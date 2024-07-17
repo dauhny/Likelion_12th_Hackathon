@@ -7,31 +7,41 @@ export function Home() {
 
   const goContentIntro = () => {
     navigate(`/contentintro`);
+    window.scrollTo(0, 0);
   };
 
   const goAllExihibit = () => {
     navigate(`/allexhibit`);
+    window.scrollTo(0, 0);
   };
 
+  //하단바
   const goSearch = () => {
     navigate(`/search`);
+    window.scrollTo(0, 0);
   };
 
   const goAI = () => {
     navigate(`/ai`);
+    window.scrollTo(0, 0);
   };
 
   const goHome = () => {
     navigate(`/home`);
+    window.scrollTo(0, 0);
   };
 
   const goRecord = () => {
     navigate(`/record`);
+    window.scrollTo(0, 0);
   };
 
   const goMyPage = () => {
     navigate(`/mypage`);
+    window.scrollTo(0, 0);
   };
+
+  //하단바 끝
 
   return (
     <>

@@ -16,6 +16,7 @@ export function Register() {
 
   const goWelcome = () => {
     navigate(`/welcome`);
+    window.scrollTo(0, 0);
   };
 
   const handleSubmit = async (event) => {

@@ -9,6 +9,7 @@ export function Welcome() {
 
   const goHome = () => {
     navigate(`/home`);
+    window.scrollTo(0, 0);
   };
 
   return (

@@ -9,9 +9,11 @@ export function Main() {
 
   const goLogin = () => {
     navigate(`/rest-auth/login`);
+    window.scrollTo(0, 0);
   };
   const goRegister = () => {
     navigate(`/register`);
+    window.scrollTo(0, 0);
   };
 
   return (

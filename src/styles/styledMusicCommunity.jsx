@@ -1,9 +1,9 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
-  height: 969px;
-  background: linear-gradient(180deg, #3b3e40 0%, #101212 100%);
+  height: 1209px;
+  background: #121212;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -12,67 +12,217 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const BlackCircleWhite = styled.div`
-  width: 70px;
-  height: 70px;
-  fill: #121212;
-  stroke-width: 1px;
-  stroke: #fff;
-  margin-left: 7%;
-  margin-top: 10%;
+//고정
+export const Item = styled.div`
+  position: relative;
+  margin-left: 5%;
+  margin-top: 8%;
+  z-index: 0;
 `;
 
-export const InfoText = styled.div`
+//하단바 시작
+
+export const NavBar = styled.div`
+  width: 390px;
+  height: 74px;
+  border-radius: 20px 20px 0px 0px;
+  border: 1px solid gray;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  margin-left: -1px;
+`;
+
+export const NavBtnContainer = styled.div`
+  display: column;
+`;
+
+export const NavIcon = styled.button`
+  width: 21px;
+  height: 39px;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  margin-left: 30px;
+  margin-top: 11px;
+  cursor: pointer;
+  margin-right: 15px;
+`;
+
+export const NavText = styled.div`
   color: #fff;
-  font-family: Roboto;
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.715px;
+  margin-left: 33px;
+  margin-top: -5px;
+`;
+
+//하단바 끝
+
+//보라색 블러 배경
+export const PurpleBlur = styled.div`
+  width: 223px;
+  height: 208px;
+  margin-left: 220px;
+  background-color: #a259ff;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: 30px;
+`;
+
+//뒤로가기
+export const BackBtn = styled.button`
+  width: 11px;
+  height: 19px;
+  background-image: url("/images/BackBtn.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  margin-top: 10px;
+`;
+
+export const TapContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+`;
+
+export const TapOn = styled.button`
+  display: flex;
+  width: 195px;
+  height: 36px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-image: url("/images/TapOn.svg");
+  h1 {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    padding-left: 75px;
+    margin-top: 5px;
+  }
+`;
+
+export const TapOff = styled(TapOn)`
+  background-image: url("/images/TapOff.svg");
+  h1 {
+    color: #9c9c9c;
+  }
+`;
+
+export const ProfileImg = styled.div`
+  width: 29px;
+  height: 29px;
+`;
+
+export const PostNickname = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
   font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 50px;
+  margin-top: -32px;
+`;
+
+export const PostDate = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 50px;
+`;
+
+export const MusicCommunityBox = styled.div`
+  margin-top: 10px;
+  width: 360px;
+  height: 130px;
+  background: linear-gradient(
+    rgba(52, 52, 52, 0.5) -3.56%,
+    rgba(78, 78, 78, 0.5) 21.44%,
+    rgba(103, 103, 103, 0.5) 46.44%,
+    rgba(154, 154, 154, 0.5) 96.44%
+  );
+  border-radius: 15px;
+  margin-left: -5px;
+`;
+
+export const MusicIcon = styled.div`
+  width: 18px;
+  height: 18px;
+  background-image: url("/images/MusicIcon.svg");
+  margin-top: -115px;
+  margin-left: 15px;
+`;
+
+export const MusicTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 17px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-top: -15%;
-  text-align: left;
-  padding-left: 110px;
+  margin-top: -22px;
+  margin-left: 45px;
 `;
 
-export const AlbumCover = styled.div`
-  width: 200px;
-  height: 200px;
-  margin-left: 26%;
-  margin-top: 15%;
-  background-image: url("/images/AlbumCover.svg");
-`;
-
-export const MusicInfo = styled.div`
-  #songTitle {
-    color: #fff;
-    font-family: Roboto;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    margin-left: 50%;
-  }
-
-  #artist {
-    color: #fff;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    margin-left: 45.5%;
-    margin-top: -10.5%;
-  }
-`;
-
-export const UserText = styled.div`
+export const MusicArtist = styled.div`
   color: #fff;
-  font-family: Roboto;
+  font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  padding-left: 15%;
-  padding-right: 15%;
-  text-align: justify;
+  margin-left: 45px;
+  margin-top: -3px;
+  margin-bottom: 6px;
+`;
+
+export const MusicContent = styled.div`
+  width: 250px;
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-left: 15px;
+`;
+
+export const MusciPhoto = styled.div`
+  margin-left: 280px;
+  img {
+    width: 61px;
+    height: 61px;
+    border-radius: 5px;
+  }
+  position: absolute;
+  margin-top: 20px;
+`;
+
+export const InfoText = styled.div`
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 `;

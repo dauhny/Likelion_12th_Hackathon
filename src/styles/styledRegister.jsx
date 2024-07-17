@@ -34,7 +34,7 @@ export const InputContainer = styled.div`
 
 export const InputLabel = styled.div`
   color: #fff;
-  font-family: Barlow;
+  font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -49,7 +49,7 @@ export const UserInput = styled.input`
   border: 1px solid #a259ff;
   background: #121212;
   color: rgba(255, 255, 255, 0.5);
-  font-family: Barlow;
+  font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

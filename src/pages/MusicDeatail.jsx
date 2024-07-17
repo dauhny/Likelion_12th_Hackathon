@@ -1,8 +1,8 @@
 import React from "react";
-import * as B from "../styles/styledBookCommunity";
+import * as M from "../styles/styledMusicDetail";
 import { useNavigate } from "react-router-dom";
 
-export function BookCommunity() {
+export function MusicDetail() {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -38,37 +38,24 @@ export function BookCommunity() {
 
   //하단바 끝
 
-  const goMusicCommunity = () => {
-    navigate(`/musiccommunity`);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <>
-      <B.Container>
-        <B.BackBtn onClick={goBack}></B.BackBtn>
-        <B.TapContainer>
-          <B.TapOff onClick={goMusicCommunity}>
-            <h1>음악</h1>
-          </B.TapOff>
-          <B.TapOn>
-            <h1>도서</h1>
-          </B.TapOn>
-        </B.TapContainer>
-        <B.BlackCircleWhite>
-          <img src="/images/BlackCircleWhite.svg" alt="BlackCircleWhite" />
-        </B.BlackCircleWhite>
-        <B.InfoText>
+      <M.Container>
+        <M.BackBtn onClick={goBack}></M.BackBtn>
+        <M.ProfileImgBlack>
+          <img src="/images/ProfileImgBlack.svg" />
+        </M.ProfileImgBlack>
+        <M.InfoText>
           고독한 예술가님께서 실리카겔의<br></br>T를 추천했어요!!
-        </B.InfoText>
-        <B.AlbumCover></B.AlbumCover>
-        <B.MusicInfo>
+        </M.InfoText>
+        <M.AlbumCover></M.AlbumCover>
+        <M.MusicInfo>
           <p id={"songTitle"}>T</p>
           <br></br>
           <p id={"artist"}>실리카겔</p>
-        </B.MusicInfo>
+        </M.MusicInfo>
         <br />
-        <B.UserText>
+        <M.UserText>
           저는 영원주의를 주제로 하는 이 전시를 둘러보면서 실리카겔의 T가
           떠올랐어요!! 이음악과 함께 작품을 둘러보니 잠시 시간여행을 다녀온 듯한
           심오한 기분이 들어서 더욱 좋더라구요 !! ㅎㅎ <br />
@@ -82,32 +69,32 @@ export function BookCommunity() {
           또 시간에 의해서 한 인간 존재는 한정되어 지지만 변하지 않는 사실은
           시간은 흐르고 있다는 거에요. 우리가 경험하고 느꼈던 지난 시절을 어떻게
           받아들이며 살 것인가 그것이 문제 아닐까요. !!
-        </B.UserText>
+        </M.UserText>{" "}
         {/*하단바*/}
-        <B.NavBar>
+        <M.NavBar>
           {/*검색*/}
-          <B.NavBtnContainer>
-            <B.NavIcon
+          <M.NavBtnContainer>
+            <M.NavIcon
               style={{
                 marginLeft: "25px",
               }}
             >
               <img src="/images/SearchIcon.svg" onClick={goSearch} />
-            </B.NavIcon>
-            <B.NavText
+            </M.NavIcon>
+            <M.NavText
               style={{
                 marginLeft: "28px",
               }}
             >
               검색
-            </B.NavText>
-          </B.NavBtnContainer>
+            </M.NavText>
+          </M.NavBtnContainer>
           {/*AI 심리 분석*/}
-          <B.NavBtnContainer>
-            <B.NavIcon>
+          <M.NavBtnContainer>
+            <M.NavIcon>
               <img src="/images/AIIcon.svg" onClick={goAI} />
-            </B.NavIcon>
-            <B.NavText
+            </M.NavIcon>
+            <M.NavText
               style={{
                 fontSize: "11px",
                 marginLeft: "20px",
@@ -115,11 +102,11 @@ export function BookCommunity() {
               }}
             >
               AI 심리 분석
-            </B.NavText>{" "}
-          </B.NavBtnContainer>
+            </M.NavText>{" "}
+          </M.NavBtnContainer>
           {/*홈*/}
-          <B.NavBtnContainer>
-            <B.NavIcon
+          <M.NavBtnContainer>
+            <M.NavIcon
               style={{
                 fontSize: "11px",
                 marginLeft: "10px",
@@ -127,39 +114,39 @@ export function BookCommunity() {
               }}
             >
               <img src="/images/HomeIcon.svg" onClick={goHome} />
-            </B.NavIcon>
-          </B.NavBtnContainer>
+            </M.NavIcon>
+          </M.NavBtnContainer>
           {/*내 기록*/}
-          <B.NavBtnContainer>
-            <B.NavIcon
+          <M.NavBtnContainer>
+            <M.NavIcon
               style={{
                 marginLeft: "63px",
               }}
             >
               <img src="/images/RecordIcon.svg" onClick={goRecord} />
-            </B.NavIcon>
-            <B.NavText
+            </M.NavIcon>
+            <M.NavText
               style={{
                 marginLeft: "60px",
               }}
             >
               내 기록
-            </B.NavText>
-          </B.NavBtnContainer>
+            </M.NavText>
+          </M.NavBtnContainer>
           {/*마이페이지*/}
-          <B.NavBtnContainer>
-            <B.NavIcon
+          <M.NavBtnContainer>
+            <M.NavIcon
               style={{
                 marginLeft: "45px",
               }}
             >
               <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
-            </B.NavIcon>
-            <B.NavText>마이페이지</B.NavText>
-          </B.NavBtnContainer>
-        </B.NavBar>
+            </M.NavIcon>
+            <M.NavText>마이페이지</M.NavText>
+          </M.NavBtnContainer>
+        </M.NavBar>
         {/*하단바*/}
-      </B.Container>
+      </M.Container>
     </>
   );
 }

@@ -14,6 +14,7 @@ import Idea from "./pages/Idea";
 import Mypage from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
+import { MusicDetail } from "./pages/MusicDeatail";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/mypagescrap" element={<MypageScrap />} />
         <Route path="/idea" element={<Idea />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/musicdetail" element={<MusicDetail />} />
       </Routes>
     </BrowserRouter>
   );
