@@ -81,10 +81,10 @@ export function BookCommunity() {
             <img src="/images/RecBook1.svg" />
           </B.BookPhoto>
           <B.BookCommunityBox onClick={goBookDetail}></B.BookCommunityBox>
-          <B.BookIcon></B.BookIcon>
-          <B.BookTitle>노스텔지어</B.BookTitle>
-          <B.BookArtist>이지원</B.BookArtist>
-          <B.BookContent>
+          <B.BookIcon onClick={goBookDetail}></B.BookIcon>
+          <B.BookTitle onClick={goBookDetail}>노스텔지어</B.BookTitle>
+          <B.BookArtist onClick={goBookDetail}>이지원</B.BookArtist>
+          <B.BookContent onClick={goBookDetail}>
             이 책과 함께하면 이 전시는 더욱 풍부해지는 것 같아요.
           </B.BookContent>
           <B.PurpleBlur></B.PurpleBlur>
