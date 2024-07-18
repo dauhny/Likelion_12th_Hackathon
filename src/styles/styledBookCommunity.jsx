@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const Container = styled.div`
   width: 390px;
   height: 1209px;
-  background: linear-gradient(180deg, #3b3e40 0%, #101212 100%);
+  background: #121212;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -12,12 +12,19 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
+//고정
+export const Item = styled.div`
+  position: relative;
+  margin-left: 5%;
+  margin-top: 8%;
+  z-index: 0;
+`;
+
 //하단바 시작
 
 export const NavBar = styled.div`
   width: 390px;
   height: 74px;
-  flex-shrink: 0;
   border-radius: 20px 20px 0px 0px;
   border: 1px solid gray;
   background: rgba(0, 0, 0, 0.5);
@@ -37,7 +44,6 @@ export const NavIcon = styled.button`
   height: 39px;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
   background-color: transparent;
   border: none;
   margin-left: 30px;
@@ -60,6 +66,18 @@ export const NavText = styled.div`
 
 //하단바 끝
 
+//보라색 블러 배경
+export const PurpleBlur = styled.div`
+  width: 223px;
+  height: 208px;
+  margin-left: 220px;
+  background-color: #a259ff;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: 30px;
+`;
+
 //뒤로가기
 export const BackBtn = styled.button`
   width: 11px;
@@ -74,71 +92,6 @@ export const BackBtn = styled.button`
   margin-top: 10px;
 `;
 
-export const BlackCircleWhite = styled.div`
-  width: 70px;
-  height: 70px;
-  fill: #121212;
-  stroke-width: 1px;
-  stroke: #fff;
-  margin-left: 7%;
-  margin-top: 10%;
-`;
-
-export const InfoText = styled.div`
-  color: #fff;
-  font-family: Roboto;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  margin-top: -15%;
-  text-align: left;
-  padding-left: 110px;
-`;
-
-export const AlbumCover = styled.div`
-  width: 200px;
-  height: 200px;
-  margin-left: 26%;
-  margin-top: 15%;
-  background-image: url("/images/AlbumCover.svg");
-`;
-
-export const MusicInfo = styled.div`
-  #songTitle {
-    color: #fff;
-    font-family: Roboto;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    margin-left: 50%;
-  }
-
-  #artist {
-    color: #fff;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    margin-left: 45.5%;
-    margin-top: -10.5%;
-  }
-`;
-
-export const UserText = styled.div`
-  color: #fff;
-  font-family: Roboto;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  padding-left: 15%;
-  padding-right: 15%;
-  text-align: justify;
-`;
-
 export const TapContainer = styled.div`
   margin-top: 10px;
   display: flex;
@@ -148,7 +101,6 @@ export const TapOn = styled.button`
   display: flex;
   width: 195px;
   height: 36px;
-  flex-shrink: 0;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -170,4 +122,136 @@ export const TapOff = styled(TapOn)`
   h1 {
     color: #9c9c9c;
   }
+`;
+
+export const ProfileImg = styled.div`
+  width: 29px;
+  height: 29px;
+`;
+
+export const PostNickname = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 50px;
+  margin-top: -32px;
+`;
+
+export const PostDate = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 50px;
+`;
+
+export const BookCommunityBox = styled.div`
+  margin-top: 10px;
+  width: 360px;
+  height: 180px;
+  background: linear-gradient(
+    rgba(52, 52, 52, 0.5) -3.56%,
+    rgba(78, 78, 78, 0.5) 21.44%,
+    rgba(103, 103, 103, 0.5) 46.44%,
+    rgba(154, 154, 154, 0.5) 96.44%
+  );
+  border-radius: 15px;
+  margin-left: -5px;
+  cursor: pointer;
+`;
+
+export const BookIcon = styled.div`
+  width: 17px;
+  height: 14px;
+  background-image: url("/images/BookIcon.svg");
+  background-repeat: no-repeat;
+  margin-top: -165px;
+  margin-left: 15px;
+  cursor: pointer;
+`;
+
+export const BookTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: -19px;
+  margin-left: 45px;
+  cursor: pointer;
+`;
+
+export const BookArtist = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-left: 45px;
+  margin-top: -3px;
+  margin-bottom: 6px;
+  cursor: pointer;
+`;
+
+export const BookContent = styled.div`
+  width: 230px;
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-left: 15px;
+  cursor: pointer;
+`;
+
+export const BookPhoto = styled.div`
+  margin-left: 280px;
+  img {
+    width: 80px;
+    height: 127px;
+  }
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 68%;
+  cursor: pointer;
+`;
+
+export const InfoText = styled.div`
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin-top: 50px;
+  margin-left: -10px;
+  p {
+    color: #fff;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+  }
+`;
+
+export const RecBtn = styled.button`
+  width: 290px;
+  height: 41px;
+  background-image: url("/images/RecBtn.svg");
+  background-color: transparent;
+  border: none;
+  margin-left: 40px;
+  cursor: pointer;
 `;

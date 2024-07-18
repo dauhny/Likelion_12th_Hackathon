@@ -107,7 +107,7 @@ export function ContentIntro() {
           </C.InfoText>
           <C.CommentInputContainer>
             <C.ProfileImg>
-              <img src="/images/ProfileImg.svg" />
+              <img src="/images/ProfileImgComment.svg" />
             </C.ProfileImg>
             <C.CommentInput placeholder="전시에 대한 코멘트를 남겨보세요."></C.CommentInput>
             <C.CommentBtn>

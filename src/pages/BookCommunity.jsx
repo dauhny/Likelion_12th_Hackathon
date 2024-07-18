@@ -43,6 +43,21 @@ export function BookCommunity() {
     window.scrollTo(0, 0);
   };
 
+  const goBookCommunity = () => {
+    navigate(`/bookcommunity`);
+    window.scrollTo(0, 0);
+  };
+
+  const goCommunityDeatil = () => {
+    navigate(`/communitydetail`);
+    window.scrollTo(0, 0);
+  };
+
+  const goWrite = () => {
+    navigate(`/write`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <B.Container>
@@ -51,38 +66,33 @@ export function BookCommunity() {
           <B.TapOff onClick={goMusicCommunity}>
             <h1>음악</h1>
           </B.TapOff>
-          <B.TapOn>
+          <B.TapOn onClick={goBookCommunity}>
             <h1>도서</h1>
           </B.TapOn>
         </B.TapContainer>
-        <B.BlackCircleWhite>
-          <img src="/images/BlackCircleWhite.svg" alt="BlackCircleWhite" />
-        </B.BlackCircleWhite>
-        <B.InfoText>
-          고독한 예술가님께서 실리카겔의<br></br>T를 추천했어요!!
-        </B.InfoText>
-        <B.AlbumCover></B.AlbumCover>
-        <B.MusicInfo>
-          <p id={"songTitle"}>T</p>
-          <br></br>
-          <p id={"artist"}>실리카겔</p>
-        </B.MusicInfo>
-        <br />
-        <B.UserText>
-          저는 영원주의를 주제로 하는 이 전시를 둘러보면서 실리카겔의 T가
-          떠올랐어요!! 이음악과 함께 작품을 둘러보니 잠시 시간여행을 다녀온 듯한
-          심오한 기분이 들어서 더욱 좋더라구요 !! ㅎㅎ <br />
-          <br />
-          실리카겔의 보컬이자 작곡가 김한주의 해석을 빌려서 이 음악과 전시에
-          대한 간단한 생각을 써보려해요~ 실리카겔의 T 에서 시간은 왜곡되지만,
-          우리가 기억하는 유일한 것은 시간이 우리의 몸을 통과하여 지나간다는
-          사실을 표현하고자 했어요. 인간이라는 존재는 ‘시간’에 의해서 한정되고
-          왜곡되어지고 한계를 가지는 데, 이 시간의 굴레에서 탈출한 존재는 무한한
-          가능성의 존재가 되는 것을 의미한다고 볼수 있죠~ 결국 시간은 왜곡되고
-          또 시간에 의해서 한 인간 존재는 한정되어 지지만 변하지 않는 사실은
-          시간은 흐르고 있다는 거에요. 우리가 경험하고 느꼈던 지난 시절을 어떻게
-          받아들이며 살 것인가 그것이 문제 아닐까요. !!
-        </B.UserText>
+        <B.Item>
+          <B.ProfileImg>
+            <img src="/images/ProfileImg.svg" />
+          </B.ProfileImg>
+          <B.PostNickname>고독한 예술가</B.PostNickname>
+          <B.PostDate>07/17 16:29</B.PostDate>
+          <B.BookPhoto onClick={goCommunityDeatil}>
+            <img src="/images/RecBook1.svg" />
+          </B.BookPhoto>
+          <B.BookCommunityBox onClick={goCommunityDeatil}></B.BookCommunityBox>
+          <B.BookIcon onClick={goCommunityDeatil}></B.BookIcon>
+          <B.BookTitle onClick={goCommunityDeatil}>노스텔지어</B.BookTitle>
+          <B.BookArtist onClick={goCommunityDeatil}>이지원</B.BookArtist>
+          <B.BookContent onClick={goCommunityDeatil}>
+            이 책과 함께하면 이 전시는 더욱 풍부해지는 것 같아요.
+          </B.BookContent>
+          <B.PurpleBlur></B.PurpleBlur>
+          <B.InfoText>
+            관람에 도움이 되었나요?
+            <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
+          </B.InfoText>
+          <B.RecBtn onClick={goWrite}></B.RecBtn>
+        </B.Item>
         {/*하단바*/}
         <B.NavBar>
           {/*검색*/}

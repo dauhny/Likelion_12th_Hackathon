@@ -162,6 +162,7 @@ export const MusicCommunityBox = styled.div`
   );
   border-radius: 15px;
   margin-left: -5px;
+  cursor: pointer;
 `;
 
 export const MusicIcon = styled.div`
@@ -170,6 +171,7 @@ export const MusicIcon = styled.div`
   background-image: url("/images/MusicIcon.svg");
   margin-top: -115px;
   margin-left: 15px;
+  cursor: pointer;
 `;
 
 export const MusicTitle = styled.div`
@@ -181,6 +183,7 @@ export const MusicTitle = styled.div`
   line-height: 24px;
   margin-top: -22px;
   margin-left: 45px;
+  cursor: pointer;
 `;
 
 export const MusicArtist = styled.div`
@@ -193,6 +196,7 @@ export const MusicArtist = styled.div`
   margin-left: 45px;
   margin-top: -3px;
   margin-bottom: 6px;
+  cursor: pointer;
 `;
 
 export const MusicContent = styled.div`
@@ -204,9 +208,10 @@ export const MusicContent = styled.div`
   font-weight: 500;
   line-height: 24px;
   margin-left: 15px;
+  cursor: pointer;
 `;
 
-export const MusciPhoto = styled.div`
+export const MusicPhoto = styled.div`
   margin-left: 280px;
   img {
     width: 61px;
@@ -215,14 +220,37 @@ export const MusciPhoto = styled.div`
   }
   position: absolute;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
 export const InfoText = styled.div`
   color: #fff;
   text-align: center;
   font-family: "Pretendard Variable";
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
+  margin-top: 50px;
+  margin-left: -10px;
+  p {
+    color: #fff;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+  }
+`;
+
+export const RecBtn = styled.button`
+  width: 290px;
+  height: 41px;
+  background-image: url("/images/RecBtn.svg");
+  background-color: transparent;
+  border: none;
+  margin-left: 40px;
+  cursor: pointer;
 `;

@@ -43,12 +43,27 @@ export function MusicCommunity() {
     window.scrollTo(0, 0);
   };
 
+  const goMusicCommunity = () => {
+    navigate(`/musiccommunity`);
+    window.scrollTo(0, 0);
+  };
+
+  const goCommunityDetail = () => {
+    navigate(`/communitydetail`);
+    window.scrollTo(0, 0);
+  };
+
+  const goWrite = () => {
+    navigate(`/write`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <M.Container>
         <M.BackBtn onClick={goBack}></M.BackBtn>
         <M.TapContainer>
-          <M.TapOn>
+          <M.TapOn onClick={goMusicCommunity}>
             <h1>음악</h1>
           </M.TapOn>
           <M.TapOff onClick={goBookCommunity}>
@@ -61,19 +76,25 @@ export function MusicCommunity() {
           </M.ProfileImg>
           <M.PostNickname>고독한 예술가</M.PostNickname>
           <M.PostDate>07/17 16:29</M.PostDate>
-          <M.MusciPhoto>
+          <M.MusicPhoto onClick={goCommunityDetail}>
             <img src="/images/AlbumCover.svg" />
-          </M.MusciPhoto>
-          <M.MusicCommunityBox></M.MusicCommunityBox>
-          <M.MusicIcon></M.MusicIcon>
-          <M.MusicTitle>T</M.MusicTitle>
-          <M.MusicArtist>실리카겔</M.MusicArtist>
-          <M.MusicContent>
+          </M.MusicPhoto>
+          <M.MusicCommunityBox
+            onClick={goCommunityDetail}
+          ></M.MusicCommunityBox>
+          <M.MusicIcon onClick={goCommunityDetail}></M.MusicIcon>
+          <M.MusicTitle onClick={goCommunityDetail}>T</M.MusicTitle>
+          <M.MusicArtist onClick={goCommunityDetail}>실리카겔</M.MusicArtist>
+          <M.MusicContent onClick={goCommunityDetail}>
             저는 영원주의를 주제로 하는 이 전시를 둘러보면서 실리카겔의 T가
-            떠올랐어요!! 이음악과 함께 작
+            떠올랐어요!! 이음악과 함께
           </M.MusicContent>
           <M.PurpleBlur></M.PurpleBlur>
-          <M.InfoText>관람에 도움이 되었나요?</M.InfoText>
+          <M.InfoText>
+            관람에 도움이 되었나요?
+            <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
+          </M.InfoText>
+          <M.RecBtn onClick={goWrite}></M.RecBtn>
         </M.Item>
         {/*하단바*/}
         <M.NavBar>

@@ -224,7 +224,6 @@ export const CommentInput = styled.input`
   line-height: 24px;
   border: none;
   padding-left: 10px;
-  margin-left: 12px;
 `;
 
 export const CommentBtn = styled.button`

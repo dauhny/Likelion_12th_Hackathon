@@ -5,7 +5,6 @@ import { Register } from "./pages/Register";
 import { Home } from "./pages/Home";
 import { ContentIntro } from "./pages/ContentIntro";
 import { MusicCommunity } from "./pages/MusicCommunity";
-import { BookInfo } from "./pages/BookInfo";
 import { BookCommunity } from "./pages/BookCommunity";
 import { CommunityProfile } from "./pages/CommunityProfile";
 import { Write } from "./pages/Write";
@@ -14,7 +13,7 @@ import Idea from "./pages/Idea";
 import Mypage from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
-import { MusicDetail } from "./pages/MusicDeatail";
+import { CommunityDetail, MusicDetail } from "./pages/MusicDeatail";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/contentintro" element={<ContentIntro />} />
         <Route path="/musiccommunity" element={<MusicCommunity />} />
-        <Route path="/bookinfo" element={<BookInfo />} />
         <Route path="/bookcommunity" element={<BookCommunity />} />
         <Route path="/communityprofile" element={<CommunityProfile />} />
         <Route path="/write" element={<Write />} />
@@ -35,7 +33,7 @@ function App() {
         <Route path="/mypagescrap" element={<MypageScrap />} />
         <Route path="/idea" element={<Idea />} />
         <Route path="/welcome" element={<Welcome />} />
-        <Route path="/musicdetail" element={<MusicDetail />} />
+        <Route path="/communitydetail" element={<CommunityDetail />} />
       </Routes>
     </BrowserRouter>
   );

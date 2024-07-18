@@ -8,9 +8,10 @@ export function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [birthdate, setBirthDate] = useState("");
 
@@ -25,16 +26,17 @@ export function Register() {
       const response = await axios.post("http://127.0.0.1:8000/user/", {
         username,
         password,
+        password2,
         email,
         nickname,
-        phoneNumber,
+        phone,
         name,
         birthdate,
       });
       console.log("회원가입 성공:", response.data);
       goWelcome(); // 성공적으로 가입된 후 홈으로 이동
     } catch (error) {
-      console.error("에러입니다", error);
+      console.error("회원가입 실패", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -69,6 +71,13 @@ export function Register() {
             placeholder="비밀번호를 입력하세요."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          ></R.UserInput>
+          <R.InputLabel>비밀번호 확인</R.InputLabel>
+          <R.UserInput
+            type="password2"
+            placeholder="비밀번호를 입력하세요."
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
           ></R.UserInput>
           <br></br>
           <br></br>
@@ -107,8 +116,8 @@ export function Register() {
           <R.PhoneNumber
             type="tel"
             placeholder="전화번호를 입력하세요."
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           ></R.PhoneNumber>
           <R.Complete onClick={goWelcome}>가입하기</R.Complete>
         </R.InputContainer>
