@@ -21,6 +21,20 @@ export const Item = styled.div`
   z-index: 0;
 `;
 
+//뒤로가기 버튼
+export const BackBtn = styled.button`
+  width: 11px;
+  height: 19px;
+  background-image: url("/images/BackBtn.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+  margin-top: 10px;
+`;
+
 //하단바 시작
 
 export const NavBar = styled.div`

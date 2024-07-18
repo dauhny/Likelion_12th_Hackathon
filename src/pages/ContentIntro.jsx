@@ -6,6 +6,11 @@ import { useState, useEffect } from "react";
 export function ContentIntro() {
   const navigate = useNavigate();
 
+  const goBack = () => {
+    navigate(-1);
+    window.scrollTo(0, 0);
+  };
+
   const goMusicCommunity = () => {
     navigate(`/musiccommunity`);
     window.scrollTo(0, 0);
@@ -58,6 +63,7 @@ export function ContentIntro() {
   return (
     <>
       <C.Container>
+        <C.BackBtn onClick={goBack}></C.BackBtn>
         <C.Item>
           <C.ExhibitTitle>포에버리즘 : 우리를 세상의 끝으로</C.ExhibitTitle>
           <C.ExhibitPoster>
