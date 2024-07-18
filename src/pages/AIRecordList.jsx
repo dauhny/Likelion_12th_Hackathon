@@ -3,6 +3,7 @@ import * as A from "../styles/styledAIRecordList";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+////sdfsf
 export function AIRecordList() {
   const navigate = useNavigate();
 
