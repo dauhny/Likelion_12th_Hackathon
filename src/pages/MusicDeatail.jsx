@@ -1,8 +1,8 @@
 import React from "react";
-import * as M from "../styles/styledCommunityDetail";
+import * as M from "../styles/styledMusicDetail";
 import { useNavigate } from "react-router-dom";
 
-export function CommunityDetail() {
+export function MusicDetail() {
   const navigate = useNavigate();
 
   const goBack = () => {

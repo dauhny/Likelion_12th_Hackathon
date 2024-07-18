@@ -48,13 +48,13 @@ export function BookCommunity() {
     window.scrollTo(0, 0);
   };
 
-  const goCommunityDeatil = () => {
-    navigate(`/communitydetail`);
+  const goBookDetail = () => {
+    navigate(`/bookdetail`);
     window.scrollTo(0, 0);
   };
 
-  const goWrite = () => {
-    navigate(`/write`);
+  const goBookWrite = () => {
+    navigate(`/bookwrite`);
     window.scrollTo(0, 0);
   };
 
@@ -62,6 +62,7 @@ export function BookCommunity() {
     <>
       <B.Container>
         <B.BackBtn onClick={goBack}></B.BackBtn>
+        <B.PageTitle>추천 콘텐츠</B.PageTitle>
         <B.TapContainer>
           <B.TapOff onClick={goMusicCommunity}>
             <h1>음악</h1>
@@ -76,14 +77,14 @@ export function BookCommunity() {
           </B.ProfileImg>
           <B.PostNickname>고독한 예술가</B.PostNickname>
           <B.PostDate>07/17 16:29</B.PostDate>
-          <B.BookPhoto onClick={goCommunityDeatil}>
+          <B.BookPhoto onClick={goBookDetail}>
             <img src="/images/RecBook1.svg" />
           </B.BookPhoto>
-          <B.BookCommunityBox onClick={goCommunityDeatil}></B.BookCommunityBox>
-          <B.BookIcon onClick={goCommunityDeatil}></B.BookIcon>
-          <B.BookTitle onClick={goCommunityDeatil}>노스텔지어</B.BookTitle>
-          <B.BookArtist onClick={goCommunityDeatil}>이지원</B.BookArtist>
-          <B.BookContent onClick={goCommunityDeatil}>
+          <B.BookCommunityBox onClick={goBookDetail}></B.BookCommunityBox>
+          <B.BookIcon></B.BookIcon>
+          <B.BookTitle>노스텔지어</B.BookTitle>
+          <B.BookArtist>이지원</B.BookArtist>
+          <B.BookContent>
             이 책과 함께하면 이 전시는 더욱 풍부해지는 것 같아요.
           </B.BookContent>
           <B.PurpleBlur></B.PurpleBlur>
@@ -91,7 +92,7 @@ export function BookCommunity() {
             관람에 도움이 되었나요?
             <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
           </B.InfoText>
-          <B.RecBtn onClick={goWrite}></B.RecBtn>
+          <B.RecBtn onClick={goBookWrite}></B.RecBtn>
         </B.Item>
         {/*하단바*/}
         <B.NavBar>

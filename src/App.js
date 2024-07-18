@@ -7,15 +7,17 @@ import { ContentIntro } from "./pages/ContentIntro";
 import { MusicCommunity } from "./pages/MusicCommunity";
 import { BookCommunity } from "./pages/BookCommunity";
 import { CommunityProfile } from "./pages/CommunityProfile";
-import { Write } from "./pages/Write";
+import { MusicWrite } from "./pages/MusicWrite";
+import { BookWrite } from "./pages/BookWrite";
 import See from "./pages/See";
 import Idea from "./pages/Idea";
 import Mypage from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
-import { CommunityDetail, MusicDetail } from "./pages/MusicDeatail";
 import { AI } from "./pages/AI";
 import { AIRecordList } from "./pages/AIRecordList";
+import { BookDetail } from "./pages/BookDetail";
+import { MusicDetail } from "./pages/MusicDeatail";
 
 function App() {
   return (
@@ -29,13 +31,15 @@ function App() {
         <Route path="/musiccommunity" element={<MusicCommunity />} />
         <Route path="/bookcommunity" element={<BookCommunity />} />
         <Route path="/communityprofile" element={<CommunityProfile />} />
-        <Route path="/write" element={<Write />} />
+        <Route path="/musicwrite" element={<MusicWrite />} />
+        <Route path="/bookwrite" element={<BookWrite />} />
         <Route path="/see" element={<See />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypagescrap" element={<MypageScrap />} />
         <Route path="/idea" element={<Idea />} />
         <Route path="/welcome" element={<Welcome />} />
-        <Route path="/communitydetail" element={<CommunityDetail />} />
+        <Route path="/musicdetail" element={<MusicDetail />} />
+        <Route path="/bookdetail" element={<BookDetail />} />
         <Route path="/ai" element={<AI />} />
         <Route path="/airecordlist" element={<AIRecordList />} />
       </Routes>

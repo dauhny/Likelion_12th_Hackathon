@@ -64,6 +64,7 @@ export function ContentIntro() {
     <>
       <C.Container>
         <C.BackBtn onClick={goBack}></C.BackBtn>
+        <C.PageTitle>전시 상세</C.PageTitle>
         <C.Item>
           <C.ExhibitTitle>포에버리즘 : 우리를 세상의 끝으로</C.ExhibitTitle>
           <C.ExhibitPoster>

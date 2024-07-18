@@ -21,6 +21,18 @@ export const Item = styled.div`
   z-index: 0;
 `;
 
+//페이지 제목
+export const PageTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
+`;
+
 //뒤로가기 버튼
 export const BackBtn = styled.button`
   width: 11px;
