@@ -14,6 +14,8 @@ import Mypage from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
 import { CommunityDetail, MusicDetail } from "./pages/MusicDeatail";
+import { AI } from "./pages/AI";
+import { AIRecordList } from "./pages/AIRecordList";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path="/idea" element={<Idea />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/communitydetail" element={<CommunityDetail />} />
+        <Route path="/ai" element={<AI />} />
+        <Route path="/airecordlist" element={<AIRecordList />} />
       </Routes>
     </BrowserRouter>
   );
