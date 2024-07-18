@@ -54,6 +54,7 @@ export function AIRecordList() {
     );
   };
 
+  //힘들다
   return (
     <>
       <A.Container>
