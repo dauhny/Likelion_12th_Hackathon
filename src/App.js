@@ -18,6 +18,7 @@ import { AI } from "./pages/AI";
 import { AIRecordList } from "./pages/AIRecordList";
 import { BookDetail } from "./pages/BookDetail";
 import { MusicDetail } from "./pages/MusicDeatail";
+import { Search } from "./pages/Search";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/bookdetail" element={<BookDetail />} />
         <Route path="/ai" element={<AI />} />
         <Route path="/airecordlist" element={<AIRecordList />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
