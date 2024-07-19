@@ -11,7 +11,6 @@ export function Login() {
 
   const goHome = () => {
     navigate(`/home`);
-    window.scrollTo(0, 0);
   };
 
   const handleLogin = async (event) => {

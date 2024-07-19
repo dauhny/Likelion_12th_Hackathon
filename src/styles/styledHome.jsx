@@ -12,6 +12,13 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
+//고정
+export const Item = styled.div`
+  margin-left: 12%;
+  position: relative;
+  z-index: 0;
+`;
+
 //하단바 시작
 
 export const NavBar = styled.div`
@@ -75,7 +82,6 @@ export const InfoTextPurple = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-left: 50px;
   margin-bottom: 5px;
 `;
 
@@ -83,7 +89,7 @@ export const NewExhibit = styled.div`
   img {
     width: 290px;
     height: 360px;
-    margin: -20px 0px 0px 50px;
+    margin: -20px 0px 0px 0px;
     border-radius: 10px;
   }
 `;
@@ -93,9 +99,7 @@ export const ExhibitPoster = styled.div`
   height: 176px;
   flex-shrink: 0;
   border-radius: 10px;
-  margin-left: 11.5%;
   overflow: hidden;
-  position: relative;
   position: relative;
   z-index: 999;
   cursor: pointer;
@@ -130,7 +134,6 @@ export const InfoText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-left: 50px;
   margin-bottom: -20px;
 `;
 
@@ -150,4 +153,93 @@ export const ReviewBtn = styled.button`
   img {
     margin-bottom: -7px;
   }
+`;
+
+export const ReviewBox = styled.div`
+  width: 300px;
+  height: 110px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #281d36 0%, #6e5095 91%, #74549c 100%);
+  margin-bottom: 15px;
+`;
+
+export const ProfileImg = styled.div`
+  background: url("/images/ProfileImgReview.svg");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  margin-left: 18px;
+  margin-top: 13px;
+  position: absolute;
+`;
+
+export const ReviewName = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  width: 100px;
+  margin-left: 50px;
+  margin-top: 13px;
+  position: absolute;
+`;
+
+export const ReviewDate = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  position: absolute;
+  margin-left: 73%;
+  margin-top: 7px;
+`;
+
+export const ReviewTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  position: absolute;
+  margin-left: 19px;
+  margin-top: 43px;
+`;
+
+export const ReviewContent = styled.div`
+  color: #cccccc;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  position: absolute;
+  margin-left: 19px;
+  margin-top: 66px;
+`;
+
+export const LikeIcon = styled.div`
+  background: url("/images/LikeIcon.svg");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin-left: 71%;
+  margin-top: 76px;
+`;
+
+export const LikeCnt = styled.div`
+  color: #cccccc;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+  position: absolute;
+  margin-left: 78%;
+  margin-top: 76px;
 `;
