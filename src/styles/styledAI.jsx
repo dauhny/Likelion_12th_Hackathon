@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 
+//확인
 //고정
 export const Container = styled.div`
   width: 390px;
