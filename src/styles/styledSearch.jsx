@@ -114,13 +114,13 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchIcon = styled.button`
-  background: url("/images/SearchIcon.svg");
+  background: url("/images/SearchIconPurple.svg");
   border: none;
   width: 30px;
   height: 30px;
   cursor: pointer;
   position: absolute;
-  margin-top: 27px;
+  margin-top: 25px;
   margin-left: 7px;
 `;
 
