@@ -1,8 +1,8 @@
 import React from "react";
-import * as S from "../styles/styledSee";
+import * as S from "../styles/styledReviewCommunity";
 import { useNavigate } from "react-router-dom";
 
-const See = () => {
+export const ReviewCommunity = () => {
   const navigate = useNavigate();
 
   const goMypage = () => {
@@ -55,5 +55,3 @@ const See = () => {
     </S.Container>
   );
 };
-
-export default See;

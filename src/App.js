@@ -9,7 +9,7 @@ import { BookCommunity } from "./pages/BookCommunity";
 import { CommunityProfile } from "./pages/CommunityProfile";
 import { MusicWrite } from "./pages/MusicWrite";
 import { BookWrite } from "./pages/BookWrite";
-import See from "./pages/See";
+import { ReviewCommunity } from "./pages/ReviewCommunity";
 import Idea from "./pages/Idea";
 import Mypage from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
@@ -33,7 +33,7 @@ function App() {
         <Route path="/communityprofile" element={<CommunityProfile />} />
         <Route path="/musicwrite" element={<MusicWrite />} />
         <Route path="/bookwrite" element={<BookWrite />} />
-        <Route path="/see" element={<See />} />
+        <Route path="/reviewcommunity" element={<ReviewCommunity />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypagescrap" element={<MypageScrap />} />
         <Route path="/idea" element={<Idea />} />
