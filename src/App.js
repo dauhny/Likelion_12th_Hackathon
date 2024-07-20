@@ -16,6 +16,9 @@ import { Welcome } from "./pages/Welcome";
 import { CommunityDetail, MusicDetail } from "./pages/MusicDeatail";
 import { AI } from "./pages/AI";
 import { AIRecordList } from "./pages/AIRecordList";
+import { AIPastDetail } from "./pages/AIPastDetail";
+import { AIResult } from "./pages/AIResult";
+import { AIPast } from "./pages/AIPast";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         <Route path="/communitydetail" element={<CommunityDetail />} />
         <Route path="/ai" element={<AI />} />
         <Route path="/airecordlist" element={<AIRecordList />} />
+        <Route path="/aipastdetail" element={<AIPastDetail />} />
+        <Route path="/airesult" element={<AIResult />} />
+        <Route path="/aipast" element={<AIPast />} />
       </Routes>
     </BrowserRouter>
   );
