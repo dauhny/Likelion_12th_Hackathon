@@ -101,6 +101,13 @@ export function ContentIntro() {
     }
   };
 
+  //포스터 클릭 시 url 새 탭 열기
+  const handlePageUrl = (url) => {
+    if (url) {
+      window.open(url, "_blank");
+    }
+  };
+
   return (
     <>
       <C.Container>
@@ -111,7 +118,7 @@ export function ContentIntro() {
           {content.map((e) => (
             <C.ExhibitContainer>
               <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
-              <C.ExhibitPoster onClick={e.pageUrl}>
+              <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
                 <img src={e.image} alt="ExhibitPoster" />
               </C.ExhibitPoster>
               <C.LocationIcon>

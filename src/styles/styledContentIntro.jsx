@@ -101,6 +101,8 @@ export const ExhibitPoster = styled.div`
     height: 360px;
     border-radius: 10px;
   }
+
+  cursor: pointer;
 `;
 
 export const ExhibitTitle = styled.div`
