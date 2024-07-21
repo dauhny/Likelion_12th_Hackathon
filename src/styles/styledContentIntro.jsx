@@ -123,6 +123,7 @@ export const ExhibitDetail = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: 24px;
+  margin-bottom: 20px;
 `;
 
 //고정
@@ -140,7 +141,7 @@ export const PurpleBlur = styled.div`
 export const CalendarIcon = styled.div`
   width: 18px;
   height: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 `;
 
 export const InfoText = styled.div`
@@ -150,7 +151,7 @@ export const InfoText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-top: -25px;
+  margin-top: -35px;
   margin-left: 25px;
 `;
 
@@ -158,7 +159,6 @@ export const LocationIcon = styled.div`
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  margin-top: -20px;
 `;
 
 export const LocationText = styled.div`

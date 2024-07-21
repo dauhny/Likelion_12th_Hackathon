@@ -7,12 +7,10 @@ import axios from "axios";
 export function ContentIntro() {
   const navigate = useNavigate();
   const [content, setContent] = useState([]);
-  const [user, setUser] = useState(""); //유저 고유번호
-  const [data, setData] = useState(""); //전시 고유번호
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const id = queryParams.get("id"); // URL 쿼리에서 id 파라미터 추출
+  const id = queryParams.get("id");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,17 +27,12 @@ export function ContentIntro() {
 
   const goBack = () => {
     navigate(-1);
-    window.scrollTo(0, 0);
   };
 
   const handleScrap = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:8000/scraps/", {
-        user,
-        data,
-        id,
-      });
+      const response = await axios.post("http://127.0.0.1:8000/scraps/");
       console.log("스크랩 성공:", response.data);
       ChangeScrap();
     } catch (error) {
@@ -140,7 +133,7 @@ export function ContentIntro() {
                   <img src={ScrapBtn} alt="Scrap Button" />
                   <h3>{e.scrapCount}</h3>
                 </C.ScrapBtn>
-                <C.ShareBtn onClick={() => handleCopyClipBoard(`{e.pageUrl}`)}>
+                <C.ShareBtn onClick={() => handleCopyClipBoard(e.pageUrl)}>
                   <img src="/images/ShareBtn.svg" />
                 </C.ShareBtn>
               </C.BtnContainer>{" "}
