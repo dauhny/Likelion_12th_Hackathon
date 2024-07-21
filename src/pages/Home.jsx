@@ -108,9 +108,9 @@ export function Home() {
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>
           {content.map((e) => (
-            <H.ExhibitPoster key={e.id}>
-              <img src={e.image} onClick={() => goContentIntro(e.id)} />
-              <H.ExhibitInfo>
+            <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>
+              <img src={e.image} />
+              <H.ExhibitInfo onClick={() => goContentIntro(e.id)}>
                 <p id={"InfoP"}>
                   {e.title}
                   <br />

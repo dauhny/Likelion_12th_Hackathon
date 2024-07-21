@@ -111,7 +111,7 @@ export function ContentIntro() {
           {content.map((e) => (
             <C.ExhibitContainer>
               <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
-              <C.ExhibitPoster>
+              <C.ExhibitPoster onClick={e.pageUrl}>
                 <img src={e.image} alt="ExhibitPoster" />
               </C.ExhibitPoster>
               <C.LocationIcon>
