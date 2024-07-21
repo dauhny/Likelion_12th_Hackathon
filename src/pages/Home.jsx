@@ -8,6 +8,7 @@ export function Home() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 3; // 페이지당 항목 수
+  const newItemCountPerPage = 1;
 
   const goContentIntro = (id) => {
     navigate(`/contentintro?id=${id}`);
@@ -47,8 +48,33 @@ export function Home() {
   //하단바 끝
 
   const [content, setContent] = useState([]);
-  const [id, setId] = useState();
+  const [newcontent, setNewContent] = useState([]);
 
+  //최신 전시
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const response = await axios.get(`http://127.0.0.1:8000/data/`);
+        const allData = response.data;
+
+        const sortedData = allData.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
+        const startIndex = (page - 1) * newItemCountPerPage;
+        const endIndex = startIndex + newItemCountPerPage;
+        const paginatedData = sortedData.slice(startIndex, endIndex);
+
+        setNewContent(sortedData[0]);
+      } catch (error) {
+        console.error("최신 전시 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, []);
+
+  //HOT 후기글&전시
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,11 +102,17 @@ export function Home() {
       <H.Container>
         <H.Item>
           <br />
-          <H.InfoTextPurple>New</H.InfoTextPurple>
-          <br />
-          <H.NewExhibit>
-            <img src="/images/ReHersier.svg" />
-          </H.NewExhibit>
+          {newcontent ? (
+            <H.NewExhibitContainer>
+              <H.InfoTextPurple>New</H.InfoTextPurple>
+              <br />
+              <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
+                <img src={newcontent.image} />
+              </H.NewExhibit>{" "}
+            </H.NewExhibitContainer>
+          ) : (
+            <p>최신 전시가 없습니다.</p>
+          )}
           <H.InfoText>HOT 후기글</H.InfoText>
           <H.ReviewBtn onClick={goReview}>
             더보기 <img src="images/ExpandBtn.svg" />
@@ -110,7 +142,7 @@ export function Home() {
           {content.map((e) => (
             <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>
               <img src={e.image} />
-              <H.ExhibitInfo onClick={() => goContentIntro(e.id)}>
+              <H.ExhibitInfo key={e.id} onClick={() => goContentIntro(e.id)}>
                 <p id={"InfoP"}>
                   {e.title}
                   <br />

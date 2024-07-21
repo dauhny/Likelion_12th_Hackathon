@@ -91,6 +91,7 @@ export const NewExhibit = styled.div`
     margin: -20px 0px 0px 0px;
     border-radius: 10px;
   }
+  cursor: pointer;
 `;
 
 export const ExhibitPoster = styled.div`
@@ -245,3 +246,5 @@ export const LikeCnt = styled.div`
   margin-left: 78%;
   margin-top: 76px;
 `;
+
+export const NewExhibitContainer = styled.div``;
