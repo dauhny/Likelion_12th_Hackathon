@@ -1,9 +1,13 @@
 import React from "react";
 import * as H from "../styles/styledHome";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Home() {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1); // 현재 페이지
+  const itemsCountPerPage = 3; // 페이지당 항목 수
 
   const goContentIntro = () => {
     navigate(`/contentintro`);
@@ -11,7 +15,7 @@ export function Home() {
   };
 
   const goAllExihibit = () => {
-    navigate(`/allexhibit`);
+    navigate(`/contentintro`);
     window.scrollTo(0, 0);
   };
 
@@ -19,7 +23,6 @@ export function Home() {
     navigate(`/review`);
     window.scrollTo(0, 0);
   };
-
   //하단바
   const goSearch = () => {
     navigate(`/search`);
@@ -48,6 +51,31 @@ export function Home() {
 
   //하단바 끝
 
+  const [content, setContent] = useState([]);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const response = await axios.get(`http://127.0.0.1:8000/data`);
+        const allData = response.data;
+        setContent(response.data); // API 응답으로 받은 데이터를 state에 저장   const allData = response.data;
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setContent(paginatedData); //현재 페이지 데이터 설정
+      } catch (error) {
+        console.error("전시 상세 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, []);
+
   return (
     <>
       <H.Container>
@@ -58,9 +86,7 @@ export function Home() {
           <H.NewExhibit>
             <img src="/images/ReHersier.svg" />
           </H.NewExhibit>
-          <br /> <br />
-          <br /> <br />
-          <H.InfoText>HOT 후기글</H.InfoText>{" "}
+          <H.InfoText>HOT 후기글</H.InfoText>
           <H.ReviewBtn onClick={goReview}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>
@@ -69,84 +95,40 @@ export function Home() {
             <H.ReviewName>익명1</H.ReviewName>
             <H.ReviewDate>07/17</H.ReviewDate>
             <H.ReviewTitle>이 전시 꼭 보세요</H.ReviewTitle>
-            <H.ReviewContent>
-              힙노시스 전시 진짜 재밌네요...
-            </H.ReviewContent>{" "}
+            <H.ReviewContent>힙노시스 전시 진짜 재밌네요...</H.ReviewContent>
             <H.LikeIcon />
             <H.LikeCnt>12</H.LikeCnt>
           </H.ReviewBox>
           <H.ReviewBox>
-            {" "}
             <H.ProfileImg />
             <H.ReviewName>익명2</H.ReviewName>
             <H.ReviewDate>07/17</H.ReviewDate>
             <H.ReviewTitle>포에버리즘 다녀오신 분?</H.ReviewTitle>
-            <H.ReviewContent>굿즈 어떤 거 사셨나요??</H.ReviewContent>{" "}
+            <H.ReviewContent>굿즈 어떤 거 사셨나요??</H.ReviewContent>
             <H.LikeIcon />
             <H.LikeCnt>12</H.LikeCnt>
           </H.ReviewBox>
-          <H.ReviewBox>
-            {" "}
-            <H.ProfileImg />
-            <H.ReviewName>익명3</H.ReviewName>
-            <H.ReviewDate>07/17</H.ReviewDate>
-            <H.ReviewTitle>길을 못 찾겠어요..</H.ReviewTitle>
-            <H.ReviewContent>
-              예술의 전당 A gate가 어디인가요?
-            </H.ReviewContent>{" "}
-            <H.LikeIcon />
-            <H.LikeCnt>12</H.LikeCnt>
-          </H.ReviewBox>
-          <br /> <br />
-          <br /> <br />
           <H.InfoText>HOT 전시</H.InfoText>
           <H.ReviewBtn onClick={goAllExihibit}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>
-          <H.ExhibitPoster>
-            <img src="/images/Foreverism.svg" onClick={goContentIntro} />
-            <H.ExhibitInfo>
-              {" "}
-              <p id={"InfoP"}>
-                포에버리즘 : 우리를 세상의 끝으로
-                <br />
-                2024.04.12 ~ 24.06.23
-                <br />
-                일민미술관
-              </p>
-            </H.ExhibitInfo>{" "}
-          </H.ExhibitPoster>
-          <br />
-          <br />
-          <H.ExhibitPoster>
-            <img src="/images/ReHercierPoster.svg" />
-            <H.ExhibitInfo>
-              {" "}
-              <p id={"InfoP"}>
-                Re - hercier
-                <br />
-                2024.05.10 ~ 24.05.23
-                <br />
-                스페이스 로라
-              </p>
-            </H.ExhibitInfo>{" "}
-          </H.ExhibitPoster>
-          <br />
-          <br />
-          <H.ExhibitPoster>
-            <img src="/images/Hipgnosis.svg" alt="Hipgnosis" />
-            <H.ExhibitInfo>
-              <p id={"InfoP"}>
-                힙노시스 : 롤 플레잉 스토리
-                <br />
-                2024.03.8 ~ 24.08.31
-                <br />
-                그라운드 시소 서촌
-              </p>
-            </H.ExhibitInfo>
-          </H.ExhibitPoster>
-          <H.PurpleBlur></H.PurpleBlur>{" "}
+          {content.map((e) => (
+            <H.ExhibitPoster>
+              <img src={e.image} onClick={goContentIntro} />
+              <H.ExhibitInfo>
+                <p id={"InfoP"}>
+                  {e.title}
+                  <br />
+                  {e.period}
+                  <br />
+                  {e.place}
+                </p>
+              </H.ExhibitInfo>
+              <br />
+            </H.ExhibitPoster>
+          ))}{" "}
         </H.Item>
+        <H.PurpleBlur></H.PurpleBlur>
 
         {/*하단바*/}
         <H.NavBar>
@@ -180,7 +162,7 @@ export function Home() {
               }}
             >
               AI 심리 분석
-            </H.NavText>{" "}
+            </H.NavText>
           </H.NavBtnContainer>
           {/*홈*/}
           <H.NavBtnContainer>

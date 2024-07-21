@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
-  height: 2690px;
+  height: 1490px;
   margin: 0 auto;
   background: #121212;
   justify-content: center;
@@ -125,16 +125,14 @@ export const SearchIcon = styled.button`
 `;
 
 export const ExhibitContainer = styled.div`
-  margin-bottom: 120px;
+  display: block;
 `;
 
 export const ExhibitImg = styled.button`
   background: transparent;
   border: none;
-
   cursor: pointer;
-  position: absolute;
-  margin-top: 19px;
+  margin-top: 15px;
 
   img {
     width: 100px;
@@ -156,21 +154,21 @@ export const ExhibitInfoBox = styled.button`
     #392a4d 68.17%,
     #4e3968 100%
   );
-  cursor: pointer;
   position: absolute;
-  margin-top: 20px;
-  margin-left: 106px;
+  cursor: pointer;
+  margin-top: 16px;
+  margin-left: -6px;
 `;
 
 export const ExhibitTitle = styled.div`
   color: #fdfdfd;
-  text-align: center;
+  text-align: left;
   font-family: "Pretendard Variable";
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-bottom: 10px;
+  margin-left: 10px;
 `;
 
 export const ExhibitDetail = styled.div`
@@ -181,5 +179,49 @@ export const ExhibitDetail = styled.div`
   font-weight: 400;
   line-height: 16px;
   text-align: left;
-  margin-left: 18px;
+  margin-left: 10px;
+`;
+
+export const PaginationContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    cursor: pointer;
+    margin-left: -70px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.pagination li {
+    width: 30px;
+    height: 30px;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  ul.pagination li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  ul.pagination li.active a {
+    color: #a259ff;
+  }
+
+  ul.pagination li.active a:hover {
+    color: white;
+  }
+
+  ul.pagination li a:hover {
+    background-color: #a259ff;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+  }
 `;

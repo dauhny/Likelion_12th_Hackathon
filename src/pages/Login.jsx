@@ -11,6 +11,7 @@ export function Login() {
 
   const goHome = () => {
     navigate(`/home`);
+    window.scrollTo(0, 0);
   };
 
   const handleLogin = async (event) => {
@@ -27,7 +28,7 @@ export function Login() {
       console.log("로그인 성공:", response.data);
       goHome();
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("로그인 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -63,7 +64,7 @@ export function Login() {
           ></L.UserInput>
         </L.InputContainer>
         <br></br>
-        <L.Complete onClick={goHome}>완료</L.Complete>
+        <L.Complete onClick={handleLogin}>완료</L.Complete>
       </L.Container>
     </>
   );

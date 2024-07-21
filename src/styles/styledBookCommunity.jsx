@@ -266,4 +266,7 @@ export const RecBtn = styled.button`
   border: none;
   margin-left: 40px;
   cursor: pointer;
+  &:hover {
+    background-image: url("/images/RecBtnH.svg");
+  }
 `;

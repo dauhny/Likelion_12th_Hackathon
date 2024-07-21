@@ -12,7 +12,6 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-//고정
 export const Item = styled.div`
   margin-left: 12%;
   position: relative;
@@ -95,24 +94,26 @@ export const NewExhibit = styled.div`
 `;
 
 export const ExhibitPoster = styled.div`
-  width: 300px;
-  height: 176px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  z-index: 999;
   cursor: pointer;
+  border-radius: 10px;
+
+  img {
+    width: 300px;
+    height: 176px;
+    resizemode: "cover";
+    object-fit: cover;
+    border-radius: 10px;
+  }
 `;
 
 export const ExhibitInfo = styled.div`
   width: 300px;
   height: 80px;
-  flex-shrink: 0;
   border-radius: 0px 0px 10px 10px;
   background: rgba(245, 247, 250, 0.37);
-  margin-top: -28%;
-  position: absolute;
+  margin-top: -26%;
+  position: relative;
+  z-index: 999;
 
   #InfoP {
     color: #000;
@@ -135,6 +136,7 @@ export const InfoText = styled.div`
   font-weight: 600;
   line-height: 24px;
   margin-bottom: -20px;
+  margin-top: 20%;
 `;
 
 export const ReviewBtn = styled.button`

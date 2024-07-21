@@ -88,6 +88,7 @@ export const PageTitle = styled.div`
   line-height: 24px;
   text-align: center;
   margin-top: -23px;
+  }
 `;
 
 //뒤로가기
@@ -265,4 +266,7 @@ export const RecBtn = styled.button`
   border: none;
   margin-left: 40px;
   cursor: pointer;
+  &:hover {
+    background-image: url("/images/RecBtnH.svg");
+  }
 `;

@@ -111,7 +111,9 @@ export const ExhibitTitle = styled.div`
   font-weight: 600;
   line-height: 24px;
   margin-top: 10%;
-  margin-left: 3%;
+  width: 290px;
+  text-align: center;
+  margin-bottom: 10px;
 `;
 
 export const ExhibitDetail = styled.div`
@@ -320,3 +322,5 @@ export const CommentLine = styled.div`
   margin-top: 5px;
   margin-left: -5px;
 `;
+
+export const ExhibitContainer = styled.div``;

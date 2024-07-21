@@ -1,14 +1,49 @@
 import React from "react";
 import * as C from "../styles/styledContentIntro";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function ContentIntro() {
   const navigate = useNavigate();
+  const [content, setContent] = useState([]);
+  const [user, setUser] = useState(""); //유저 고유번호
+  const [data, setData] = useState(""); //전시 고유번호
+  const [id, setId] = useState("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const response = await axios.get("http://127.0.0.1:8000/data/");
+        setContent(response.data); // API 응답으로 받은 데이터를 state에 저장
+      } catch (error) {
+        console.error("전시 상세 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, []);
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
+  };
+
+  const handleScrap = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/scraps/", {
+        user,
+        data,
+        id,
+      });
+      console.log("스크랩 성공:", response.data);
+      ChangeScrap();
+    } catch (error) {
+      console.error("스크랩 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
   };
 
   const goMusicCommunity = () => {
@@ -46,54 +81,67 @@ export function ContentIntro() {
 
   //스크랩 버튼 스타일, 횟수 변경
   const [ScrapBtn, setScrapBtn] = useState("/images/ScrapBtnOff.svg");
-  const [ScrapCnt, setScrapCnt] = useState(0);
+  const [scrapCount, setScrapCount] = useState(0);
 
   function ChangeScrap() {
     if (ScrapBtn === "/images/ScrapBtnOff.svg") {
       setScrapBtn("/images/ScrapBtnOn.svg");
-      setScrapCnt(ScrapCnt + 1);
+      setScrapCount(scrapCount + 1);
       alert("스크랩되었습니다.");
     } else {
       setScrapBtn("/images/ScrapBtnOff.svg");
-      setScrapCnt(ScrapCnt - 1);
+      setScrapCount(scrapCount - 1);
       alert("스크랩이 취소되었습니다.");
     }
   }
+  //공유 버튼
+  const handleCopyClipBoard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("클립보드에 링크가 복사되었습니다.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
       <C.Container>
         <C.BackBtn onClick={goBack}></C.BackBtn>
         <C.PageTitle>전시 상세</C.PageTitle>
+
         <C.Item>
-          <C.ExhibitTitle>포에버리즘 : 우리를 세상의 끝으로</C.ExhibitTitle>
-          <C.ExhibitPoster>
-            <img src="/images/ForeverismIntro.svg" alt="ExhibitPoster" />
-          </C.ExhibitPoster>
-          <C.LocationIcon>
-            <img src="/images/LocationIcon.svg" />
-          </C.LocationIcon>
-          <br /> <br />
-          <C.LocationText>서울 종로구 세종대로 152 일민 미술관</C.LocationText>
-          <C.CalendarIcon>
-            <img src="/images/CalendarIcon.svg" />
-          </C.CalendarIcon>
-          <C.InfoText>전시 일정</C.InfoText>
-          <C.ExhibitDetail>
-            2024. 04. 12 ~ 2024. 06. 23
-            <br />
-            11:00 ~ 19:00
-            <br /> 매주 월요일 휴무
-          </C.ExhibitDetail>
-          <C.BtnContainer>
-            <C.ScrapBtn onClick={ChangeScrap}>
-              <img src={ScrapBtn} alt="Scrap Button" />
-              <h3>{ScrapCnt}</h3>
-            </C.ScrapBtn>
-            <C.ShareBtn>
-              <img src="/images/ShareBtn.svg" />
-            </C.ShareBtn>
-          </C.BtnContainer>{" "}
+          {content.map((e) => (
+            <C.ExhibitContainer>
+              <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
+              <C.ExhibitPoster>
+                <img src={e.image} alt="ExhibitPoster" />
+              </C.ExhibitPoster>
+              <C.LocationIcon>
+                <img src="/images/LocationIcon.svg" />
+              </C.LocationIcon>
+              <br /> <br />
+              <C.LocationText>{e.place}</C.LocationText>
+              <C.CalendarIcon>
+                <img src="/images/CalendarIcon.svg" />
+              </C.CalendarIcon>
+              <C.InfoText>전시 일정</C.InfoText>
+              <C.ExhibitDetail>
+                {e.period}
+                <br />
+                {e.time}
+              </C.ExhibitDetail>
+              <C.BtnContainer>
+                <C.ScrapBtn onClick={handleScrap}>
+                  <img src={ScrapBtn} alt="Scrap Button" />
+                  <h3>{e.scrapCount}</h3>
+                </C.ScrapBtn>
+                <C.ShareBtn onClick={() => handleCopyClipBoard(`{e.pageUrl}`)}>
+                  <img src="/images/ShareBtn.svg" />
+                </C.ShareBtn>
+              </C.BtnContainer>{" "}
+            </C.ExhibitContainer>
+          ))}
           <C.InfoText style={{ margin: "80px 0 5px 20px" }}>
             이 전시와 함께하면 좋은 콘텐츠를 확인해보세요.
           </C.InfoText>
@@ -204,7 +252,7 @@ export function ContentIntro() {
               <C.NavText>마이페이지</C.NavText>
             </C.NavBtnContainer>
           </C.NavBar>
-          {/*하단바*/}
+          {/*하단바*/}{" "}
         </C.Item>
       </C.Container>
     </>
