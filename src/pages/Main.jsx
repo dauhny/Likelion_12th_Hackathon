@@ -8,7 +8,7 @@ export function Main() {
   const navigate = useNavigate();
 
   const goLogin = () => {
-    navigate(`/rest-auth/login`);
+    navigate(`/login`);
     window.scrollTo(0, 0);
   };
   const goRegister = () => {

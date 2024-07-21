@@ -3,6 +3,7 @@ import * as R from "../styles/styledRegister";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export function Register() {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ export function Register() {
           ></R.UserInput>
           <R.InputLabel>비밀번호 확인</R.InputLabel>
           <R.UserInput
-            type="password_confirm"
+            type="password"
             placeholder="비밀번호를 입력하세요."
             value={password_confirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}

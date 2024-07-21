@@ -46,7 +46,6 @@ export const UserInput = styled.input`
   width: 313px;
   height: 34px;
   border-radius: 10px;
-  border: 1px solid #a259ff;
   background: #121212;
   color: rgba(255, 255, 255, 0.5);
   font-family: "Pretendard Variable";
@@ -55,6 +54,7 @@ export const UserInput = styled.input`
   font-weight: 400;
   line-height: 160.5%;
   padding-left: 10px;
+  border: 1px solid #a259ff;
 `;
 
 export const UserInputShort = styled(UserInput)`
