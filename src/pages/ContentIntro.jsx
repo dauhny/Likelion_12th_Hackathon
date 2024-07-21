@@ -1,6 +1,6 @@
 import React from "react";
 import * as C from "../styles/styledContentIntro";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -9,20 +9,24 @@ export function ContentIntro() {
   const [content, setContent] = useState([]);
   const [user, setUser] = useState(""); //유저 고유번호
   const [data, setData] = useState(""); //전시 고유번호
-  const [id, setId] = useState("");
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id"); // URL 쿼리에서 id 파라미터 추출
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // API 호출
-        const response = await axios.get("http://127.0.0.1:8000/data/");
-        setContent(response.data); // API 응답으로 받은 데이터를 state에 저장
+        const response = await axios.get(`http://127.0.0.1:8000/data/${id}`);
+        setContent([response.data]); // API 응답으로 받은 데이터를 state에 저장
       } catch (error) {
         console.error("전시 상세 조회 실패 :", error);
       }
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
-  }, []);
+  }, [id]);
+
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
@@ -145,9 +149,7 @@ export function ContentIntro() {
           <C.InfoText style={{ margin: "80px 0 5px 20px" }}>
             이 전시와 함께하면 좋은 콘텐츠를 확인해보세요.
           </C.InfoText>
-          <C.goRecBtn onClick={goMusicCommunity}>
-            <img src="/images/goRecBtn.svg" />
-          </C.goRecBtn>
+          <C.goRecBtn onClick={goMusicCommunity} />
           <C.PurpleBlur></C.PurpleBlur>
           <C.CommentIcon>
             <img src="/images/CommentIcon.svg" />

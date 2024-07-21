@@ -210,12 +210,17 @@ export const ShareBtn = styled.button`
 `;
 
 export const goRecBtn = styled.button`
-  width: 278px;
+  width: 290px;
   height: 41px;
-  flex-shrink: 0;
-  background-color: transparent;
   border: none;
   cursor: pointer;
+  background-color: transparent;
+  background-image: url("/images/goRecBtn.svg");
+  margin-left: 7px;
+
+  &:hover {
+    background-image: url("/images/goRecBtnH.svg");
+  }
 `;
 
 export const CommentIcon = styled.div`

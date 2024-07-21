@@ -9,13 +9,8 @@ export function Home() {
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 3; // 페이지당 항목 수
 
-  const goContentIntro = () => {
-    navigate(`/contentintro`);
-    window.scrollTo(0, 0);
-  };
-
-  const goAllExihibit = () => {
-    navigate(`/contentintro`);
+  const goContentIntro = (id) => {
+    navigate(`/contentintro?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -58,7 +53,7 @@ export function Home() {
     const fetchData = async () => {
       try {
         // API 호출
-        const response = await axios.get(`http://127.0.0.1:8000/data`);
+        const response = await axios.get(`http://127.0.0.1:8000/data/`);
         const allData = response.data;
         setContent(response.data); // API 응답으로 받은 데이터를 state에 저장   const allData = response.data;
 
@@ -109,12 +104,12 @@ export function Home() {
             <H.LikeCnt>12</H.LikeCnt>
           </H.ReviewBox>
           <H.InfoText>HOT 전시</H.InfoText>
-          <H.ReviewBtn onClick={goAllExihibit}>
+          <H.ReviewBtn onClick={goSearch}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>
           {content.map((e) => (
-            <H.ExhibitPoster>
-              <img src={e.image} onClick={goContentIntro} />
+            <H.ExhibitPoster key={e.id}>
+              <img src={e.image} onClick={() => goContentIntro(e.id)} />
               <H.ExhibitInfo>
                 <p id={"InfoP"}>
                   {e.title}
