@@ -11,6 +11,8 @@ export function ContentIntro() {
   const [data, setData] = useState();
   const [isScrapped, setIsScrapped] = useState(false);
   const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState(""); // 댓글 상태 추가
+  const [profileImg, setProfileImg] = useState(""); // 프로필 이미지 상태 추가
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -48,6 +50,11 @@ export function ContentIntro() {
           }
         );
         setComments(commentsResponse.data);
+
+        const userResponse = await axios.get(`http://127.0.0.1:8000/user/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+        setProfileImg(userResponse.data.profile);
       } catch (error) {
         console.error("댓글 조회 실패 :", error);
       }
@@ -67,11 +74,10 @@ export function ContentIntro() {
 
       const url = isScrapped
         ? `http://127.0.0.1:8000/scraps/${data}/delete/`
-        : "http://127.0.0.1:8000/scraps/";
+        : `http://127.0.0.1:8000/scraps/${data}/`;
 
       const method = isScrapped ? "delete" : "post";
 
-      // API 호출 시 data와 user 정보를 전달하지 않음
       const response = await axios({
         method,
         url,
@@ -79,7 +85,6 @@ export function ContentIntro() {
       });
 
       console.log("스크랩 성공:", response.data);
-      // 스크랩 상태와 버튼 이미지를 업데이트
       setIsScrapped((prev) => !prev);
       setScrapCount((prevCount) =>
         isScrapped ? prevCount - 1 : prevCount + 1
@@ -95,6 +100,38 @@ export function ContentIntro() {
       );
     } catch (error) {
       console.error("스크랩 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
+  const handleCommentChange = (event) => {
+    setCommentText(event.target.value);
+  };
+
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const response = await axios.post(
+        `http://127.0.0.1:8000/datas/${id}/comments`,
+        { comment: commentText },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      );
+
+      setComments((prevComments) => [response.data, ...prevComments]);
+      setCommentText(""); // 입력 필드 비우기
+    } catch (error) {
+      console.error("댓글 등록 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -202,14 +239,21 @@ export function ContentIntro() {
               marginTop: "-22px",
             }}
           >
-            코멘트 (33)
+            코멘트 ({comments.length})
           </C.InfoText>
           <C.CommentInputContainer>
             <C.ProfileImg>
-              <img src="/images/ProfileImgComment.svg" />
+              <img
+                src={`http://127.0.0.1:8000${profileImg}`}
+                alt="Profile Img"
+              />
             </C.ProfileImg>
-            <C.CommentInput placeholder="전시에 대한 코멘트를 남겨보세요."></C.CommentInput>
-            <C.CommentBtn>
+            <C.CommentInput
+              placeholder="전시에 대한 코멘트를 남겨보세요."
+              value={commentText}
+              onChange={handleCommentChange}
+            />
+            <C.CommentBtn onClick={handleCommentSubmit}>
               <img src="/images/CommentBtn.svg" />
             </C.CommentBtn>
           </C.CommentInputContainer>
@@ -220,12 +264,14 @@ export function ContentIntro() {
               <C.DeleteBtn />
               <C.CommentNickname>{e.username} • </C.CommentNickname>
               <C.CommentProfile>
-                {console.log(e.profile)}
-                <img src={`http://127.0.0.1:8000${e.profile}`} />
+                <img
+                  src={`http://127.0.0.1:8000${e.profile}`}
+                  alt="Comment Profile"
+                />
               </C.CommentProfile>
               <C.CommentLine />
             </C.CommentContainer>
-          ))}
+          ))}{" "}
           <C.PinkBlur />
           {/* 하단바 */}
           <C.NavBar>

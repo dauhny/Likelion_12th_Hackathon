@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1425px;
+  height: 2625px;
   margin: 0 auto;
   background: #fff;
   justify-content: center;
@@ -242,7 +242,8 @@ export const CommentInputContainer = styled.div`
 export const ProfileImg = styled.div`
   width: 27px;
   height: 27px;
-  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 10px;
 `;
 
 export const CommentInput = styled.input`
@@ -275,10 +276,10 @@ export const PinkBlur = styled.div`
   width: 185px;
   height: 184px;
   background-color: #fe3796;
-  filter: blur(140px);
+  filter: blur(160px);
   position: relative;
   z-index: -1;
-  margin-top: 70%;
+  margin-top: -120%;
 `;
 
 export const CommentContent = styled.div`
@@ -328,8 +329,9 @@ export const CommentLine = styled.div`
   height: 0px;
   flex-shrink: 0;
   border: 1px solid #281d36;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-left: -5px;
+  margin-bottom: 10px;
 `;
 
 export const ExhibitContainer = styled.div``;
