@@ -344,3 +344,5 @@ export const DeleteBtn = styled.button`
   margin-top: -16px;
   cursor: pointer;
 `;
+
+export const CommentContainer = styled.div``;

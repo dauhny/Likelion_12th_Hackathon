@@ -10,6 +10,7 @@ export function ContentIntro() {
   const [scrapCount, setScrapCount] = useState(0);
   const [data, setData] = useState();
   const [isScrapped, setIsScrapped] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -18,7 +19,17 @@ export function ContentIntro() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/data/${id}`);
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/data/${id}`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
         const fetchedData = response.data;
         setContent([fetchedData]);
         setData(fetchedData.id);
@@ -29,8 +40,16 @@ export function ContentIntro() {
             ? "/images/ScrapBtnOn.svg"
             : "/images/ScrapBtnOff.svg"
         );
+
+        const commentsResponse = await axios.get(
+          `http://127.0.0.1:8000/datas/${id}/comments`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+        setComments(commentsResponse.data);
       } catch (error) {
-        console.error("전시 상세 조회 실패 :", error);
+        console.error("댓글 조회 실패 :", error);
       }
     };
     fetchData();
@@ -46,17 +65,16 @@ export function ContentIntro() {
         return;
       }
 
-      const user = 1;
       const url = isScrapped
         ? `http://127.0.0.1:8000/scraps/${data}/delete/`
         : "http://127.0.0.1:8000/scraps/";
 
       const method = isScrapped ? "delete" : "post";
 
+      // API 호출 시 data와 user 정보를 전달하지 않음
       const response = await axios({
         method,
         url,
-        data: { user, data },
         headers: { Authorization: `Token ${token}` },
       });
 
@@ -195,14 +213,18 @@ export function ContentIntro() {
               <img src="/images/CommentBtn.svg" />
             </C.CommentBtn>
           </C.CommentInputContainer>
-          <C.CommentContent>" 제가 본 전시 중 최고였어요! "</C.CommentContent>
-          <C.CommentDate>07/15</C.CommentDate>
-          <C.DeleteBtn />
-          <C.CommentNickname>dauhny • </C.CommentNickname>
-          <C.CommentProfile>
-            <img src="/images/ProfileImg.svg" />
-          </C.CommentProfile>
-          <C.CommentLine />
+          {comments.map((e) => (
+            <C.CommentContainer key={e.id}>
+              <C.CommentContent>{e.comment}</C.CommentContent>
+              <C.CommentDate>{e.createdAt}</C.CommentDate>
+              <C.DeleteBtn />
+              <C.CommentNickname>{e.username} • </C.CommentNickname>
+              <C.CommentProfile>
+                <img src={e.profile} />
+              </C.CommentProfile>
+              <C.CommentLine />
+            </C.CommentContainer>
+          ))}
           <C.PinkBlur />
           {/* 하단바 */}
           <C.NavBar>
