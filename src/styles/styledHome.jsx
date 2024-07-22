@@ -164,6 +164,7 @@ export const ReviewBox = styled.div`
   border-radius: 10px;
   background: linear-gradient(90deg, #281d36 0%, #6e5095 91%, #74549c 100%);
   margin-bottom: 15px;
+  cursor: pointer;
 `;
 
 export const ProfileImg = styled.div`

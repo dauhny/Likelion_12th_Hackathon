@@ -11,7 +11,7 @@ import { MusicWrite } from "./pages/MusicWrite";
 import { BookWrite } from "./pages/BookWrite";
 import { ReviewCommunity } from "./pages/ReviewCommunity";
 import Idea from "./pages/Idea";
-import Mypage from "./pages/Mypage";
+import { Mypage } from "./pages/Mypage";
 import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
 import { AI } from "./pages/AI";
@@ -19,6 +19,7 @@ import { AIRecordList } from "./pages/AIRecordList";
 import { BookDetail } from "./pages/BookDetail";
 import { MusicDetail } from "./pages/MusicDeatail";
 import { Search } from "./pages/Search";
+import { MypageRevise } from "./pages/MypageRevise";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/ai" element={<AI />} />
         <Route path="/airecordlist" element={<AIRecordList />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/mypagerevise" element={<MypageRevise />} />
       </Routes>
     </BrowserRouter>
   );

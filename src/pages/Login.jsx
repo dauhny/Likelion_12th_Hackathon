@@ -25,6 +25,11 @@ export function Login() {
           password,
         }
       );
+
+      //토큰 저장
+      const token = response.data.key;
+      localStorage.setItem("token", token);
+
       console.log("로그인 성공:", response.data);
       goHome();
     } catch (error) {

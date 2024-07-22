@@ -15,6 +15,11 @@ export function Home() {
     window.scrollTo(0, 0);
   };
 
+  const goReviewDetail = () => {
+    navigate(`/reviewdetail`);
+    window.scrollTo(0, 0);
+  };
+
   const goReview = () => {
     navigate(`/review`);
     window.scrollTo(0, 0);
@@ -48,6 +53,7 @@ export function Home() {
   //하단바 끝
 
   const [content, setContent] = useState([]);
+  const [review, setReview] = useState([]);
   const [newcontent, setNewContent] = useState([]);
 
   //최신 전시
@@ -117,9 +123,9 @@ export function Home() {
           <H.ReviewBtn onClick={goReview}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>
-          <H.ReviewBox>
+          <H.ReviewBox onClick={goReviewDetail}>
             <H.ProfileImg />
-            <H.ReviewName>익명1</H.ReviewName>
+            <H.ReviewName></H.ReviewName>
             <H.ReviewDate>07/17</H.ReviewDate>
             <H.ReviewTitle>이 전시 꼭 보세요</H.ReviewTitle>
             <H.ReviewContent>힙노시스 전시 진짜 재밌네요...</H.ReviewContent>

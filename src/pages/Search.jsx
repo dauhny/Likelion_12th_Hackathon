@@ -29,8 +29,8 @@ export const Search = () => {
     window.scrollTo(0, 0);
   };
 
-  const goContenIntro = () => {
-    navigate(`/contentintro`);
+  const goContentIntro = (id) => {
+    navigate(`/contentintro?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -102,7 +102,10 @@ export const Search = () => {
           <S.SearchIcon onClick={handleSearch} />
           <br />
           {content.map((e, index) => (
-            <S.ExhibitContainer key={index} onClick={goContenIntro}>
+            <S.ExhibitContainer
+              key={index}
+              onClick={() => goContentIntro(e.id)}
+            >
               <S.ExhibitImg>
                 <img src={e.image} alt={e.title} />
               </S.ExhibitImg>

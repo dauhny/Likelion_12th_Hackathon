@@ -312,11 +312,11 @@ export const CommentProfile = styled.div`
 export const CommentDate = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
-  font-size: 8px;
+  font-size: 8.5px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-left: 75%;
+  margin-left: 72%;
   position: absolute;
   margin-top: -25px;
 `;
@@ -331,3 +331,16 @@ export const CommentLine = styled.div`
 `;
 
 export const ExhibitContainer = styled.div``;
+
+export const DeleteBtn = styled.button`
+  background-image: url("/images/DeleteBtn.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  width: 6.5px;
+  height: 6.5px;
+  border: none;
+  position: absolute;
+  margin-left: 80%;
+  margin-top: -16px;
+  cursor: pointer;
+`;

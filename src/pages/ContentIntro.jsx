@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as C from "../styles/styledContentIntro";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 export function ContentIntro() {
   const navigate = useNavigate();
   const [content, setContent] = useState([]);
+  const [scrapBtn, setScrapBtn] = useState("/images/ScrapBtnOff.svg");
+  const [scrapCount, setScrapCount] = useState(0);
+  const [data, setData] = useState();
+  const [isScrapped, setIsScrapped] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -15,26 +18,63 @@ export function ContentIntro() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // API 호출
         const response = await axios.get(`http://127.0.0.1:8000/data/${id}`);
-        setContent([response.data]); // API 응답으로 받은 데이터를 state에 저장
+        const fetchedData = response.data;
+        setContent([fetchedData]);
+        setData(fetchedData.id);
+        setScrapCount(fetchedData.scrapCount);
+        setIsScrapped(fetchedData.isScrapped);
+        setScrapBtn(
+          fetchedData.isScrapped
+            ? "/images/ScrapBtnOn.svg"
+            : "/images/ScrapBtnOff.svg"
+        );
       } catch (error) {
         console.error("전시 상세 조회 실패 :", error);
       }
     };
-    fetchData(); // useEffect에서 fetchData 함수 호출
+    fetchData();
   }, [id]);
-
-  const goBack = () => {
-    navigate(-1);
-  };
 
   const handleScrap = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:8000/scraps/");
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const user = 1;
+      const url = isScrapped
+        ? `http://127.0.0.1:8000/scraps/${data}/delete/`
+        : "http://127.0.0.1:8000/scraps/";
+
+      const method = isScrapped ? "delete" : "post";
+
+      const response = await axios({
+        method,
+        url,
+        data: { user, data },
+        headers: { Authorization: `Token ${token}` },
+      });
+
       console.log("스크랩 성공:", response.data);
-      ChangeScrap();
+      // 스크랩 상태와 버튼 이미지를 업데이트
+      setIsScrapped((prev) => !prev);
+      setScrapCount((prevCount) =>
+        isScrapped ? prevCount - 1 : prevCount + 1
+      );
+      setScrapBtn(
+        isScrapped ? "/images/ScrapBtnOff.svg" : "/images/ScrapBtnOn.svg"
+      );
+
+      alert(
+        isScrapped
+          ? "스크랩이 취소되었습니다."
+          : "스크랩되었습니다. 마이페이지에서 확인하세요."
+      );
     } catch (error) {
       console.error("스크랩 실패:", error);
       if (error.response) {
@@ -43,12 +83,15 @@ export function ContentIntro() {
     }
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const goMusicCommunity = () => {
     navigate(`/musiccommunity`);
     window.scrollTo(0, 0);
   };
 
-  //하단바
   const goSearch = () => {
     navigate(`/search`);
     window.scrollTo(0, 0);
@@ -74,25 +117,7 @@ export function ContentIntro() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
-  //스크랩 버튼 스타일, 횟수 변경
-  const [ScrapBtn, setScrapBtn] = useState("/images/ScrapBtnOff.svg");
-  const [scrapCount, setScrapCount] = useState(0);
-
-  function ChangeScrap() {
-    if (ScrapBtn === "/images/ScrapBtnOff.svg") {
-      setScrapBtn("/images/ScrapBtnOn.svg");
-      setScrapCount(scrapCount + 1);
-      alert("스크랩되었습니다.");
-    } else {
-      setScrapBtn("/images/ScrapBtnOff.svg");
-      setScrapCount(scrapCount - 1);
-      alert("스크랩이 취소되었습니다.");
-    }
-  }
-  //공유 버튼
-  const handleCopyClipBoard = async (text: string) => {
+  const handleCopyClipBoard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
       alert("클립보드에 링크가 복사되었습니다.");
@@ -101,7 +126,6 @@ export function ContentIntro() {
     }
   };
 
-  //포스터 클릭 시 url 새 탭 열기
   const handlePageUrl = (url) => {
     if (url) {
       window.open(url, "_blank");
@@ -116,7 +140,7 @@ export function ContentIntro() {
 
         <C.Item>
           {content.map((e) => (
-            <C.ExhibitContainer>
+            <C.ExhibitContainer key={e.id}>
               <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
               <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
                 <img src={e.image} alt="ExhibitPoster" />
@@ -137,20 +161,20 @@ export function ContentIntro() {
               </C.ExhibitDetail>
               <C.BtnContainer>
                 <C.ScrapBtn onClick={handleScrap}>
-                  <img src={ScrapBtn} alt="Scrap Button" />
-                  <h3>{e.scrapCount}</h3>
+                  <img src={scrapBtn} alt="Scrap Button" />
+                  <h3>{scrapCount}</h3>
                 </C.ScrapBtn>
                 <C.ShareBtn onClick={() => handleCopyClipBoard(e.pageUrl)}>
                   <img src="/images/ShareBtn.svg" />
                 </C.ShareBtn>
-              </C.BtnContainer>{" "}
+              </C.BtnContainer>
             </C.ExhibitContainer>
           ))}
           <C.InfoText style={{ margin: "80px 0 5px 20px" }}>
             이 전시와 함께하면 좋은 콘텐츠를 확인해보세요.
           </C.InfoText>
           <C.goRecBtn onClick={goMusicCommunity} />
-          <C.PurpleBlur></C.PurpleBlur>
+          <C.PurpleBlur />
           <C.CommentIcon>
             <img src="/images/CommentIcon.svg" />
           </C.CommentIcon>
@@ -173,15 +197,16 @@ export function ContentIntro() {
           </C.CommentInputContainer>
           <C.CommentContent>" 제가 본 전시 중 최고였어요! "</C.CommentContent>
           <C.CommentDate>07/15</C.CommentDate>
+          <C.DeleteBtn />
           <C.CommentNickname>dauhny • </C.CommentNickname>
           <C.CommentProfile>
             <img src="/images/ProfileImg.svg" />
           </C.CommentProfile>
-          <C.CommentLine></C.CommentLine>
-          <C.PinkBlur></C.PinkBlur>
-          {/*하단바*/}
+          <C.CommentLine />
+          <C.PinkBlur />
+          {/* 하단바 */}
           <C.NavBar>
-            {/*검색*/}
+            {/* 검색 */}
             <C.NavBtnContainer>
               <C.NavIcon
                 style={{
@@ -198,7 +223,7 @@ export function ContentIntro() {
                 검색
               </C.NavText>
             </C.NavBtnContainer>
-            {/*AI 심리 분석*/}
+            {/* AI 심리 분석 */}
             <C.NavBtnContainer>
               <C.NavIcon>
                 <img src="/images/AIIcon.svg" onClick={goAI} />
@@ -213,7 +238,7 @@ export function ContentIntro() {
                 AI 심리 분석
               </C.NavText>{" "}
             </C.NavBtnContainer>
-            {/*홈*/}
+            {/* 홈 */}
             <C.NavBtnContainer>
               <C.NavIcon
                 style={{
@@ -225,7 +250,7 @@ export function ContentIntro() {
                 <img src="/images/HomeIcon.svg" onClick={goHome} />
               </C.NavIcon>
             </C.NavBtnContainer>
-            {/*내 기록*/}
+            {/* 내 기록 */}
             <C.NavBtnContainer>
               <C.NavIcon
                 style={{
@@ -242,7 +267,7 @@ export function ContentIntro() {
                 내 기록
               </C.NavText>
             </C.NavBtnContainer>
-            {/*마이페이지*/}
+            {/* 마이페이지 */}
             <C.NavBtnContainer>
               <C.NavIcon
                 style={{
@@ -254,7 +279,7 @@ export function ContentIntro() {
               <C.NavText>마이페이지</C.NavText>
             </C.NavBtnContainer>
           </C.NavBar>
-          {/*하단바*/}{" "}
+          {/* 하단바 끝 */}
         </C.Item>
       </C.Container>
     </>
