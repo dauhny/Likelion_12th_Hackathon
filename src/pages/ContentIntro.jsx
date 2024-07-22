@@ -220,7 +220,8 @@ export function ContentIntro() {
               <C.DeleteBtn />
               <C.CommentNickname>{e.username} • </C.CommentNickname>
               <C.CommentProfile>
-                <img src={e.profile} />
+                {console.log(e.profile)}
+                <img src={`http://127.0.0.1:8000${e.profile}`} />
               </C.CommentProfile>
               <C.CommentLine />
             </C.CommentContainer>

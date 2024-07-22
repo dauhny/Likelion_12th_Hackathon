@@ -297,15 +297,17 @@ export const CommentNickname = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+  width: 100px;
 `;
 
 export const CommentProfile = styled.div`
   img {
     width: 11px;
     height: 11px;
-    margin-left: 45px;
+    margin-left: 44px;
     position: absolute;
-    margin-top: -16px;
+    margin-top: -16.5px;
+    border-radius: 10px;
   }
 `;
 
