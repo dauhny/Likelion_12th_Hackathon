@@ -19,6 +19,11 @@ import { AIRecordList } from "./pages/AIRecordList";
 import { AIPastDetail } from "./pages/AIPastDetail";
 import { AIResult } from "./pages/AIResult";
 import { AIPast } from "./pages/AIPast";
+import { Record } from "./pages/Record";
+import { RecordWrite } from "./pages/RecordWrite";
+import { MyRecordDetail } from "./pages/MyRecordDetail";
+import { ReviewCommunity } from "./pages/ReviewCommunity";
+import { ReviewDetail } from "./pages/ReviewDetail";
 
 function App() {
   return (
@@ -44,6 +49,11 @@ function App() {
         <Route path="/aipastdetail" element={<AIPastDetail />} />
         <Route path="/airesult" element={<AIResult />} />
         <Route path="/aipast" element={<AIPast />} />
+        <Route path="/record" element={<Record />} />
+        <Route path="/recordwrite" element={<RecordWrite />} />
+        <Route path="/myrecorddetail" element={<MyRecordDetail />} />
+        <Route path="/reviewcommunity" element={<ReviewCommunity />} />
+        <Route path="/reviewdetail" element={<ReviewDetail />} />
       </Routes>
     </BrowserRouter>
   );

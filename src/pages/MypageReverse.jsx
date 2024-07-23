@@ -134,9 +134,8 @@ export function MypageReverse() {
               type="tel"
               placeholder="전화번호를 입력하세요."
             ></MPR.PhoneNumber>
-            <MPR.Complete>가입하기</MPR.Complete>
+            <MPR.Complete onClick={goMyPage}>저장하기</MPR.Complete>
           </MPR.InputContainer>
-
           {/*하단바*/}
           <MPR.NavBar>
             {/*검색*/}
