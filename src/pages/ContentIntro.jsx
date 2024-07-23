@@ -11,12 +11,13 @@ export function ContentIntro() {
   const [data, setData] = useState();
   const [isScrapped, setIsScrapped] = useState(false);
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState(""); // 댓글 상태 추가
-  const [profileImg, setProfileImg] = useState(""); // 프로필 이미지 상태 추가
+  const [commentText, setCommentText] = useState("");
+  const [profileImg, setProfileImg] = useState("");
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const usercode = queryParams.get("usercode");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,9 +52,13 @@ export function ContentIntro() {
         );
         setComments(commentsResponse.data);
 
-        const userResponse = await axios.get(`http://127.0.0.1:8000/user/`, {
-          headers: { Authorization: `Token ${token}` },
-        });
+        const userResponse = await axios.get(
+          `http://127.0.0.1:8000/user/${usercode}`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+        console.log("프로필 사진:", userResponse.data.profile);
         setProfileImg(userResponse.data.profile);
       } catch (error) {
         console.error("댓글 조회 실패 :", error);
@@ -110,6 +115,7 @@ export function ContentIntro() {
     setCommentText(event.target.value);
   };
 
+  //댓글 생성
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -129,9 +135,42 @@ export function ContentIntro() {
       );
 
       setComments((prevComments) => [response.data, ...prevComments]);
-      setCommentText(""); // 입력 필드 비우기
+      setCommentText("");
     } catch (error) {
       console.error("댓글 등록 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
+  //댓글 삭제
+  const handleCommentDelete = async (commentId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      await axios.delete(
+        `http://127.0.0.1:8000/datas/${id}/comments/${commentId}`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      );
+
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentId)
+      );
+      alert("댓글이 삭제되었습니다.");
+
+      // 페이지 새로고침
+      window.location.reload();
+    } catch (error) {
+      alert("자신의 댓글만 삭제할 수 있습니다.");
+      console.error("댓글 삭제 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -243,10 +282,7 @@ export function ContentIntro() {
           </C.InfoText>
           <C.CommentInputContainer>
             <C.ProfileImg>
-              <img
-                src={`http://127.0.0.1:8000${profileImg}`}
-                alt="Profile Img"
-              />
+              <img src={profileImg} alt="Profile Img" />
             </C.ProfileImg>
             <C.CommentInput
               placeholder="전시에 대한 코멘트를 남겨보세요."
@@ -261,7 +297,7 @@ export function ContentIntro() {
             <C.CommentContainer key={e.id}>
               <C.CommentContent>{e.comment}</C.CommentContent>
               <C.CommentDate>{e.createdAt}</C.CommentDate>
-              <C.DeleteBtn />
+              <C.DeleteBtn onClick={() => handleCommentDelete(e.id)} />
               <C.CommentNickname>{e.username} • </C.CommentNickname>
               <C.CommentProfile>
                 <img

@@ -240,10 +240,11 @@ export const CommentInputContainer = styled.div`
 `;
 
 export const ProfileImg = styled.div`
-  width: 27px;
-  height: 27px;
-  overflow: hidden;
-  border-radius: 10px;
+  img {
+    width: 27px;
+    height: 27px;
+    border-radius: 20px;
+  }
 `;
 
 export const CommentInput = styled.input`
@@ -279,10 +280,11 @@ export const PinkBlur = styled.div`
   filter: blur(160px);
   position: relative;
   z-index: -1;
-  margin-top: -120%;
+  margin-top: -120px;
 `;
 
 export const CommentContent = styled.div`
+  width: 200px;
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 12px;

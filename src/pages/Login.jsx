@@ -30,6 +30,10 @@ export function Login() {
       const token = response.data.key;
       localStorage.setItem("token", token);
 
+      //usercode 저장
+      const usercode = response.data.usercode;
+      localStorage.setItem("usercode", usercode);
+
       console.log("로그인 성공:", response.data);
       goHome();
     } catch (error) {
