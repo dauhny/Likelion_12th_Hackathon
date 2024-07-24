@@ -20,6 +20,7 @@ import { BookDetail } from "./pages/BookDetail";
 import { MusicDetail } from "./pages/MusicDeatail";
 import { Search } from "./pages/Search";
 import { MypageRevise } from "./pages/MypageRevise";
+import { AIResult } from "./pages/AIResult";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/mypagerevise" element={<MypageRevise />} />
         <Route path="/review" element={<ReviewCommunity />} />
+        <Route path="/airesult" element={<AIResult />} />
       </Routes>
     </BrowserRouter>
   );
