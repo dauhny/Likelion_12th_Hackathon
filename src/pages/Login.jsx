@@ -17,7 +17,6 @@ export function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      // API 호출 시 사용자 입력 데이터 전달
       const response = await axios.post(
         "http://127.0.0.1:8000/rest-auth/login/",
         {
@@ -27,7 +26,7 @@ export function Login() {
       );
 
       //토큰 저장
-      const token = response.data.key;
+      const token = response.data.token;
       localStorage.setItem("token", token);
 
       //usercode 저장

@@ -17,12 +17,12 @@ export function ContentIntro() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
-  const usercode = queryParams.get("usercode");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
+        const usercode = localStorage.getItem("usercode");
 
         if (!token) {
           alert("로그인 후 이용하세요.");
@@ -61,7 +61,7 @@ export function ContentIntro() {
         console.log("프로필 사진:", userResponse.data.profile);
         setProfileImg(userResponse.data.profile);
       } catch (error) {
-        console.error("댓글 조회 실패 :", error);
+        console.error("프로필 실패 :", error);
       }
     };
     fetchData();
