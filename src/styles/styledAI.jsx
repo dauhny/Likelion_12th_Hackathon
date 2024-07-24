@@ -94,16 +94,16 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// AI 심리 분석 텍스트
-export const IntroText = styled.div`
+//페이지 제목
+export const PageTitle = styled.div`
   color: #3d3a3a;
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 104px;
-  margin-top: -26px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
 `;
 
 // 챗지피티 이미지
@@ -133,7 +133,7 @@ export const Analysis = styled.button`
     flex-shrink: 0;
     stroke-width: 2px;
     stroke: #fff;
-    margin-top: -5px;
+    margin-top: -4px;
     margin-left: 10px;
   }
   #text {
@@ -170,7 +170,7 @@ export const Replay = styled.button`
     stroke-width: 2px;
     stroke: #fff;
     margin-top: -5px;
-    margin-left: 5px;
+    margin-left: 10px;
   }
   #text2 {
     width: 130px;

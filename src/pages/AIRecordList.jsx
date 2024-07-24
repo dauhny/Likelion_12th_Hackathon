@@ -58,8 +58,8 @@ export function AIRecordList() {
     <>
       <A.Container>
         <A.BackBtn onClick={goBack}></A.BackBtn>
+        <A.PageTitle>나의 기록</A.PageTitle>
         <A.Item>
-          <A.IntroText>나의 기록</A.IntroText>
           <A.Choice>분석하고 싶은 기록을 선택하세요.</A.Choice>
           <A.Comment>
             AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.

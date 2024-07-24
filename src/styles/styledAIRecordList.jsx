@@ -94,15 +94,15 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 나의 기록 텍스트
-export const IntroText = styled.div`
+//페이지 제목
+export const PageTitle = styled.div`
   color: #3d3a3a;
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 113px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
   margin-top: -23px;
 `;
 

@@ -1,198 +1,249 @@
 import { styled } from "styled-components";
 
+//고정
 export const Container = styled.div`
   width: 390px;
-  height: 1110px;
+  height: 898px;
   margin: 0 auto;
   background: #121212;
   justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+  position: relative;
   overflow: hidden;
-
-  #Writebtn {
-    width: 26px;
-    margin-top: 32px;
-    height: 27px;
-    flex-shrink: 0;
-  }
-
-  #Ideabtn {
-    width: 60px;
-    height: 62px;
-    margin-top: 14px;
-    flex-shrink: 0;
-    cursor: pointer;
-  }
 `;
 
-export const TopBar = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 135px;
+//고정
+export const Item = styled.div`
+  margin-left: 12%;
+  position: relative;
+  z-index: 0;
 `;
 
+//뒤로가기 버튼
 export const BackBtn = styled.button`
-  width: 29px;
-  height: 30px;
+  width: 11px;
+  height: 19px;
   background-image: url("/images/BackBtn.svg");
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
   outline: none;
+  margin-left: 10px;
+  margin-top: 10px;
 `;
 
-export const GroupSmall = styled.div`
-  width: 45px;
-  height: 27px;
+//하단바 시작
+
+export const NavBar = styled.div`
+  width: 390px;
+  height: 74px;
+  flex-shrink: 0;
+  border-radius: 20px 20px 0px 0px;
+  border: 1px solid gray;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  margin-left: -48px;
 `;
 
-export const MyPage = styled.button`
-  width: 25px;
-  height: 27px;
-  cursor: pointer;
-  background-image: url("/images/MyPage.svg");
+export const NavBtnContainer = styled.div`
+  display: column;
+`;
+
+export const NavIcon = styled.button`
+  width: 21px;
+  height: 39px;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
   background-color: transparent;
   border: none;
-  outline: none;
+  margin-left: 30px;
+  margin-top: 11px;
+  cursor: pointer;
+  margin-right: 15px;
 `;
 
-export const UserInput = styled.input`
-  width: 312px;
-  height: 40px;
-  border: 1px solid #a259ff;
-  background: #121212;
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  font-family: Roboto;
-  font-size: 20px;
+export const NavText = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.715px;
+  margin-left: 33px;
+  margin-top: -5px;
+`;
+// 하단바 끝
+
+export const PageTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  padding-left: 3px;
-  margin-top: 25px;
-  margin-bottom: 23px;
+  text-align: center;
+  margin-top: -23px;
 `;
 
-export const Box1 = styled.div`
-  width: 312px;
-  height: 150px;
-  flex-shrink: 0;
-  border: 1px solid #a259ff;
-  background: #121212;
-  margin-top: 15px;
+// 검색창, 검색 이미지 감싸는 박스
+export const searchBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 50px;
 `;
 
-export const SB1 = styled.div`
-  width: 284.967px;
-  margin-left: 13px;
-  margin-top: 11px;
-  height: 30px;
+// 검색창
+export const search = styled.input`
+  width: 259px;
+  height: 40px;
   flex-shrink: 0;
-  border: 1px solid #a259ff;
+  border-radius: 16px;
+  border: 1px solid #9747ff;
   background: #121212;
+  margin-top: 20px;
+  margin-left: -7px;
+  color: #ccc;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 200% */
+  padding-left: 10px;
+`;
 
-  #detail {
-    margin-top: 6px;
-    margin-left: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: Roboto;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 171.429% */
+// 검색 이미지
+export const searchImg = styled.div`
+  img {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    margin-top: 25px;
+    margin-left: 10px;
+    cursor: pointer;
   }
 `;
 
-export const Box2 = styled.div`
-  width: 312px;
-  height: 150px;
-  flex-shrink: 0;
-  border: 1px solid #a259ff;
-  background: #121212;
-  margin-top: 15px;
-`;
-
-export const SB2 = styled.div`
-  width: 284.967px;
-  margin-left: 13px;
-  margin-top: 11px;
-  height: 30px;
-  flex-shrink: 0;
-  border: 1px solid #a259ff;
-  background: #121212;
-
-  #detail {
-    margin-top: 6px;
-    margin-left: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: Roboto;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 171.429% */
+// 티켓
+export const ticket = styled.div`
+  position: relative;
+  img {
+    width: 343px;
+    height: 115.367px;
+    margin-top: 34px;
+    margin-left: -23px;
   }
 `;
 
-export const Box3 = styled.div`
-  margin-top: 21px;
-  width: 310px;
-  height: 341px;
-  flex-shrink: 0;
-  border: 1px solid #a259ff;
-  background: #121212;
-`;
+// 프로필 박스
+export const profileContainer = styled.div`
+  position: relative;
+  width: 100px;
+  height: 114px;
+  margin-top: -115px;
+  cursor: pointer;
+  img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
 
-export const SB3 = styled.div`
-  margin-left: 13px;
-  margin-top: 11px;
-  width: 284.167px;
-  height: 30px;
-  flex-shrink: 0;
-  border: 1px solid #a259ff;
-  background: #121212;
-
-  #detail {
-    margin-top: 6px;
-    margin-left: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: Roboto;
-    font-size: 14px;
+  #name {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 171.429% */
+    line-height: 24px; /* 200% */
+    margin-left: 5px;
   }
-`;
 
-export const Help = styled.div`
-  width: 190px;
-  height: 48px;
-  margin-top: 72px;
-
-  #detail {
+  #time {
     color: #d9d9d9;
-    text-align: center;
-    font-family: Roboto;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 240% */
+    margin-left: 9px;
+    margin-top: -7px;
+  }
+
+  #line {
+    position: absolute;
+    width: 1px;
+    height: 77px;
+    background: #fff;
+    margin-top: -82px;
+    margin-left: 77px;
+  }
+`;
+
+// 콘텐츠 박스
+export const contentContainer = styled.div`
+  position: relative;
+  width: 200px;
+  height: 114px;
+  margin-top: -93px;
+  margin-left: 110px;
+  cursor: pointer;
+  #title {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 200% */
+  }
+
+  #content {
+    color: #fff;
+    font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 240% */
   }
-`;
 
-export const Ideation = styled.div`
-  width: 75px;
-  height: 24px;
-  margin-top: 2px;
+  img {
+    width: 17px;
+    height: 16px;
+    flex-shrink: 0;
+    position: absolute;
+    margin-left: 166px;
+    margin-top: -44px;
+  }
 
-  #detail {
-    color: #a259ff;
-    font-family: Roboto;
-    font-size: 15px;
+  #count {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 160% */
+    line-height: 24px; /* 200% */
+    position: absolute;
+    margin-left: 183px;
+    margin-top: -47px;
   }
+`;
+
+export const PinkBlur = styled.div`
+  width: 223px;
+  height: 234px;
+  background-color: #c47dd7;
+  filter: blur(140px);
+  position: relative;
+  z-index: -3;
+  margin-top: 410px;
+  margin-left: -50px;
 `;

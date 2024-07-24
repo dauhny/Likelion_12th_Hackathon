@@ -51,8 +51,8 @@ export function AI() {
     <>
       <A.Container>
         <A.BackBtn onClick={goBack}></A.BackBtn>
+        <A.PageTitle>AI 심리 분석</A.PageTitle>
         <A.Item>
-          <A.IntroText>AI 심리 분석</A.IntroText>
           <A.AIImg>
             <img src="/images/ChatGPT 2.svg" />
           </A.AIImg>

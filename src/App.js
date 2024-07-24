@@ -46,6 +46,7 @@ function App() {
         <Route path="/airecordlist" element={<AIRecordList />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mypagerevise" element={<MypageRevise />} />
+        <Route path="/review" element={<ReviewCommunity />} />
       </Routes>
     </BrowserRouter>
   );
