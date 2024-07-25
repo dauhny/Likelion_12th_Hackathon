@@ -68,7 +68,37 @@ export function ReviewCommunity() {
             <RC.contentContainer onClick={goReviewDetail}>
               <div id="title">작품 제목이 들어갑니다.</div>
               <div id="content">내용이 들어갑니다.</div>
-              <img src="/images/Scrap.svg" alt="scrap"></img>
+              <img src="/images/LikeIcon.svg" alt="scrap"></img>
+              <div id="count">12</div>
+            </RC.contentContainer>
+          </RC.ticket>
+          <RC.ticket>
+            <img src="/images/Ticket.svg" alt="ticket"></img>
+            <RC.profileContainer onClick={goReviewDetail}>
+              <img src="/images/ProfileImg.svg" alt="profile"></img>
+              <div id="name">문학소녀</div>
+              <div id="time">1시간 전</div>
+              <div id="line"></div>
+            </RC.profileContainer>
+            <RC.contentContainer onClick={goReviewDetail}>
+              <div id="title">작품 제목이 들어갑니다.</div>
+              <div id="content">내용이 들어갑니다.</div>
+              <img src="/images/LikeIcon.svg" alt="scrap"></img>
+              <div id="count">12</div>
+            </RC.contentContainer>
+          </RC.ticket>
+          <RC.ticket>
+            <img src="/images/Ticket.svg" alt="ticket"></img>
+            <RC.profileContainer onClick={goReviewDetail}>
+              <img src="/images/ProfileImg.svg" alt="profile"></img>
+              <div id="name">문학소녀</div>
+              <div id="time">1시간 전</div>
+              <div id="line"></div>
+            </RC.profileContainer>
+            <RC.contentContainer onClick={goReviewDetail}>
+              <div id="title">작품 제목이 들어갑니다.</div>
+              <div id="content">내용이 들어갑니다.</div>
+              <img src="/images/LikeIcon.svg" alt="scrap"></img>
               <div id="count">12</div>
             </RC.contentContainer>
           </RC.ticket>

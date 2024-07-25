@@ -116,8 +116,8 @@ export const name = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 160.5%; /* 22.47px */
-  margin-left: 108px;
-  margin-top: 5px;
+  margin-left: 103px;
+  text-align: center;
 `;
 
 // 정보

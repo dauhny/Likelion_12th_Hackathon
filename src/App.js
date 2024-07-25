@@ -12,7 +12,6 @@ import { BookWrite } from "./pages/BookWrite";
 import { ReviewCommunity } from "./pages/ReviewCommunity";
 import Idea from "./pages/Idea";
 import { Mypage } from "./pages/Mypage";
-import MypageScrap from "./pages/MypageScrap";
 import { Welcome } from "./pages/Welcome";
 import { AI } from "./pages/AI";
 import { AIRecordList } from "./pages/AIRecordList";
@@ -21,6 +20,7 @@ import { MusicDetail } from "./pages/MusicDeatail";
 import { Search } from "./pages/Search";
 import { MypageRevise } from "./pages/MypageRevise";
 import { AIResult } from "./pages/AIResult";
+import { ReviewDetail } from "./pages/ReviewDetail";
 
 function App() {
   return (
@@ -38,7 +38,6 @@ function App() {
         <Route path="/bookwrite" element={<BookWrite />} />
         <Route path="/reviewcommunity" element={<ReviewCommunity />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/mypagescrap" element={<MypageScrap />} />
         <Route path="/idea" element={<Idea />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/musicdetail" element={<MusicDetail />} />
@@ -49,6 +48,7 @@ function App() {
         <Route path="/mypagerevise" element={<MypageRevise />} />
         <Route path="/review" element={<ReviewCommunity />} />
         <Route path="/airesult" element={<AIResult />} />
+        <Route path="/reviewdetail" element={<ReviewDetail />} />
       </Routes>
     </BrowserRouter>
   );

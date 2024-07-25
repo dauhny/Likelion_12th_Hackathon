@@ -1,9 +1,42 @@
 import React from "react";
 import * as MP from "../styles/styledMypage";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Mypage() {
   const navigate = useNavigate();
+  const [profileImg, setProfileImg] = useState("");
+  const [nickname, setNickname] = useState("");
+
+  //프로필 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const usercode = localStorage.getItem("usercode");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const userResponse = await axios.get(
+          `http://127.0.0.1:8000/user/${usercode}`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+        setProfileImg(userResponse.data.profile);
+        setNickname(userResponse.data.nickname);
+      } catch (error) {
+        console.error("프로필 실패 :", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  //전시 상세 조회
 
   const goBack = () => {
     navigate(-1);
@@ -14,9 +47,15 @@ export function Mypage() {
     navigate(`/mypagerevise`);
   };
 
+  const goContentIntro = (id) => {
+    navigate(`/contentintro?id=${id}`);
+    window.scrollTo(0, 0);
+  };
+
   const goLogin = () => {
     navigate(`/login`);
   };
+
   //하단바
   const goSearch = () => {
     navigate(`/search`);
@@ -49,8 +88,8 @@ export function Mypage() {
     <>
       <MP.Container>
         <MP.BackBtn onClick={goBack}></MP.BackBtn>
+        <MP.PageTitle>마이페이지</MP.PageTitle>
         <MP.Item>
-          <MP.IntroText>마이페이지</MP.IntroText>
           <MP.profile>
             <div
               id="background"
@@ -60,9 +99,9 @@ export function Mypage() {
                 fill: "#3D3A3A",
               }}
             />
-            <img src="/images/ProfileImg.svg" alt="profile"></img>
+            <img src={profileImg} alt="profile"></img>
           </MP.profile>
-          <MP.name>고독한 예술가</MP.name>
+          <MP.name>{nickname}</MP.name>
           <MP.edit onClick={goMypageRevise}>
             <div id="text1">프로필 편집</div>
           </MP.edit>
@@ -73,10 +112,10 @@ export function Mypage() {
             <img src="/images/Scrap.svg" alt="scrap"></img>
             <div id="ScrapText">스크랩한 전시</div>
           </MP.scrap>
-          <MP.ImgBox>
+          <MP.ImgBox onClick={goContentIntro}>
             <img src="/images/ForeverismIntro.svg" alt="ExhibitPoster"></img>
           </MP.ImgBox>
-          <MP.ExhibitionIntroduce>
+          <MP.ExhibitionIntroduce onClick={goContentIntro}>
             <div id="Title">포에버리즘 : 우리를 세상의 끝으로 </div>
             <div id="Date">2024/07/25</div>
             <MP.Trash id="remove">

@@ -1,9 +1,50 @@
 import React from "react";
 import * as MPR from "../styles/styledMypageRevise";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function MypageRevise() {
   const navigate = useNavigate();
+  const [profileImg, setProfileImg] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [birthdate, setBirthDate] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+
+  //프로필 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const usercode = localStorage.getItem("usercode");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const userResponse = await axios.get(
+          `http://127.0.0.1:8000/user/${usercode}`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+        setProfileImg(userResponse.data.profile);
+        setNickname(userResponse.data.nickname);
+        setName(userResponse.data.name);
+        setBirthDate(userResponse.data.birthdate);
+        setEmail(userResponse.data.email);
+        setPhone(userResponse.data.phone);
+        setUsername(userResponse.data.username);
+      } catch (error) {
+        console.error("프로필 조회 실패 :", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const goBack = () => {
     navigate(-1);
@@ -53,7 +94,7 @@ export function MypageRevise() {
                 fill: "#3D3A3A",
               }}
             />
-            <img src="/images/ProfileImg.svg" alt="profile"></img>
+            <img src={profileImg} alt="profile"></img>
             <div
               id="backgroundBlack"
               style={{
@@ -91,10 +132,11 @@ export function MypageRevise() {
                 marginTop: "-18px",
                 zIndex: "3",
                 position: "absolute",
+                cursor: "pointer",
               }}
             />
           </MPR.profile>
-          <MPR.name>고독한 예술가</MPR.name>
+          <MPR.name>{nickname}</MPR.name>
           <MPR.informationText>
             정보
             <img src="/images/WhiteArrow.svg" alt="profile"></img>
@@ -103,20 +145,17 @@ export function MypageRevise() {
             <MPR.InputLabel>아이디</MPR.InputLabel>
             <MPR.UserInputShort
               type="text"
-              placeholder="baegopa"
+              placeholder={username}
             ></MPR.UserInputShort>
             <MPR.InputLabel>이름</MPR.InputLabel>
-            <MPR.Name type="text" placeholder="지여니"></MPR.Name>
+            <MPR.Name type="text" placeholder={name}></MPR.Name>
             <MPR.InputLabel>생년월일</MPR.InputLabel>
             <MPR.SelectBirth
               type="text"
-              placeholder="2004-09-24"
+              placeholder={birthdate}
             ></MPR.SelectBirth>
             <MPR.InputLabel>이메일</MPR.InputLabel>
-            <MPR.Email
-              type="email"
-              placeholder="likelion@naver.com"
-            ></MPR.Email>
+            <MPR.Email type="email" placeholder={email}></MPR.Email>
           </MPR.InputContainer>
           <MPR.changeText>
             변경

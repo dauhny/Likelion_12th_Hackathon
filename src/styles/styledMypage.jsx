@@ -81,16 +81,16 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 마이페이지 텍스트
-export const IntroText = styled.div`
+//페이지 제목
+export const PageTitle = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 111px;
-  margin-top: -26px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
 `;
 
 // 프로필 이미지
@@ -115,7 +115,8 @@ export const name = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 160.5%; /* 22.47px */
-  margin-left: 108px;
+  margin-left: 103px;
+  text-align: center;
 `;
 
 // 프로필 편집 버튼
@@ -197,6 +198,7 @@ export const ImgBox = styled.div`
   background: #2b1e3c;
   margin-top: 12px;
   margin-left: -24px;
+  cursor: pointer;
   img {
     width: 61px;
     height: 61px;
@@ -216,6 +218,7 @@ export const ExhibitionIntroduce = styled.div`
   background: linear-gradient(90deg, #895ebf 0%, #402c59 100%);
   margin-left: 56px;
   margin-top: -81px;
+  cursor: pointer;
 
   #Title {
     color: #fff;

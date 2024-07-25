@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 898px;
+  height: 1156px;
   margin: 0 auto;
   background: #121212;
   justify-content: center;
@@ -81,91 +81,37 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-export const PageTitle = styled.div`
+// 커뮤니티 텍스트
+export const IntroText = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: center;
-  margin-top: -23px;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin-left: 118px;
+  margin-top: -26px;
 `;
 
-// 검색창, 검색 이미지 감싸는 박스
-export const searchBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 300px;
-  height: 50px;
-`;
-
-// 검색창
-export const search = styled.input`
-  width: 259px;
-  height: 40px;
-  flex-shrink: 0;
-  border-radius: 16px;
-  border: 1px solid #9747ff;
-  background: #121212;
-  margin-top: 20px;
-  margin-left: -7px;
-  color: #ccc;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: "Pretendard Variable";
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 200% */
-  padding-left: 10px;
-`;
-
-// 검색 이미지
-export const searchImg = styled.div`
-  img {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    margin-top: 25px;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-`;
-
-// 티켓
-export const ticket = styled.div`
+// 프로필
+export const profile = styled.div`
   position: relative;
   img {
-    width: 343px;
-    height: 115.367px;
-    margin-top: 34px;
-    margin-left: -23px;
-  }
-`;
-
-// 프로필 박스
-export const profileContainer = styled.div`
-  position: relative;
-  width: 100px;
-  height: 114px;
-  margin-top: -115px;
-  cursor: pointer;
-  img {
-    width: 32px;
-    height: 32px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
-    margin-top: 20px;
-    margin-left: 10px;
+    margin-top: 50px;
+    margin-left: 117px;
   }
 
   #name {
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 200% */
-    margin-left: 5px;
+    font-weight: 600;
+    line-height: 160.5%; /* 22.47px */
+    margin-left: 122px;
   }
 
   #time {
@@ -173,54 +119,59 @@ export const profileContainer = styled.div`
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 24px; /* 240% */
-    margin-left: 9px;
-    margin-top: -7px;
-  }
-
-  #line {
-    position: absolute;
-    width: 1px;
-    height: 77px;
-    background: #fff;
-    margin-top: -82px;
-    margin-left: 77px;
+    margin-left: 130px;
+    margin-top: -4px;
   }
 `;
 
-// 콘텐츠 박스
-export const contentContainer = styled.div`
-  position: relative;
-  margin-bottom: 30px;
-  margin-top: -93px;
-  margin-left: 110px;
-  cursor: pointer;
-  #title {
+// 날짜, 스크랩 묶은 박스
+export const firstBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 385px;
+  height: 30px;
+  margin-top: 12px;
+  margin-left: -17px;
+`;
+
+// 날짜
+export const date = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 96px;
+  height: 23px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #ddc4fb;
+  #text {
+    flex-direction: row;
+    width: 65.73px;
+    height: 15px;
+    flex-shrink: 0;
     color: #fff;
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 200% */
+    line-height: 160.5%; /* 19.26px */
+    margin-left: 15px;
+    margin-top: 2px;
   }
+`;
 
-  #content {
-    color: #fff;
-    font-family: "Pretendard Variable";
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 240% */
-  }
-
+// 스크랩
+export const scrap = styled.div`
+  display: flex;
+  flex-direction: row;
   img {
     width: 17px;
     height: 16px;
     flex-shrink: 0;
     position: absolute;
-    margin-left: 163px;
-    margin-top: -44px;
+    margin-top: 7px;
+    margin-left: 195px;
   }
 
   #count {
@@ -231,18 +182,73 @@ export const contentContainer = styled.div`
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-left: 183px;
-    margin-top: -47px;
+    margin-top: 4px;
+    margin-left: 215px;
   }
 `;
 
 export const PinkBlur = styled.div`
+  width: 206px;
+  height: 205px;
+  background: #a259ff;
+  filter: blur(159.68670654296875px);
+  position: relative;
+  z-index: -3;
+  margin-top: -53px;
+  margin-left: -35px;
+`;
+
+// 제목
+export const title = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+  margin-left: 16px;
+  margin-top: 25px;
+`;
+
+// 전시 이미지
+export const img = styled.div`
+  width: 236px;
+  height: 214px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  margin-left: 32px;
+  margin-top: 26px;
+`;
+
+// 내용
+export const contentContainer = styled.div`
+  width: 343px;
+  height: 295px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #6f4f98 0%, #251a32 100%);
+  margin-left: -25px;
+  margin-top: 24px;
+  #content {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160.5%; /* 22.47px */
+    position: absolute;
+    margin-left: 32px;
+    margin-top: 19px;
+  }
+`;
+
+export const PinkBlur2 = styled.div`
   width: 223px;
   height: 234px;
-  background-color: #c47dd7;
+  background: #c47dd7;
   filter: blur(140px);
   position: relative;
   z-index: -3;
-  margin-top: 410px;
-  margin-left: -50px;
+  margin-top: 100px;
+  margin-left: 20px;
 `;
