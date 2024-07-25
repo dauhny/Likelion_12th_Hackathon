@@ -200,7 +200,7 @@ export const PaginationContainer = styled.div`
     height: 30px;
     font-family: "Pretendard Variable";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 24px;
   }
 
@@ -211,6 +211,7 @@ export const PaginationContainer = styled.div`
 
   ul.pagination li.active a {
     color: #a259ff;
+    font-weight: 500;
   }
 
   ul.pagination li.active a:hover {

@@ -101,7 +101,8 @@ export const profile = styled.div`
     height: 60px;
     flex-shrink: 0;
     margin-top: 50px;
-    margin-left: 117px;
+    margin-left: 121px;
+    border-radius: 30px;
   }
 
   #name {
@@ -111,7 +112,8 @@ export const profile = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 160.5%; /* 22.47px */
-    margin-left: 122px;
+    margin-left: -12%;
+    text-align: center;
   }
 
   #time {
@@ -121,7 +123,8 @@ export const profile = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 240% */
-    margin-left: 130px;
+    margin-left: -12%;
+    text-align: center;
     margin-top: -4px;
   }
 `;
@@ -147,14 +150,13 @@ export const date = styled.div`
   border: 1px solid #ddc4fb;
   #text {
     flex-direction: row;
-    width: 65.73px;
     height: 15px;
     flex-shrink: 0;
     color: #fff;
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 160.5%; /* 19.26px */
     margin-left: 15px;
     margin-top: 2px;
@@ -162,7 +164,7 @@ export const date = styled.div`
 `;
 
 // 스크랩
-export const scrap = styled.div`
+export const like = styled.div`
   display: flex;
   flex-direction: row;
   img {
@@ -205,9 +207,10 @@ export const title = styled.div`
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 120% */
-  margin-left: 16px;
-  margin-top: 25px;
+  line-height: 24px;
+  margin-top: 15px;
+  text-align: center;
+  margin-left: -12%;
 `;
 
 // 전시 이미지
@@ -234,11 +237,12 @@ export const contentContainer = styled.div`
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 160.5%; /* 22.47px */
     position: absolute;
-    margin-left: 32px;
+    margin-left: 23px;
     margin-top: 19px;
+    width: 300px;
   }
 `;
 
@@ -252,3 +256,5 @@ export const PinkBlur2 = styled.div`
   margin-top: 100px;
   margin-left: 20px;
 `;
+
+export const ReviewContainer = styled.div``;

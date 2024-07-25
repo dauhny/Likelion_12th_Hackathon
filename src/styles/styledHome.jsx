@@ -160,7 +160,7 @@ export const ReviewBtn = styled.button`
 
 export const ReviewBox = styled.div`
   width: 300px;
-  height: 110px;
+  height: 130px;
   border-radius: 10px;
   background: linear-gradient(90deg, #281d36 0%, #6e5095 91%, #74549c 100%);
   margin-bottom: 15px;
@@ -168,13 +168,14 @@ export const ReviewBox = styled.div`
 `;
 
 export const ProfileImg = styled.div`
-  background: url("/images/ProfileImgReview.svg");
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  margin-left: 18px;
-  margin-top: 13px;
-  position: absolute;
+  img {
+    width: 30px;
+    height: 30px;
+    margin-left: 18px;
+    margin-top: 13px;
+    position: absolute;
+    border-radius: 30px;
+  }
 `;
 
 export const ReviewName = styled.div`
@@ -185,7 +186,7 @@ export const ReviewName = styled.div`
   font-weight: 400;
   line-height: 24px;
   width: 100px;
-  margin-left: 50px;
+  margin-left: 55px;
   margin-top: 13px;
   position: absolute;
 `;
@@ -198,7 +199,7 @@ export const ReviewDate = styled.div`
   font-weight: 400;
   line-height: 24px;
   position: absolute;
-  margin-left: 73%;
+  margin-left: 60%;
   margin-top: 7px;
 `;
 
@@ -211,7 +212,7 @@ export const ReviewTitle = styled.div`
   line-height: 24px;
   position: absolute;
   margin-left: 19px;
-  margin-top: 43px;
+  margin-top: 48px;
 `;
 
 export const ReviewContent = styled.div`
@@ -223,7 +224,10 @@ export const ReviewContent = styled.div`
   line-height: 24px;
   position: absolute;
   margin-left: 19px;
-  margin-top: 66px;
+  margin-top: 71px;
+  width: 205px;
+  height: 50px;
+  overflow: hidden;
 `;
 
 export const LikeIcon = styled.div`
@@ -233,7 +237,7 @@ export const LikeIcon = styled.div`
   height: 20px;
   position: absolute;
   margin-left: 71%;
-  margin-top: 76px;
+  margin-top: 96px;
 `;
 
 export const LikeCnt = styled.div`
@@ -245,7 +249,9 @@ export const LikeCnt = styled.div`
   line-height: 24px;
   position: absolute;
   margin-left: 78%;
-  margin-top: 76px;
+  margin-top: 96px;
 `;
 
 export const NewExhibitContainer = styled.div``;
+
+export const ReviewContainer = styled.div``;

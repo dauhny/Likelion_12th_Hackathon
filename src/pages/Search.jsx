@@ -91,7 +91,7 @@ export const Search = () => {
   return (
     <>
       <S.Container>
-        <S.BackBtn onClick={goBack}></S.BackBtn>{" "}
+        <S.BackBtn onClick={goBack}></S.BackBtn>
         <S.PageTitle>전시 검색</S.PageTitle>
         <S.Item>
           <S.SearchInput
@@ -118,7 +118,7 @@ export const Search = () => {
                 </S.ExhibitDetail>
               </S.ExhibitInfoBox>
             </S.ExhibitContainer>
-          ))}{" "}
+          ))}
           <S.PaginationContainer>
             <Pagination
               clssName="pagination"

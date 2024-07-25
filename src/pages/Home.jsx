@@ -15,8 +15,8 @@ export function Home() {
     window.scrollTo(0, 0);
   };
 
-  const goReviewDetail = () => {
-    navigate(`/reviewdetail`);
+  const goReviewDetail = (id) => {
+    navigate(`/reviewdetail?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -80,7 +80,7 @@ export function Home() {
     fetchData(); // useEffect에서 fetchData 함수 호출
   }, []);
 
-  //HOT 후기글&전시
+  //HOT 전시
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -98,6 +98,39 @@ export function Home() {
         setContent(paginatedData); //현재 페이지 데이터 설정
       } catch (error) {
         console.error("전시 상세 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, []);
+
+  //hot 후기글
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/posts/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        const sortedData = allData.sort((a, b) => b.likeCount - a.likeCount);
+
+        //총 데이터 개수 추정
+        const totalItems = sortedData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData); //현재 페이지 데이터 설정
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
       }
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
@@ -122,26 +155,21 @@ export function Home() {
           <H.InfoText>HOT 후기글</H.InfoText>
           <H.ReviewBtn onClick={goReview}>
             더보기 <img src="images/ExpandBtn.svg" />
-          </H.ReviewBtn>
-          <H.ReviewBox onClick={goReviewDetail}>
-            <H.ProfileImg />
-            <H.ReviewName></H.ReviewName>
-            <H.ReviewDate>07/17</H.ReviewDate>
-            <H.ReviewTitle>이 전시 꼭 보세요</H.ReviewTitle>
-            <H.ReviewContent>힙노시스 전시 진짜 재밌네요...</H.ReviewContent>
-            <H.LikeIcon />
-            <H.LikeCnt>12</H.LikeCnt>
-          </H.ReviewBox>
-          <H.ReviewBox>
-            <H.ProfileImg />
-            <H.ReviewName>익명2</H.ReviewName>
-            <H.ReviewDate>07/17</H.ReviewDate>
-            <H.ReviewTitle>포에버리즘 다녀오신 분?</H.ReviewTitle>
-            <H.ReviewContent>굿즈 어떤 거 사셨나요??</H.ReviewContent>
-            <H.LikeIcon />
-            <H.LikeCnt>12</H.LikeCnt>
-          </H.ReviewBox>
-          <H.InfoText>HOT 전시</H.InfoText>
+          </H.ReviewBtn>{" "}
+          {review.map((e) => (
+            <H.ReviewBox onClick={() => goReviewDetail(e.id)}>
+              <H.ProfileImg>
+                <img src={`http://127.0.0.1:8000${e.profile}`} alt="profile" />
+              </H.ProfileImg>
+              <H.ReviewName>{e.username}</H.ReviewName>
+              <H.ReviewDate>{e.createdAt}</H.ReviewDate>
+              <H.ReviewTitle>{e.title}</H.ReviewTitle>
+              <H.ReviewContent>{e.content}</H.ReviewContent>
+              <H.LikeIcon />
+              <H.LikeCnt>{e.likeCount}</H.LikeCnt>
+            </H.ReviewBox>
+          ))}
+          \<H.InfoText>HOT 전시</H.InfoText>
           <H.ReviewBtn onClick={goSearch}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>

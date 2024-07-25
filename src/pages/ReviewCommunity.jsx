@@ -1,17 +1,24 @@
 import React from "react";
 import * as RC from "../styles/styledReviewCommunity";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Pagination from "react-js-pagination";
 
 export function ReviewCommunity() {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1); // 현재 페이지
+  const itemsCountPerPage = 5; // 페이지당 항목 수
+  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
 
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
   };
 
-  const goReviewDetail = () => {
-    navigate(`/reviewdetail`);
+  const goReviewDetail = (id) => {
+    navigate(`/reviewdetail?id=${id}`);
+    window.scrollTo(0, 0);
   };
 
   //하단바
@@ -42,6 +49,96 @@ export function ReviewCommunity() {
 
   //하단바 끝
 
+  //후기글 전체 조회
+  const [review, setReview] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/posts/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setReview(response.data);
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData); //현재 페이지 데이터 설정
+        setTotalItems(totalItems); //총 데이터 개수 설정
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [page]);
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
+
+  //검색 기능
+
+  const [searchValue, setSearchValue] = useState(""); // 검색어
+  const [keyword, setKeyword] = useState(""); // 검색어
+
+  const handleKeyword = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const apiUrl = keyword
+          ? `http://127.0.0.1:8000/posts/?search=${keyword}`
+          : `http://127.0.0.1:8000/posts/`;
+
+        const response = await axios.get(apiUrl, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData); //현재 페이지 데이터 설정
+        setTotalItems(totalItems); //총 데이터 개수 설정
+      } catch (error) {
+        console.error("전시 검색 실패 :", error);
+      }
+    };
+    fetchData();
+  }, [keyword, page]);
+
+  const handleSearch = () => {
+    setKeyword(searchValue);
+    setPage(1);
+  };
+
   return (
     <>
       <RC.Container>
@@ -51,57 +148,46 @@ export function ReviewCommunity() {
           <RC.searchBox>
             <RC.search
               type="text"
-              placeholder="참고할 전시를 검색해 보세요."
+              placeholder="후기가 궁금한 전시를 입력해보세요."
+              value={searchValue}
+              onChange={handleKeyword}
             ></RC.search>
-            <RC.searchImg>
+            <RC.searchImg onClick={handleSearch}>
               <img src="/images/SearchIconPurple.svg" alt="search"></img>
             </RC.searchImg>
           </RC.searchBox>
-          <RC.ticket>
-            <img src="/images/Ticket.svg" alt="ticket"></img>
-            <RC.profileContainer onClick={goReviewDetail}>
-              <img src="/images/ProfileImg.svg" alt="profile"></img>
-              <div id="name">문학소녀</div>
-              <div id="time">1시간 전</div>
-              <div id="line"></div>
-            </RC.profileContainer>
-            <RC.contentContainer onClick={goReviewDetail}>
-              <div id="title">작품 제목이 들어갑니다.</div>
-              <div id="content">내용이 들어갑니다.</div>
-              <img src="/images/LikeIcon.svg" alt="scrap"></img>
-              <div id="count">12</div>
-            </RC.contentContainer>
-          </RC.ticket>
-          <RC.ticket>
-            <img src="/images/Ticket.svg" alt="ticket"></img>
-            <RC.profileContainer onClick={goReviewDetail}>
-              <img src="/images/ProfileImg.svg" alt="profile"></img>
-              <div id="name">문학소녀</div>
-              <div id="time">1시간 전</div>
-              <div id="line"></div>
-            </RC.profileContainer>
-            <RC.contentContainer onClick={goReviewDetail}>
-              <div id="title">작품 제목이 들어갑니다.</div>
-              <div id="content">내용이 들어갑니다.</div>
-              <img src="/images/LikeIcon.svg" alt="scrap"></img>
-              <div id="count">12</div>
-            </RC.contentContainer>
-          </RC.ticket>
-          <RC.ticket>
-            <img src="/images/Ticket.svg" alt="ticket"></img>
-            <RC.profileContainer onClick={goReviewDetail}>
-              <img src="/images/ProfileImg.svg" alt="profile"></img>
-              <div id="name">문학소녀</div>
-              <div id="time">1시간 전</div>
-              <div id="line"></div>
-            </RC.profileContainer>
-            <RC.contentContainer onClick={goReviewDetail}>
-              <div id="title">작품 제목이 들어갑니다.</div>
-              <div id="content">내용이 들어갑니다.</div>
-              <img src="/images/LikeIcon.svg" alt="scrap"></img>
-              <div id="count">12</div>
-            </RC.contentContainer>
-          </RC.ticket>
+          {review.map((e) => (
+            <RC.ticket key={e.id}>
+              <img src="/images/Ticket.svg" alt="ticket"></img>
+              <RC.profileContainer onClick={() => goReviewDetail(e.id)}>
+                <img
+                  src={`http://127.0.0.1:8000${e.profile}`}
+                  alt="profile"
+                ></img>
+                <div id="name">{e.username}</div>
+                <div id="time">{e.createdAt}</div>
+                <div id="line"></div>
+              </RC.profileContainer>
+              <RC.contentContainer onClick={() => goReviewDetail(e.id)}>
+                <div id="title">{e.title}</div>
+                <div id="content">{e.content}</div>
+                <img src="/images/LikeIcon.svg" alt="like"></img>
+                <div id="count">{e.likeCount}</div>
+              </RC.contentContainer>
+            </RC.ticket>
+          ))}
+          <RC.PaginationContainer>
+            <Pagination
+              clssName="pagination"
+              activePage={page} // 현재 페이지
+              itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+              totalItemsCount={totalItems} // 총 아이템 수
+              pageRangeDisplayed={5} // paginator의 페이지 범위
+              prevPageText={"‹"} // "이전"을 나타낼 텍스트
+              nextPageText={"›"} // "다음"을 나타낼 텍스트
+              onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+            />
+          </RC.PaginationContainer>
           <RC.PinkBlur></RC.PinkBlur>
           {/*하단바*/}
           <RC.NavBar>

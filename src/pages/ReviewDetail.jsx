@@ -1,9 +1,54 @@
 import React from "react";
 import * as RD from "../styles/styledReviewDetail";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function ReviewDetail() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
+  const [title, setTitle] = useState("");
+  const [img, setImg] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [viewAt, setViewAt] = useState("");
+
+  const [likeCount, setLikeCount] = useState("");
+  const [profile, setProfile] = useState("");
+  const [content, setContent] = useState("");
+  const [username, setUserName] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/posts/${id}`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+        setTitle(response.data.title);
+        setUserName(response.data.username);
+        setContent(response.data.content);
+        setCreatedAt(response.data.createdAt);
+        setLikeCount(response.data.likeCount);
+        setProfile(response.data.profile);
+        setImg(response.data.img);
+        setViewAt(response.data.viewAt);
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [id]);
 
   const goBack = () => {
     navigate(-1);
@@ -44,28 +89,30 @@ export function ReviewDetail() {
         <RD.BackBtn onClick={goBack}></RD.BackBtn>
         <RD.Item>
           <RD.IntroText>커뮤니티</RD.IntroText>
-          <RD.profile>
-            <img src="/images/ProfileImg.svg" alt="profile"></img>
-            <div id="name">문학소녀</div>
-            <div id="time">1시간 전</div>
-          </RD.profile>
-          <RD.firstBox>
-            <RD.date>
-              <div id="text">2024-07-11</div>
-            </RD.date>
-            <RD.scrap>
-              <img src="/images/LikeIcon.svg" alt="scrap"></img>
-              <div id="count">12</div>
-            </RD.scrap>
-            <RD.PinkBlur></RD.PinkBlur>
-          </RD.firstBox>
-          <RD.title>포에버리즘 : 우리를 세상의 끝으로</RD.title>
-          <RD.img>
-            <img src="/images/ImgReviewDetail.svg" alt="exhibition"></img>
-          </RD.img>
-          <RD.contentContainer>
-            <div id="content">내용이 들어갑니다.</div>
-          </RD.contentContainer>
+          <RD.ReviewContainer>
+            <RD.profile>
+              <img src={`http://127.0.0.1:8000${profile}`} alt="profile"></img>
+              <div id="name">{username}</div>
+              <div id="time">{createdAt}</div>
+            </RD.profile>
+            <RD.firstBox>
+              <RD.date>
+                <div id="text">{viewAt}</div>
+              </RD.date>
+              <RD.like>
+                <img src="/images/LikeIcon.svg" alt="scrap"></img>
+                <div id="count">{likeCount}</div>
+              </RD.like>
+              <RD.PinkBlur></RD.PinkBlur>
+            </RD.firstBox>
+            <RD.title>{title}</RD.title>
+            <RD.img>
+              <img src={img} alt="exhibition"></img>
+            </RD.img>
+            <RD.contentContainer>
+              <div id="content">{content}</div>
+            </RD.contentContainer>
+          </RD.ReviewContainer>
           <RD.PinkBlur2></RD.PinkBlur2>
           {/*하단바*/}
           <RD.NavBar>

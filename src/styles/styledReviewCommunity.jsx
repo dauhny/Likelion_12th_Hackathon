@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 898px;
+  height: 1598px;
   margin: 0 auto;
   background: #121212;
   justify-content: center;
@@ -150,12 +150,14 @@ export const profileContainer = styled.div`
   height: 114px;
   margin-top: -115px;
   cursor: pointer;
+
   img {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
     margin-top: 20px;
     margin-left: 10px;
+    border-radius: 30px;
   }
 
   #name {
@@ -165,7 +167,9 @@ export const profileContainer = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 200% */
-    margin-left: 5px;
+    text-align: center;
+    margin-top: -5px;
+    margin-left: -45%;
   }
 
   #time {
@@ -175,7 +179,7 @@ export const profileContainer = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 240% */
-    margin-left: 9px;
+    margin-left: -5px;
     margin-top: -7px;
   }
 
@@ -184,7 +188,7 @@ export const profileContainer = styled.div`
     width: 1px;
     height: 77px;
     background: #fff;
-    margin-top: -82px;
+    margin-top: -77px;
     margin-left: 77px;
   }
 `;
@@ -193,13 +197,13 @@ export const profileContainer = styled.div`
 export const contentContainer = styled.div`
   position: relative;
   margin-bottom: 30px;
-  margin-top: -93px;
+  margin-top: -103px;
   margin-left: 110px;
   cursor: pointer;
   #title {
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 200% */
@@ -208,10 +212,13 @@ export const contentContainer = styled.div`
   #content {
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 240% */
+    font-weight: 300;
+    line-height: 17px; /* 240% */
+    width: 150px;
+    height: 50px;
+    overflow: hidden;
   }
 
   img {
@@ -245,4 +252,49 @@ export const PinkBlur = styled.div`
   z-index: -3;
   margin-top: 410px;
   margin-left: -50px;
+`;
+
+export const PaginationContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+    cursor: pointer;
+    margin-left: -70px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.pagination li {
+    width: 30px;
+    height: 30px;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  ul.pagination li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  ul.pagination li.active a {
+    color: #a259ff;
+    font-weight: 500;
+  }
+
+  ul.pagination li.active a:hover {
+    color: white;
+  }
+
+  ul.pagination li a:hover {
+    background-color: #a259ff;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+  }
 `;
