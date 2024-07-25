@@ -1,7 +1,7 @@
 import React from "react";
 import * as MPR from "../styles/styledMypageRevise";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 export function MypageRevise() {
@@ -45,6 +45,20 @@ export function MypageRevise() {
     };
     fetchData();
   }, []);
+
+  // 이미지 업로드 input의 onChange
+
+  const [imgFile, setImgFile] = useState("");
+  const imgRef = useRef();
+
+  const saveImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    };
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -94,7 +108,7 @@ export function MypageRevise() {
                 fill: "#3D3A3A",
               }}
             />
-            <img src={profileImg} alt="profile"></img>
+            <img src={imgFile ? imgFile : profileImg} alt="profile"></img>
             <div
               id="backgroundBlack"
               style={{
@@ -122,18 +136,27 @@ export function MypageRevise() {
                 border: "1px solid #A259FF",
               }}
             />
-            <img
-              src="/images/ProfileEdit.svg"
-              alt="profile-edit"
-              style={{
-                width: "11px",
-                height: "11px",
-                marginLeft: "169px",
-                marginTop: "-18px",
-                zIndex: "3",
-                position: "absolute",
-                cursor: "pointer",
-              }}
+            <MPR.PostImgLabel htmlFor="profileImg">
+              <img
+                src="/images/ProfileEdit.svg"
+                alt="profile-edit"
+                style={{
+                  width: "11px",
+                  height: "11px",
+                  marginLeft: "169px",
+                  marginTop: "-18px",
+                  zIndex: "3",
+                  position: "absolute",
+                  cursor: "pointer",
+                }}
+              />
+            </MPR.PostImgLabel>
+            <MPR.PostImgInput
+              type="file"
+              accept="image/*"
+              onChange={saveImgFile}
+              ref={imgRef}
+              id="profileImg"
             />
           </MPR.profile>
           <MPR.name>{nickname}</MPR.name>
@@ -173,7 +196,7 @@ export function MypageRevise() {
               type="tel"
               placeholder="전화번호를 입력하세요."
             ></MPR.PhoneNumber>
-            <MPR.Complete>가입하기</MPR.Complete>
+            <MPR.Complete onClick={goMyPage}>변경사항 저장하기</MPR.Complete>
           </MPR.InputContainer>
 
           {/*하단바*/}

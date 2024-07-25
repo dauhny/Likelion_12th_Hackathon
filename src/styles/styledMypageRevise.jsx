@@ -102,6 +102,7 @@ export const profile = styled.div`
     margin-left: 116px;
     margin-top: 8px;
     position: relative;
+    border-radius: 30px;
   }
 `;
 
@@ -246,4 +247,19 @@ export const Complete = styled.button`
   line-height: 160.5%;
   cursor: pointer;
   margin-top: 100px;
+`;
+
+//이미지 삽입
+export const PostImgInput = styled.input`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  display: none;
+`;
+
+export const PostImgLabel = styled.label`
+  cursor: pointer;
 `;
