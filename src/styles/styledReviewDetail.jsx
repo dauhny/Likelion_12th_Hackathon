@@ -215,12 +215,14 @@ export const title = styled.div`
 
 // 전시 이미지
 export const img = styled.div`
-  width: 236px;
-  height: 214px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  margin-left: 32px;
-  margin-top: 26px;
+  img {
+    width: 236px;
+    height: 214px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    margin-left: 32px;
+    margin-top: 16px;
+  }
 `;
 
 // 내용

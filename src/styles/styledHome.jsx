@@ -194,13 +194,13 @@ export const ReviewName = styled.div`
 export const ReviewDate = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
-  font-size: 11px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
   position: absolute;
-  margin-left: 60%;
-  margin-top: 7px;
+  margin-left: 75%;
+  margin-top: 5px;
 `;
 
 export const ReviewTitle = styled.div`
@@ -228,6 +228,17 @@ export const ReviewContent = styled.div`
   width: 205px;
   height: 50px;
   overflow: hidden;
+`;
+
+export const ReviewImg = styled.div`
+  img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin-left: 240px;
+    margin-top: 41px;
+    border-radius: 5px;
+  }
 `;
 
 export const LikeIcon = styled.div`

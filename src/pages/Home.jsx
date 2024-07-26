@@ -161,10 +161,13 @@ export function Home() {
               <H.ProfileImg>
                 <img src={`http://127.0.0.1:8000${e.profile}`} alt="profile" />
               </H.ProfileImg>
-              <H.ReviewName>{e.username}</H.ReviewName>
-              <H.ReviewDate>{e.createdAt}</H.ReviewDate>
+              <H.ReviewName>{e.nickname}</H.ReviewName>
+              <H.ReviewDate>{e.createdAt2}</H.ReviewDate>
               <H.ReviewTitle>{e.title}</H.ReviewTitle>
               <H.ReviewContent>{e.content}</H.ReviewContent>
+              <H.ReviewImg>
+                <img src={e.img} alt="Review Image" />
+              </H.ReviewImg>
               <H.LikeIcon />
               <H.LikeCnt>{e.likeCount}</H.LikeCnt>
             </H.ReviewBox>

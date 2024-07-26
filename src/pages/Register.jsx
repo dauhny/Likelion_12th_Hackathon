@@ -2,8 +2,14 @@ import React from "react";
 import * as R from "../styles/styledRegister";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
+import {
+  faCheck,
+  faTimes,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function Register() {
   const navigate = useNavigate();
@@ -15,6 +21,7 @@ export function Register() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [birthdate, setBirthDate] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const goWelcome = () => {
     navigate(`/welcome`);
@@ -23,6 +30,7 @@ export function Register() {
 
   const handleRegister = async (event) => {
     event.preventDefault();
+    if (!validateInputs()) return;
     try {
       const response = await axios.post("http://127.0.0.1:8000/user/", {
         username,
@@ -44,85 +52,127 @@ export function Register() {
     }
   };
 
+  // 유효성 검사
+  const validateInputs = () => {
+    if (username.trim() === "") {
+      setErrorMessage("아이디를 입력하세요.");
+      return false;
+    }
+
+    if (password.trim() === "") {
+      setErrorMessage("비밀번호를 입력하세요.");
+      return false;
+    }
+
+    if (password.length < 8) {
+      setErrorMessage("비밀번호가 8글자 미만입니다. 다시 입력하세요.");
+      return false;
+    }
+
+    if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
+      setErrorMessage(
+        "비밀번호는 문자와 숫자 조합만 가능합니다. 다시 입력하세요."
+      );
+      return false;
+    }
+
+    if (/^\d+$/.test(password)) {
+      setErrorMessage("숫자로만 이루어져 있습니다. 다시 입력하세요.");
+      return false;
+    }
+
+    if (["11111111", "12345678", "password", "qwerty"].includes(password)) {
+      setErrorMessage("이 비밀번호는 너무 흔합니다. 다시 입력하세요.");
+      return false;
+    }
+
+    if (password !== password_confirm) {
+      setErrorMessage("비밀번호 확인이 일치하지 않습니다.");
+      return false;
+    }
+
+    setErrorMessage("");
+    return true;
+  };
+
   return (
-    <>
-      <R.Container>
-        <R.Group>
-          <img src="/images/Group.svg" alt="Group" />
-        </R.Group>
-        <R.Ellipse549></R.Ellipse549>
+    <R.Container>
+      <R.Group>
+        <img src="/images/Group.svg" alt="Group" />
+      </R.Group>
+      <R.Ellipse549></R.Ellipse549>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <R.InputContainer>
+        <R.InputLabel>아이디</R.InputLabel>
+        <R.UserInputShort
+          type="text"
+          placeholder="아이디를 입력하세요."
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <R.CheckId>중복체크</R.CheckId>
+        <br />
+        <R.InputLabel>비밀번호</R.InputLabel>
+        <R.UserInput
+          type="password"
+          placeholder="비밀번호를 입력하세요."
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <R.InputLabel>비밀번호 확인</R.InputLabel>
+        <R.UserInput
+          type="password"
+          placeholder="비밀번호를 입력하세요."
+          value={password_confirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
         <br />
         <br />
         <br />
         <br />
+        <R.InputLabel>이름</R.InputLabel>
+        <R.Name
+          type="text"
+          placeholder="이름을 입력하세요."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <br />
-        <R.InputContainer>
-          <R.InputLabel>아이디</R.InputLabel>
-          <R.UserInputShort
-            type="text"
-            placeholder="아이디를 입력하세요."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></R.UserInputShort>
-          <R.CheckId>중복체크</R.CheckId>
-          <br></br>
-          <R.InputLabel>비밀번호</R.InputLabel>
-          <R.UserInput
-            type="password"
-            placeholder="비밀번호를 입력하세요."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></R.UserInput>
-          <R.InputLabel>비밀번호 확인</R.InputLabel>
-          <R.UserInput
-            type="password"
-            placeholder="비밀번호를 입력하세요."
-            value={password_confirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          ></R.UserInput>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <R.InputLabel>이름</R.InputLabel>
-          <R.Name
-            type="text"
-            placeholder="이름을 입력하세요."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></R.Name>
-          <br></br>
-          <R.InputLabel>닉네임</R.InputLabel>
-          <R.NickName
-            type="text"
-            placeholder="닉네임을 입력하세요."
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-          ></R.NickName>
-          <R.CheckNickName>중복체크</R.CheckNickName>
-          <R.InputLabel>생년월일</R.InputLabel>
-          <R.SelectBirth
-            type="date"
-            value={birthdate}
-            onChange={(e) => setBirthDate(e.target.value)}
-          ></R.SelectBirth>
-          <R.InputLabel>이메일</R.InputLabel>
-          <R.Email
-            type="email"
-            placeholder="선택 입력"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></R.Email>
-          <R.InputLabel>전화번호</R.InputLabel>
-          <R.PhoneNumber
-            type="tel"
-            placeholder="전화번호를 입력하세요."
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          ></R.PhoneNumber>
-          <R.Complete onClick={handleRegister}>가입하기</R.Complete>
-        </R.InputContainer>
-      </R.Container>
-    </>
+        <R.InputLabel>닉네임</R.InputLabel>
+        <R.NickName
+          type="text"
+          placeholder="닉네임을 입력하세요."
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+        <R.CheckNickName>중복체크</R.CheckNickName>
+        <R.InputLabel>생년월일</R.InputLabel>
+        <R.SelectBirth
+          type="date"
+          value={birthdate}
+          onChange={(e) => setBirthDate(e.target.value)}
+        />
+        <R.InputLabel>이메일</R.InputLabel>
+        <R.Email
+          type="email"
+          placeholder="선택 입력"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <R.InputLabel>전화번호</R.InputLabel>
+        <R.PhoneNumber
+          type="tel"
+          placeholder="전화번호를 입력하세요."
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        {errorMessage && <R.ErrorMessage>{errorMessage}</R.ErrorMessage>}
+        <R.Complete onClick={handleRegister}>가입하기</R.Complete>
+      </R.InputContainer>
+    </R.Container>
   );
 }

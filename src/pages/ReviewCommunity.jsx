@@ -159,7 +159,7 @@ export function ReviewCommunity() {
           {review.map((e) => (
             <RC.ticket key={e.id}>
               <img src="/images/Ticket.svg" alt="ticket"></img>
-              <RC.profileContainer onClick={() => goReviewDetail(e.id)}>
+              <RC.profileContainer>
                 <img
                   src={`http://127.0.0.1:8000${e.profile}`}
                   alt="profile"

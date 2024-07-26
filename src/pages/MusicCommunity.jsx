@@ -1,9 +1,53 @@
 import React from "react";
 import * as M from "../styles/styledMusicCommunity";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function MusicCommunity() {
   const navigate = useNavigate();
+  const [content, setContent] = useState([]);
+  const [page, setPage] = useState(1); // 현재 페이지
+  const itemsCountPerPage = 5; // 페이지당 항목 수
+  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/musics/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setContent(response.data);
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setContent(paginatedData); //현재 페이지 데이터 설정
+        setTotalItems(totalItems); //총 데이터 개수 설정
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [page]);
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -48,8 +92,8 @@ export function MusicCommunity() {
     window.scrollTo(0, 0);
   };
 
-  const goMusicDetail = () => {
-    navigate(`/musicdetail`);
+  const goMusicDetail = (id) => {
+    navigate(`/musicdetail?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -72,22 +116,30 @@ export function MusicCommunity() {
           </M.TapOff>
         </M.TapContainer>
         <M.Item>
-          <M.ProfileImg>
-            <img src="/images/ProfileImg.svg" />
-          </M.ProfileImg>
-          <M.PostNickname>고독한 예술가</M.PostNickname>
-          <M.PostDate>07/17 16:29</M.PostDate>
-          <M.MusicPhoto onClick={goMusicDetail}>
-            <img src="/images/AlbumCover.svg" />
-          </M.MusicPhoto>
-          <M.MusicCommunityBox onClick={goMusicDetail}></M.MusicCommunityBox>
-          <M.MusicIcon onClick={goMusicDetail}></M.MusicIcon>
-          <M.MusicTitle onClick={goMusicDetail}>T</M.MusicTitle>
-          <M.MusicArtist onClick={goMusicDetail}>실리카겔</M.MusicArtist>
-          <M.MusicContent onClick={goMusicDetail}>
-            저는 영원주의를 주제로 하는 이 전시를 둘러보면서 실리카겔의 T가
-            떠올랐어요!! 이음악과 함께
-          </M.MusicContent>
+          {content.map((e) => (
+            <M.RecContainer>
+              <M.ProfileImg>
+                <img src={`http://127.0.0.1:8000${e.profile}`} />
+              </M.ProfileImg>
+              <M.PostNickname>{e.nickname}</M.PostNickname>
+              <M.PostDate>{e.createdAt}</M.PostDate>
+              <M.MusicCommunityBox onClick={() => goMusicDetail(e.id)}>
+                <M.MusicPhoto onClick={() => goMusicDetail(e.id)}>
+                  <img src={e.image} />
+                </M.MusicPhoto>
+                <M.MusicIcon onClick={() => goMusicDetail(e.id)} />
+                <M.MusicTitle onClick={() => goMusicDetail(e.id)}>
+                  {e.title}
+                </M.MusicTitle>
+                <M.MusicArtist onClick={() => goMusicDetail(e.id)}>
+                  {e.author}
+                </M.MusicArtist>
+                <M.MusicContent onClick={() => goMusicDetail(e.id)}>
+                  {e.content}
+                </M.MusicContent>
+              </M.MusicCommunityBox>
+            </M.RecContainer>
+          ))}
           <M.PurpleBlur></M.PurpleBlur>
           <M.InfoText>
             관람에 도움이 되었나요?

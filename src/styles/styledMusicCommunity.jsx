@@ -138,8 +138,11 @@ export const TapOff = styled(TapOn)`
 `;
 
 export const ProfileImg = styled.div`
-  width: 29px;
-  height: 29px;
+  img {
+    width: 33px;
+    height: 33px;
+    border-radius: 30px;
+  }
 `;
 
 export const PostNickname = styled.div`
@@ -150,7 +153,7 @@ export const PostNickname = styled.div`
   font-weight: 400;
   line-height: 24px;
   margin-left: 50px;
-  margin-top: -32px;
+  margin-top: -42px;
 `;
 
 export const PostDate = styled.div`
@@ -164,7 +167,6 @@ export const PostDate = styled.div`
 `;
 
 export const MusicCommunityBox = styled.div`
-  margin-top: 10px;
   width: 360px;
   height: 130px;
   background: linear-gradient(
@@ -176,13 +178,15 @@ export const MusicCommunityBox = styled.div`
   border-radius: 15px;
   margin-left: -5px;
   cursor: pointer;
+  margin-bottom: 30px;
+  margin-top: 10px;
 `;
 
 export const MusicIcon = styled.div`
   width: 18px;
   height: 18px;
   background-image: url("/images/MusicIcon.svg");
-  margin-top: -115px;
+  margin-top: -45px;
   margin-left: 15px;
   cursor: pointer;
 `;
@@ -214,26 +218,27 @@ export const MusicArtist = styled.div`
 
 export const MusicContent = styled.div`
   width: 250px;
+  height: 40px;
+  overflow: hidden;
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 20px;
   margin-left: 15px;
   cursor: pointer;
 `;
 
 export const MusicPhoto = styled.div`
   margin-left: 280px;
+  cursor: pointer;
+
   img {
     width: 61px;
     height: 61px;
     border-radius: 5px;
   }
-  position: absolute;
-  margin-top: 20px;
-  cursor: pointer;
 `;
 
 export const InfoText = styled.div`
@@ -270,3 +275,5 @@ export const RecBtn = styled.button`
     background-image: url("/images/RecBtnH.svg");
   }
 `;
+
+export const RecContainer = styled.div``;

@@ -161,22 +161,22 @@ export const ExhibitInfoBox = styled.button`
 `;
 
 export const ExhibitTitle = styled.div`
-  color: #fdfdfd;
+  color: #fff;
   text-align: left;
   font-family: "Pretendard Variable";
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 16px;
   margin-left: 10px;
 `;
 
 export const ExhibitDetail = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
-  font-size: 9px;
+  font-size: 10px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 16px;
   text-align: left;
   margin-left: 10px;

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const Container = styled.div`
   width: 390px;
   height: 969px;
-  background: linear-gradient(180deg, #3b3e40 0%, #101212 100%);
+  background: linear-gradient(180deg, #101212 0%, #3b3e40 100%);
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -75,30 +75,50 @@ export const BackBtn = styled.button`
 `;
 
 export const ProfileImgBlack = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-left: 12%;
-  margin-top: 10%;
+  img {
+    width: 50px;
+    height: 50px;
+    margin-left: 41%;
+    margin-top: 5%;
+    border-radius: 30px;
+  }
 `;
 
 export const InfoText = styled.div`
+  width: 500px;
+  height: 50px;
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-top: -12%;
-  text-align: left;
-  padding-left: 110px;
+  text-align: center;
+  overflow: hidden;
+  margin-left: -16%;
+`;
+
+export const PostDate = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 200% */
+  text-align: center;
+  margin-top: -25px;
+  margin-left: -4%;
 `;
 
 export const AlbumCover = styled.div`
-  width: 200px;
-  height: 200px;
-  margin-left: 26%;
-  margin-top: 15%;
-  background-image: url("/images/AlbumCover.svg");
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  margin-left: 24%;
+  margin-top: 5%;
   border-radius: 10px;
 `;
 
@@ -110,7 +130,7 @@ export const MusicInfo = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
-    margin-left: 49.5%;
+    text-align: center;
   }
 
   #artist {
@@ -120,8 +140,8 @@ export const MusicInfo = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
-    margin-left: 45.5%;
     margin-top: -10.5%;
+    text-align: center;
   }
 `;
 

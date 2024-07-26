@@ -37,7 +37,8 @@ export function ContentIntro() {
         setContent([fetchedData]);
         setData(fetchedData.id);
         setScrapCount(fetchedData.scrapCount);
-        setIsScrapped(fetchedData.isScrapped);
+        setIsScrapped(response.data.isScrapped);
+        console.log("스크랩 여부", isScrapped);
         setScrapBtn(
           fetchedData.isScrapped
             ? "/images/ScrapBtnOn.svg"
@@ -211,6 +212,7 @@ export function ContentIntro() {
     window.scrollTo(0, 0);
   };
 
+  //공유하기
   const handleCopyClipBoard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
