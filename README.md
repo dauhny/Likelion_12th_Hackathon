@@ -92,6 +92,6 @@
 
 ```
 $ source myvenv/Scripts/activate
-$ cd taskmanageProject
+$ cd GalleryProject
 $ python manage.py runserver
 ```
