@@ -108,6 +108,10 @@ export function MypageReverse() {
             <MPR.Name>
               <MPR.span>지여니</MPR.span>
             </MPR.Name>
+            <MPR.InputLabel>생년월일</MPR.InputLabel>
+            <MPR.SelectBirth>
+              <MPR.span>2004-09-24</MPR.span>
+            </MPR.SelectBirth>
             <MPR.Label>이메일</MPR.Label>
             <MPR.Email>
               {" "}
@@ -130,11 +134,6 @@ export function MypageReverse() {
               type="tel"
               placeholder="전화번호를 입력하세요."
             ></MPR.PhoneNumber>
-            <MPR.InputLabel>생년월일</MPR.InputLabel>
-            <MPR.SelectBirth
-              type="text"
-              placeholder="2004-09-24"
-            ></MPR.SelectBirth>
             <MPR.Complete onClick={goMyPage}>저장하기</MPR.Complete>
           </MPR.InputContainer>
           {/*하단바*/}

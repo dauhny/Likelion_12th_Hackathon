@@ -210,6 +210,15 @@ export const Name = styled.div`
   background: #2e2e2e;
 `;
 
+export const SelectBirth = styled.div`
+  width: 305px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #9747ff;
+  background: #2e2e2e;
+`;
+
 export const Email = styled.div`
   width: 305px;
   height: 30px;
@@ -258,12 +267,6 @@ export const PhoneNumber = styled(UserInput)`
   width: 300px;
   height: 30px;
 
-  background: #121212;
-`;
-
-export const SelectBirth = styled(UserInput)`
-  width: 116px;
-  height: 30px;
   background: #121212;
 `;
 
