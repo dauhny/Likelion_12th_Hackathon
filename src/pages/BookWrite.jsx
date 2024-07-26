@@ -7,6 +7,7 @@ import { useState, useRef } from "react";
 export function BookWrite() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState(""); // 추가된 부분
   const [content, setContent] = useState("");
 
   const goBack = () => {
@@ -22,11 +23,32 @@ export function BookWrite() {
   const handlePost = async (event) => {
     event.preventDefault();
     try {
-      // API 호출 시 사용자 입력 데이터 전달
-      const response = await axios.post("http://127.0.0.1:8000/posts/", {
-        title,
-        content,
-      });
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("author", author); // 추가된 부분
+      formData.append("content", content);
+      if (imgRef.current.files[0]) {
+        formData.append("image", imgRef.current.files[0]);
+      }
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/books/",
+        formData,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
       console.log("후기글 생성 성공:", response.data);
       goBookCommunity();
     } catch (error) {
@@ -56,7 +78,7 @@ export function BookWrite() {
         <W.BackBtn onClick={goBack} />
         <W.PageTitle>추천글 작성</W.PageTitle>
         <W.Item>
-          <W.ShareBtn onClick={goBookCommunity}>공유하기</W.ShareBtn>
+          <W.ShareBtn onClick={handlePost}>공유하기</W.ShareBtn>
           <W.PostImgLabel htmlFor="profileImg">
             <img src="/images/PostImgBtn.svg" />
           </W.PostImgLabel>
@@ -70,9 +92,21 @@ export function BookWrite() {
           <W.PostedImg>
             <img src={imgFile ? imgFile : "/images/BasicImg.svg"} />
           </W.PostedImg>
-          <W.PostTitle placeholder="책 제목을 입력하세요."></W.PostTitle>
-          <W.PostArtist placeholder="작가명을 입력하세요."></W.PostArtist>
-          <W.PostContent placeholder="내용을 입력하세요."></W.PostContent>
+          <W.PostTitle
+            placeholder="책 제목을 입력하세요."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></W.PostTitle>
+          <W.PostArtist
+            placeholder="작가명을 입력하세요."
+            value={author} // 추가된 부분
+            onChange={(e) => setAuthor(e.target.value)} // 추가된 부분
+          ></W.PostArtist>
+          <W.PostContent
+            placeholder="내용을 입력하세요."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></W.PostContent>
         </W.Item>
       </W.Container>
     </>

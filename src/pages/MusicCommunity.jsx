@@ -117,7 +117,7 @@ export function MusicCommunity() {
         </M.TapContainer>
         <M.Item>
           {content.map((e) => (
-            <M.RecContainer>
+            <M.RecContainer key={e.id}>
               <M.ProfileImg>
                 <img src={`http://127.0.0.1:8000${e.profile}`} />
               </M.ProfileImg>

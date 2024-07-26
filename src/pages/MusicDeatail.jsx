@@ -99,7 +99,8 @@ export function MusicDetail() {
           <p id={"artist"}>{author}</p>
         </M.MusicInfo>
         <br />
-        <M.UserText>{content}</M.UserText> {/*하단바*/}
+        <M.UserText>{content}</M.UserText>
+        {/*하단바*/}
         <M.NavBar>
           {/*검색*/}
           <M.NavBtnContainer>

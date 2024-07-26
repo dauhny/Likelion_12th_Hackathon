@@ -7,6 +7,7 @@ import { useState, useRef } from "react";
 export function MusicWrite() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
 
   const goBack = () => {
@@ -22,15 +23,36 @@ export function MusicWrite() {
   const handlePost = async (event) => {
     event.preventDefault();
     try {
-      // API 호출 시 사용자 입력 데이터 전달
-      const response = await axios.post("http://127.0.0.1:8000/posts/", {
-        title,
-        content,
-      });
-      console.log("후기글 생성 성공:", response.data);
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("author", author);
+      formData.append("content", content);
+      if (imgRef.current.files[0]) {
+        formData.append("image", imgRef.current.files[0]);
+      }
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/musics/",
+        formData,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("음악 추천글 생성 성공:", response.data);
       goMusicCommunity();
     } catch (error) {
-      console.error("후기글 생성 실패:", error);
+      console.error("음악 추천글 생성 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -56,7 +78,7 @@ export function MusicWrite() {
         <W.BackBtn onClick={goBack} />
         <W.PageTitle>추천글 작성</W.PageTitle>
         <W.Item>
-          <W.ShareBtn onClick={goMusicCommunity}>공유하기</W.ShareBtn>
+          <W.ShareBtn onClick={handlePost}>공유하기</W.ShareBtn>
           <W.PostImgLabel htmlFor="profileImg">
             <img src="/images/PostImgBtn.svg" />
           </W.PostImgLabel>
@@ -70,9 +92,21 @@ export function MusicWrite() {
           <W.PostedImg>
             <img src={imgFile ? imgFile : "/images/BasicImg.svg"} />
           </W.PostedImg>
-          <W.PostTitle placeholder="음악 제목을 입력하세요."></W.PostTitle>
-          <W.PostArtist placeholder="아티스트명을 입력하세요."></W.PostArtist>
-          <W.PostContent placeholder="내용을 입력하세요."></W.PostContent>
+          <W.PostTitle
+            placeholder="음악 제목을 입력하세요."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></W.PostTitle>
+          <W.PostArtist
+            placeholder="아티스트명을 입력하세요."
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          ></W.PostArtist>
+          <W.PostContent
+            placeholder="내용을 입력하세요."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></W.PostContent>
         </W.Item>
       </W.Container>
     </>

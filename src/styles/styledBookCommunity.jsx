@@ -137,8 +137,11 @@ export const TapOff = styled(TapOn)`
 `;
 
 export const ProfileImg = styled.div`
-  width: 29px;
-  height: 29px;
+  img {
+    width: 39px;
+    height: 39px;
+    border-radius: 30px;
+  }
 `;
 
 export const PostNickname = styled.div`
@@ -149,7 +152,7 @@ export const PostNickname = styled.div`
   font-weight: 400;
   line-height: 24px;
   margin-left: 50px;
-  margin-top: -32px;
+  margin-top: -42px;
 `;
 
 export const PostDate = styled.div`
@@ -175,6 +178,7 @@ export const BookCommunityBox = styled.div`
   border-radius: 15px;
   margin-left: -5px;
   cursor: pointer;
+  margin-bottom: 30px;
 `;
 
 export const BookIcon = styled.div`
@@ -182,8 +186,8 @@ export const BookIcon = styled.div`
   height: 14px;
   background-image: url("/images/BookIcon.svg");
   background-repeat: no-repeat;
-  margin-top: -165px;
-  margin-left: 15px;
+  margin-top: -125px;
+  margin-left: 25px;
   cursor: pointer;
 `;
 
@@ -194,9 +198,9 @@ export const BookTitle = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-top: -19px;
-  margin-left: 45px;
+  margin-left: 55px;
   cursor: pointer;
+  margin-top: -20px;
 `;
 
 export const BookArtist = styled.div`
@@ -206,21 +210,21 @@ export const BookArtist = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-left: 45px;
+  margin-left: 55px;
   margin-top: -3px;
   margin-bottom: 6px;
   cursor: pointer;
 `;
 
 export const BookContent = styled.div`
-  width: 230px;
+  width: 210px;
   color: #fff;
   font-family: "Pretendard Variable";
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 24px;
-  margin-left: 15px;
+  margin-left: 25px;
   cursor: pointer;
 `;
 
@@ -229,10 +233,9 @@ export const BookPhoto = styled.div`
   img {
     width: 80px;
     height: 127px;
+    margin-top: 20px;
   }
-  position: absolute;
-  margin-top: 25px;
-  margin-left: 68%;
+  margin-left: 71%;
   cursor: pointer;
 `;
 
@@ -270,3 +273,5 @@ export const RecBtn = styled.button`
     background-image: url("/images/RecBtnH.svg");
   }
 `;
+
+export const BookContainer = styled.div``;

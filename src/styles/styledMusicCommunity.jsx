@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
-  height: 1209px;
+  height: 1809px;
   background: #121212;
   margin: 0 auto;
   justify-content: center;
@@ -139,8 +139,8 @@ export const TapOff = styled(TapOn)`
 
 export const ProfileImg = styled.div`
   img {
-    width: 33px;
-    height: 33px;
+    width: 39px;
+    height: 39px;
     border-radius: 30px;
   }
 `;
@@ -153,7 +153,7 @@ export const PostNickname = styled.div`
   font-weight: 400;
   line-height: 24px;
   margin-left: 50px;
-  margin-top: -42px;
+  margin-top: -45px;
 `;
 
 export const PostDate = styled.div`
@@ -186,7 +186,7 @@ export const MusicIcon = styled.div`
   width: 18px;
   height: 18px;
   background-image: url("/images/MusicIcon.svg");
-  margin-top: -45px;
+  margin-top: -65px;
   margin-left: 15px;
   cursor: pointer;
 `;
@@ -235,6 +235,7 @@ export const MusicPhoto = styled.div`
   cursor: pointer;
 
   img {
+    margin-top: 20px;
     width: 61px;
     height: 61px;
     border-radius: 5px;

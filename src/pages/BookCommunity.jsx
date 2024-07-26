@@ -1,9 +1,53 @@
 import React from "react";
 import * as B from "../styles/styledBookCommunity";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function BookCommunity() {
   const navigate = useNavigate();
+  const [content, setContent] = useState([]);
+  const [page, setPage] = useState(1); // 현재 페이지
+  const itemsCountPerPage = 5; // 페이지당 항목 수
+  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/books/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setContent(response.data);
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setContent(paginatedData); //현재 페이지 데이터 설정
+        setTotalItems(totalItems); //총 데이터 개수 설정
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [page]);
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -48,8 +92,8 @@ export function BookCommunity() {
     window.scrollTo(0, 0);
   };
 
-  const goBookDetail = () => {
-    navigate(`/bookdetail`);
+  const goBookDetail = (id) => {
+    navigate(`/bookdetail?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -72,21 +116,30 @@ export function BookCommunity() {
           </B.TapOn>
         </B.TapContainer>
         <B.Item>
-          <B.ProfileImg>
-            <img src="/images/ProfileImg.svg" />
-          </B.ProfileImg>
-          <B.PostNickname>고독한 예술가</B.PostNickname>
-          <B.PostDate>07/17 16:29</B.PostDate>
-          <B.BookPhoto onClick={goBookDetail}>
-            <img src="/images/RecBook1.svg" />
-          </B.BookPhoto>
-          <B.BookCommunityBox onClick={goBookDetail}></B.BookCommunityBox>
-          <B.BookIcon onClick={goBookDetail}></B.BookIcon>
-          <B.BookTitle onClick={goBookDetail}>노스텔지어</B.BookTitle>
-          <B.BookArtist onClick={goBookDetail}>이지원</B.BookArtist>
-          <B.BookContent onClick={goBookDetail}>
-            이 책과 함께하면 이 전시는 더욱 풍부해지는 것 같아요.
-          </B.BookContent>
+          {content.map((e) => (
+            <B.BookContainer key={e.id}>
+              <B.ProfileImg>
+                <img src={`http://127.0.0.1:8000${e.profile}`} />
+              </B.ProfileImg>
+              <B.PostNickname>{e.nickname}</B.PostNickname>
+              <B.PostDate>{e.createdAt}</B.PostDate>
+              <B.BookCommunityBox onClick={() => goBookDetail(e.id)}>
+                <B.BookPhoto onClick={() => goBookDetail(e.id)}>
+                  <img src={e.image} />
+                </B.BookPhoto>
+                <B.BookIcon onClick={() => goBookDetail(e.id)}></B.BookIcon>
+                <B.BookTitle onClick={() => goBookDetail(e.id)}>
+                  {e.title}
+                </B.BookTitle>
+                <B.BookArtist onClick={() => goBookDetail(e.id)}>
+                  {e.author}
+                </B.BookArtist>
+                <B.BookContent onClick={() => goBookDetail(e.id)}>
+                  {e.content}
+                </B.BookContent>
+              </B.BookCommunityBox>
+            </B.BookContainer>
+          ))}
           <B.PurpleBlur></B.PurpleBlur>
           <B.InfoText>
             관람에 도움이 되었나요?
