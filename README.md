@@ -48,52 +48,42 @@
  │  ├─ __init__.py
  │  ├─ admin.py
  │  ├─ models.py
- │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
  │  ├─ serializers.py
- │  ├─ permissions.py
- │  └─ apps.py
+ │  └─ permissions.py
  ├─ books/
  │  ├─ __init__.py
  │  ├─ admin.py
  │  ├─ models.py
- │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
  │  ├─ serializers.py
- │  ├─ permissions.py
- │  └─ apps.py
+ │  └─ permissions.py
  ├─ musics/
  │  ├─ __init__.py
  │  ├─ admin.py
  │  ├─ models.py
- │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
  │  ├─ serializers.py
- │  ├─ permissions.py
- │  └─ apps.py
+ │  └─ permissions.py
  ├─ datas/
  │  ├─ __init__.py
  │  ├─ admin.py
  │  ├─ models.py
- │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
  │  ├─ serializers.py
- │  ├─ permissions.py
- │  └─ apps.py
+ │  └─ permissions.py
  ├─ posts/
  │  ├─ __init__.py
  │  ├─ admin.py
  │  ├─ models.py
- │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
  │  ├─ serializers.py
- │  ├─ permissions.py
- │  └─ apps.py
+ │  └─ permissions.py
  └─ manage.py
 ```
 <br>
