@@ -72,3 +72,13 @@ export const Complete = styled.button`
   line-height: 160.5%;
   cursor: pointer;
 `;
+
+export const ErrorMessage = styled.div`
+  color: #ff4d4d;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin-top: 8px;
+`;
