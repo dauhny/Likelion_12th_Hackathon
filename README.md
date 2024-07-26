@@ -1,13 +1,13 @@
 # Likelion_12th_Heckathon
 멋쟁이사자처럼 12기 중앙해커톤 : Heckathon 조 - 팀명: Pathos(파토스)
 
-## 팀 소개 : 🦁 Pathos(파토스) 🦁
+## 🦁 팀 소개 : Pathos(파토스) 🦁
 팀명인 Pathos는 그리스어로 "열정"이라는 뜻을 가진 단어입니다.<br>
 또 Path OS, 즉 OS로의 길을 열정을 가지고 개척해 나갈 것이라는 중의적인 의미를 담고있습니다.
 
 <br>
 
-## 프로젝트 소개 :  🍀 ArtHeal 🍀
+## 🍀 프로젝트 소개 : ArtHeal 🍀
 
 ### 1. 서비스 소개
 
