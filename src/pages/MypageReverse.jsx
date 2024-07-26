@@ -100,23 +100,19 @@ export function MypageReverse() {
             <img src="/images/WhiteArrow.svg" alt="profile"></img>
           </MPR.informationText>
           <MPR.InputContainer>
-            <MPR.InputLabel>아이디</MPR.InputLabel>
-            <MPR.UserInputShort
-              type="text"
-              placeholder="baegopa"
-            ></MPR.UserInputShort>
-            <MPR.InputLabel>이름</MPR.InputLabel>
-            <MPR.Name type="text" placeholder="지여니"></MPR.Name>
-            <MPR.InputLabel>생년월일</MPR.InputLabel>
-            <MPR.SelectBirth
-              type="text"
-              placeholder="2004-09-24"
-            ></MPR.SelectBirth>
-            <MPR.InputLabel>이메일</MPR.InputLabel>
-            <MPR.Email
-              type="email"
-              placeholder="likelion@naver.com"
-            ></MPR.Email>
+            <MPR.Label>아이디</MPR.Label>
+            <MPR.User>
+              <MPR.span>baegopa</MPR.span>
+            </MPR.User>
+            <MPR.Label>이름</MPR.Label>
+            <MPR.Name>
+              <MPR.span>지여니</MPR.span>
+            </MPR.Name>
+            <MPR.Label>이메일</MPR.Label>
+            <MPR.Email>
+              {" "}
+              <MPR.span>likelion@naver.com</MPR.span>
+            </MPR.Email>
           </MPR.InputContainer>
           <MPR.changeText>
             변경
@@ -134,6 +130,11 @@ export function MypageReverse() {
               type="tel"
               placeholder="전화번호를 입력하세요."
             ></MPR.PhoneNumber>
+            <MPR.InputLabel>생년월일</MPR.InputLabel>
+            <MPR.SelectBirth
+              type="text"
+              placeholder="2004-09-24"
+            ></MPR.SelectBirth>
             <MPR.Complete onClick={goMyPage}>저장하기</MPR.Complete>
           </MPR.InputContainer>
           {/*하단바*/}

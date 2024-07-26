@@ -155,6 +155,16 @@ export const InputLabel = styled.div`
   margin: 7px;
 `;
 
+export const Label = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin: 7px;
+`;
+
 export const UserInput = styled.input`
   border-radius: 8px;
   border: 1px solid #9747ff;
@@ -168,24 +178,45 @@ export const UserInput = styled.input`
   padding-left: 10px;
 `;
 
-export const UserInputShort = styled(UserInput)`
-  width: 270px;
+export const User = styled.div`
+  width: 305px;
   height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #9747ff;
+  background: #2e2e2e;
 `;
 
-export const Name = styled(UserInput)`
-  width: 270px;
-  height: 30px;
+export const span = styled.div`
+  width: 239.33px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #9c9c9c;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%; /* 19.26px */
+  margin-left: 10px;
+  margin-top: 5px;
 `;
 
-export const SelectBirth = styled(UserInputShort)`
-  width: 116px;
+export const Name = styled.div`
+  width: 305px;
   height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #9747ff;
+  background: #2e2e2e;
 `;
 
-export const Email = styled(UserInput)`
-  width: 156px;
+export const Email = styled.div`
+  width: 305px;
   height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #9747ff;
+  background: #2e2e2e;
 `;
 
 // 변경
@@ -199,7 +230,7 @@ export const changeText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 160.5%; /* 27.285px */
-  margin-top: 50px;
+  margin-top: 40px;
 
   img {
     position: absolute;
@@ -217,7 +248,7 @@ export const changeText = styled.div`
   }
 `;
 
-export const NickName = styled(UserInputShort)`
+export const NickName = styled(UserInput)`
   width: 300px;
   height: 30px;
   background: #121212;
@@ -226,7 +257,13 @@ export const NickName = styled(UserInputShort)`
 export const PhoneNumber = styled(UserInput)`
   width: 300px;
   height: 30px;
-  margin-bottom: 10px;
+
+  background: #121212;
+`;
+
+export const SelectBirth = styled(UserInput)`
+  width: 116px;
+  height: 30px;
   background: #121212;
 `;
 
