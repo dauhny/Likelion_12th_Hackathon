@@ -22,6 +22,7 @@ import { MypageRevise } from "./pages/MypageRevise";
 import { AIResult } from "./pages/AIResult";
 import { ReviewDetail } from "./pages/ReviewDetail";
 import { Record } from "./pages/Record";
+import { RecordWrite } from "./pages/RecordWrite";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="/airesult" element={<AIResult />} />
         <Route path="/reviewdetail" element={<ReviewDetail />} />
         <Route path="/record" element={<Record />} />
+        <Route path="/recordwrite" element={<RecordWrite />} />
       </Routes>
     </BrowserRouter>
   );

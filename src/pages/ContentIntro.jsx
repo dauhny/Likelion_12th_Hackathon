@@ -300,7 +300,7 @@ export function ContentIntro() {
               <C.CommentContent>{e.comment}</C.CommentContent>
               <C.CommentDate>{e.createdAt}</C.CommentDate>
               <C.DeleteBtn onClick={() => handleCommentDelete(e.id)} />
-              <C.CommentNickname>{e.username} • </C.CommentNickname>
+              <C.CommentNickname>{e.nickname} • </C.CommentNickname>
               <C.CommentProfile>
                 <img
                   src={`http://127.0.0.1:8000${e.profile}`}

@@ -8,6 +8,36 @@ export function Mypage() {
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState("");
   const [nickname, setNickname] = useState("");
+  const [content, setContent] = useState([]);
+  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  const [page, setPage] = useState(1); // 현재 페이지
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/scraps/all/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setContent(response.data);
+
+        setContent(allData); //현재 페이지 데이터 설정
+      } catch (error) {
+        console.error("스크랩한 전시 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [page]);
 
   //프로필 불러오기
   useEffect(() => {
@@ -112,16 +142,20 @@ export function Mypage() {
             <img src="/images/Scrap.svg" alt="scrap"></img>
             <div id="ScrapText">스크랩한 전시</div>
           </MP.scrap>
-          <MP.ImgBox onClick={goContentIntro}>
-            <img src="/images/ForeverismIntro.svg" alt="ExhibitPoster"></img>
-          </MP.ImgBox>
-          <MP.ExhibitionIntroduce onClick={goContentIntro}>
-            <div id="Title">포에버리즘 : 우리를 세상의 끝으로 </div>
-            <div id="Date">2024/07/25</div>
-            <MP.Trash id="remove">
-              <img src="/images/Trash.svg" alt="remove"></img>
-            </MP.Trash>
-          </MP.ExhibitionIntroduce>
+          {content.map((e) => (
+            <MP.ScrapContainer key={e.id}>
+              <MP.ImgBox onClick={goContentIntro}>
+                <img src={e.image} alt="ExhibitPoster"></img>
+              </MP.ImgBox>
+              <MP.ExhibitionIntroduce onClick={goContentIntro}>
+                <div id="Title">{e.title}</div>
+                <div id="Date">{e.period}</div>
+                <MP.Trash id="remove">
+                  <img src="/images/Trash.svg" alt="remove"></img>
+                </MP.Trash>{" "}
+              </MP.ExhibitionIntroduce>
+            </MP.ScrapContainer>
+          ))}
           {/*하단바*/}
           <MP.NavBar>
             {/*검색*/}

@@ -258,3 +258,5 @@ export const Trash = styled.div`
     height: 100%;
   }
 `;
+
+export const ScrapContainer = styled.div``;

@@ -87,6 +87,8 @@ export function Home() {
         // API 호출
         const response = await axios.get(`http://127.0.0.1:8000/data/`);
         const allData = response.data;
+        const sortedData = allData.sort((a, b) => b.scrapCount - a.scrapCount);
+
         setContent(response.data); // API 응답으로 받은 데이터를 state에 저장   const allData = response.data;
 
         //총 데이터 개수 추정
@@ -157,7 +159,7 @@ export function Home() {
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>{" "}
           {review.map((e) => (
-            <H.ReviewBox onClick={() => goReviewDetail(e.id)}>
+            <H.ReviewBox key={e.id} onClick={() => goReviewDetail(e.id)}>
               <H.ProfileImg>
                 <img src={`http://127.0.0.1:8000${e.profile}`} alt="profile" />
               </H.ProfileImg>
