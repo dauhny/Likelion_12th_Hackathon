@@ -35,7 +35,7 @@
 ### 4. 폴더 구조
 
 ```
-📂 HERETHON-TEAM-10
+📂 HECKATHON-TEAM-Pathos
 └─ myvenv
 └─ GalleryProject
  ├─ GalleryProject/
@@ -47,21 +47,53 @@
  ├─ accounts/
  │  ├─ __init__.py
  │  ├─ admin.py
- │  ├─ forms.py
  │  ├─ models.py
  │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
- │  ├─ templates
- ├─ teams/
+ │  ├─ serializers.py
+ │  ├─ permissions.py
+ │  └─ apps.py
+ ├─ books/
  │  ├─ __init__.py
  │  ├─ admin.py
- │  ├─ forms.py
  │  ├─ models.py
  │  ├─ tests.py
  │  ├─ urls.py
  │  ├─ views.py
- │  ├─ templates
+ │  ├─ serializers.py
+ │  ├─ permissions.py
+ │  └─ apps.py
+ ├─ musics/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  ├─ urls.py
+ │  ├─ views.py
+ │  ├─ serializers.py
+ │  ├─ permissions.py
+ │  └─ apps.py
+ ├─ datas/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  ├─ urls.py
+ │  ├─ views.py
+ │  ├─ serializers.py
+ │  ├─ permissions.py
+ │  └─ apps.py
+ ├─ posts/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  ├─ urls.py
+ │  ├─ views.py
+ │  ├─ serializers.py
+ │  ├─ permissions.py
+ │  └─ apps.py
  └─ manage.py
 ```
 <br>
