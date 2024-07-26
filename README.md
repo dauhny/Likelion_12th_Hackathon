@@ -1,7 +1,5 @@
 # Likelion_12th_Heckathon
-멋쟁이사자처럼 12기 중앙해커톤
-
-2024 중앙해커톤 : Heckathon 조 - 팀명: Pathos(파토스)
+멋쟁이사자처럼 12기 중앙해커톤 : Heckathon 조 - 팀명: Pathos(파토스)
 
 ## 💜 팀 소개 :  Pathos(파토스) 💜
 팀명인 Pathos는 그리스어로 "열정"이라는 뜻을 가진 단어입니다.<br>
