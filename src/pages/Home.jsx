@@ -149,7 +149,7 @@ export function Home() {
               <br />
               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
                 <img src={newcontent.image} />
-              </H.NewExhibit>{" "}
+              </H.NewExhibit>
             </H.NewExhibitContainer>
           ) : (
             <p>최신 전시가 없습니다.</p>
@@ -174,7 +174,7 @@ export function Home() {
               <H.LikeCnt>{e.likeCount}</H.LikeCnt>
             </H.ReviewBox>
           ))}
-          \<H.InfoText>HOT 전시</H.InfoText>
+          <H.InfoText>HOT 전시</H.InfoText>
           <H.ReviewBtn onClick={goSearch}>
             더보기 <img src="images/ExpandBtn.svg" />
           </H.ReviewBtn>

@@ -16,13 +16,14 @@ import { Welcome } from "./pages/Welcome";
 import { AI } from "./pages/AI";
 import { AIRecordList } from "./pages/AIRecordList";
 import { BookDetail } from "./pages/BookDetail";
-import { MusicDetail } from "./pages/MusicDeatail";
+import { MusicDetail } from "./pages/MusicDetail";
 import { Search } from "./pages/Search";
 import { MypageRevise } from "./pages/MypageRevise";
 import { AIResult } from "./pages/AIResult";
 import { ReviewDetail } from "./pages/ReviewDetail";
 import { Record } from "./pages/Record";
 import { RecordWrite } from "./pages/RecordWrite";
+import { MyRecordDetail } from "./pages/MyRecordDetail";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="/reviewdetail" element={<ReviewDetail />} />
         <Route path="/record" element={<Record />} />
         <Route path="/recordwrite" element={<RecordWrite />} />
+        <Route path="/myrecorddetail" element={<MyRecordDetail />} />
       </Routes>
     </BrowserRouter>
   );

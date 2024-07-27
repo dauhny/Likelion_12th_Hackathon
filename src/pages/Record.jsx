@@ -1,9 +1,59 @@
 import React from "react";
 import * as R from "../styles/styledRecord";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Pagination from "react-js-pagination";
 
 export function Record() {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1); // 현재 페이지
+  const itemsCountPerPage = 5; // 페이지당 항목 수
+  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
+  const [review, setReview] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/myposts/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setReview(response.data);
+
+        //총 데이터 개수 추정
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData); //현재 페이지 데이터 설정
+        setTotalItems(totalItems); //총 데이터 개수 설정
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [page]);
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -12,6 +62,11 @@ export function Record() {
 
   const goRecordWrite = () => {
     navigate(`/recordwrite`);
+  };
+
+  const goMyRecordDetail = (id) => {
+    navigate(`/myrecorddetail?id=${id}`);
+    window.scrollTo(0, 0);
   };
 
   //하단바
@@ -45,22 +100,26 @@ export function Record() {
   return (
     <>
       <R.Container>
-        <R.BackBtn onClick={goBack}></R.BackBtn>
+        <R.BackBtn onClick={goBack}></R.BackBtn>{" "}
+        <R.PageTitle>나의 기록</R.PageTitle>
         <R.Item>
-          <R.IntroText>나의 기록</R.IntroText>
           <R.record onClick={goRecordWrite}>
             <div id="text">기록하기</div>
           </R.record>
-          <R.ImgBox>
-            <img src="/images/ForeverismIntro.svg" alt="ExhibitPoster"></img>
-          </R.ImgBox>
-          <R.ExhibitionIntroduce>
-            <div id="Title">포에버리즘 : 우리를 세상의 끝으로 </div>
-            <div id="Date">2024/07/25</div>
-            <R.Trash id="remove">
-              <img src="/images/Trash.svg" alt="remove"></img>
-            </R.Trash>
-          </R.ExhibitionIntroduce>
+          {review.map((e) => (
+            <R.ReviewContainer onClick={() => goMyRecordDetail(e.id)}>
+              <R.ImgBox onClick={() => goMyRecordDetail(e.id)}>
+                <img src={e.img} alt="ExhibitPoster"></img>
+              </R.ImgBox>
+              <R.ExhibitionIntroduce onClick={() => goMyRecordDetail(e.id)}>
+                <div id="Title">{e.title}</div>
+                <div id="Date">{e.createdAt2}</div>
+                <R.Trash id="remove">
+                  <img src={"/images/Trash.svg"} alt="remove"></img>
+                </R.Trash>
+              </R.ExhibitionIntroduce>
+            </R.ReviewContainer>
+          ))}
           <R.PinkBlur></R.PinkBlur>
           {/*하단바*/}
           <R.NavBar>

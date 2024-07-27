@@ -9,7 +9,8 @@ export function BookDetail() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const id = queryParams.get("id");
+  const communityId = queryParams.get("community_id");
+  const bookId = queryParams.get("book_id");
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -31,9 +32,12 @@ export function BookDetail() {
           return;
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/books/${id}`, {
-          headers: { Authorization: `Token ${token}` },
-        });
+        const response = await axios.get(
+          `http://127.0.0.1:8000/datas/${communityId}/books/${bookId}/`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
         setTitle(response.data.title);
         setNickName(response.data.nickname);
         setContent(response.data.content);
@@ -45,8 +49,8 @@ export function BookDetail() {
         console.error("도서 추천글 조회 실패 :", error);
       }
     };
-    fetchData(); // useEffect에서 fetchData 함수 호출
-  }, [id]);
+    fetchData();
+  }, [communityId, bookId]);
 
   const goBack = () => {
     navigate(-1);

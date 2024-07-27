@@ -97,8 +97,8 @@ export function MypageRevise() {
     <>
       <MPR.Container>
         <MPR.BackBtn onClick={goBack}></MPR.BackBtn>
+        <MPR.PageTitle>프로필 편집</MPR.PageTitle>
         <MPR.Item>
-          <MPR.IntroText>프로필 편집</MPR.IntroText>
           <MPR.profile>
             <div
               id="background"

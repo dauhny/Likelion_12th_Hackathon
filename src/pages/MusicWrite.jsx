@@ -1,6 +1,6 @@
 import React from "react";
 import * as W from "../styles/styledMusicWrite";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useRef } from "react";
 
@@ -10,13 +10,17 @@ export function MusicWrite() {
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
   };
 
   const goMusicCommunity = () => {
-    navigate(`/musiccommunity`);
+    navigate(`/musiccommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -39,7 +43,7 @@ export function MusicWrite() {
       }
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/musics/",
+        `http://127.0.0.1:8000/datas/${id}/musics/`,
         formData,
         {
           headers: {

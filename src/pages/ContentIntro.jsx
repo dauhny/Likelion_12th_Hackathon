@@ -38,7 +38,7 @@ export function ContentIntro() {
         setData(fetchedData.id);
         setScrapCount(fetchedData.scrapCount);
         setIsScrapped(response.data.isScrapped);
-        console.log("스크랩 여부", isScrapped);
+
         setScrapBtn(
           fetchedData.isScrapped
             ? "/images/ScrapBtnOn.svg"
@@ -182,8 +182,8 @@ export function ContentIntro() {
     navigate(-1);
   };
 
-  const goMusicCommunity = () => {
-    navigate(`/musiccommunity`);
+  const goMusicCommunity = (id) => {
+    navigate(`/musiccommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -269,7 +269,7 @@ export function ContentIntro() {
           <C.InfoText style={{ margin: "80px 0 5px 20px" }}>
             이 전시와 함께하면 좋은 콘텐츠를 확인해보세요.
           </C.InfoText>
-          <C.goRecBtn onClick={goMusicCommunity} />
+          <C.goRecBtn onClick={() => goMusicCommunity(id)} />
           <C.PurpleBlur />
           <C.CommentIcon>
             <img src="/images/CommentIcon.svg" />

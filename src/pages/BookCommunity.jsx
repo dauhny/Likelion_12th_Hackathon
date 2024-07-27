@@ -6,10 +6,15 @@ import axios from "axios";
 
 export function BookCommunity() {
   const navigate = useNavigate();
+
   const [content, setContent] = useState([]);
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 5; // 페이지당 항목 수
   const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +27,12 @@ export function BookCommunity() {
           return;
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/books/`, {
-          headers: { Authorization: `Token ${token}` },
-        });
+        const response = await axios.get(
+          `http://127.0.0.1:8000/datas/${id}/books`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
 
         const allData = response.data;
         setContent(response.data);
@@ -83,22 +91,22 @@ export function BookCommunity() {
   //하단바 끝
 
   const goMusicCommunity = () => {
-    navigate(`/musiccommunity`);
+    navigate(`/musiccommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
   const goBookCommunity = () => {
-    navigate(`/bookcommunity`);
+    navigate(`/bookcommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
-  const goBookDetail = (id) => {
-    navigate(`/bookdetail?id=${id}`);
+  const goBookDetail = (bookId) => {
+    navigate(`/bookdetail?community_id=${id}&book_id=${bookId}`);
     window.scrollTo(0, 0);
   };
 
   const goBookWrite = () => {
-    navigate(`/bookwrite`);
+    navigate(`/bookwrite?id=${id}`);
     window.scrollTo(0, 0);
   };
 

@@ -16,10 +16,14 @@ export function ReviewDetail() {
   const [createdAt, setCreatedAt] = useState("");
   const [viewAt, setViewAt] = useState("");
 
-  const [likeCount, setLikeCount] = useState("");
   const [profile, setProfile] = useState("");
   const [content, setContent] = useState("");
   const [username, setUserName] = useState("");
+
+  const [likeBtn, setLikeBtn] = useState("/images/LikeBtn.svg");
+  const [likeCount, setLikeCount] = useState(0);
+  const [data, setData] = useState();
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,6 +87,73 @@ export function ReviewDetail() {
 
   //하단바 끝
 
+  //좋아요 버튼
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/posts/${id}`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const fetchedData = response.data;
+        setContent(fetchedData.content); // 여기서 fetchedData.content로 수정
+        setData(fetchedData.id);
+        setLikeCount(fetchedData.likeCount);
+        setIsLiked(fetchedData.isLiked); // fetchedData.isLiked로 수정
+        setLikeBtn(
+          fetchedData.isLiked ? "/images/LikeBtnOn.svg" : "/images/LikeBtn.svg"
+        );
+      } catch (error) {
+        console.error("좋아요 실패 :", error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  //좋아요
+  const handleLike = async (event) => {
+    event.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const url = isLiked
+        ? `http://127.0.0.1:8000/likes/${id}/delete/`
+        : `http://127.0.0.1:8000/likes/${id}/`;
+
+      const method = isLiked ? "delete" : "post";
+
+      const response = await axios({
+        method,
+        url,
+        headers: { Authorization: `Token ${token}` },
+      });
+
+      console.log("좋아요 성공:", response.data);
+      setIsLiked((prev) => !prev);
+      setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+      setLikeBtn(isLiked ? "/images/LikeBtn.svg" : "/images/LikeBtnOn.svg");
+
+      alert(isLiked ? "좋아요가 취소되었습니다." : "좋아요를 남겼습니다.");
+    } catch (error) {
+      console.error("스크랩 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
   return (
     <>
       <RD.Container>
@@ -99,8 +170,13 @@ export function ReviewDetail() {
               <RD.date>
                 <div id="text">{viewAt}</div>
               </RD.date>
-              <RD.like>
-                <img src="/images/LikeIcon.svg" alt="scrap"></img>
+              <RD.like onClick={handleLike}>
+                <img
+                  src={
+                    isLiked ? "/images/LikeBtnOn.svg" : "/images/LikeBtn.svg"
+                  }
+                  alt="like"
+                ></img>
                 <div id="count">{likeCount}</div>
               </RD.like>
               <RD.PinkBlur></RD.PinkBlur>

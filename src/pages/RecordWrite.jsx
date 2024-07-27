@@ -1,16 +1,52 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as RW from "../styles/styledRecordWrite";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useState, useRef } from "react";
 
 export function RecordWrite() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [viewAt, setViewAt] = useState("");
+  const [imgFile, setImgFile] = useState("");
+  const imgRef = useRef();
 
-  //기록글 생성
+  // Fetch existing data if id is present
+  useEffect(() => {
+    if (id) {
+      const fetchData = async () => {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            alert("로그인 후 이용하세요.");
+            return;
+          }
+
+          const response = await axios.get(
+            `http://127.0.0.1:8000/posts/${id}/`,
+            {
+              headers: { Authorization: `Token ${token}` },
+            }
+          );
+
+          setTitle(response.data.title);
+          setContent(response.data.content);
+          setViewAt(response.data.viewAt);
+          setImgFile(response.data.img); // Assuming the API returns an image URL
+        } catch (error) {
+          console.error("기록글 조회 실패:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [id]);
+
   const handlePost = async (event) => {
     event.preventDefault();
     try {
@@ -29,38 +65,41 @@ export function RecordWrite() {
         formData.append("img", imgRef.current.files[0]);
       }
 
-      const response = await axios.post(
-        "http://127.0.0.1:8000/posts/",
-        formData,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("기록글 생성 성공:", response.data);
-      goReviewCommunity();
+      if (id) {
+        const response = await axios.patch(
+          `http://127.0.0.1:8000/posts/${id}/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("기록글 수정 성공:", response.data);
+      } else {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/posts/",
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("기록글 생성 성공:", response.data);
+      }
+
+      goRecord();
     } catch (error) {
-      console.error("기록글 생성 실패:", error);
+      console.error("기록글 처리 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
     }
   };
-  const goBack = () => {
-    navigate(-1);
-    window.scrollTo(0, 0);
-  };
 
-  const goReviewCommunity = () => {
-    navigate(`/reviewcommunity`);
-  };
-
-  const [imgFile, setImgFile] = useState("");
-  const imgRef = useRef();
-
-  // 이미지 업로드 input의 onChange
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
@@ -70,7 +109,10 @@ export function RecordWrite() {
     };
   };
 
-  //하단바
+  const goBack = () => {
+    navigate(-1);
+    window.scrollTo(0, 0);
+  };
 
   const goSearch = () => {
     navigate(`/search`);
@@ -97,16 +139,14 @@ export function RecordWrite() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
   return (
     <>
       <RW.Container>
         <RW.BackBtn onClick={goBack}></RW.BackBtn>
         <RW.Item>
-          <RW.IntroText>기록하기</RW.IntroText>
+          <RW.IntroText>{id ? "기록 수정하기" : "기록하기"}</RW.IntroText>
           <RW.record onClick={handlePost}>
-            <div id="text">공유하기</div>
+            <div id="text">{id ? "수정하기" : "공유하기"}</div>
           </RW.record>
           <RW.PostImgLabel htmlFor="profileImg">
             <img src="/images/Image.svg" />
@@ -138,26 +178,13 @@ export function RecordWrite() {
             onChange={(e) => setContent(e.target.value)}
           />
           <RW.PinkBlur2></RW.PinkBlur2>
-          {/*하단바*/}
           <RW.NavBar>
-            {/*검색*/}
             <RW.NavBtnContainer>
-              <RW.NavIcon
-                style={{
-                  marginLeft: "25px",
-                }}
-              >
+              <RW.NavIcon style={{ marginLeft: "25px" }}>
                 <img src="/images/SearchIcon.svg" onClick={goSearch} />
               </RW.NavIcon>
-              <RW.NavText
-                style={{
-                  marginLeft: "28px",
-                }}
-              >
-                검색
-              </RW.NavText>
+              <RW.NavText style={{ marginLeft: "28px" }}>검색</RW.NavText>
             </RW.NavBtnContainer>
-            {/*AI 심리 분석*/}
             <RW.NavBtnContainer>
               <RW.NavIcon>
                 <img src="/images/AIIcon.svg" onClick={goAI} />
@@ -170,9 +197,8 @@ export function RecordWrite() {
                 }}
               >
                 AI 심리 분석
-              </RW.NavText>{" "}
+              </RW.NavText>
             </RW.NavBtnContainer>
-            {/*홈*/}
             <RW.NavBtnContainer>
               <RW.NavIcon
                 style={{
@@ -184,42 +210,21 @@ export function RecordWrite() {
                 <img src="/images/HomeIcon.svg" onClick={goHome} />
               </RW.NavIcon>
             </RW.NavBtnContainer>
-            {/*내 기록*/}
             <RW.NavBtnContainer>
-              <RW.NavIcon
-                style={{
-                  marginLeft: "63px",
-                  color: "#A259FF",
-                }}
-              >
+              <RW.NavIcon style={{ marginLeft: "63px", color: "#A259FF" }}>
                 <img src="/images/RecordIcon.svg" onClick={goRecord} />
               </RW.NavIcon>
-              <RW.NavText
-                style={{
-                  marginLeft: "60px",
-                  color: "#A259FF",
-                }}
-              >
+              <RW.NavText style={{ marginLeft: "60px", color: "#A259FF" }}>
                 내 기록
               </RW.NavText>
             </RW.NavBtnContainer>
-            {/*마이페이지*/}
             <RW.NavBtnContainer>
-              <RW.NavIcon
-                style={{
-                  marginLeft: "45px",
-                }}
-              >
-                <img
-                  src="/images/MyPageIcon.svg"
-                  onClick={goMyPage}
-                  style={{}}
-                />
+              <RW.NavIcon style={{ marginLeft: "45px" }}>
+                <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
               </RW.NavIcon>
-              <RW.NavText style={{}}>마이페이지</RW.NavText>
+              <RW.NavText>마이페이지</RW.NavText>
             </RW.NavBtnContainer>
           </RW.NavBar>
-          {/*하단바*/}
         </RW.Item>
       </RW.Container>
     </>

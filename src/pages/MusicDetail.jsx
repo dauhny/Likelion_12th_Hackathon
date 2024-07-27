@@ -9,7 +9,8 @@ export function MusicDetail() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const id = queryParams.get("id");
+  const communityId = queryParams.get("community_id");
+  const musicId = queryParams.get("music_id");
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -31,9 +32,12 @@ export function MusicDetail() {
           return;
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/musics/${id}`, {
-          headers: { Authorization: `Token ${token}` },
-        });
+        const response = await axios.get(
+          `http://127.0.0.1:8000/datas/${communityId}/musics/${musicId}/`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
         setTitle(response.data.title);
         setNickName(response.data.nickname);
         setContent(response.data.content);
@@ -46,7 +50,7 @@ export function MusicDetail() {
       }
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
-  }, [id]);
+  }, [communityId, musicId]);
 
   const goBack = () => {
     navigate(-1);

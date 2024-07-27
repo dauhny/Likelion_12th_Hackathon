@@ -144,15 +144,12 @@ export function Mypage() {
           </MP.scrap>
           {content.map((e) => (
             <MP.ScrapContainer key={e.id}>
-              <MP.ImgBox onClick={goContentIntro}>
+              <MP.ImgBox onClick={() => goContentIntro(e.data)}>
                 <img src={e.image} alt="ExhibitPoster"></img>
               </MP.ImgBox>
-              <MP.ExhibitionIntroduce onClick={goContentIntro}>
+              <MP.ExhibitionIntroduce onClick={() => goContentIntro(e.data)}>
                 <div id="Title">{e.title}</div>
                 <div id="Date">{e.period}</div>
-                <MP.Trash id="remove">
-                  <img src="/images/Trash.svg" alt="remove"></img>
-                </MP.Trash>{" "}
               </MP.ExhibitionIntroduce>
             </MP.ScrapContainer>
           ))}

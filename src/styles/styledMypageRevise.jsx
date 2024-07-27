@@ -34,6 +34,18 @@ export const BackBtn = styled.button`
   margin-top: 10px;
 `;
 
+//페이지 제목
+export const PageTitle = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
+`;
+
 //하단바 시작
 
 export const NavBar = styled.div`

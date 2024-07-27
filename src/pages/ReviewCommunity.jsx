@@ -164,13 +164,16 @@ export function ReviewCommunity() {
                   src={`http://127.0.0.1:8000${e.profile}`}
                   alt="profile"
                 ></img>
-                <div id="name">{e.username}</div>
+                <div id="name">{e.nickname}</div>
                 <div id="time">{e.createdAt}</div>
                 <div id="line"></div>
               </RC.profileContainer>
               <RC.contentContainer onClick={() => goReviewDetail(e.id)}>
                 <div id="title">{e.title}</div>
                 <div id="content">{e.content}</div>
+                <RC.ReviewImg>
+                  <img src={e.img} alt="Review Image" />
+                </RC.ReviewImg>
                 <img src="/images/LikeIcon.svg" alt="like"></img>
                 <div id="count">{e.likeCount}</div>
               </RC.contentContainer>

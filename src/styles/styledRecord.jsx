@@ -81,16 +81,17 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 나의 기록 텍스트
-export const IntroText = styled.div`
+//페이지 제목
+export const PageTitle = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 116px;
-  margin-top: -26px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
+  }
 `;
 
 // 기록하기 버튼
@@ -104,13 +105,14 @@ export const record = styled.button`
   border: 2px solid #9747ff;
   margin-top: 50px;
   margin-left: 248px;
+
   #text {
     width: 66.661px;
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px; /* 240% */
     margin-left: -5px;
   }
@@ -123,8 +125,10 @@ export const ImgBox = styled.div`
   flex-shrink: 0;
   border-radius: 10px;
   background: #281d36;
-  margin-top: 30px;
+  margin-top: 15px;
   margin-left: -24px;
+  cursor: pointer;
+
   img {
     width: 61px;
     height: 61px;
@@ -134,7 +138,7 @@ export const ImgBox = styled.div`
   }
 `;
 
-// 전시 설명
+// 기록 박스
 export const ExhibitionIntroduce = styled.div`
   width: 256px;
   height: 81px;
@@ -149,7 +153,7 @@ export const ExhibitionIntroduce = styled.div`
     font-family: "Pretendard Variable";
     font-size: 13px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 160.5%; /* 20.865px */
     margin-left: 18px;
     margin-top: 20px;
@@ -160,7 +164,7 @@ export const ExhibitionIntroduce = styled.div`
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 160.5%; /* 16.05px */
     margin-left: 18px;
     margin-top: 41px;
@@ -192,4 +196,8 @@ export const PinkBlur = styled.div`
   z-index: -3;
   margin-top: 330px;
   margin-left: -30px;
+`;
+
+export const ReviewContainer = styled.div`
+  cursor: pointer;
 `;

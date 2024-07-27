@@ -1,6 +1,6 @@
 import React from "react";
 import * as W from "../styles/styledBookWrite";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useRef } from "react";
 
@@ -10,13 +10,17 @@ export function BookWrite() {
   const [author, setAuthor] = useState(""); // 추가된 부분
   const [content, setContent] = useState("");
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
   };
 
   const goBookCommunity = () => {
-    navigate(`/bookcommunity`);
+    navigate(`/bookcommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -39,7 +43,7 @@ export function BookWrite() {
       }
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/books/",
+        `http://127.0.0.1:8000/datas/${id}/books/`,
         formData,
         {
           headers: {

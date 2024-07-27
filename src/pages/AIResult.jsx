@@ -77,25 +77,26 @@ export function AIResult() {
               data={[
                 {
                   value: 49,
-                  fill: "linear-gradient(180deg, #6F4F98 0%, #251A32 100%)",
-                  name: "name1",
+                  color: "#261042",
+                  name: "분노",
                 },
+
                 {
                   value: 24,
-                  color: "#9D7DC7",
-                  name: "name2",
+                  color: "#512984",
+                  name: "불안",
                 },
 
                 {
                   value: 15,
-                  color: "#C9ADED",
-                  name: "name3",
+                  color: "#8241D8",
+                  name: "슬픔",
                 },
 
                 {
                   value: 12,
-                  color: "#fff",
-                  name: "name4",
+                  color: "#DBBEFC",
+                  name: "행복",
                 },
               ]}
               reveal={100}

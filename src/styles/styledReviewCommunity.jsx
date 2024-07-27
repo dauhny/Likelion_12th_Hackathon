@@ -226,8 +226,8 @@ export const contentContainer = styled.div`
     height: 16px;
     flex-shrink: 0;
     position: absolute;
-    margin-left: 163px;
-    margin-top: -44px;
+    margin-left: 154px;
+    margin-top: -73px;
   }
 
   #count {
@@ -238,8 +238,8 @@ export const contentContainer = styled.div`
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-left: 183px;
-    margin-top: -47px;
+    margin-left: 175px;
+    margin-top: -75px;
   }
 `;
 
@@ -296,5 +296,16 @@ export const PaginationContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0px 5px;
+  }
+`;
+
+export const ReviewImg = styled.div`
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    position: absolute;
+    margin-left: 150px;
+    margin-top: -45px;
   }
 `;

@@ -167,24 +167,26 @@ export const date = styled.div`
 export const like = styled.div`
   display: flex;
   flex-direction: row;
+  cursor: pointer;
+
   img {
-    width: 17px;
-    height: 16px;
+    width: 76px;
+    height: 24px;
     flex-shrink: 0;
     position: absolute;
-    margin-top: 7px;
-    margin-left: 195px;
+    margin-top: 4px;
+    margin-left: 157px;
   }
 
   #count {
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 12px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-top: 4px;
+    margin-top: 4.5px;
     margin-left: 215px;
   }
 `;
@@ -245,6 +247,7 @@ export const contentContainer = styled.div`
     margin-left: 23px;
     margin-top: 19px;
     width: 300px;
+    -webkit-line-clamp: 2;
   }
 `;
 

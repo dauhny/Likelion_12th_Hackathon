@@ -1,15 +1,20 @@
 import React from "react";
 import * as M from "../styles/styledMusicCommunity";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export function MusicCommunity() {
   const navigate = useNavigate();
+
   const [content, setContent] = useState([]);
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 5; // 페이지당 항목 수
   const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +27,12 @@ export function MusicCommunity() {
           return;
         }
 
-        const response = await axios.get(`http://127.0.0.1:8000/musics/`, {
-          headers: { Authorization: `Token ${token}` },
-        });
+        const response = await axios.get(
+          `http://127.0.0.1:8000/datas/${id}/musics`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
 
         const allData = response.data;
         setContent(response.data);
@@ -38,7 +46,7 @@ export function MusicCommunity() {
         setContent(paginatedData); //현재 페이지 데이터 설정
         setTotalItems(totalItems); //총 데이터 개수 설정
       } catch (error) {
-        console.error("후기글 조회 실패 :", error);
+        console.error("음악 추천글 조회 실패 :", error);
       }
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
@@ -83,22 +91,22 @@ export function MusicCommunity() {
   //하단바 끝
 
   const goBookCommunity = () => {
-    navigate(`/bookcommunity`);
+    navigate(`/bookcommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
   const goMusicCommunity = () => {
-    navigate(`/musiccommunity`);
+    navigate(`/musiccommunity?id=${id}`);
     window.scrollTo(0, 0);
   };
 
-  const goMusicDetail = (id) => {
-    navigate(`/musicdetail?id=${id}`);
+  const goMusicDetail = (musicId) => {
+    navigate(`/musicdetail?community_id=${id}&music_id=${musicId}`);
     window.scrollTo(0, 0);
   };
 
   const goMusicWrite = () => {
-    navigate(`/musicwrite`);
+    navigate(`/musicwrite?id=${id}`);
     window.scrollTo(0, 0);
   };
 
