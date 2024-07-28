@@ -47,8 +47,6 @@ export function Login() {
       console.error("로그인 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
-      } else {
-        setErrorMessage("로그인에 실패했습니다. 네트워크를 확인해주세요.");
       }
     }
   };

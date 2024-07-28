@@ -24,6 +24,10 @@ import { RecordWrite } from "./pages/RecordWrite";
 import { MyRecordDetail } from "./pages/MyRecordDetail";
 import { ReviewCommunity } from "./pages/ReviewCommunity";
 import { ReviewDetail } from "./pages/ReviewDetail";
+import { IntroduceApp } from "./pages/IntroduceApp";
+import { IntroduceContent } from "./pages/IntroduceContent";
+import { IntroduceAI } from "./pages/IntroduceAI";
+import { IntroduceCommunity } from "./pages/IntroduceCommunity";
 
 function App() {
   return (
@@ -54,6 +58,10 @@ function App() {
         <Route path="/myrecorddetail" element={<MyRecordDetail />} />
         <Route path="/reviewcommunity" element={<ReviewCommunity />} />
         <Route path="/reviewdetail" element={<ReviewDetail />} />
+        <Route path="/introduceapp" element={<IntroduceApp />} />
+        <Route path="/introducecontent" element={<IntroduceContent />} />
+        <Route path="/introduceai" element={<IntroduceAI />} />
+        <Route path="/introducecommunity" element={<IntroduceCommunity />} />
       </Routes>
     </BrowserRouter>
   );
