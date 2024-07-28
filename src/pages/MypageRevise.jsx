@@ -65,6 +65,54 @@ export function MypageRevise() {
     window.scrollTo(0, 0);
   };
 
+  //회원정보 수정 기능
+  const handleSaveChanges = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const usercode = localStorage.getItem("usercode");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("nickname", nickname);
+      formData.append("phone", phone);
+      if (imgRef.current && imgRef.current.files[0]) {
+        formData.append("profile", imgRef.current.files[0]);
+      }
+
+      // 디버깅을 위한 로그
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      await axios.patch(
+        `http://127.0.0.1:8000/user/${usercode}/update/`,
+        formData,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      alert("변경사항이 저장되었습니다.");
+      goMyPage();
+    } catch (error) {
+      if (error.response) {
+        // 서버에서 반환한 오류 메시지
+        console.error("서버 응답 오류:", error.response.data);
+        alert(`서버 오류: ${JSON.stringify(error.response.data)}`);
+      } else {
+        console.error("회원정보 수정 실패 :", error);
+        alert("회원정보 수정 실패. 서버 로그를 확인하세요.");
+      }
+    }
+  };
+
   //하단바
   const goSearch = () => {
     navigate(`/search`);
@@ -190,13 +238,19 @@ export function MypageRevise() {
             <MPR.NickName
               type="text"
               placeholder="닉네임을 입력하세요."
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
             ></MPR.NickName>
             <MPR.InputLabel>휴대번호</MPR.InputLabel>
             <MPR.PhoneNumber
               type="tel"
               placeholder="전화번호를 입력하세요."
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             ></MPR.PhoneNumber>
-            <MPR.Complete onClick={goMyPage}>변경사항 저장하기</MPR.Complete>
+            <MPR.Complete onClick={handleSaveChanges}>
+              변경사항 저장하기
+            </MPR.Complete>
           </MPR.InputContainer>
 
           {/*하단바*/}

@@ -101,6 +101,7 @@ export const profile = styled.div`
     flex-shrink: 0;
     margin-left: 116px;
     margin-top: 8px;
+    border-radius: 30px;
   }
 `;
 

@@ -1,15 +1,13 @@
-import React from "react";
-import * as M from "../styles/styledMusicDetail";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import * as M from "../styles/styledMusicDetail";
 
 export function MusicDetail() {
   const navigate = useNavigate();
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const communityId = queryParams.get("community_id");
+  const id = queryParams.get("id");
   const musicId = queryParams.get("music_id");
 
   const [title, setTitle] = useState("");
@@ -33,7 +31,7 @@ export function MusicDetail() {
         }
 
         const response = await axios.get(
-          `http://127.0.0.1:8000/datas/${communityId}/musics/${musicId}/`,
+          `http://127.0.0.1:8000/datas/${id}/musics/${musicId}/`,
           {
             headers: { Authorization: `Token ${token}` },
           }
@@ -50,7 +48,7 @@ export function MusicDetail() {
       }
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
-  }, [communityId, musicId]);
+  }, [id, musicId]);
 
   const goBack = () => {
     navigate(-1);
@@ -85,6 +83,45 @@ export function MusicDetail() {
 
   //하단바 끝
 
+  const goMusicCommunity = () => {
+    navigate(`/musiccommunity?id=${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  //삭제 버튼
+  const deletePost = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      await axios.delete(
+        `http://127.0.0.1:8000/datas/${id}/musics/${musicId}`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      );
+
+      alert("게시글이 삭제되었습니다.");
+      goMusicCommunity();
+      window.scrollTo(0, 0);
+    } catch (error) {
+      alert("자신의 게시글만 삭제할 수 있습니다.");
+      console.error("삭제 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
+  //수정 페이지로 이동
+  const modifyPost = () => {
+    navigate(`/musicwrite?id=${id}&music_id=${musicId}`);
+  };
+
   return (
     <>
       <M.Container>
@@ -94,6 +131,12 @@ export function MusicDetail() {
         </M.ProfileImgBlack>
         <M.InfoText>{nickname}</M.InfoText>
         <M.PostDate>{createdAt}</M.PostDate>
+        <M.modify onClick={modifyPost}>
+          <div id="text">수정</div>
+        </M.modify>
+        <M.remove onClick={deletePost}>
+          <div id="text">삭제</div>
+        </M.remove>
         <M.AlbumCover>
           <img src={image} alt="Music Image" />
         </M.AlbumCover>

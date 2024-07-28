@@ -136,3 +136,45 @@ export const UserText = styled.div`
   padding-right: 15%;
   text-align: justify;
 `;
+
+export const modify = styled.div`
+  width: 43px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ddc4fb;
+  margin-left: 38%;
+  cursor: pointer;
+
+  #text {
+    color: #3d3a3a;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 16.05px */
+    margin-left: 11px;
+  }
+`;
+
+export const remove = styled.div`
+  width: 43px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ddc4fb;
+  margin-left: 51%;
+  cursor: pointer;
+  margin-top: -5.7%;
+
+  #text {
+    color: #3d3a3a;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 16.05px */
+    margin-left: 11px;
+    margin-top: 2px;
+  }
+`;

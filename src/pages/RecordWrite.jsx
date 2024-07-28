@@ -15,7 +15,6 @@ export function RecordWrite() {
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
 
-  // Fetch existing data if id is present
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
@@ -37,7 +36,7 @@ export function RecordWrite() {
           setTitle(response.data.title);
           setContent(response.data.content);
           setViewAt(response.data.viewAt);
-          setImgFile(response.data.img); // Assuming the API returns an image URL
+          setImgFile(response.data.img);
         } catch (error) {
           console.error("기록글 조회 실패:", error);
         }

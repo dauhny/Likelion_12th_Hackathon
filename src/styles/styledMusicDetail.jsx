@@ -78,9 +78,10 @@ export const ProfileImgBlack = styled.div`
   img {
     width: 50px;
     height: 50px;
-    margin-left: 41%;
+    margin-left: 44%;
     margin-top: 5%;
     border-radius: 30px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -95,7 +96,7 @@ export const InfoText = styled.div`
   line-height: 24px;
   text-align: center;
   overflow: hidden;
-  margin-left: -16%;
+  margin-left: -14%;
 `;
 
 export const PostDate = styled.div`
@@ -107,7 +108,8 @@ export const PostDate = styled.div`
   line-height: 24px; /* 200% */
   text-align: center;
   margin-top: -25px;
-  margin-left: -4%;
+  margin-left: 1%;
+  margin-bottom: 10px;
 `;
 
 export const AlbumCover = styled.div`
@@ -155,4 +157,46 @@ export const UserText = styled.div`
   padding-left: 15%;
   padding-right: 15%;
   text-align: justify;
+`;
+
+export const modify = styled.div`
+  width: 43px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ddc4fb;
+  margin-left: 38%;
+  cursor: pointer;
+
+  #text {
+    color: #3d3a3a;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 16.05px */
+    margin-left: 11px;
+  }
+`;
+
+export const remove = styled.div`
+  width: 43px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #ddc4fb;
+  margin-left: 51%;
+  cursor: pointer;
+  margin-top: -5.7%;
+
+  #text {
+    color: #3d3a3a;
+    font-family: "Pretendard Variable";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 16.05px */
+    margin-left: 11px;
+    margin-top: 2px;
+  }
 `;

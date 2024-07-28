@@ -101,7 +101,7 @@ export function BookCommunity() {
   };
 
   const goBookDetail = (bookId) => {
-    navigate(`/bookdetail?community_id=${id}&book_id=${bookId}`);
+    navigate(`/bookdetail?id=${id}&book_id=${bookId}`);
     window.scrollTo(0, 0);
   };
 

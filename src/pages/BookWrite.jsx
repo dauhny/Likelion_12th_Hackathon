@@ -2,7 +2,7 @@ import React from "react";
 import * as W from "../styles/styledBookWrite";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export function BookWrite() {
   const navigate = useNavigate();
@@ -13,14 +13,55 @@ export function BookWrite() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const bookId = queryParams.get("book_id");
+
+  const goBookCommunity = () => {
+    navigate(`/bookcommunity?id=${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const [imgFile, setImgFile] = useState("");
+  const imgRef = useRef();
+
+  // 기존 데이터 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      if (bookId) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            alert("로그인 후 이용하세요.");
+            return;
+          }
+
+          const response = await axios.get(
+            `http://127.0.0.1:8000/datas/${id}/books/${bookId}/`,
+            {
+              headers: { Authorization: `Token ${token}` },
+            }
+          );
+
+          setTitle(response.data.title);
+          setAuthor(response.data.author);
+          setContent(response.data.content);
+          setImgFile(response.data.image);
+        } catch (error) {
+          console.error("기존 데이터 불러오기 실패:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [id, bookId]);
 
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
   };
 
-  const goBookCommunity = () => {
-    navigate(`/bookcommunity?id=${id}`);
+  const goMusicDetail = (bookId) => {
+    navigate(`/bookdetail?id=${id}&id=${bookId}`);
     window.scrollTo(0, 0);
   };
 
@@ -36,37 +77,49 @@ export function BookWrite() {
 
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("author", author); // 추가된 부분
+      formData.append("author", author);
       formData.append("content", content);
       if (imgRef.current.files[0]) {
         formData.append("image", imgRef.current.files[0]);
       }
 
-      const response = await axios.post(
-        `http://127.0.0.1:8000/datas/${id}/books/`,
-        formData,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      let response;
 
-      console.log("후기글 생성 성공:", response.data);
-      goBookCommunity();
+      if (bookId) {
+        response = await axios.patch(
+          `http://127.0.0.1:8000/datas/${id}/books/${bookId}/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("음악 추천글 수정 성공:", response.data);
+        goMusicDetail(bookId);
+      } else {
+        response = await axios.post(
+          `http://127.0.0.1:8000/datas/${id}/books/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("음악 추천글 생성 성공:", response.data);
+        goBookCommunity();
+      }
     } catch (error) {
-      console.error("후기글 생성 실패:", error);
+      console.error("음악 추천글 생성 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
     }
   };
 
-  const [imgFile, setImgFile] = useState("");
-  const imgRef = useRef();
-
-  // 이미지 업로드 input의 onChange
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();

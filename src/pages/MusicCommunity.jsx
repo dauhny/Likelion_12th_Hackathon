@@ -15,6 +15,7 @@ export function MusicCommunity() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const musicId = queryParams.get("music_id");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,7 +102,7 @@ export function MusicCommunity() {
   };
 
   const goMusicDetail = (musicId) => {
-    navigate(`/musicdetail?community_id=${id}&music_id=${musicId}`);
+    navigate(`/musicdetail?id=${id}&music_id=${musicId}`);
     window.scrollTo(0, 0);
   };
 

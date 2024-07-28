@@ -9,7 +9,7 @@ export function BookDetail() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const communityId = queryParams.get("community_id");
+  const id = queryParams.get("id");
   const bookId = queryParams.get("book_id");
 
   const [title, setTitle] = useState("");
@@ -33,7 +33,7 @@ export function BookDetail() {
         }
 
         const response = await axios.get(
-          `http://127.0.0.1:8000/datas/${communityId}/books/${bookId}/`,
+          `http://127.0.0.1:8000/datas/${id}/books/${bookId}/`,
           {
             headers: { Authorization: `Token ${token}` },
           }
@@ -50,7 +50,7 @@ export function BookDetail() {
       }
     };
     fetchData();
-  }, [communityId, bookId]);
+  }, [id, bookId]);
 
   const goBack = () => {
     navigate(-1);
@@ -85,6 +85,41 @@ export function BookDetail() {
 
   //하단바 끝
 
+  //삭제 버튼
+  const deletePost = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      await axios.delete(`http://127.0.0.1:8000/datas/${id}/books/${bookId}/`, {
+        headers: { Authorization: `Token ${token}` },
+      });
+
+      alert("도서 추천글이 삭제되었습니다.");
+      goBookCommunity();
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error("삭제 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
+  const goBookCommunity = () => {
+    navigate(`/bookcommunity?id=${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  //수정 페이지로 이동
+  const modifyPost = () => {
+    navigate(`/bookwrite?id=${id}&book_id=${bookId}`);
+  };
+
   return (
     <>
       <M.Container>
@@ -93,7 +128,13 @@ export function BookDetail() {
           <img src={`http://127.0.0.1:8000${profile}`} />
         </M.ProfileImgBlack>
         <M.InfoText>{nickname}</M.InfoText>
-        <M.PostDate>{createdAt}</M.PostDate>
+        <M.PostDate>{createdAt}</M.PostDate>{" "}
+        <M.modify onClick={modifyPost}>
+          <div id="text">수정</div>
+        </M.modify>
+        <M.remove onClick={deletePost}>
+          <div id="text">삭제</div>
+        </M.remove>
         <M.AlbumCover>
           <img src={image} alt="Music Image" />
         </M.AlbumCover>

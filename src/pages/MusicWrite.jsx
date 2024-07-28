@@ -1,18 +1,52 @@
-import React from "react";
-import * as W from "../styles/styledMusicWrite";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useState, useRef } from "react";
+import * as W from "../styles/styledMusicWrite";
 
 export function MusicWrite() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const musicId = queryParams.get("music_id");
+
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
+  const [imgFile, setImgFile] = useState("");
+  const imgRef = useRef();
+
+  // 기존 데이터 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      if (musicId) {
+        try {
+          const token = localStorage.getItem("token");
+
+          if (!token) {
+            alert("로그인 후 이용하세요.");
+            return;
+          }
+
+          const response = await axios.get(
+            `http://127.0.0.1:8000/datas/${id}/musics/${musicId}/`,
+            {
+              headers: { Authorization: `Token ${token}` },
+            }
+          );
+
+          setTitle(response.data.title);
+          setAuthor(response.data.author);
+          setContent(response.data.content);
+          setImgFile(response.data.image);
+        } catch (error) {
+          console.error("기존 데이터 불러오기 실패:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [id, musicId]);
 
   const goBack = () => {
     navigate(-1);
@@ -21,6 +55,11 @@ export function MusicWrite() {
 
   const goMusicCommunity = () => {
     navigate(`/musiccommunity?id=${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const goMusicDetail = (musicId) => {
+    navigate(`/musicdetail?id=${id}&music_id=${musicId}`);
     window.scrollTo(0, 0);
   };
 
@@ -42,19 +81,35 @@ export function MusicWrite() {
         formData.append("image", imgRef.current.files[0]);
       }
 
-      const response = await axios.post(
-        `http://127.0.0.1:8000/datas/${id}/musics/`,
-        formData,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      let response;
 
-      console.log("음악 추천글 생성 성공:", response.data);
-      goMusicCommunity();
+      if (musicId) {
+        response = await axios.patch(
+          `http://127.0.0.1:8000/datas/${id}/musics/${musicId}/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("음악 추천글 수정 성공:", response.data);
+        goMusicDetail(musicId);
+      } else {
+        response = await axios.post(
+          `http://127.0.0.1:8000/datas/${id}/musics/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("음악 추천글 생성 성공:", response.data);
+        goMusicCommunity();
+      }
     } catch (error) {
       console.error("음악 추천글 생성 실패:", error);
       if (error.response) {
@@ -63,10 +118,6 @@ export function MusicWrite() {
     }
   };
 
-  const [imgFile, setImgFile] = useState("");
-  const imgRef = useRef();
-
-  // 이미지 업로드 input의 onChange
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
