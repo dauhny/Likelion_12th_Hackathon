@@ -232,8 +232,6 @@ export function ContentIntro() {
     <>
       <C.Container>
         <C.BackBtn onClick={goBack}></C.BackBtn>
-        <C.PageTitle>전시 상세</C.PageTitle>
-
         <C.Item>
           {content.map((e) => (
             <C.ExhibitContainer key={e.id}>
@@ -266,9 +264,6 @@ export function ContentIntro() {
               </C.BtnContainer>
             </C.ExhibitContainer>
           ))}
-          <C.InfoText style={{ margin: "80px 0 5px 20px" }}>
-            이 전시와 함께하면 좋은 콘텐츠를 확인해보세요.
-          </C.InfoText>
           <C.goRecBtn onClick={() => goMusicCommunity(id)} />
           <C.PurpleBlur />
           <C.CommentIcon>

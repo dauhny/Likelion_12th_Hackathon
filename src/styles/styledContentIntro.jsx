@@ -21,18 +21,6 @@ export const Item = styled.div`
   z-index: 0;
 `;
 
-//페이지 제목
-export const PageTitle = styled.div`
-  color: #fff;
-  font-family: "Pretendard Variable";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: center;
-  margin-top: -23px;
-`;
-
 //뒤로가기 버튼
 export const BackBtn = styled.button`
   width: 11px;
@@ -45,6 +33,8 @@ export const BackBtn = styled.button`
   outline: none;
   margin-left: 10px;
   margin-top: 10px;
+  position: relative;
+  z-index: 999;
 `;
 
 //하단바 시작
@@ -97,9 +87,10 @@ export const NavText = styled.div`
 
 export const ExhibitPoster = styled.div`
   img {
-    width: 290px;
-    height: 360px;
+    width: 151px;
+    height: 188px;
     border-radius: 10px;
+    margin-left: -10px;
   }
 
   cursor: pointer;
@@ -108,14 +99,14 @@ export const ExhibitPoster = styled.div`
 export const ExhibitTitle = styled.div`
   color: #fff;
   font-family: "Pretendard Variable";
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 24px;
-  margin-top: 10%;
-  width: 290px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-top: -23px;
+  margin-left: -12%;
+  margin-bottom: 8%;
 `;
 
 export const ExhibitDetail = styled.div`
@@ -126,6 +117,8 @@ export const ExhibitDetail = styled.div`
   font-weight: 300;
   line-height: 24px;
   margin-bottom: 20px;
+  margin-left: 45%;
+  width: 166px;
 `;
 
 //고정
@@ -144,6 +137,7 @@ export const CalendarIcon = styled.div`
   width: 18px;
   height: 18px;
   margin-bottom: 15px;
+  margin-left: 45%;
 `;
 
 export const InfoText = styled.div`
@@ -153,14 +147,16 @@ export const InfoText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-top: -35px;
-  margin-left: 25px;
+  margin-top: -36px;
+  margin-left: 52%;
 `;
 
 export const LocationIcon = styled.div`
   width: 16px;
   height: 16px;
   flex-shrink: 0;
+  margin-top: -190px;
+  margin-left: 44%;
 `;
 
 export const LocationText = styled.div`
@@ -171,7 +167,7 @@ export const LocationText = styled.div`
   font-weight: 500;
   line-height: 24px;
   margin-top: -62px;
-  margin-left: 5%;
+  margin-left: 49%;
   margin-bottom: 30px;
 `;
 
@@ -185,8 +181,8 @@ export const ScrapBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 45%;
+  margin-top: -4px;
+  margin-left: 43%;
   h3 {
     color: #fff;
     font-family: "Pretendard Variable";
@@ -207,11 +203,12 @@ export const ShareBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: -4px;
+  margin-left: 7px;
 `;
 
 export const goRecBtn = styled.button`
+  margin-top: 70px;
   width: 290px;
   height: 41px;
   border: none;
