@@ -24,6 +24,8 @@ import { ReviewDetail } from "./pages/ReviewDetail";
 import { Record } from "./pages/Record";
 import { RecordWrite } from "./pages/RecordWrite";
 import { MyRecordDetail } from "./pages/MyRecordDetail";
+import { AIPast } from "./pages/AIPast";
+import { AIPastDetail } from "./pages/AIPastDetail";
 
 function App() {
   return (
@@ -55,6 +57,8 @@ function App() {
         <Route path="/record" element={<Record />} />
         <Route path="/recordwrite" element={<RecordWrite />} />
         <Route path="/myrecorddetail" element={<MyRecordDetail />} />
+        <Route path="/aipast" element={<AIPast />} />
+        <Route path="/aipastdetail" element={<AIPastDetail />} />
       </Routes>
     </BrowserRouter>
   );

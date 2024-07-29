@@ -153,17 +153,29 @@ export const Content = styled.div`
 
 // 소비자 감상평
 export const Consumer = styled.div`
-  width: 216px;
-  height: 180px;
+  width: 343px;
+  height: 228px;
   flex-shrink: 0;
   border-radius: 20px;
-  opacity: 0.8;
+  opacity: 0.7;
   background: linear-gradient(270deg, #eae3f2 40%, #f5f1f9 85%, #fff 100%);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-  margin-top: 32px;
-  margin-left: 110px;
-  #review {
-    width: 165px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
+  margin-top: 30px;
+  margin-left: -24px;
+
+  #profile {
+    width: 27.2px;
+    height: 29.616px;
+    flex-shrink: 0;
+    margin-left: 17px;
+    margin-top: 15px;
+    position: absolute;
+  }
+
+  #text {
+    width: 268px;
+    height: 258px;
+    flex-shrink: 0;
     color: #3d3a3a;
     font-family: "Pretendard Variable";
     font-size: 12px;
@@ -171,55 +183,36 @@ export const Consumer = styled.div`
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-left: 26px;
-    margin-top: 17px;
+    margin-left: 70px;
+    margin-top: 15px;
   }
 `;
 
-// AI 감정 분석 결과
-export const AIAnalysis = styled.div`
-  width: 315px;
-  height: 578px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  opacity: 0.8;
-  background: linear-gradient(
-    180deg,
-    #f5f1f9 15.26%,
-    #efe7f9 27.64%,
-    #e5d5fa 87%
-  );
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.14);
-  margin-top: 28px;
-  margin-left: -25px;
-  #text {
-    width: 112px;
-    height: 20px;
-    flex-shrink: 0;
-    color: #3d3a3a;
-    font-family: "Pretendard Variable";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px; /* 150% */
-    position: absolute;
-    margin-left: 50px;
-    margin-top: 19px;
-  }
+// 감정 분석 결과 텍스트
+export const Result = styled.div`
+  color: #3d3a3a;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin-top: 33px;
+  margin-left: 46px;
+`;
 
+export const Purple = styled.div`
   #purple1 {
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
     fill: linear-gradient(180deg, #6f4f98 0%, #251a32 100%);
     position: absolute;
     margin-left: 30px;
-    margin-top: 28px;
   }
 
-  #gray1 {
-    width: 173px;
-    height: 9px;
+  #gray {
+    width: 208.257px;
+    height: 16.862px;
     flex-shrink: 0;
     border-radius: 9.919px;
     background: #d9d9d9;
@@ -234,9 +227,11 @@ export const AIAnalysis = styled.div`
     padding-right: 5px;
     padding-bottom: 5px;
     margin-left: 70px;
-    margin-top: 30px;
+    margin-top: 60px;
   }
+`;
 
+export const Purple2 = styled.div`
   #purple2 {
     width: 15px;
     height: 15px;
@@ -244,12 +239,11 @@ export const AIAnalysis = styled.div`
     fill: linear-gradient(180deg, #6f4f98 0%, #251a32 100%);
     position: absolute;
     margin-left: 30px;
-    margin-top: 13px;
   }
 
-  #gray2 {
-    width: 173px;
-    height: 9px;
+  #gray {
+    width: 208.257px;
+    height: 16.862px;
     flex-shrink: 0;
     border-radius: 9.919px;
     background: #d9d9d9;
@@ -266,7 +260,9 @@ export const AIAnalysis = styled.div`
     margin-left: 70px;
     margin-top: 15px;
   }
+`;
 
+export const Purple3 = styled.div`
   #purple3 {
     width: 15px;
     height: 15px;
@@ -274,12 +270,11 @@ export const AIAnalysis = styled.div`
     fill: linear-gradient(180deg, #6f4f98 0%, #251a32 100%);
     position: absolute;
     margin-left: 30px;
-    margin-top: 13px;
   }
 
-  #gray3 {
-    width: 173px;
-    height: 9px;
+  #gray {
+    width: 208.257px;
+    height: 16.862px;
     flex-shrink: 0;
     border-radius: 9.919px;
     background: #d9d9d9;
@@ -296,7 +291,9 @@ export const AIAnalysis = styled.div`
     margin-left: 70px;
     margin-top: 15px;
   }
+`;
 
+export const Purple4 = styled.div`
   #purple4 {
     width: 15px;
     height: 15px;
@@ -304,12 +301,11 @@ export const AIAnalysis = styled.div`
     fill: linear-gradient(180deg, #6f4f98 0%, #251a32 100%);
     position: absolute;
     margin-left: 30px;
-    margin-top: 13px;
   }
 
-  #gray4 {
-    width: 173px;
-    height: 9px;
+  #gray {
+    width: 208.257px;
+    height: 16.862px;
     flex-shrink: 0;
     border-radius: 9.919px;
     background: #d9d9d9;
@@ -326,64 +322,18 @@ export const AIAnalysis = styled.div`
     margin-left: 70px;
     margin-top: 15px;
   }
-
-  #AItext {
-    width: 246px;
-    height: 190px;
-    flex-shrink: 0;
-    color: #3d3a3a;
-    font-family: "Pretendard Variable";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 200% */
-    position: absolute;
-    margin-left: 35px;
-    margin-top: 30px;
-  }
 `;
 
-// 지난 분석 다시 보기 버튼
-export const Replay = styled.button`
-  width: 176px;
-  height: 31px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background-color: #6f4f98;
-  border: 2px solid #6f4f98;
-  cursor: pointer;
-  margin-left: 56px;
-  margin-top: 30px;
-  #past {
-    width: 16.929px;
-    height: 14.091px;
-    flex-shrink: 0;
-    stroke-width: 2px;
-    stroke: #fff;
-    margin-top: -5px;
-    margin-left: 13px;
-  }
-  #text2 {
-    width: 130px;
-    height: 15px;
-    flex-shrink: 0;
-    color: #fff;
-    font-family: "Pretendard Variable";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 160.5%; /* 22.47px */
-    margin-left: 25px;
-    margin-top: -15px;
-  }
+//AI 심리분석 해설
+export const AItext = styled.div`
+  width: 303px;
+  color: #3d3a3a;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 200% */
+  margin-top: 35px;
 `;
 
-export const Loading = styled.div`
-  width: 390px;
-  height: 1096px;
-  background-image: url("/images/Loading.svg");
-  position: relative;
-  z-index: 999;
-  margin-left: -46.7px;
-  margin-top: -33px;
-`;
+export const RecordContainer = styled.div``;

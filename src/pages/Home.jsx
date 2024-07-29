@@ -209,7 +209,7 @@ export function Home() {
           <H.Item>
             <H.NewExhibit>
               {" "}
-              // <H.InfoTextPurple>New</H.InfoTextPurple>
+              <H.InfoTextPurple>New</H.InfoTextPurple>
               <SimpleSlider newContent={newcontent}></SimpleSlider>
             </H.NewExhibit>
             {/* <SimpleSlider></SimpleSlider> */}

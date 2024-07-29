@@ -1,20 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as A from "../styles/styledAIPast";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import axios from "axios";
 
 export function AIPast() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
+  const [data, setData] = useState([]); // 데이터 배열
+
+  const [page, setPage] = useState(1);
+  const itemsCountPerPage = 4;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(
+          `http://127.0.0.1:8000/analysis-results/`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+
+        setData(response.data || []);
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+
+    fetchData();
+  }, [page]);
 
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
   };
 
-  const goAIPastDetail = () => {
-    navigate(`/aipastdetail`);
+  const goAIPastDetail = (id) => {
+    navigate(`/aipastdetail?id=${id}`);
   };
-  //하단바
+
+  // 하단바
   const goSearch = () => {
     navigate(`/search`);
     window.scrollTo(0, 0);
@@ -40,63 +76,68 @@ export function AIPast() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
   return (
     <>
       <A.Container>
         <A.BackBtn onClick={goBack}></A.BackBtn>
+        <A.PageTitle>지난 분석</A.PageTitle>
         <A.Item>
-          <A.IntroText>지난 분석</A.IntroText>
-          <A.PurpleBox>
-            <div
-              id="purplebox"
-              style={{
-                width: "81px",
-                height: "96px",
-                borderRadius: "10px 0px 0px 10px",
-                background: "linear-gradient(180deg, #C0B0D5 0%, #9286A2 50%)",
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                marginTop: "35px",
-                marginLeft: "-25px",
-              }}
-            />
-            <A.GrayBox>
-              <div
-                id="graybox"
-                style={{
-                  width: "61px",
-                  height: "78px",
-                  borderRadius: "20px 5px 5px 5px",
-                  background:
-                    "linear-gradient(180deg, rgba(98, 98, 98, 0.55) 0%, rgba(200, 200, 200, 0.55) 100%)",
-                  boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.17)",
-                  marginTop: "-88px",
-                  marginLeft: "-11px",
-                }}
-              />
-              <div id="greencheck">
-                <img src="/images/GreenCheck.svg"></img>
-              </div>
-              <div id="text">분석 완료</div>
-              <A.ImgBox>
-                <img
-                  src="/images/ForeverismIntro.svg"
-                  alt="ExhibitPoster"
-                ></img>
-              </A.ImgBox>
-            </A.GrayBox>
-          </A.PurpleBox>
-          <A.ExhibitionIntroduce onClick={goAIPastDetail}>
-            <div id="Title">포에버리즘 : 우리를 세상의 끝으로 </div>
-            <div id="Date">
-              2024/07/25에 다녀온 포에버리즘 전시 기록에 대한 <br />
-              AI 분석을 마쳤어요. 회원님의 심리 상태를 알려드릴게요.
-            </div>
-          </A.ExhibitionIntroduce>
-          {/*하단바*/}
+          {data.map((item, index) => (
+            <A.RecordContainer key={index}>
+              <A.PurpleBox>
+                <div
+                  id="purplebox"
+                  style={{
+                    width: "81px",
+                    height: "96px",
+                    borderRadius: "10px 0px 0px 10px",
+                    background:
+                      "linear-gradient(180deg, #C0B0D5 0%, #9286A2 50%)",
+                    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                    marginTop: "35px",
+                    marginLeft: "-25px",
+                  }}
+                />
+                <A.GrayBox>
+                  <div
+                    id="graybox"
+                    style={{
+                      width: "61px",
+                      height: "78px",
+                      borderRadius: "20px 5px 5px 5px",
+                      background:
+                        "linear-gradient(180deg, rgba(98, 98, 98, 0.55) 0%, rgba(200, 200, 200, 0.55) 100%)",
+                      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.17)",
+                      marginTop: "-88px",
+                      marginLeft: "-11px",
+                    }}
+                  />
+                  <div id="greencheck">
+                    <img src="/images/GreenCheck.svg" alt="Green Check"></img>
+                  </div>
+                  <div id="text">분석 완료</div>
+                  <A.ImgBox>
+                    <img
+                      src={item.post.img || "/images/default-image.png"}
+                      alt="Review Image"
+                    ></img>
+                  </A.ImgBox>
+                </A.GrayBox>
+              </A.PurpleBox>
+              <A.ExhibitionIntroduce onClick={() => goAIPastDetail(item.id)}>
+                <div id="Title">{item.post.title}</div>
+                <div id="Date">
+                  {item.post.createdAt2}에 다녀온 {item.post.title} 전시 기록에
+                  대한 <br />
+                  AI 분석을 마쳤어요. 회원님의 심리 상태를 알려드릴게요.
+                </div>
+              </A.ExhibitionIntroduce>
+            </A.RecordContainer>
+          ))}
+
+          {/* 하단바 */}
           <A.NavBar>
-            {/*검색*/}
+            {/* 검색 */}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -113,7 +154,7 @@ export function AIPast() {
                 검색
               </A.NavText>
             </A.NavBtnContainer>
-            {/*AI 심리 분석*/}
+            {/* AI 심리 분석 */}
             <A.NavBtnContainer>
               <A.NavIcon>
                 <img src="/images/AIIcon.svg" onClick={goAI} />
@@ -129,7 +170,7 @@ export function AIPast() {
                 AI 심리 분석
               </A.NavText>{" "}
             </A.NavBtnContainer>
-            {/*홈*/}
+            {/* 홈 */}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -141,7 +182,7 @@ export function AIPast() {
                 <img src="/images/HomeIcon.svg" onClick={goHome} />
               </A.NavIcon>
             </A.NavBtnContainer>
-            {/*내 기록*/}
+            {/* 내 기록 */}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -158,7 +199,7 @@ export function AIPast() {
                 내 기록
               </A.NavText>
             </A.NavBtnContainer>
-            {/*마이페이지*/}
+            {/* 마이페이지 */}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -170,7 +211,6 @@ export function AIPast() {
               <A.NavText>마이페이지</A.NavText>
             </A.NavBtnContainer>
           </A.NavBar>
-          {/*하단바*/}
         </A.Item>
       </A.Container>
     </>

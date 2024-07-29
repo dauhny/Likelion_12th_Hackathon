@@ -3,9 +3,73 @@ import * as A from "../styles/styledAIResult";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
+import axios from "axios";
 
 export function AIResult() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
+  const [title, setTitle] = useState("");
+  const [img, setImg] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [viewAt, setViewAt] = useState("");
+  const [post, setPost] = useState({});
+  const [analysis, setAnalysis] = useState({
+    analysis: "",
+    happiness: 0,
+    sadness: 0,
+    anger: 0,
+    anxiety: 0,
+  });
+
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(
+          `http://127.0.0.1:8000/analyze-post/${id}/`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+
+        const { post, analysisResult } = response.data;
+
+        setPost({
+          title: post.title,
+          content: post.content,
+          createdAt: post.createdAt,
+          img: post.img,
+          viewAt: post.viewAt,
+        });
+
+        setAnalysis({
+          analysis: analysisResult.analysis,
+          happiness: analysisResult.happiness,
+          sadness: analysisResult.sadness,
+          anger: analysisResult.anger,
+          anxiety: analysisResult.anxiety,
+        });
+
+        setLoading(false); // 데이터 로딩 완료
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+        setLoading(false); // 로딩 상태를 해제하는 것도 고려
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const goBack = () => {
     navigate(-1);
@@ -15,6 +79,13 @@ export function AIResult() {
   const goAIPast = () => {
     navigate(`/aipast`);
   };
+
+  const pieChartData = [
+    { value: analysis.anger, color: "#261042", name: "분노" },
+    { value: analysis.anxiety, color: "#512984", name: "불안" },
+    { value: analysis.sadness, color: "#8241D8", name: "슬픔" },
+    { value: analysis.happiness, color: "#DBBEFC", name: "행복" },
+  ];
 
   //하단바
   const goSearch = () => {
@@ -45,232 +116,224 @@ export function AIResult() {
   //하단바 끝
 
   return (
-    <>
-      <A.Container>
-        <A.BackBtn onClick={goBack}></A.BackBtn>
-        <A.Item>
-          <A.IntroText>분석 결과</A.IntroText>
-          <A.Introduce></A.Introduce>
-          <A.Content>
-            <div id="Title">포에버리즘 : 우리를 세상의 끝으로</div>
-            <div id="Date">2024. 07. 25 관람</div>
-          </A.Content>
-          <A.Consumer>
-            <div id="review">
-              내용이 들어갑니다. <br />
-              전시를 보고난 후 <br />
-              나의 감상을 통해 <br />
-              감정을 분석해주는 기능 <br />
-              입니다.
-            </div>
-          </A.Consumer>
-          <A.AIAnalysis>
-            <div id="text">감정 분석 결과</div>
-            <PieChart
-              style={{
-                width: "160px",
-                height: "160px",
-                marginLeft: "80px",
-                marginTop: "70px",
-                borderRadius: "0px",
-              }}
-              data={[
-                {
-                  value: 49,
-                  color: "#261042",
-                  name: "분노",
-                },
-
-                {
-                  value: 24,
-                  color: "#512984",
-                  name: "불안",
-                },
-
-                {
-                  value: 15,
-                  color: "#8241D8",
-                  name: "슬픔",
-                },
-
-                {
-                  value: 12,
-                  color: "#DBBEFC",
-                  name: "행복",
-                },
-              ]}
-              reveal={100}
-              lineWidth={40}
-              background="#f3f3f3"
-              lengthAngle={360}
-              rounded
-              animate
-              label={({ dataEntry }) => "감정상태 분석"}
-              labelStyle={{
-                fontFamily: "Pretendard Variable",
-                fontWeight: "400",
-                fontSize: "6px",
-                fill: "#33333",
-              }}
-              labelPosition={0}
-            />
-            <div id="purple1">
-              <img src="/images/Purple1.svg"></img>
-            </div>
-            <div id="gray1">분노 49%</div>
-            <div
-              id="PercentPurple1"
-              style={{
-                width: "85px",
-                height: "14px",
-                borderRadius: "9.919px",
-                background: "linear-gradient(90deg, #6F4F98 0%, #251A32 100%)",
-                boxShadow: "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
-                marginLeft: "70px",
-                marginTop: "-14px",
-              }}
-            />
-            <div id="purple2">
-              <img src="/images/Purple2.svg"></img>
-            </div>
-            <div id="gray2">불안 24%</div>
-            <div
-              id="PercentPurple2"
-              style={{
-                width: "54px",
-                height: "14px",
-                borderRadius: "9.919px",
-                background: "linear-gradient(180deg, #9D7DC7 0%, #4D3D61 100%)",
-                boxShadow: "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
-                marginLeft: "70px",
-                marginTop: "-14px",
-              }}
-            />
-            <div id="purple3">
-              <img src="/images/Purple3.svg"></img>
-            </div>
-            <div id="gray3">슬픔 15%</div>
-            <div
-              id="PercentPurple3"
-              style={{
-                width: "26px",
-                height: "14px",
-                borderRadius: "9.919px",
-                background: "linear-gradient(180deg, #C9ADED 0%, #726387 100%)",
-                boxShadow: "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
-                marginLeft: "70px",
-                marginTop: "-14px",
-              }}
-            />
-            <div id="purple4">
-              <img src="/images/Purple4.svg"></img>
-            </div>
-            <div id="gray4">행복 12%</div>
-            <div
-              id="PercentPurple4"
-              style={{
-                width: "18px",
-                height: "14px",
-                borderRadius: "9.919px",
-                background: "linear-gradient(180deg, #EBE2F7 0%, #BAB3C4 100%)",
-                boxShadow: "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
-                marginLeft: "70px",
-                marginTop: "-14px",
-              }}
-            />
-            <div id="AItext">
-              고독한 예술가 님의 감정 분석 결과를 알려드리겠습니다. 고독한
-              예술가 님은 행복을 40%, 불안감을 24%, 행복을 15%, 분노를 12%
-              느끼고 있습니다. 고독한 예술가 님과 비슷한 감정을 느끼는 사람이
-              20%정도 분포하고 있고 불안감을 해소하기 위한 방안으로 BACK TO THE
-              FUTURE 전시를 추천드립니다.
-            </div>
-          </A.AIAnalysis>
-          <A.Replay onClick={goAIPast}>
-            <div id="past">
-              <img src="/images/Past.svg" />
-            </div>
-            <div id="text2">지난 분석 다시 보기</div>
-          </A.Replay>
-          {/*하단바*/}
-          <A.NavBar>
-            {/*검색*/}
-            <A.NavBtnContainer>
-              <A.NavIcon
+    <A.Container>
+      <A.BackBtn onClick={goBack}></A.BackBtn>
+      <A.PageTitle>분석 결과</A.PageTitle>
+      <A.Item>
+        {loading ? (
+          <A.Loading></A.Loading> // 로딩 중 표시
+        ) : (
+          <>
+            <A.Introduce></A.Introduce>
+            <A.Content>
+              <div id="Title">{post.title}</div>
+              <div id="Date">{post.createdAt}</div>
+            </A.Content>
+            <A.Consumer>
+              <div id="review">{post.content}</div>
+            </A.Consumer>
+            <A.AIAnalysis>
+              <div id="text">감정 분석 결과</div>
+              <PieChart
                 style={{
-                  marginLeft: "25px",
+                  width: "160px",
+                  height: "160px",
+                  marginLeft: "80px",
+                  marginTop: "70px",
+                  borderRadius: "0px",
                 }}
-              >
-                <img src="/images/SearchIcon.svg" onClick={goSearch} />
-              </A.NavIcon>
-              <A.NavText
+                data={pieChartData}
+                reveal={100}
+                lineWidth={40}
+                background="#f3f3f3"
+                lengthAngle={360}
+                rounded
+                animate
+                label={({ dataEntry }) => dataEntry.name}
+                labelStyle={{
+                  fontFamily: "Pretendard Variable",
+                  fontWeight: "400",
+                  fontSize: "6px",
+                  fill: "#33333",
+                }}
+                labelPosition={0}
+              />
+              <div id="purple1">
+                <img src="/images/Purple1.svg" alt="분노"></img>
+              </div>
+              <div id="gray1">분노 {analysis.anger}%</div>
+              <div
+                id="PercentPurple1"
                 style={{
-                  marginLeft: "28px",
+                  width: "85px",
+                  height: "14px",
+                  borderRadius: "9.919px",
+                  background:
+                    "linear-gradient(90deg, #6F4F98 0%, #251A32 100%)",
+                  boxShadow:
+                    "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
+                  marginLeft: "70px",
+                  marginTop: "-14px",
                 }}
-              >
-                검색
-              </A.NavText>
-            </A.NavBtnContainer>
-            {/*AI 심리 분석*/}
-            <A.NavBtnContainer>
-              <A.NavIcon>
-                <img src="/images/AIIcon.svg" onClick={goAI} />
-              </A.NavIcon>
-              <A.NavText
+              />
+              <div id="purple2">
+                <img src="/images/Purple2.svg" alt="불안"></img>
+              </div>
+              <div id="gray2">불안 {analysis.anxiety}%</div>
+              <div
+                id="PercentPurple2"
                 style={{
-                  fontSize: "11px",
-                  marginLeft: "20px",
-                  marginTop: "-3px",
-                  color: "#A259FF",
+                  width: "54px",
+                  height: "14px",
+                  borderRadius: "9.919px",
+                  background:
+                    "linear-gradient(180deg, #9D7DC7 0%, #4D3D61 100%)",
+                  boxShadow:
+                    "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
+                  marginLeft: "70px",
+                  marginTop: "-14px",
                 }}
-              >
-                AI 심리 분석
-              </A.NavText>{" "}
-            </A.NavBtnContainer>
-            {/*홈*/}
-            <A.NavBtnContainer>
-              <A.NavIcon
+              />
+              <div id="purple3">
+                <img src="/images/Purple3.svg" alt="슬픔"></img>
+              </div>
+              <div id="gray3">슬픔 {analysis.sadness}%</div>
+              <div
+                id="PercentPurple3"
                 style={{
-                  fontSize: "11px",
-                  marginLeft: "10px",
-                  marginTop: "-25px",
+                  width: "26px",
+                  height: "14px",
+                  borderRadius: "9.919px",
+                  background:
+                    "linear-gradient(180deg, #C9ADED 0%, #726387 100%)",
+                  boxShadow:
+                    "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
+                  marginLeft: "70px",
+                  marginTop: "-14px",
                 }}
-              >
-                <img src="/images/HomeIcon.svg" onClick={goHome} />
-              </A.NavIcon>
-            </A.NavBtnContainer>
-            {/*내 기록*/}
-            <A.NavBtnContainer>
-              <A.NavIcon
+              />
+              <div id="purple4">
+                <img src="/images/Purple4.svg" alt="행복"></img>
+              </div>
+              <div id="gray4">행복 {analysis.happiness}%</div>
+              <div
+                id="PercentPurple4"
                 style={{
-                  marginLeft: "63px",
+                  width: "18px",
+                  height: "14px",
+                  borderRadius: "9.919px",
+                  background:
+                    "linear-gradient(180deg, #EBE2F7 0%, #BAB3C4 100%)",
+                  boxShadow:
+                    "0px 3.968px 3.968px 0px rgba(0, 0, 0, 0.25) inset",
+                  marginLeft: "70px",
+                  marginTop: "-14px",
                 }}
-              >
-                <img src="/images/RecordIcon.svg" onClick={goRecord} />
-              </A.NavIcon>
-              <A.NavText
-                style={{
-                  marginLeft: "60px",
-                }}
-              >
-                내 기록
-              </A.NavText>
-            </A.NavBtnContainer>
-            {/*마이페이지*/}
-            <A.NavBtnContainer>
-              <A.NavIcon
-                style={{
-                  marginLeft: "45px",
-                }}
-              >
-                <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
-              </A.NavIcon>
-              <A.NavText>마이페이지</A.NavText>
-            </A.NavBtnContainer>
-          </A.NavBar>
-          {/*하단바*/}
-        </A.Item>
-      </A.Container>
-    </>
+              />
+              <div id="AItext">{analysis.analysis}</div>
+            </A.AIAnalysis>
+            <A.Replay onClick={goAIPast}>
+              <div id="past">
+                <img src="/images/Past.svg" alt="지난 분석"></img>
+              </div>
+              <div id="text2">지난 분석 다시 보기</div>
+            </A.Replay>
+            {/*하단바*/}
+            <A.NavBar>
+              {/*검색*/}
+              <A.NavBtnContainer>
+                <A.NavIcon
+                  style={{
+                    marginLeft: "25px",
+                  }}
+                >
+                  <img
+                    src="/images/SearchIcon.svg"
+                    onClick={goSearch}
+                    alt="검색"
+                  />
+                </A.NavIcon>
+                <A.NavText
+                  style={{
+                    marginLeft: "28px",
+                  }}
+                >
+                  검색
+                </A.NavText>
+              </A.NavBtnContainer>
+              {/*AI 심리 분석*/}
+              <A.NavBtnContainer>
+                <A.NavIcon>
+                  <img
+                    src="/images/AIIcon.svg"
+                    onClick={goAI}
+                    alt="AI 심리 분석"
+                  />
+                </A.NavIcon>
+                <A.NavText
+                  style={{
+                    fontSize: "11px",
+                    marginLeft: "20px",
+                    marginTop: "-3px",
+                    color: "#A259FF",
+                  }}
+                >
+                  AI 심리 분석
+                </A.NavText>
+              </A.NavBtnContainer>
+              {/*홈*/}
+              <A.NavBtnContainer>
+                <A.NavIcon
+                  style={{
+                    fontSize: "11px",
+                    marginLeft: "10px",
+                    marginTop: "-25px",
+                  }}
+                >
+                  <img src="/images/HomeIcon.svg" onClick={goHome} alt="홈" />
+                </A.NavIcon>
+              </A.NavBtnContainer>
+              {/*내 기록*/}
+              <A.NavBtnContainer>
+                <A.NavIcon
+                  style={{
+                    marginLeft: "63px",
+                  }}
+                >
+                  <img
+                    src="/images/RecordIcon.svg"
+                    onClick={goRecord}
+                    alt="내 기록"
+                  />
+                </A.NavIcon>
+                <A.NavText
+                  style={{
+                    marginLeft: "60px",
+                  }}
+                >
+                  내 기록
+                </A.NavText>
+              </A.NavBtnContainer>
+              {/*마이페이지*/}
+              <A.NavBtnContainer>
+                <A.NavIcon
+                  style={{
+                    marginLeft: "45px",
+                  }}
+                >
+                  <img
+                    src="/images/MyPageIcon.svg"
+                    onClick={goMyPage}
+                    alt="마이페이지"
+                  />
+                </A.NavIcon>
+                <A.NavText>마이페이지</A.NavText>
+              </A.NavBtnContainer>
+            </A.NavBar>
+            {/*하단바*/}
+          </>
+        )}
+      </A.Item>
+    </A.Container>
   );
 }

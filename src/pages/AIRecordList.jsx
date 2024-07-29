@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as A from "../styles/styledAIRecordList";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-//dfeff
+import axios from "axios";
+
 export function AIRecordList() {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const itemsCountPerPage = 4;
+  const [totalItems, setTotalItems] = useState(0);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const id = queryParams.get("id");
+
+  const [review, setReview] = useState([]);
+  const [checkedItemId, setCheckedItemId] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(`http://127.0.0.1:8000/myposts/`, {
+          headers: { Authorization: `Token ${token}` },
+        });
+
+        const allData = response.data;
+        setReview(allData);
+
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData);
+        setTotalItems(totalItems);
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData();
+  }, [page]);
 
   const goBack = () => {
     navigate(-1);
@@ -12,10 +53,13 @@ export function AIRecordList() {
   };
 
   const goAIResult = () => {
-    navigate(`/airesult`);
+    if (checkedItemId !== null) {
+      navigate(`/airesult?id=${checkedItemId}`);
+    } else {
+      alert("분석할 기록을 선택하세요.");
+    }
   };
 
-  //하단바
   const goSearch = () => {
     navigate(`/search`);
     window.scrollTo(0, 0);
@@ -31,8 +75,8 @@ export function AIRecordList() {
     window.scrollTo(0, 0);
   };
 
-  const goRecord = () => {
-    navigate(`/record`);
+  const goRecord = (id) => {
+    navigate(`/record?id=${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -41,16 +85,13 @@ export function AIRecordList() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
-  // 체크 표시 클릭하면 체크 완료
-  const [imageSrc, setImageSrc] = useState("/images/NotCheck.svg");
-
-  const handleImageClick = () => {
-    setImageSrc((prevSrc) =>
-      prevSrc === "/images/NotCheck.svg"
-        ? "/images/Check.svg"
-        : "/images/NotCheck.svg"
+  const handleImageClick = (index) => {
+    if (checkedItemId !== null && checkedItemId !== review[index].id) {
+      alert("분석은 한 개씩 할 수 있습니다.");
+      return;
+    }
+    setCheckedItemId((prev) =>
+      prev === review[index].id ? null : review[index].id
     );
   };
 
@@ -63,43 +104,45 @@ export function AIRecordList() {
           <A.Choice>분석하고 싶은 기록을 선택하세요.</A.Choice>
           <A.Comment>
             AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.
-          </A.Comment>
-          <A.ImgBox>
-            <img src="/images/ForeverismIntro.svg" alt="ExhibitPoster"></img>
-          </A.ImgBox>
-          <A.ExhibitionIntroduce>
-            <div id="Title">포에버리즘 : 우리를 세상의 끝으로 </div>
-            <div id="Date">2024/07/25</div>
-            <A.CheckBox id="NotCheck" onClick={handleImageClick}>
-              <img src={imageSrc} alt="CheckStatus"></img>
-            </A.CheckBox>
-          </A.ExhibitionIntroduce>
+          </A.Comment>{" "}
+          {review.map((e, index) => (
+            <A.RecordContainer key={index}>
+              <A.ImgBox>
+                <img src={e.img} alt="Review Image"></img>
+              </A.ImgBox>
+              <A.ExhibitionIntroduce>
+                <div id="Title">{e.title}</div>
+                <div id="Date">{e.createdAt}</div>
+                <A.CheckBox
+                  id="NotCheck"
+                  onClick={() => handleImageClick(index)}
+                >
+                  <img
+                    src={
+                      checkedItemId === e.id
+                        ? "/images/Check.svg"
+                        : "/images/NotCheck.svg"
+                    }
+                    alt="CheckStatus"
+                  ></img>
+                </A.CheckBox>
+              </A.ExhibitionIntroduce>
+            </A.RecordContainer>
+          ))}
           <A.Analysis onClick={goAIResult}>
             <div id="choice">
               <img src="/images/WhiteCheck.svg" />
             </div>
             <div id="text">선택한 기록 분석</div>
           </A.Analysis>
-          {/*하단바*/}
           <A.NavBar>
-            {/*검색*/}
+            {/* Navigation Buttons */}
             <A.NavBtnContainer>
-              <A.NavIcon
-                style={{
-                  marginLeft: "25px",
-                }}
-              >
+              <A.NavIcon style={{ marginLeft: "25px" }}>
                 <img src="/images/SearchIcon.svg" onClick={goSearch} />
               </A.NavIcon>
-              <A.NavText
-                style={{
-                  marginLeft: "28px",
-                }}
-              >
-                검색
-              </A.NavText>
+              <A.NavText style={{ marginLeft: "28px" }}>검색</A.NavText>
             </A.NavBtnContainer>
-            {/*AI 심리 분석*/}
             <A.NavBtnContainer>
               <A.NavIcon>
                 <img src="/images/AIIcon.svg" onClick={goAI} />
@@ -113,9 +156,8 @@ export function AIRecordList() {
                 }}
               >
                 AI 심리 분석
-              </A.NavText>{" "}
+              </A.NavText>
             </A.NavBtnContainer>
-            {/*홈*/}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -127,38 +169,26 @@ export function AIRecordList() {
                 <img src="/images/HomeIcon.svg" onClick={goHome} />
               </A.NavIcon>
             </A.NavBtnContainer>
-            {/*내 기록*/}
             <A.NavBtnContainer>
-              <A.NavIcon
-                style={{
-                  marginLeft: "63px",
-                }}
-              >
-                <img src="/images/RecordIcon.svg" onClick={goRecord} />
+              <A.NavIcon style={{ marginLeft: "63px" }}>
+                <img
+                  src="/images/RecordIcon.svg"
+                  onClick={() => goRecord(id)}
+                />
               </A.NavIcon>
-              <A.NavText
-                style={{
-                  marginLeft: "60px",
-                }}
-              >
-                내 기록
-              </A.NavText>
+              <A.NavText style={{ marginLeft: "60px" }}>내 기록</A.NavText>
             </A.NavBtnContainer>
-            {/*마이페이지*/}
             <A.NavBtnContainer>
-              <A.NavIcon
-                style={{
-                  marginLeft: "45px",
-                }}
-              >
+              <A.NavIcon style={{ marginLeft: "45px" }}>
                 <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
               </A.NavIcon>
               <A.NavText>마이페이지</A.NavText>
             </A.NavBtnContainer>
           </A.NavBar>
-          {/*하단바*/}
         </A.Item>
       </A.Container>
     </>
   );
 }
+
+export default AIRecordList;

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 898px;
+  height: 844px;
   margin: 0 auto;
   background: linear-gradient(
       0deg,
@@ -106,128 +106,92 @@ export const PageTitle = styled.div`
   margin-top: -23px;
 `;
 
-// 분석하고 싶은 기록을 선택하세요
-export const Choice = styled.div`
-  color: #3d3a3a;
-  font-family: "Pretendard Variable";
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 160% */
-  margin-top: 40px;
-  margin-left: -14px;
-`;
-
-// 부연설명
-export const Comment = styled.div`
-  color: rgba(61, 58, 58, 0.61);
-  font-family: "Pretendard Variable";
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 240% */
-  margin-left: -14px;
-`;
-
-// 포스터 첨부 박스
-export const ImgBox = styled.div`
+//보라색 백그라운드
+export const PurpleBox = styled.div`
   width: 81px;
-  height: 81px;
+  height: 96px;
   flex-shrink: 0;
-  border-radius: 10px 0px 0px 10px;
-  background: #6f4f98;
-  margin-top: 12px;
-  margin-left: -20px;
-  img {
-    width: 61px;
-    height: 61px;
+`;
+
+//보라색 안 그레이 백그라운드 요소들
+export const GrayBox = styled.div`
+  width: 61px;
+  height: 78px;
+  flex-shrink: 0;
+
+  #greencheck {
+    width: 7px;
+    height: 6px;
     flex-shrink: 0;
-    margin-left: 11px;
-    margin-top: 10px;
+    margin-top: -86px;
+    margin-left: 6px;
+  }
+
+  #text {
+    width: 30px;
+    height: 9.941px;
+    flex-shrink: 0;
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 12.84px */
+    margin-left: 15px;
+    margin-top: 2px;
   }
 `;
 
-// 전시 설명
+// 이미지 박스
+export const ImgBox = styled.div`
+  width: 61px;
+  height: 61px;
+  flex-shrink: 0;
+
+  margin-top: 12px;
+  margin-left: -20px;
+  img {
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    margin-left: 4px;
+    margin-top: -9px;
+    border-radius: 8px;
+  }
+`;
+
+// 전시작품 설명
 export const ExhibitionIntroduce = styled.div`
   width: 262px;
-  height: 81px;
+  height: 96px;
   flex-shrink: 0;
   border-radius: 0px 10px 10px 0px;
-  background: linear-gradient(270deg, #eae3f2 9%, #d1cbd9 34%, #b9b3bf 62.5%);
-  margin-left: 61px;
-  margin-top: -81px;
-
+  background: #fff;
+  margin-left: 56px;
+  margin-top: -96px;
+  cursor: pointer;
   #Title {
-    color: #fff;
+    color: #3d3a3a;
     font-family: "Pretendard Variable";
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
     line-height: 160.5%; /* 20.865px */
-    margin-left: 18px;
-    margin-top: 20px;
     position: absolute;
+    margin-left: 10px;
+    margin-top: 15px;
   }
+
   #Date {
-    color: #fff;
+    color: #3d3a3a;
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: 160.5%; /* 16.05px */
-    margin-left: 18px;
-    margin-top: 41px;
     position: absolute;
-  }
-`;
-
-// 체크박스
-export const CheckBox = styled.div`
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-left: 226px;
-  margin-top: 31px;
-  position: absolute;
-  cursor: pointer;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-// 선택한 기록 분석 버튼
-export const Analysis = styled.button`
-  width: 158.851px;
-  height: 31px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: #6f4f98;
-  border: 2px solid #6f4f98;
-  cursor: pointer;
-  margin-left: 67px;
-  margin-top: 90px;
-  #choice {
-    width: 12px;
-    height: 9.856px;
-    flex-shrink: 0;
-    margin-top: 7px;
     margin-left: 10px;
-  }
-
-  #text {
-    width: 132.677px;
-    height: 24.97px;
-    flex-shrink: 0;
-    color: #fff;
-    font-family: "Pretendard Variable";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 160.5%; /* 22.47px */
-    margin-left: 20px;
-    margin-top: -15px;
+    margin-top: 43px;
   }
 `;
 

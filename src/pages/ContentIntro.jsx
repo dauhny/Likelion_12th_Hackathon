@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "../styles/styledContentIntro";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { motion, px } from "framer-motion";
+import { motion, px, resolveMotionValue } from "framer-motion";
 import StarInput from "./StarInput";
 import styled from "@emotion/styled";
 
@@ -265,6 +265,35 @@ export function ContentIntro() {
 
   const handleClickRating = (value) => {
     setRating(value);
+    handleRatingSubmit(value);
+  };
+
+  const handleRatingSubmit = async (value) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      const response = await axios.post(
+        `http://127.0.0.1:8000/datas/${id}/rate/`,
+        { rating: value },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      );
+
+      console.log("별점 등록 성공:", response.data);
+      alert("별점이 등록되었습니다.");
+    } catch (error) {
+      console.error("별점 등록 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        alert("별점 등록에 실패했습니다. 유효한 값을 입력했는지 확인하세요.");
+      }
+    }
   };
 
   //별점 문구
@@ -282,28 +311,55 @@ export function ContentIntro() {
   };
 
   const ratingTexts2 = {
-    0.5: "전시가 별로였나요?",
-    1: "전시가 별로였나요?",
-    1.5: "전시가 별로였나요?",
-    2: "전시가 별로였나요?",
-    2.5: "만족한 관람이었나요?",
-    3: "만족한 관람이었나요?",
-    3.5: "만족한 관람이었나요?",
-    4: "훌륭한 전시네요!",
-    4.5: "훌륭한 전시네요!",
-    5: "완벽한 전시네요!",
+    0.5: "별점이 등록되었습니다.",
+    1: "별점이 등록되었습니다.",
+    1.5: "별점이 등록되었습니다.",
+    2: "별점이 등록되었습니다.",
+    2.5: "별점이 등록되었습니다.",
+    3: "별점이 등록되었습니다.",
+    3.5: "별점이 등록되었습니다.",
+    4: "별점이 등록되었습니다.",
+    4.5: "별점이 등록되었습니다.",
+    5: "별점이 등록되었습니다.",
   };
 
   const getRatingText = (value) => {
-    return ratingTexts[Math.round(value * 2) / 2] || "별점을 남겨보세요.";
+    return ratingTexts[Math.round(value * 2) / 2] || "";
   };
 
   const getRatingText2 = (value) => {
-    return (
-      ratingTexts2[Math.round(value * 2) / 2] ||
-      "이 전시에 대한 코멘트를 남겨보세요."
-    );
+    return ratingTexts2[Math.round(value * 2) / 2] || "별점을 남겨보세요.";
   };
+
+  //별점
+  const [ratingCount, setRatingCount] = useState("");
+  const [averageRating, setAverageRating] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // API 호출
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          alert("로그인 후 이용하세요.");
+          return;
+        }
+
+        const response = await axios.get(
+          `http://127.0.0.1:8000/datas/${id}/ratings/`,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+        setRatingCount(response.data.ratingCount);
+        setAverageRating(response.data.averageRating);
+      } catch (error) {
+        console.error("후기글 조회 실패 :", error);
+      }
+    };
+    fetchData(); // useEffect에서 fetchData 함수 호출
+  }, [id]);
 
   return (
     <>
@@ -351,8 +407,8 @@ export function ContentIntro() {
             ))}
             <C.goRecBtn onClick={() => goMusicCommunity(id)} />
             <C.PurpleBlur />
-            <C.ScoreMean>3.8</C.ScoreMean>
-            <C.ScorePeople>(10명 참여)</C.ScorePeople>
+            <C.ScoreMean>{averageRating}</C.ScoreMean>
+            <C.ScorePeople>({ratingCount}명 참여)</C.ScorePeople>
             <RatingField>
               <StarInput
                 onClickRating={(value) => setRating(value)}
@@ -433,7 +489,7 @@ export function ContentIntro() {
                   fontWeight: "500",
                   marginTop: "30%",
                   position: "absolute",
-                  marginLeft: "-70px",
+                  marginLeft: "-85px",
                 }}
               >
                 {getRatingText2(rating)}
