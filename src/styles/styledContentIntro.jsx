@@ -208,7 +208,7 @@ export const ShareBtn = styled.button`
 `;
 
 export const goRecBtn = styled.button`
-  margin-top: 70px;
+  margin-top: 40px;
   width: 290px;
   height: 41px;
   border: none;
@@ -226,7 +226,7 @@ export const CommentIcon = styled.div`
   width: 18px;
   height: 17px;
   flex-shrink: 0;
-  margin: 50px 0 0 -15px;
+  margin: 200px 0 0 -15px;
 `;
 
 export const CommentInputContainer = styled.div`
@@ -349,3 +349,38 @@ export const DeleteBtn = styled.button`
 `;
 
 export const CommentContainer = styled.div``;
+
+export const ScoreMean = styled.div`
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+`;
+
+export const ScorePeople = styled.div`
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 240% */
+  margin-left: -59%;
+  margin-top: -23px;
+  margin-bottom: 10px;
+`;
+
+export const CommentRec = styled.div`
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 40px;
+`;

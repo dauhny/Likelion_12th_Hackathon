@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import * as C from "../styles/styledContentIntro";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { motion, px } from "framer-motion";
+import StarInput from "./StarInput";
+import styled from "@emotion/styled";
 
 export function ContentIntro() {
   const navigate = useNavigate();
@@ -229,6 +231,71 @@ export function ContentIntro() {
     }
   };
 
+  //별점
+
+  const RatingField = styled.fieldset`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    border: none;
+    transform: translateY(2px);
+    margin-top: 10px;
+    margin-left: 55px;
+    gap: 6px;
+
+    input:checked ~ label,
+    labeL:hover,
+    labeL:hover ~ label {
+      transition: 0.2s;
+      color: orange;
+    }
+  `;
+
+  const [rating, setRating] = useState(0);
+
+  const handleClickRating = (value) => {
+    setRating(value);
+  };
+
+  //별점 문구
+  const ratingTexts = {
+    0.5: `"   최악이에요..   "`,
+    1: `"   별로에요   "`,
+    1.5: `"   그럭저럭이에요   "`,
+    2: `"   조금 아쉬워요   "`,
+    2.5: `"   괜찮아요   "`,
+    3: `"   괜찮아요   "`,
+    3.5: `"   아주 좋아요!   "`,
+    4: `"   아주 좋아요!   "`,
+    4.5: `"   최고예요!   "`,
+    5: `"   최고예요!   "`,
+  };
+
+  const ratingTexts2 = {
+    0.5: "전시가 별로였나요?",
+    1: "전시가 별로였나요?",
+    1.5: "전시가 별로였나요?",
+    2: "전시가 별로였나요?",
+    2.5: "만족한 관람이었나요?",
+    3: "만족한 관람이었나요?",
+    3.5: "만족한 관람이었나요?",
+    4: "훌륭한 전시네요!",
+    4.5: "훌륭한 전시네요!",
+    5: "완벽한 전시네요!",
+  };
+
+  const getRatingText = (value) => {
+    return ratingTexts[Math.round(value * 2) / 2] || "별점을 남겨보세요.";
+  };
+
+  const getRatingText2 = (value) => {
+    return (
+      ratingTexts2[Math.round(value * 2) / 2] ||
+      "이 전시에 대한 코멘트를 남겨보세요."
+    );
+  };
+
   return (
     <>
       <C.Container>
@@ -275,6 +342,97 @@ export function ContentIntro() {
             ))}
             <C.goRecBtn onClick={() => goMusicCommunity(id)} />
             <C.PurpleBlur />
+            <C.ScoreMean>3.8</C.ScoreMean>
+            <C.ScorePeople>(10명 참여)</C.ScorePeople>
+            <RatingField>
+              <StarInput
+                onClickRating={(value) => setRating(value)}
+                value={5}
+                isHalf={false}
+              />
+              <StarInput
+                onClickRating={handleClickRating}
+                value={4.5}
+                isHalf={true}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={4}
+                isHalf={false}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={3.5}
+                isHalf={true}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={3}
+                isHalf={false}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={2.5}
+                isHalf={true}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={2}
+                isHalf={false}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={1.5}
+                isHalf={true}
+              />{" "}
+              <StarInput
+                onClickRating={handleClickRating}
+                value={1}
+                isHalf={false}
+              />
+              <StarInput
+                onClickRating={handleClickRating}
+                value={0.5}
+                isHalf={true}
+              />
+            </RatingField>
+            <div
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  color: "white",
+                  fontFamily: "Pretendard Variable",
+                  fontSize: "10px",
+                  fontStyle: "normal",
+                  fontWeight: "400",
+                  marginTop: "15%",
+                  position: "absolute",
+                  marginLeft: "-55px",
+                }}
+              >
+                {getRatingText(rating)}
+              </span>
+              <span
+                style={{
+                  color: "white",
+                  fontFamily: "Pretendard Variable",
+                  fontSize: "13px",
+                  fontStyle: "normal",
+                  fontWeight: "500",
+                  marginTop: "30%",
+                  position: "absolute",
+                  marginLeft: "-70px",
+                }}
+              >
+                {getRatingText2(rating)}
+              </span>
+            </div>
+            <C.CommentRec>
+              유다현님의 관람 경험을 아래 코멘트에 작성해보세요.
+            </C.CommentRec>
             <C.CommentIcon>
               <img src="/images/CommentIcon.svg" />
             </C.CommentIcon>
