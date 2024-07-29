@@ -60,7 +60,7 @@ export const NavBar = styled.div`
   bottom: 0;
   z-index: 999;
   display: flex;
-  margin-left: -48px;
+  margin-left: -1px;
 `;
 
 export const NavBtnContainer = styled.div`

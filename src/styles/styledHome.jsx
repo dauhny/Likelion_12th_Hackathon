@@ -82,6 +82,8 @@ export const InfoTextPurple = styled.div`
   font-weight: 600;
   line-height: 24px;
   margin-bottom: 5px;
+  margin-top: 30px;
+  margin-left: 5px;
 `;
 
 export const NewExhibit = styled.div`
@@ -90,6 +92,7 @@ export const NewExhibit = styled.div`
     height: 360px;
     margin: -20px 0px 0px 0px;
     border-radius: 10px;
+    margin-top: 10px;
   }
   cursor: pointer;
 `;

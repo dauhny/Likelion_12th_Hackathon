@@ -3,12 +3,19 @@ import * as H from "../styles/styledHome";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+
+import SimpleSlider from "./SimpleSlider";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import { Component } from "react";
 
 export function Home() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 3; // 페이지당 항목 수
-  const newItemCountPerPage = 1;
+  const newItemCountPerPage = 3;
 
   const goContentIntro = (id) => {
     navigate(`/contentintro?id=${id}`);
@@ -24,6 +31,7 @@ export function Home() {
     navigate(`/review`);
     window.scrollTo(0, 0);
   };
+
   //하단바
   const goSearch = () => {
     navigate(`/search`);
@@ -60,24 +68,23 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // API 호출
         const response = await axios.get(`http://127.0.0.1:8000/data/`);
         const allData = response.data;
 
+        // 최신 전시 데이터를 날짜로 정렬
         const sortedData = allData.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
 
-        const startIndex = (page - 1) * newItemCountPerPage;
-        const endIndex = startIndex + newItemCountPerPage;
-        const paginatedData = sortedData.slice(startIndex, endIndex);
+        // 최신 전시 3개만 가져오기
+        const latestExhibits = sortedData.slice(0, newItemCountPerPage);
 
-        setNewContent(sortedData[0]);
+        setNewContent(latestExhibits); // 최신 전시 3개 설정
       } catch (error) {
         console.error("최신 전시 조회 실패 :", error);
       }
     };
-    fetchData(); // useEffect에서 fetchData 함수 호출
+    fetchData();
   }, []);
 
   //HOT 전시
@@ -138,64 +145,120 @@ export function Home() {
     fetchData(); // useEffect에서 fetchData 함수 호출
   }, []);
 
+  // //캐러셀
+  // class SimpleSlider extends Component {
+  //   render() {
+  //     const settings = {
+  //       dots: true,
+  //       infinite: true,
+  //       speed: 500,
+  //       slidesToShow: 1,
+  //       slideToScroll: 1,
+  //     };
+  //     return (
+  //       <div>
+  //         <H.InfoTextPurple>New</H.InfoTextPurple>
+  //         <Slider {...settings}>
+  //           {newcontent ? (
+  //             <H.NewExhibitContainer>
+  //               <br />
+  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
+  //                 <img src={newcontent.image} />
+  //               </H.NewExhibit>
+  //             </H.NewExhibitContainer>
+  //           ) : (
+  //             <p>최신 전시가 없습니다.</p>
+  //           )}{" "}
+  //           {newcontent ? (
+  //             <H.NewExhibitContainer>
+  //               <br />
+  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
+  //                 <img src={newcontent.image} />
+  //               </H.NewExhibit>
+  //             </H.NewExhibitContainer>
+  //           ) : (
+  //             <p>최신 전시가 없습니다.</p>
+  //           )}{" "}
+  //           {newcontent ? (
+  //             <H.NewExhibitContainer>
+  //               <br />
+  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
+  //                 <img src={newcontent.image} />
+  //               </H.NewExhibit>
+  //             </H.NewExhibitContainer>
+  //           ) : (
+  //             <p>최신 전시가 없습니다.</p>
+  //           )}
+  //         </Slider>
+  //       </div>
+  //     );
+  //   }
+  // }
+
   return (
     <>
       <H.Container>
-        <H.Item>
-          <br />
-          {newcontent ? (
-            <H.NewExhibitContainer>
-              <H.InfoTextPurple>New</H.InfoTextPurple>
-              <br />
-              <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
-                <img src={newcontent.image} />
-              </H.NewExhibit>
-            </H.NewExhibitContainer>
-          ) : (
-            <p>최신 전시가 없습니다.</p>
-          )}
-          <H.InfoText>HOT 후기글</H.InfoText>
-          <H.ReviewBtn onClick={goReview}>
-            더보기 <img src="images/ExpandBtn.svg" />
-          </H.ReviewBtn>{" "}
-          {review.map((e) => (
-            <H.ReviewBox key={e.id} onClick={() => goReviewDetail(e.id)}>
-              <H.ProfileImg>
-                <img src={`http://127.0.0.1:8000${e.profile}`} alt="profile" />
-              </H.ProfileImg>
-              <H.ReviewName>{e.nickname}</H.ReviewName>
-              <H.ReviewDate>{e.createdAt2}</H.ReviewDate>
-              <H.ReviewTitle>{e.title}</H.ReviewTitle>
-              <H.ReviewContent>{e.content}</H.ReviewContent>
-              <H.ReviewImg>
-                <img src={e.img} alt="Review Image" />
-              </H.ReviewImg>
-              <H.LikeIcon />
-              <H.LikeCnt>{e.likeCount}</H.LikeCnt>
-            </H.ReviewBox>
-          ))}
-          <H.InfoText>HOT 전시</H.InfoText>
-          <H.ReviewBtn onClick={goSearch}>
-            더보기 <img src="images/ExpandBtn.svg" />
-          </H.ReviewBtn>
-          {content.map((e) => (
-            <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>
-              <img src={e.image} />
-              <H.ExhibitInfo key={e.id} onClick={() => goContentIntro(e.id)}>
-                <p id={"InfoP"}>
-                  {e.title}
-                  <br />
-                  {e.period}
-                  <br />
-                  {e.place}
-                </p>
-              </H.ExhibitInfo>
-              <br />
-            </H.ExhibitPoster>
-          ))}{" "}
-        </H.Item>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <H.Item>
+            <H.NewExhibit>
+              {" "}
+              // <H.InfoTextPurple>New</H.InfoTextPurple>
+              <SimpleSlider newContent={newcontent}></SimpleSlider>
+            </H.NewExhibit>
+            {/* <SimpleSlider></SimpleSlider> */}
+            <br />
+            <H.InfoText>HOT 후기글</H.InfoText>
+            <H.ReviewBtn onClick={goReview}>
+              더보기 <img src="images/ExpandBtn.svg" />
+            </H.ReviewBtn>{" "}
+            {review.map((e) => (
+              <H.ReviewBox key={e.id} onClick={() => goReviewDetail(e.id)}>
+                <H.ProfileImg>
+                  <img
+                    src={`http://127.0.0.1:8000${e.profile}`}
+                    alt="profile"
+                  />
+                </H.ProfileImg>
+                <H.ReviewName>{e.nickname}</H.ReviewName>
+                <H.ReviewDate>{e.createdAt2}</H.ReviewDate>
+                <H.ReviewTitle>{e.title}</H.ReviewTitle>
+                <H.ReviewContent>{e.content}</H.ReviewContent>
+                <H.ReviewImg>
+                  <img src={e.img} alt="Review Image" />
+                </H.ReviewImg>
+                <H.LikeIcon />
+                <H.LikeCnt>{e.likeCount}</H.LikeCnt>
+              </H.ReviewBox>
+            ))}
+            <H.InfoText>HOT 전시</H.InfoText>
+            <H.ReviewBtn onClick={goSearch}>
+              더보기 <img src="images/ExpandBtn.svg" />
+            </H.ReviewBtn>
+            {content.map((e) => (
+              <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>
+                <img src={e.image} />
+                <H.ExhibitInfo key={e.id} onClick={() => goContentIntro(e.id)}>
+                  <p id={"InfoP"}>
+                    {e.title}
+                    <br />
+                    {e.period}
+                    <br />
+                    {e.place}
+                  </p>
+                </H.ExhibitInfo>
+                <br />
+              </H.ExhibitPoster>
+            ))}{" "}
+          </H.Item>{" "}
+        </motion.div>
         <H.PurpleBlur></H.PurpleBlur>
-
         {/*하단바*/}
         <H.NavBar>
           {/*검색*/}
@@ -276,3 +339,9 @@ export function Home() {
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

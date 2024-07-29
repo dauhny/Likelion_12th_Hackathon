@@ -10,6 +10,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 
 export function Register() {
   const navigate = useNavigate();
@@ -97,82 +98,98 @@ export function Register() {
 
   return (
     <R.Container>
-      <R.Group>
-        <img src="/images/Group.svg" alt="Group" />
-      </R.Group>
-      <R.Ellipse549></R.Ellipse549>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <R.InputContainer>
-        <R.InputLabel>아이디</R.InputLabel>
-        <R.UserInputShort
-          type="text"
-          placeholder="아이디를 입력하세요."
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <R.CheckId>중복체크</R.CheckId>
-        <br />
-        <R.InputLabel>비밀번호</R.InputLabel>
-        <R.UserInput
-          type="password"
-          placeholder="비밀번호를 입력하세요."
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <R.InputLabel>비밀번호 확인</R.InputLabel>
-        <R.UserInput
-          type="password"
-          placeholder="비밀번호를 입력하세요."
-          value={password_confirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-        />
+      {" "}
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageTransition}
+        transition={{ duration: 0.5 }}
+        style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+      >
+        <R.Group>
+          <img src="/images/Group.svg" alt="Group" />
+        </R.Group>
+        <R.Ellipse549></R.Ellipse549>
         <br />
         <br />
         <br />
         <br />
-        <R.InputLabel>이름</R.InputLabel>
-        <R.Name
-          type="text"
-          placeholder="이름을 입력하세요."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
         <br />
-        <R.InputLabel>닉네임</R.InputLabel>
-        <R.NickName
-          type="text"
-          placeholder="닉네임을 입력하세요."
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-        />
-        <R.CheckNickName>중복체크</R.CheckNickName>
-        <R.InputLabel>생년월일</R.InputLabel>
-        <R.SelectBirth
-          type="date"
-          value={birthdate}
-          onChange={(e) => setBirthDate(e.target.value)}
-        />
-        <R.InputLabel>이메일</R.InputLabel>
-        <R.Email
-          type="email"
-          placeholder="선택 입력"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <R.InputLabel>전화번호</R.InputLabel>
-        <R.PhoneNumber
-          type="tel"
-          placeholder="전화번호를 입력하세요."
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        {errorMessage && <R.ErrorMessage>{errorMessage}</R.ErrorMessage>}
-        <R.Complete onClick={handleRegister}>가입하기</R.Complete>
-      </R.InputContainer>
+        <R.InputContainer>
+          <R.InputLabel>아이디</R.InputLabel>
+          <R.UserInputShort
+            type="text"
+            placeholder="아이디를 입력하세요."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <R.CheckId>중복체크</R.CheckId>
+          <br />
+          <R.InputLabel>비밀번호</R.InputLabel>
+          <R.UserInput
+            type="password"
+            placeholder="비밀번호를 입력하세요."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <R.InputLabel>비밀번호 확인</R.InputLabel>
+          <R.UserInput
+            type="password"
+            placeholder="비밀번호를 입력하세요."
+            value={password_confirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
+          <br />
+          <br />
+          <br />
+          <br />
+          <R.InputLabel>이름</R.InputLabel>
+          <R.Name
+            type="text"
+            placeholder="이름을 입력하세요."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+          <R.InputLabel>닉네임</R.InputLabel>
+          <R.NickName
+            type="text"
+            placeholder="닉네임을 입력하세요."
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+          <R.CheckNickName>중복체크</R.CheckNickName>
+          <R.InputLabel>생년월일</R.InputLabel>
+          <R.SelectBirth
+            type="date"
+            value={birthdate}
+            onChange={(e) => setBirthDate(e.target.value)}
+          />
+          <R.InputLabel>이메일</R.InputLabel>
+          <R.Email
+            type="email"
+            placeholder="선택 입력"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <R.InputLabel>전화번호</R.InputLabel>
+          <R.PhoneNumber
+            type="tel"
+            placeholder="전화번호를 입력하세요."
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          {errorMessage && <R.ErrorMessage>{errorMessage}</R.ErrorMessage>}
+          <R.Complete onClick={handleRegister}>가입하기</R.Complete>
+        </R.InputContainer>{" "}
+      </motion.div>
     </R.Container>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%", y: "10%" }, // 오른쪽에서 시작
+  animate: { x: "8%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

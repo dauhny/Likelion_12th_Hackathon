@@ -3,6 +3,7 @@ import * as MP from "../styles/styledMypage";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export function Mypage() {
   const navigate = useNavigate();
@@ -117,133 +118,149 @@ export function Mypage() {
   return (
     <>
       <MP.Container>
-        <MP.BackBtn onClick={goBack}></MP.BackBtn>
-        <MP.PageTitle>마이페이지</MP.PageTitle>
-        <MP.Item>
-          <MP.profile>
-            <div
-              id="background"
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <MP.BackBtn onClick={goBack}></MP.BackBtn>
+          <MP.PageTitle>마이페이지</MP.PageTitle>
+          <MP.Item>
+            <MP.profile>
+              <div
+                id="background"
+                style={{
+                  width: "75px",
+                  height: "75px",
+                  fill: "#3D3A3A",
+                }}
+              />
+              <img src={profileImg} alt="profile"></img>
+            </MP.profile>
+            <MP.name>{nickname}</MP.name>
+            <MP.edit onClick={goMypageRevise}>
+              <div id="text1">프로필 편집</div>
+            </MP.edit>
+            <MP.logout onClick={goLogin}>
+              <div id="text2">로그아웃</div>
+            </MP.logout>
+            <MP.scrap>
+              <img src="/images/Scrap.svg" alt="scrap"></img>
+              <div id="ScrapText">스크랩한 전시</div>
+            </MP.scrap>
+            {content.map((e) => (
+              <MP.ScrapContainer key={e.id}>
+                <MP.ImgBox onClick={() => goContentIntro(e.data)}>
+                  <img src={e.image} alt="ExhibitPoster"></img>
+                </MP.ImgBox>
+                <MP.ExhibitionIntroduce onClick={() => goContentIntro(e.data)}>
+                  <div id="Title">{e.title}</div>
+                  <div id="Date">{e.period}</div>
+                </MP.ExhibitionIntroduce>
+              </MP.ScrapContainer>
+            ))}{" "}
+          </MP.Item>
+        </motion.div>
+
+        {/*하단바*/}
+        <MP.NavBar>
+          {/*검색*/}
+          <MP.NavBtnContainer>
+            <MP.NavIcon
               style={{
-                width: "75px",
-                height: "75px",
-                fill: "#3D3A3A",
+                marginLeft: "25px",
               }}
-            />
-            <img src={profileImg} alt="profile"></img>
-          </MP.profile>
-          <MP.name>{nickname}</MP.name>
-          <MP.edit onClick={goMypageRevise}>
-            <div id="text1">프로필 편집</div>
-          </MP.edit>
-          <MP.logout onClick={goLogin}>
-            <div id="text2">로그아웃</div>
-          </MP.logout>
-          <MP.scrap>
-            <img src="/images/Scrap.svg" alt="scrap"></img>
-            <div id="ScrapText">스크랩한 전시</div>
-          </MP.scrap>
-          {content.map((e) => (
-            <MP.ScrapContainer key={e.id}>
-              <MP.ImgBox onClick={() => goContentIntro(e.data)}>
-                <img src={e.image} alt="ExhibitPoster"></img>
-              </MP.ImgBox>
-              <MP.ExhibitionIntroduce onClick={() => goContentIntro(e.data)}>
-                <div id="Title">{e.title}</div>
-                <div id="Date">{e.period}</div>
-              </MP.ExhibitionIntroduce>
-            </MP.ScrapContainer>
-          ))}
-          {/*하단바*/}
-          <MP.NavBar>
-            {/*검색*/}
-            <MP.NavBtnContainer>
-              <MP.NavIcon
-                style={{
-                  marginLeft: "25px",
-                }}
-              >
-                <img src="/images/SearchIcon.svg" onClick={goSearch} />
-              </MP.NavIcon>
-              <MP.NavText
-                style={{
-                  marginLeft: "28px",
-                }}
-              >
-                검색
-              </MP.NavText>
-            </MP.NavBtnContainer>
-            {/*AI 심리 분석*/}
-            <MP.NavBtnContainer>
-              <MP.NavIcon>
-                <img src="/images/AIIcon.svg" onClick={goAI} />
-              </MP.NavIcon>
-              <MP.NavText
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "20px",
-                  marginTop: "-3px",
-                }}
-              >
-                AI 심리 분석
-              </MP.NavText>{" "}
-            </MP.NavBtnContainer>
-            {/*홈*/}
-            <MP.NavBtnContainer>
-              <MP.NavIcon
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "10px",
-                  marginTop: "-25px",
-                }}
-              >
-                <img src="/images/HomeIcon.svg" onClick={goHome} />
-              </MP.NavIcon>
-            </MP.NavBtnContainer>
-            {/*내 기록*/}
-            <MP.NavBtnContainer>
-              <MP.NavIcon
-                style={{
-                  marginLeft: "63px",
-                }}
-              >
-                <img src="/images/RecordIcon.svg" onClick={goRecord} />
-              </MP.NavIcon>
-              <MP.NavText
-                style={{
-                  marginLeft: "60px",
-                }}
-              >
-                내 기록
-              </MP.NavText>
-            </MP.NavBtnContainer>
-            {/*마이페이지*/}
-            <MP.NavBtnContainer>
-              <MP.NavIcon
-                style={{
-                  marginLeft: "45px",
-                  color: "#A259FF",
-                }}
-              >
-                <img
-                  src="/images/MyPageIcon.svg"
-                  onClick={goMyPage}
-                  style={{
-                    color: "#A259FF",
-                  }}
-                />
-              </MP.NavIcon>
-              <MP.NavText
+            >
+              <img src="/images/SearchIcon.svg" onClick={goSearch} />
+            </MP.NavIcon>
+            <MP.NavText
+              style={{
+                marginLeft: "28px",
+              }}
+            >
+              검색
+            </MP.NavText>
+          </MP.NavBtnContainer>
+          {/*AI 심리 분석*/}
+          <MP.NavBtnContainer>
+            <MP.NavIcon>
+              <img src="/images/AIIcon.svg" onClick={goAI} />
+            </MP.NavIcon>
+            <MP.NavText
+              style={{
+                fontSize: "11px",
+                marginLeft: "20px",
+                marginTop: "-3px",
+              }}
+            >
+              AI 심리 분석
+            </MP.NavText>
+          </MP.NavBtnContainer>
+          {/*홈*/}
+          <MP.NavBtnContainer>
+            <MP.NavIcon
+              style={{
+                fontSize: "11px",
+                marginLeft: "10px",
+                marginTop: "-25px",
+              }}
+            >
+              <img src="/images/HomeIcon.svg" onClick={goHome} />
+            </MP.NavIcon>
+          </MP.NavBtnContainer>
+          {/*내 기록*/}
+          <MP.NavBtnContainer>
+            <MP.NavIcon
+              style={{
+                marginLeft: "63px",
+              }}
+            >
+              <img src="/images/RecordIcon.svg" onClick={goRecord} />
+            </MP.NavIcon>
+            <MP.NavText
+              style={{
+                marginLeft: "60px",
+              }}
+            >
+              내 기록
+            </MP.NavText>
+          </MP.NavBtnContainer>
+          {/*마이페이지*/}
+          <MP.NavBtnContainer>
+            <MP.NavIcon
+              style={{
+                marginLeft: "45px",
+                color: "#A259FF",
+              }}
+            >
+              <img
+                src="/images/MyPageIcon.svg"
+                onClick={goMyPage}
                 style={{
                   color: "#A259FF",
                 }}
-              >
-                마이페이지
-              </MP.NavText>
-            </MP.NavBtnContainer>
-          </MP.NavBar>
-          {/*하단바*/}
-        </MP.Item>
+              />
+            </MP.NavIcon>
+            <MP.NavText
+              style={{
+                color: "#A259FF",
+              }}
+            >
+              마이페이지
+            </MP.NavText>
+          </MP.NavBtnContainer>
+        </MP.NavBar>
+        {/*하단바*/}
       </MP.Container>
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

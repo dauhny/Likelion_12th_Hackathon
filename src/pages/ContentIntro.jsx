@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as C from "../styles/styledContentIntro";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export function ContentIntro() {
   const navigate = useNavigate();
@@ -231,159 +232,174 @@ export function ContentIntro() {
   return (
     <>
       <C.Container>
-        <C.BackBtn onClick={goBack}></C.BackBtn>
-        <C.Item>
-          {content.map((e) => (
-            <C.ExhibitContainer key={e.id}>
-              <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
-              <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
-                <img src={e.image} alt="ExhibitPoster" />
-              </C.ExhibitPoster>
-              <C.LocationIcon>
-                <img src="/images/LocationIcon.svg" />
-              </C.LocationIcon>
-              <br /> <br />
-              <C.LocationText>{e.place}</C.LocationText>
-              <C.CalendarIcon>
-                <img src="/images/CalendarIcon.svg" />
-              </C.CalendarIcon>
-              <C.InfoText>전시 일정</C.InfoText>
-              <C.ExhibitDetail>
-                {e.period}
-                <br />
-                {e.time}
-              </C.ExhibitDetail>
-              <C.BtnContainer>
-                <C.ScrapBtn onClick={handleScrap}>
-                  <img src={scrapBtn} alt="Scrap Button" />
-                  <h3>{scrapCount}</h3>
-                </C.ScrapBtn>
-                <C.ShareBtn onClick={() => handleCopyClipBoard(e.pageUrl)}>
-                  <img src="/images/ShareBtn.svg" />
-                </C.ShareBtn>
-              </C.BtnContainer>
-            </C.ExhibitContainer>
-          ))}
-          <C.goRecBtn onClick={() => goMusicCommunity(id)} />
-          <C.PurpleBlur />
-          <C.CommentIcon>
-            <img src="/images/CommentIcon.svg" />
-          </C.CommentIcon>
-          <C.InfoText
-            style={{
-              marginLeft: "15px",
-              marginTop: "-22px",
-            }}
-          >
-            코멘트 ({comments.length})
-          </C.InfoText>
-          <C.CommentInputContainer>
-            <C.ProfileImg>
-              <img src={profileImg} alt="Profile Img" />
-            </C.ProfileImg>
-            <C.CommentInput
-              placeholder="전시에 대한 코멘트를 남겨보세요."
-              value={commentText}
-              onChange={handleCommentChange}
-            />
-            <C.CommentBtn onClick={handleCommentSubmit}>
-              <img src="/images/CommentBtn.svg" />
-            </C.CommentBtn>
-          </C.CommentInputContainer>
-          {comments.map((e) => (
-            <C.CommentContainer key={e.id}>
-              <C.CommentContent>{e.comment}</C.CommentContent>
-              <C.CommentDate>{e.createdAt}</C.CommentDate>
-              <C.DeleteBtn onClick={() => handleCommentDelete(e.id)} />
-              <C.CommentNickname>{e.nickname} • </C.CommentNickname>
-              <C.CommentProfile>
-                <img
-                  src={`http://127.0.0.1:8000${e.profile}`}
-                  alt="Comment Profile"
-                />
-              </C.CommentProfile>
-              <C.CommentLine />
-            </C.CommentContainer>
-          ))}{" "}
-          <C.PinkBlur />
-          {/* 하단바 */}
-          <C.NavBar>
-            {/* 검색 */}
-            <C.NavBtnContainer>
-              <C.NavIcon
-                style={{
-                  marginLeft: "25px",
-                }}
-              >
-                <img src="/images/SearchIcon.svg" onClick={goSearch} />
-              </C.NavIcon>
-              <C.NavText
-                style={{
-                  marginLeft: "28px",
-                }}
-              >
-                검색
-              </C.NavText>
-            </C.NavBtnContainer>
-            {/* AI 심리 분석 */}
-            <C.NavBtnContainer>
-              <C.NavIcon>
-                <img src="/images/AIIcon.svg" onClick={goAI} />
-              </C.NavIcon>
-              <C.NavText
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "20px",
-                  marginTop: "-3px",
-                }}
-              >
-                AI 심리 분석
-              </C.NavText>{" "}
-            </C.NavBtnContainer>
-            {/* 홈 */}
-            <C.NavBtnContainer>
-              <C.NavIcon
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "10px",
-                  marginTop: "-25px",
-                }}
-              >
-                <img src="/images/HomeIcon.svg" onClick={goHome} />
-              </C.NavIcon>
-            </C.NavBtnContainer>
-            {/* 내 기록 */}
-            <C.NavBtnContainer>
-              <C.NavIcon
-                style={{
-                  marginLeft: "63px",
-                }}
-              >
-                <img src="/images/RecordIcon.svg" onClick={goRecord} />
-              </C.NavIcon>
-              <C.NavText
-                style={{
-                  marginLeft: "60px",
-                }}
-              >
-                내 기록
-              </C.NavText>
-            </C.NavBtnContainer>
-            {/* 마이페이지 */}
-            <C.NavBtnContainer>
-              <C.NavIcon
-                style={{
-                  marginLeft: "45px",
-                }}
-              >
-                <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
-              </C.NavIcon>
-              <C.NavText>마이페이지</C.NavText>
-            </C.NavBtnContainer>
-          </C.NavBar>
-          {/* 하단바 끝 */}
-        </C.Item>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <C.BackBtn onClick={goBack}></C.BackBtn>
+          <C.Item>
+            {content.map((e) => (
+              <C.ExhibitContainer key={e.id}>
+                <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
+                <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
+                  <img src={e.image} alt="ExhibitPoster" />
+                </C.ExhibitPoster>
+                <C.LocationIcon>
+                  <img src="/images/LocationIcon.svg" />
+                </C.LocationIcon>
+                <br /> <br />
+                <C.LocationText>{e.place}</C.LocationText>
+                <C.CalendarIcon>
+                  <img src="/images/CalendarIcon.svg" />
+                </C.CalendarIcon>
+                <C.InfoText>전시 일정</C.InfoText>
+                <C.ExhibitDetail>
+                  {e.period}
+                  <br />
+                  {e.time}
+                </C.ExhibitDetail>
+                <C.BtnContainer>
+                  <C.ScrapBtn onClick={handleScrap}>
+                    <img src={scrapBtn} alt="Scrap Button" />
+                    <h3>{scrapCount}</h3>
+                  </C.ScrapBtn>
+                  <C.ShareBtn onClick={() => handleCopyClipBoard(e.pageUrl)}>
+                    <img src="/images/ShareBtn.svg" />
+                  </C.ShareBtn>
+                </C.BtnContainer>
+              </C.ExhibitContainer>
+            ))}
+            <C.goRecBtn onClick={() => goMusicCommunity(id)} />
+            <C.PurpleBlur />
+            <C.CommentIcon>
+              <img src="/images/CommentIcon.svg" />
+            </C.CommentIcon>
+            <C.InfoText
+              style={{
+                marginLeft: "15px",
+                marginTop: "-22px",
+              }}
+            >
+              코멘트 ({comments.length})
+            </C.InfoText>
+            <C.CommentInputContainer>
+              <C.ProfileImg>
+                <img src={profileImg} alt="Profile Img" />
+              </C.ProfileImg>
+              <C.CommentInput
+                placeholder="전시에 대한 코멘트를 남겨보세요."
+                value={commentText}
+                onChange={handleCommentChange}
+              />
+              <C.CommentBtn onClick={handleCommentSubmit}>
+                <img src="/images/CommentBtn.svg" />
+              </C.CommentBtn>
+            </C.CommentInputContainer>
+            {comments.map((e) => (
+              <C.CommentContainer key={e.id}>
+                <C.CommentContent>{e.comment}</C.CommentContent>
+                <C.CommentDate>{e.createdAt}</C.CommentDate>
+                <C.DeleteBtn onClick={() => handleCommentDelete(e.id)} />
+                <C.CommentNickname>{e.nickname} • </C.CommentNickname>
+                <C.CommentProfile>
+                  <img
+                    src={`http://127.0.0.1:8000${e.profile}`}
+                    alt="Comment Profile"
+                  />
+                </C.CommentProfile>
+                <C.CommentLine />
+              </C.CommentContainer>
+            ))}{" "}
+          </C.Item>{" "}
+        </motion.div>
+        <C.PinkBlur />
+        {/* 하단바 */}
+        <C.NavBar>
+          {/* 검색 */}
+          <C.NavBtnContainer>
+            <C.NavIcon
+              style={{
+                marginLeft: "25px",
+              }}
+            >
+              <img src="/images/SearchIcon.svg" onClick={goSearch} />
+            </C.NavIcon>
+            <C.NavText
+              style={{
+                marginLeft: "28px",
+              }}
+            >
+              검색
+            </C.NavText>
+          </C.NavBtnContainer>
+          {/* AI 심리 분석 */}
+          <C.NavBtnContainer>
+            <C.NavIcon>
+              <img src="/images/AIIcon.svg" onClick={goAI} />
+            </C.NavIcon>
+            <C.NavText
+              style={{
+                fontSize: "11px",
+                marginLeft: "20px",
+                marginTop: "-3px",
+              }}
+            >
+              AI 심리 분석
+            </C.NavText>{" "}
+          </C.NavBtnContainer>
+          {/* 홈 */}
+          <C.NavBtnContainer>
+            <C.NavIcon
+              style={{
+                fontSize: "11px",
+                marginLeft: "10px",
+                marginTop: "-25px",
+              }}
+            >
+              <img src="/images/HomeIcon.svg" onClick={goHome} />
+            </C.NavIcon>
+          </C.NavBtnContainer>
+          {/* 내 기록 */}
+          <C.NavBtnContainer>
+            <C.NavIcon
+              style={{
+                marginLeft: "63px",
+              }}
+            >
+              <img src="/images/RecordIcon.svg" onClick={goRecord} />
+            </C.NavIcon>
+            <C.NavText
+              style={{
+                marginLeft: "60px",
+              }}
+            >
+              내 기록
+            </C.NavText>
+          </C.NavBtnContainer>
+          {/* 마이페이지 */}
+          <C.NavBtnContainer>
+            <C.NavIcon
+              style={{
+                marginLeft: "45px",
+              }}
+            >
+              <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
+            </C.NavIcon>
+            <C.NavText>마이페이지</C.NavText>
+          </C.NavBtnContainer>
+        </C.NavBar>
+        {/* 하단바 끝 */}
       </C.Container>
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

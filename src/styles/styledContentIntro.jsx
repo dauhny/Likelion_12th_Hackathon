@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 2625px;
+  height: 844px;
   margin: 0 auto;
   background: #fff;
   justify-content: center;
@@ -50,7 +50,7 @@ export const NavBar = styled.div`
   bottom: 0;
   z-index: 999;
   display: flex;
-  margin-left: -48px;
+  margin-left: -1px;
 `;
 
 export const NavBtnContainer = styled.div`

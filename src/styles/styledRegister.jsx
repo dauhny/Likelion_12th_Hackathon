@@ -16,6 +16,7 @@ export const Container = styled.div`
 export const Group = styled.div`
   width: 157px;
   height: 118px;
+  margin-left: 85px;
 `;
 
 export const Ellipse549 = styled.div`

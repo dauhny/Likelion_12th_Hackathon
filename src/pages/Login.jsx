@@ -9,6 +9,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 
 export function Login() {
   const navigate = useNavigate();
@@ -71,35 +72,49 @@ export function Login() {
   return (
     <>
       <L.Container>
-        <L.Group>
-          <img src="/images/Group.svg" alt="Group" />
-        </L.Group>
-        <L.Ellipse549></L.Ellipse549>
-        <br />
-        <br />
-        <br />
-        <br />
-        <L.InputContainer>
-          <L.InputLabel>아이디</L.InputLabel>
-          <L.UserInput
-            type="text"
-            placeholder="아이디를 입력하세요."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></L.UserInput>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+        >
+          <L.Group>
+            <img src="/images/Group.svg" alt="Group" />
+          </L.Group>
+          <L.Ellipse549></L.Ellipse549>
+          <br />
+          <br />
+          <br />
+          <br />
+          <L.InputContainer>
+            <L.InputLabel>아이디</L.InputLabel>
+            <L.UserInput
+              type="text"
+              placeholder="아이디를 입력하세요."
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></L.UserInput>
+            <br></br>
+            <L.InputLabel>비밀번호</L.InputLabel>
+            <L.UserInput
+              type="password"
+              placeholder="비밀번호를 입력하세요."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></L.UserInput>
+          </L.InputContainer>
+          {errorMessage && <L.ErrorMessage>{errorMessage}</L.ErrorMessage>}
           <br></br>
-          <L.InputLabel>비밀번호</L.InputLabel>
-          <L.UserInput
-            type="password"
-            placeholder="비밀번호를 입력하세요."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></L.UserInput>
-        </L.InputContainer>
-        {errorMessage && <L.ErrorMessage>{errorMessage}</L.ErrorMessage>}
-        <br></br>
-        <L.Complete onClick={handleLogin}>완료</L.Complete>
+          <L.Complete onClick={handleLogin}>완료</L.Complete>
+        </motion.div>
       </L.Container>
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};
