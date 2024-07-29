@@ -40,10 +40,15 @@ export function ContentIntro() {
         setContent([fetchedData]);
         setData(fetchedData.id);
         setScrapCount(fetchedData.scrapCount);
-        setIsScrapped(response.data.isScrapped);
+
+        // 로컬 스토리지에서 스크랩 상태 불러오기
+        const storedIsScrapped = localStorage.getItem(
+          "isScrapped_" + fetchedData.id
+        );
+        setIsScrapped(storedIsScrapped === "true");
 
         setScrapBtn(
-          fetchedData.isScrapped
+          storedIsScrapped === "true" || fetchedData.isScrapped
             ? "/images/ScrapBtnOn.svg"
             : "/images/ScrapBtnOff.svg"
         );
@@ -94,7 +99,11 @@ export function ContentIntro() {
       });
 
       console.log("스크랩 성공:", response.data);
-      setIsScrapped((prev) => !prev);
+      setIsScrapped((prev) => {
+        const newState = !prev;
+        localStorage.setItem("isScrapped_" + data, newState); // 상태를 로컬 스토리지에 저장
+        return newState;
+      });
       setScrapCount((prevCount) =>
         isScrapped ? prevCount - 1 : prevCount + 1
       );

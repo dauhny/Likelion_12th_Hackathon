@@ -6,7 +6,6 @@ import axios from "axios";
 
 export function ReviewDetail() {
   const navigate = useNavigate();
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
@@ -15,20 +14,17 @@ export function ReviewDetail() {
   const [img, setImg] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [viewAt, setViewAt] = useState("");
-
   const [profile, setProfile] = useState("");
   const [content, setContent] = useState("");
   const [username, setUserName] = useState("");
 
   const [likeBtn, setLikeBtn] = useState("/images/LikeBtn.svg");
   const [likeCount, setLikeCount] = useState(0);
-  const [data, setData] = useState();
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // API 호출
         const token = localStorage.getItem("token");
 
         if (!token) {
@@ -39,19 +35,30 @@ export function ReviewDetail() {
         const response = await axios.get(`http://127.0.0.1:8000/posts/${id}`, {
           headers: { Authorization: `Token ${token}` },
         });
+
         setTitle(response.data.title);
         setUserName(response.data.username);
         setContent(response.data.content);
         setCreatedAt(response.data.createdAt);
-        setLikeCount(response.data.likeCount);
-        setProfile(response.data.profile);
         setImg(response.data.img);
         setViewAt(response.data.viewAt);
+        setProfile(response.data.profile);
+        setLikeCount(response.data.likeCount);
+        setIsLiked(response.data.isLiked);
+
+        // 로컬 스토리지에서 좋아요 상태 불러오기
+        const storedIsLiked = localStorage.getItem("isLiked_" + id);
+        setIsLiked(storedIsLiked === "true" || response.data.isLiked);
+        setLikeBtn(
+          storedIsLiked === "true" || response.data.isLiked
+            ? "/images/LikeBtnOn.svg"
+            : "/images/LikeBtn.svg"
+        );
       } catch (error) {
         console.error("후기글 조회 실패 :", error);
       }
     };
-    fetchData(); // useEffect에서 fetchData 함수 호출
+    fetchData();
   }, [id]);
 
   const goBack = () => {
@@ -59,7 +66,7 @@ export function ReviewDetail() {
     window.scrollTo(0, 0);
   };
 
-  //하단바
+  // 하단바 네비게이션 함수들
   const goSearch = () => {
     navigate(`/search`);
     window.scrollTo(0, 0);
@@ -85,39 +92,7 @@ export function ReviewDetail() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
-  //좋아요 버튼
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          alert("로그인 후 이용하세요.");
-          return;
-        }
-
-        const response = await axios.get(`http://127.0.0.1:8000/posts/${id}`, {
-          headers: { Authorization: `Token ${token}` },
-        });
-
-        const fetchedData = response.data;
-        setContent(fetchedData.content); // 여기서 fetchedData.content로 수정
-        setData(fetchedData.id);
-        setLikeCount(fetchedData.likeCount);
-        setIsLiked(fetchedData.isLiked); // fetchedData.isLiked로 수정
-        setLikeBtn(
-          fetchedData.isLiked ? "/images/LikeBtnOn.svg" : "/images/LikeBtn.svg"
-        );
-      } catch (error) {
-        console.error("좋아요 실패 :", error);
-      }
-    };
-    fetchData();
-  }, [id]);
-
-  //좋아요
+  // 좋아요 버튼 핸들러
   const handleLike = async (event) => {
     event.preventDefault();
     try {
@@ -140,14 +115,21 @@ export function ReviewDetail() {
         headers: { Authorization: `Token ${token}` },
       });
 
-      console.log("좋아요 성공:", response.data);
-      setIsLiked((prev) => !prev);
-      setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-      setLikeBtn(isLiked ? "/images/LikeBtn.svg" : "/images/LikeBtnOn.svg");
+      setIsLiked((prev) => {
+        const newLikeStatus = !prev;
+        localStorage.setItem("isLiked_" + id, newLikeStatus); // 상태를 로컬 스토리지에 저장
+        setLikeCount((prevCount) =>
+          newLikeStatus ? prevCount + 1 : prevCount - 1
+        );
+        setLikeBtn(
+          newLikeStatus ? "/images/LikeBtnOn.svg" : "/images/LikeBtn.svg"
+        );
+        return newLikeStatus;
+      });
 
       alert(isLiked ? "좋아요가 취소되었습니다." : "좋아요를 남겼습니다.");
     } catch (error) {
-      console.error("스크랩 실패:", error);
+      console.error("좋아요 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -162,7 +144,7 @@ export function ReviewDetail() {
           <RD.IntroText>커뮤니티</RD.IntroText>
           <RD.ReviewContainer>
             <RD.profile>
-              <img src={`http://127.0.0.1:8000${profile}`} alt="profile"></img>
+              <img src={`http://127.0.0.1:8000${profile}`} alt="profile" />
               <div id="name">{username}</div>
               <div id="time">{createdAt}</div>
             </RD.profile>
@@ -171,28 +153,23 @@ export function ReviewDetail() {
                 <div id="text">{viewAt}</div>
               </RD.date>
               <RD.like onClick={handleLike}>
-                <img
-                  src={
-                    isLiked ? "/images/LikeBtnOn.svg" : "/images/LikeBtn.svg"
-                  }
-                  alt="like"
-                ></img>
+                <img src={likeBtn} alt="like" />
                 <div id="count">{likeCount}</div>
               </RD.like>
               <RD.PinkBlur></RD.PinkBlur>
             </RD.firstBox>
             <RD.title>{title}</RD.title>
             <RD.img>
-              <img src={img} alt="exhibition"></img>
+              <img src={img} alt="exhibition" />
             </RD.img>
             <RD.contentContainer>
               <div id="content">{content}</div>
             </RD.contentContainer>
           </RD.ReviewContainer>
           <RD.PinkBlur2></RD.PinkBlur2>
-          {/*하단바*/}
+          {/* 하단바 */}
           <RD.NavBar>
-            {/*검색*/}
+            {/* 검색 */}
             <RD.NavBtnContainer>
               <RD.NavIcon
                 style={{
@@ -209,7 +186,7 @@ export function ReviewDetail() {
                 검색
               </RD.NavText>
             </RD.NavBtnContainer>
-            {/*AI 심리 분석*/}
+            {/* AI 심리 분석 */}
             <RD.NavBtnContainer>
               <RD.NavIcon>
                 <img src="/images/AIIcon.svg" onClick={goAI} />
@@ -222,9 +199,9 @@ export function ReviewDetail() {
                 }}
               >
                 AI 심리 분석
-              </RD.NavText>{" "}
+              </RD.NavText>
             </RD.NavBtnContainer>
-            {/*홈*/}
+            {/* 홈 */}
             <RD.NavBtnContainer>
               <RD.NavIcon
                 style={{
@@ -236,7 +213,7 @@ export function ReviewDetail() {
                 <img src="/images/HomeIcon.svg" onClick={goHome} />
               </RD.NavIcon>
             </RD.NavBtnContainer>
-            {/*내 기록*/}
+            {/* 내 기록 */}
             <RD.NavBtnContainer>
               <RD.NavIcon
                 style={{
@@ -255,23 +232,19 @@ export function ReviewDetail() {
                 내 기록
               </RD.NavText>
             </RD.NavBtnContainer>
-            {/*마이페이지*/}
+            {/* 마이페이지 */}
             <RD.NavBtnContainer>
               <RD.NavIcon
                 style={{
                   marginLeft: "45px",
                 }}
               >
-                <img
-                  src="/images/MyPageIcon.svg"
-                  onClick={goMyPage}
-                  style={{}}
-                />
+                <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
               </RD.NavIcon>
-              <RD.NavText style={{}}>마이페이지</RD.NavText>
+              <RD.NavText>마이페이지</RD.NavText>
             </RD.NavBtnContainer>
           </RD.NavBar>
-          {/*하단바*/}
+          {/* 하단바 끝 */}
         </RD.Item>
       </RD.Container>
     </>

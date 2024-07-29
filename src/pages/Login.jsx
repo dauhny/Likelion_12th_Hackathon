@@ -22,6 +22,11 @@ export function Login() {
     window.scrollTo(0, 0);
   };
 
+  const goRegister = () => {
+    navigate(`/register`);
+    window.scrollTo(0, 0);
+  };
+
   const handleLogin = async (event) => {
     event.preventDefault();
     if (!validateInputs()) return;
@@ -107,6 +112,8 @@ export function Login() {
           {errorMessage && <L.ErrorMessage>{errorMessage}</L.ErrorMessage>}
           <br></br>
           <L.Complete onClick={handleLogin}>완료</L.Complete>
+          <L.InfoText>아직 계정이 없나요?</L.InfoText>
+          <L.RegisterBtn onClick={goRegister}>회원가입 ></L.RegisterBtn>
         </motion.div>
       </L.Container>
     </>

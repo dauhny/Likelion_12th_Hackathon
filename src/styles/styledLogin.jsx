@@ -16,6 +16,7 @@ export const Container = styled.div`
 export const Group = styled.div`
   width: 157px;
   height: 118px;
+  margin-left: 80px;
 `;
 
 export const Ellipse549 = styled.div`
@@ -81,4 +82,35 @@ export const ErrorMessage = styled.div`
   font-weight: 400;
   line-height: 160.5%;
   margin-top: 8px;
+`;
+
+export const InfoText = styled.div`
+  color: #fff;
+  text-align: left;
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 160.5%; /* 19.26px */
+  margin-top: 10px;
+`;
+
+export const RegisterBtn = styled.button`
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160.5%; /* 19.26px */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  margin-top: -19px;
+  margin-left: 90px;
+
+  &:hover {
+    color: #a259ff;
+  }
 `;

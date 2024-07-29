@@ -1,4 +1,4 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const Group = styled.div`
   width: 157px;
   height: 118px;
+  margin-left: 80px;
 `;
 
 export const Ellipse549 = styled.div`
@@ -39,6 +40,7 @@ export const Login = styled.button`
   font-weight: 400;
   line-height: 160.5%;
   cursor: pointer;
+  margin-bottom: 20px;
 `;
 
 export const Register = styled.button`
