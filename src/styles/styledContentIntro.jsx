@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 844px;
+  height: 1200px;
   margin: 0 auto;
   background: #fff;
   justify-content: center;
@@ -208,7 +208,7 @@ export const ShareBtn = styled.button`
 `;
 
 export const goRecBtn = styled.button`
-  margin-top: 40px;
+  margin-top: 50px;
   width: 290px;
   height: 41px;
   border: none;
@@ -216,6 +216,7 @@ export const goRecBtn = styled.button`
   background-color: transparent;
   background-image: url("/images/goRecBtn.svg");
   margin-left: 7px;
+  margin-bottom: 30px;
 
   &:hover {
     background-image: url("/images/goRecBtnH.svg");
@@ -226,7 +227,7 @@ export const CommentIcon = styled.div`
   width: 18px;
   height: 17px;
   flex-shrink: 0;
-  margin: 200px 0 0 -15px;
+  margin: 230px 0 0 -15px;
 `;
 
 export const CommentInputContainer = styled.div`
@@ -277,7 +278,8 @@ export const PinkBlur = styled.div`
   filter: blur(160px);
   position: relative;
   z-index: -1;
-  margin-top: -120px;
+  margin-top: -40px;
+  margin-left: -60px;
 `;
 
 export const CommentContent = styled.div`

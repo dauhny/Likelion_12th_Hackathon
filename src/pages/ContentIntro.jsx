@@ -472,6 +472,7 @@ export function ContentIntro() {
                 <C.CommentLine />
               </C.CommentContainer>
             ))}{" "}
+            <C.PinkBlur></C.PinkBlur>
           </C.Item>{" "}
         </motion.div>
         <C.PinkBlur />
