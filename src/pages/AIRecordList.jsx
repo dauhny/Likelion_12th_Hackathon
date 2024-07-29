@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as A from "../styles/styledAIRecordList";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export function AIRecordList() {
   const navigate = useNavigate();
@@ -99,96 +100,108 @@ export function AIRecordList() {
     <>
       <A.Container>
         <A.BackBtn onClick={goBack}></A.BackBtn>
-        <A.PageTitle>나의 기록</A.PageTitle>
-        <A.Item>
-          <A.Choice>분석하고 싶은 기록을 선택하세요.</A.Choice>
-          <A.Comment>
-            AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.
-          </A.Comment>{" "}
-          {review.map((e, index) => (
-            <A.RecordContainer key={index}>
-              <A.ImgBox>
-                <img src={e.img} alt="Review Image"></img>
-              </A.ImgBox>
-              <A.ExhibitionIntroduce>
-                <div id="Title">{e.title}</div>
-                <div id="Date">{e.createdAt}</div>
-                <A.CheckBox
-                  id="NotCheck"
-                  onClick={() => handleImageClick(index)}
-                >
-                  <img
-                    src={
-                      checkedItemId === e.id
-                        ? "/images/Check.svg"
-                        : "/images/NotCheck.svg"
-                    }
-                    alt="CheckStatus"
-                  ></img>
-                </A.CheckBox>
-              </A.ExhibitionIntroduce>
-            </A.RecordContainer>
-          ))}
-          <A.Analysis onClick={goAIResult}>
-            <div id="choice">
-              <img src="/images/WhiteCheck.svg" />
-            </div>
-            <div id="text">선택한 기록 분석</div>
-          </A.Analysis>
-          <A.NavBar>
-            {/* Navigation Buttons */}
-            <A.NavBtnContainer>
-              <A.NavIcon style={{ marginLeft: "25px" }}>
-                <img src="/images/SearchIcon.svg" onClick={goSearch} />
-              </A.NavIcon>
-              <A.NavText style={{ marginLeft: "28px" }}>검색</A.NavText>
-            </A.NavBtnContainer>
-            <A.NavBtnContainer>
-              <A.NavIcon>
-                <img src="/images/AIIcon.svg" onClick={goAI} />
-              </A.NavIcon>
-              <A.NavText
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "20px",
-                  marginTop: "-3px",
-                  color: "#A259FF",
-                }}
-              >
-                AI 심리 분석
-              </A.NavText>
-            </A.NavBtnContainer>
-            <A.NavBtnContainer>
-              <A.NavIcon
-                style={{
-                  fontSize: "11px",
-                  marginLeft: "10px",
-                  marginTop: "-25px",
-                }}
-              >
-                <img src="/images/HomeIcon.svg" onClick={goHome} />
-              </A.NavIcon>
-            </A.NavBtnContainer>
-            <A.NavBtnContainer>
-              <A.NavIcon style={{ marginLeft: "63px" }}>
-                <img
-                  src="/images/RecordIcon.svg"
-                  onClick={() => goRecord(id)}
-                />
-              </A.NavIcon>
-              <A.NavText style={{ marginLeft: "60px" }}>내 기록</A.NavText>
-            </A.NavBtnContainer>
-            <A.NavBtnContainer>
-              <A.NavIcon style={{ marginLeft: "45px" }}>
-                <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
-              </A.NavIcon>
-              <A.NavText>마이페이지</A.NavText>
-            </A.NavBtnContainer>
-          </A.NavBar>
-        </A.Item>
+        <A.PageTitle>나의 기록</A.PageTitle>{" "}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <A.Item>
+            <A.Choice>분석하고 싶은 기록을 선택하세요.</A.Choice>
+            <A.Comment>
+              AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.
+            </A.Comment>{" "}
+            {review.map((e, index) => (
+              <A.RecordContainer key={index}>
+                <A.ImgBox>
+                  <img src={e.img} alt="Review Image"></img>
+                </A.ImgBox>
+                <A.ExhibitionIntroduce>
+                  <div id="Title">{e.title}</div>
+                  <div id="Date">{e.createdAt}</div>
+                  <A.CheckBox
+                    id="NotCheck"
+                    onClick={() => handleImageClick(index)}
+                  >
+                    <img
+                      src={
+                        checkedItemId === e.id
+                          ? "/images/Check.svg"
+                          : "/images/NotCheck.svg"
+                      }
+                      alt="CheckStatus"
+                    ></img>
+                  </A.CheckBox>
+                </A.ExhibitionIntroduce>
+              </A.RecordContainer>
+            ))}
+            <A.Analysis onClick={goAIResult}>
+              <div id="choice">
+                <img src="/images/WhiteCheck.svg" />
+              </div>
+              <div id="text">선택한 기록 분석</div>
+            </A.Analysis>
+          </A.Item>{" "}
+        </motion.div>
+        <A.NavBar>
+          {/* Navigation Buttons */}
+          <A.NavBtnContainer>
+            <A.NavIcon style={{ marginLeft: "25px" }}>
+              <img src="/images/SearchIcon.svg" onClick={goSearch} />
+            </A.NavIcon>
+            <A.NavText style={{ marginLeft: "28px" }}>검색</A.NavText>
+          </A.NavBtnContainer>
+          <A.NavBtnContainer>
+            <A.NavIcon>
+              <img src="/images/AIIcon.svg" onClick={goAI} />
+            </A.NavIcon>
+            <A.NavText
+              style={{
+                fontSize: "11px",
+                marginLeft: "20px",
+                marginTop: "-3px",
+                color: "#A259FF",
+              }}
+            >
+              AI 심리 분석
+            </A.NavText>
+          </A.NavBtnContainer>
+          <A.NavBtnContainer>
+            <A.NavIcon
+              style={{
+                fontSize: "11px",
+                marginLeft: "10px",
+                marginTop: "-25px",
+              }}
+            >
+              <img src="/images/HomeIcon.svg" onClick={goHome} />
+            </A.NavIcon>
+          </A.NavBtnContainer>
+          <A.NavBtnContainer>
+            <A.NavIcon style={{ marginLeft: "63px" }}>
+              <img src="/images/RecordIcon.svg" onClick={() => goRecord(id)} />
+            </A.NavIcon>
+            <A.NavText style={{ marginLeft: "60px" }}>내 기록</A.NavText>
+          </A.NavBtnContainer>
+          <A.NavBtnContainer>
+            <A.NavIcon style={{ marginLeft: "45px" }}>
+              <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
+            </A.NavIcon>
+            <A.NavText>마이페이지</A.NavText>
+          </A.NavBtnContainer>
+        </A.NavBar>
       </A.Container>
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};
 
 export default AIRecordList;

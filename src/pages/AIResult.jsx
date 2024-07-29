@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import axios from "axios";
+import { PuffLoader } from "react-spinners";
 
 export function AIResult() {
   const navigate = useNavigate();
@@ -121,7 +122,32 @@ export function AIResult() {
       <A.PageTitle>분석 결과</A.PageTitle>
       <A.Item>
         {loading ? (
-          <A.Loading></A.Loading> // 로딩 중 표시
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh", // 전체 화면 높이에 맞춰 조정
+              marginTop: "-100px",
+              marginLeft: "-7%",
+            }}
+          >
+            <PuffLoader color="#B880FF" size={85} />
+            <h1
+              style={{
+                fontFamily: "Pretendard Variable",
+                fontSize: "18px",
+                fontStyle: "normal",
+                fontWeight: "600",
+                lineHeight: "160.5%",
+                color: "#696969",
+                marginLeft: "-110px",
+                marginTop: "190px",
+              }}
+            >
+              분석이 진행중입니다.
+            </h1>
+          </div>
         ) : (
           <>
             <A.Introduce></A.Introduce>

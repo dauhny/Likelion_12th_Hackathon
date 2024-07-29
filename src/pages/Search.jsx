@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import { motion } from "framer-motion";
 
 export const Search = () => {
   const navigate = useNavigate();
@@ -92,46 +93,55 @@ export const Search = () => {
     <>
       <S.Container>
         <S.BackBtn onClick={goBack}></S.BackBtn>
-        <S.PageTitle>전시 검색</S.PageTitle>
-        <S.Item>
-          <S.SearchInput
-            placeholder="관심 있는 전시를 검색해보세요."
-            value={searchValue}
-            onChange={handleKeyword}
-          />
-          <S.SearchIcon onClick={handleSearch} />
-          <br />
-          {content.map((e, index) => (
-            <S.ExhibitContainer
-              key={index}
-              onClick={() => goContentIntro(e.id)}
-            >
-              <S.ExhibitImg>
-                <img src={e.image} alt={e.title} />
-              </S.ExhibitImg>
-              <S.ExhibitInfoBox>
-                <S.ExhibitTitle>{e.title}</S.ExhibitTitle>
-                <S.ExhibitDetail>
-                  {e.period}
-                  <br />
-                  {e.place}
-                </S.ExhibitDetail>
-              </S.ExhibitInfoBox>
-            </S.ExhibitContainer>
-          ))}
-          <S.PaginationContainer>
-            <Pagination
-              clssName="pagination"
-              activePage={page} // 현재 페이지
-              itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
-              totalItemsCount={totalItems} // 총 아이템 수
-              pageRangeDisplayed={5} // paginator의 페이지 범위
-              prevPageText={"‹"} // "이전"을 나타낼 텍스트
-              nextPageText={"›"} // "다음"을 나타낼 텍스트
-              onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+        <S.PageTitle>전시 검색</S.PageTitle>{" "}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <S.Item>
+            <S.SearchInput
+              placeholder="관심 있는 전시를 검색해보세요."
+              value={searchValue}
+              onChange={handleKeyword}
             />
-          </S.PaginationContainer>
-        </S.Item>
+            <S.SearchIcon onClick={handleSearch} />
+            <br />
+            {content.map((e, index) => (
+              <S.ExhibitContainer
+                key={index}
+                onClick={() => goContentIntro(e.id)}
+              >
+                <S.ExhibitImg>
+                  <img src={e.image} alt={e.title} />
+                </S.ExhibitImg>
+                <S.ExhibitInfoBox>
+                  <S.ExhibitTitle>{e.title}</S.ExhibitTitle>
+                  <S.ExhibitDetail>
+                    {e.period}
+                    <br />
+                    {e.place}
+                  </S.ExhibitDetail>
+                </S.ExhibitInfoBox>
+              </S.ExhibitContainer>
+            ))}
+            <S.PaginationContainer>
+              <Pagination
+                clssName="pagination"
+                activePage={page} // 현재 페이지
+                itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+                totalItemsCount={totalItems} // 총 아이템 수
+                pageRangeDisplayed={5} // paginator의 페이지 범위
+                prevPageText={"‹"} // "이전"을 나타낼 텍스트
+                nextPageText={"›"} // "다음"을 나타낼 텍스트
+                onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+              />
+            </S.PaginationContainer>
+          </S.Item>{" "}
+        </motion.div>
         {/* 하단바 */}
         <S.NavBar>
           {/* 검색 */}
@@ -211,4 +221,9 @@ export const Search = () => {
       </S.Container>
     </>
   );
+};
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
 };

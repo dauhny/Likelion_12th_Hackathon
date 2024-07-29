@@ -72,6 +72,7 @@ export const PurpleBlur = styled.div`
   margin: -30px;
   background-color: #a259ff;
   filter: blur(160px);
+  margin-top: -780px;
 `;
 
 export const InfoTextPurple = styled.div`
@@ -269,3 +270,9 @@ export const LikeCnt = styled.div`
 export const NewExhibitContainer = styled.div``;
 
 export const ReviewContainer = styled.div``;
+
+export const AD = styled.div`
+  margin-left: -12%;
+  margin-top: 100px;
+  cursor: pointer;
+`;

@@ -213,6 +213,9 @@ export function Home() {
               <SimpleSlider newContent={newcontent}></SimpleSlider>
             </H.NewExhibit>
             {/* <SimpleSlider></SimpleSlider> */}
+            <H.AD onClick={goAI}>
+              <img src="/images/AD.svg" />
+            </H.AD>
             <br />
             <H.InfoText>HOT 후기글</H.InfoText>
             <H.ReviewBtn onClick={goReview}>
