@@ -26,6 +26,11 @@ import { RecordWrite } from "./pages/RecordWrite";
 import { MyRecordDetail } from "./pages/MyRecordDetail";
 import { AIPast } from "./pages/AIPast";
 import { AIPastDetail } from "./pages/AIPastDetail";
+import { IntroduceAI } from "./pages/IntroduceAI";
+import { IntroduceApp } from "./pages/IntroduceApp";
+import { IntroduceContent } from "./pages/IntroduceContent";
+import { IntroduceCommunity } from "./pages/IntroduceCommunity";
+import { FirstLogin } from "./pages/FirstLogin";
 
 function App() {
   return (
@@ -59,6 +64,11 @@ function App() {
         <Route path="/myrecorddetail" element={<MyRecordDetail />} />
         <Route path="/aipast" element={<AIPast />} />
         <Route path="/aipastdetail" element={<AIPastDetail />} />
+        <Route path="/introduceai" element={<IntroduceAI />} />
+        <Route path="/introducecommunity" element={<IntroduceCommunity />} />
+        <Route path="/introducecontent" element={<IntroduceContent />} />
+        <Route path="/introduceapp" element={<IntroduceApp />} />
+        <Route path="/firstlogin" element={<FirstLogin />} />
       </Routes>
     </BrowserRouter>
   );

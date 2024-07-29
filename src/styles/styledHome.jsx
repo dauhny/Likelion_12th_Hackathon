@@ -18,6 +18,17 @@ export const Item = styled.div`
   z-index: 0;
 `;
 
+export const PinkBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #fe3796;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: -100px;
+  margin-left: -60px;
+`;
+
 //하단바 시작
 
 export const NavBar = styled.div`
@@ -72,7 +83,7 @@ export const PurpleBlur = styled.div`
   margin: -30px;
   background-color: #a259ff;
   filter: blur(160px);
-  margin-top: -780px;
+  margin-top: -680px;
 `;
 
 export const InfoTextPurple = styled.div`
@@ -141,7 +152,7 @@ export const InfoText = styled.div`
   font-weight: 600;
   line-height: 24px;
   margin-bottom: -20px;
-  margin-top: 20%;
+  margin-top: 15%;
 `;
 
 export const ReviewBtn = styled.button`
@@ -273,6 +284,6 @@ export const ReviewContainer = styled.div``;
 
 export const AD = styled.div`
   margin-left: -12%;
-  margin-top: 100px;
+  margin-top: 10px;
   cursor: pointer;
 `;

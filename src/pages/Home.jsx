@@ -213,6 +213,7 @@ export function Home() {
               <SimpleSlider newContent={newcontent}></SimpleSlider>
             </H.NewExhibit>
             {/* <SimpleSlider></SimpleSlider> */}
+            <H.PinkBlur />
             <H.AD onClick={goAI}>
               <img src="/images/AD.svg" />
             </H.AD>

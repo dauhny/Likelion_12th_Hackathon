@@ -7,8 +7,8 @@ import axios from "axios";
 export function Welcome() {
   const navigate = useNavigate();
 
-  const goLogin = () => {
-    navigate(`/login`);
+  const goFirstLogin = () => {
+    navigate(`/firstlogin`);
     window.scrollTo(0, 0);
   };
 
@@ -26,7 +26,7 @@ export function Welcome() {
         <br />
         <br />
         <M.InfoText>환영합니다.</M.InfoText>
-        <M.StartBtn onClick={goLogin}>로그인 하러 가기 -></M.StartBtn>
+        <M.StartBtn onClick={goFirstLogin}>로그인 하러 가기 -></M.StartBtn>
         <br />
       </M.Container>
     </>
