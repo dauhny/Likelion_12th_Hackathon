@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function Mypage() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState("");
   const [nickname, setNickname] = useState("");
@@ -117,7 +119,7 @@ export function Mypage() {
 
   return (
     <>
-      <MP.Container>
+      <MP.Container isDarkMode={isDarkMode}>
         <motion.div
           initial="initial"
           animate="animate"
@@ -127,7 +129,7 @@ export function Mypage() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <MP.BackBtn onClick={goBack}></MP.BackBtn>
-          <MP.PageTitle>마이페이지</MP.PageTitle>
+          <MP.PageTitle isDarkMode={isDarkMode}>마이페이지</MP.PageTitle>
           <MP.Item>
             <MP.profile>
               <div
@@ -140,15 +142,14 @@ export function Mypage() {
               />
               <img src={profileImg} alt="profile"></img>
             </MP.profile>
-            <MP.name>{nickname}</MP.name>
+            <MP.name isDarkMode={isDarkMode}>{nickname}</MP.name>
             <MP.edit onClick={goMypageRevise}>
               <div id="text1">프로필 편집</div>
             </MP.edit>
             <MP.logout onClick={goLogin}>
               <div id="text2">로그아웃</div>
             </MP.logout>
-            <MP.scrap>
-              <img src="/images/Scrap.svg" alt="scrap"></img>
+            <MP.scrap isDarkMode={isDarkMode}>
               <div id="ScrapText">스크랩한 전시</div>
             </MP.scrap>
             {content.map((e) => (

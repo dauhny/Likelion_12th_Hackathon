@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 898px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -83,7 +86,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -124,10 +127,11 @@ export const ImgBox = styled.div`
   height: 81px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: #281d36;
+  background: ${(props) => (props.isDarkMode ? "#281d36" : "#fff")};
   margin-top: 15px;
   margin-left: -24px;
   cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   img {
     width: 61px;
@@ -144,12 +148,13 @@ export const ExhibitionIntroduce = styled.div`
   height: 81px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: #281d36;
+  background: ${(props) => (props.isDarkMode ? "#281d36" : "#fff")};
   margin-left: 62px;
   margin-top: -81px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   #Title {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 13px;
     font-style: normal;
@@ -160,7 +165,7 @@ export const ExhibitionIntroduce = styled.div`
     position: absolute;
   }
   #Date {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
@@ -177,14 +182,15 @@ export const Trash = styled.div`
   width: 13px;
   height: 15px;
   flex-shrink: 0;
-  margin-left: 226px;
-  margin-top: 31px;
+  margin-left: 221px;
+  margin-top: 29px;
   position: absolute;
   cursor: pointer;
-  img {
-    width: 100%;
-    height: 100%;
-  }
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/Trash.svg" : "/images/lightTrash.svg"});
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
 `;
 
 export const PinkBlur = styled.div`

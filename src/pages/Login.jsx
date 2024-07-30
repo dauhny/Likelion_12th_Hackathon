@@ -2,16 +2,57 @@ import React from "react";
 import * as L from "../styles/styledLogin";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
+import styled from "styled-components";
+
+// 스타일링 컴포넌트 정의
+const Container = styled.div`
+  width: 390px;
+  height: 844px;
+  margin: 0 auto;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+`;
+
+const LightLogin = styled.button`
+  width: 328px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #a259ff;
+  background: #a259ff;
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  cursor: pointer;
+  margin-bottom: 20px;
+`;
+
+export const InputLabel = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3d3a3a")};
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin: 7px;
+`;
 
 export function Login() {
+  const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -75,48 +116,48 @@ export function Login() {
   };
 
   return (
-    <>
-      <L.Container>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={pageTransition}
-          transition={{ duration: 0.3 }}
-        >
-          <L.Group>
-            <img src="/images/Group.svg" alt="Group" />
-          </L.Group>
-          <L.Ellipse549></L.Ellipse549>
-          <br />
-          <br />
-          <br />
-          <br />
-          <L.InputContainer>
-            <L.InputLabel>아이디</L.InputLabel>
-            <L.UserInput
-              type="text"
-              placeholder="아이디를 입력하세요."
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            ></L.UserInput>
-            <br></br>
-            <L.InputLabel>비밀번호</L.InputLabel>
-            <L.UserInput
-              type="password"
-              placeholder="비밀번호를 입력하세요."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></L.UserInput>
-          </L.InputContainer>
-          {errorMessage && <L.ErrorMessage>{errorMessage}</L.ErrorMessage>}
+    <Container isDarkMode={isDarkMode}>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageTransition}
+        transition={{ duration: 0.3 }}
+      >
+        <L.Group>
+          <img src="/images/Group.svg" alt="Group" />
+        </L.Group>
+        <L.Ellipse549></L.Ellipse549>
+        <br />
+        <br />
+        <br />
+        <br />
+        <L.InputContainer>
+          <InputLabel isDarkMode={isDarkMode}>아이디</InputLabel>
+          <L.UserInput
+            type="text"
+            placeholder="아이디를 입력하세요."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          ></L.UserInput>
           <br></br>
-          <L.Complete onClick={handleLogin}>완료</L.Complete>
-          <L.InfoText>아직 계정이 없나요?</L.InfoText>
-          <L.RegisterBtn onClick={goRegister}>회원가입 ></L.RegisterBtn>
-        </motion.div>
-      </L.Container>
-    </>
+          <InputLabel isDarkMode={isDarkMode}>비밀번호</InputLabel>
+          <L.UserInput
+            type="password"
+            placeholder="비밀번호를 입력하세요."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></L.UserInput>
+        </L.InputContainer>
+        {errorMessage && <L.ErrorMessage>{errorMessage}</L.ErrorMessage>}
+        <br></br>
+        <LightLogin isDarkMode={isDarkMode} onClick={handleLogin}>
+          완료
+        </LightLogin>
+        <L.InfoText>아직 계정이 없나요?</L.InfoText>
+        <L.RegisterBtn onClick={goRegister}>회원가입 ></L.RegisterBtn>
+      </motion.div>
+    </Container>
   );
 }
 

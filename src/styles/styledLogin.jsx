@@ -48,8 +48,8 @@ export const UserInput = styled.input`
   height: 32px;
   border-radius: 8px;
   border: 1px solid #a259ff;
-  background: #121212;
-  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  isDarkMode={isDarkMode};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;

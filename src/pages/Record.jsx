@@ -5,12 +5,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function Record() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
+
   const navigate = useNavigate();
-  const [page, setPage] = useState(1); // 현재 페이지
-  const itemsCountPerPage = 5; // 페이지당 항목 수
-  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
+  const [page, setPage] = useState(1);
+  const itemsCountPerPage = 5;
+  const [totalItems, setTotalItems] = useState(0);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -98,11 +101,37 @@ export function Record() {
 
   //하단바 끝
 
+  //삭제 버튼
+  const deletePost = async (postId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인 후 이용하세요.");
+        return;
+      }
+
+      await axios.delete(`http://127.0.0.1:8000/posts/${postId}/`, {
+        headers: { Authorization: `Token ${token}` },
+      });
+
+      alert("기록이 삭제되었습니다.");
+      setReview(review.filter((e) => e.id !== postId));
+      setTotalItems(totalItems - 1);
+      goRecord();
+    } catch (error) {
+      console.error("삭제 실패:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+    }
+  };
+
   return (
     <>
-      <R.Container>
+      <R.Container isDarkMode={isDarkMode}>
         <R.BackBtn onClick={goBack}></R.BackBtn>{" "}
-        <R.PageTitle>나의 기록</R.PageTitle>{" "}
+        <R.PageTitle isDarkMode={isDarkMode}>나의 기록</R.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -116,16 +145,20 @@ export function Record() {
               <div id="text">기록하기</div>
             </R.record>
             {review.map((e) => (
-              <R.ReviewContainer onClick={() => goMyRecordDetail(e.id)}>
-                <R.ImgBox onClick={() => goMyRecordDetail(e.id)}>
+              <R.ReviewContainer key={e.id}>
+                <R.ImgBox
+                  onClick={() => goMyRecordDetail(e.id)}
+                  isDarkMode={isDarkMode}
+                >
                   <img src={e.img} alt="ExhibitPoster"></img>
                 </R.ImgBox>
-                <R.ExhibitionIntroduce onClick={() => goMyRecordDetail(e.id)}>
+                <R.ExhibitionIntroduce
+                  isDarkMode={isDarkMode}
+                  onClick={() => goMyRecordDetail(e.id)}
+                >
                   <div id="Title">{e.title}</div>
                   <div id="Date">{e.createdAt2}</div>
-                  <R.Trash id="remove">
-                    <img src={"/images/Trash.svg"} alt="remove"></img>
-                  </R.Trash>
+                  <R.Trash id="remove" onClick={() => deletePost(e.id)} />
                 </R.ExhibitionIntroduce>
               </R.ReviewContainer>
             ))}

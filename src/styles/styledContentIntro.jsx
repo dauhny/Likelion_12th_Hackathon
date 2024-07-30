@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 1200px;
   margin: 0 auto;
-  background: #fff;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -97,7 +100,7 @@ export const ExhibitPoster = styled.div`
 `;
 
 export const ExhibitTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -110,7 +113,7 @@ export const ExhibitTitle = styled.div`
 `;
 
 export const ExhibitDetail = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -138,10 +141,14 @@ export const CalendarIcon = styled.div`
   height: 18px;
   margin-bottom: 15px;
   margin-left: 45%;
+  background-image: url(${(props) =>
+    props.isDarkMode
+      ? "/images/CalendarIcon.svg"
+      : "/images/lightCalendarIcon.svg"});
 `;
 
 export const InfoText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -157,10 +164,14 @@ export const LocationIcon = styled.div`
   flex-shrink: 0;
   margin-top: -190px;
   margin-left: 44%;
+  background-image: url(${(props) =>
+    props.isDarkMode
+      ? "/images/LocationIcon.svg"
+      : "/images/lightLocationIcon.svg"});
 `;
 
 export const LocationText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -209,12 +220,13 @@ export const ShareBtn = styled.button`
 
 export const goRecBtn = styled.button`
   margin-top: 50px;
-  width: 290px;
+  width: 278px;
   height: 41px;
   border: none;
   cursor: pointer;
   background-color: transparent;
-  background-image: url("/images/goRecBtn.svg");
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/goRecBtn.svg" : "/images/lightgoRecBtn.svg"});
   margin-left: 7px;
   margin-bottom: 30px;
 
@@ -228,6 +240,10 @@ export const CommentIcon = styled.div`
   height: 17px;
   flex-shrink: 0;
   margin: 230px 0 0 -15px;
+  background-image: url(${(props) =>
+    props.isDarkMode
+      ? "/images/CommentIcon.svg"
+      : "/images/lightCommentIcon.svg"});
 `;
 
 export const CommentInputContainer = styled.div`
@@ -250,7 +266,7 @@ export const CommentInput = styled.input`
   height: 29px;
   flex-shrink: 0;
   border-radius: 20px;
-  background: #000;
+  background: ${(props) => (props.isDarkMode ? "#000" : "#fff")};
   color: #9c9c9c;
   font-family: "Pretendard Variable";
   font-size: 10px;
@@ -284,7 +300,7 @@ export const PinkBlur = styled.div`
 
 export const CommentContent = styled.div`
   width: 200px;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -293,7 +309,7 @@ export const CommentContent = styled.div`
 `;
 
 export const CommentNickname = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
@@ -314,7 +330,7 @@ export const CommentProfile = styled.div`
 `;
 
 export const CommentDate = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 8.5px;
   font-style: normal;
@@ -329,16 +345,18 @@ export const CommentLine = styled.div`
   width: 300px;
   height: 0px;
   flex-shrink: 0;
-  border: 1px solid #281d36;
+  border: 1px solid;
   margin-top: 10px;
   margin-left: -5px;
   margin-bottom: 10px;
+  border-color: ${(props) => (props.isDarkMode ? "#281d36" : "#fff")};
 `;
 
 export const ExhibitContainer = styled.div``;
 
 export const DeleteBtn = styled.button`
-  background-image: url("/images/DeleteBtn.svg");
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/DeleteBtn.svg" : "/images/lightDeleteBtn.svg"});
   background-color: transparent;
   background-repeat: no-repeat;
   width: 6.5px;
@@ -353,7 +371,7 @@ export const DeleteBtn = styled.button`
 export const CommentContainer = styled.div``;
 
 export const ScoreMean = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 25px;
   font-style: normal;
@@ -362,7 +380,7 @@ export const ScoreMean = styled.div`
 `;
 
 export const ScorePeople = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: center;
   font-family: "Pretendard Variable";
   font-size: 11px;
@@ -375,7 +393,7 @@ export const ScorePeople = styled.div`
 `;
 
 export const CommentRec = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: center;
   font-family: "Pretendard Variable";
   font-size: 11px;

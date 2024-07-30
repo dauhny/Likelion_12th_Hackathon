@@ -5,16 +5,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export const Search = () => {
-  const navigate = useNavigate();
-  const [content, setContent] = useState([]); // 현재 페이지 데이터
-  const [totalItems, setTotalItems] = useState(0); // 전체 데이터 수
-  const [page, setPage] = useState(1); // 현재 페이지
-  const itemsCountPerPage = 10; // 페이지당 항목 수
+  const { isDarkMode } = useTheme();
 
-  const [searchValue, setSearchValue] = useState(""); // 검색어
-  const [keyword, setKeyword] = useState(""); // 검색어
+  const navigate = useNavigate();
+  const [content, setContent] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
+  const itemsCountPerPage = 10;
+
+  const [searchValue, setSearchValue] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const handleKeyword = (e) => {
     setSearchValue(e.target.value);
@@ -91,9 +94,9 @@ export const Search = () => {
 
   return (
     <>
-      <S.Container>
+      <S.Container isDarkMode={isDarkMode}>
         <S.BackBtn onClick={goBack}></S.BackBtn>
-        <S.PageTitle>전시 검색</S.PageTitle>{" "}
+        <S.PageTitle isDarkMode={isDarkMode}>전시 검색</S.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -107,6 +110,7 @@ export const Search = () => {
               placeholder="관심 있는 전시를 검색해보세요."
               value={searchValue}
               onChange={handleKeyword}
+              isDarkMode={isDarkMode}
             />
             <S.SearchIcon onClick={handleSearch} />
             <br />
@@ -118,9 +122,11 @@ export const Search = () => {
                 <S.ExhibitImg>
                   <img src={e.image} alt={e.title} />
                 </S.ExhibitImg>
-                <S.ExhibitInfoBox>
-                  <S.ExhibitTitle>{e.title}</S.ExhibitTitle>
-                  <S.ExhibitDetail>
+                <S.ExhibitInfoBox isDarkMode={isDarkMode}>
+                  <S.ExhibitTitle isDarkMode={isDarkMode}>
+                    {e.title}
+                  </S.ExhibitTitle>
+                  <S.ExhibitDetail isDarkMode={isDarkMode}>
                     {e.period}
                     <br />
                     {e.place}
@@ -128,7 +134,7 @@ export const Search = () => {
                 </S.ExhibitInfoBox>
               </S.ExhibitContainer>
             ))}
-            <S.PaginationContainer>
+            <S.PaginationContainer isDarkMode={isDarkMode}>
               <Pagination
                 clssName="pagination"
                 activePage={page} // 현재 페이지

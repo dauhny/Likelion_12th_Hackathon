@@ -5,8 +5,21 @@ import axios from "axios";
 import { motion, px, resolveMotionValue } from "framer-motion";
 import StarInput from "./StarInput";
 import styled from "@emotion/styled";
+import { useTheme } from "../contexts/ThemeContext";
+
+const StyledSpan = styled.span`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 30%;
+  position: absolute;
+  margin-left: -85px;
+`;
 
 export function ContentIntro() {
+  const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [content, setContent] = useState([]);
   const [scrapBtn, setScrapBtn] = useState("/images/ScrapBtnOff.svg");
@@ -363,7 +376,7 @@ export function ContentIntro() {
 
   return (
     <>
-      <C.Container>
+      <C.Container isDarkMode={isDarkMode}>
         <motion.div
           initial="initial"
           animate="animate"
@@ -376,20 +389,20 @@ export function ContentIntro() {
           <C.Item>
             {content.map((e) => (
               <C.ExhibitContainer key={e.id}>
-                <C.ExhibitTitle>{e.title}</C.ExhibitTitle>
+                <C.ExhibitTitle isDarkMode={isDarkMode}>
+                  {e.title}
+                </C.ExhibitTitle>
                 <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
                   <img src={e.image} alt="ExhibitPoster" />
                 </C.ExhibitPoster>
-                <C.LocationIcon>
-                  <img src="/images/LocationIcon.svg" />
-                </C.LocationIcon>
+                <C.LocationIcon isDarkMode={isDarkMode} />
                 <br /> <br />
-                <C.LocationText>{e.place}</C.LocationText>
-                <C.CalendarIcon>
-                  <img src="/images/CalendarIcon.svg" />
-                </C.CalendarIcon>
-                <C.InfoText>전시 일정</C.InfoText>
-                <C.ExhibitDetail>
+                <C.LocationText isDarkMode={isDarkMode}>
+                  {e.place}
+                </C.LocationText>
+                <C.CalendarIcon isDarkMode={isDarkMode} />
+                <C.InfoText isDarkMode={isDarkMode}>전시 일정</C.InfoText>
+                <C.ExhibitDetail isDarkMode={isDarkMode}>
                   {e.period}
                   <br />
                   {e.time}
@@ -405,10 +418,15 @@ export function ContentIntro() {
                 </C.BtnContainer>
               </C.ExhibitContainer>
             ))}
-            <C.goRecBtn onClick={() => goMusicCommunity(id)} />
+            <C.goRecBtn
+              onClick={() => goMusicCommunity(id)}
+              isDarkMode={isDarkMode}
+            />
             <C.PurpleBlur />
-            <C.ScoreMean>{averageRating}</C.ScoreMean>
-            <C.ScorePeople>({ratingCount}명 참여)</C.ScorePeople>
+            <C.ScoreMean isDarkMode={isDarkMode}>{averageRating}</C.ScoreMean>
+            <C.ScorePeople isDarkMode={isDarkMode}>
+              ({ratingCount}명 참여)
+            </C.ScorePeople>
             <RatingField>
               <StarInput
                 onClickRating={(value) => setRating(value)}
@@ -466,9 +484,8 @@ export function ContentIntro() {
                 textAlign: "center",
               }}
             >
-              <span
+              <StyledSpan
                 style={{
-                  color: "white",
                   fontFamily: "Pretendard Variable",
                   fontSize: "10px",
                   fontStyle: "normal",
@@ -477,12 +494,12 @@ export function ContentIntro() {
                   position: "absolute",
                   marginLeft: "-55px",
                 }}
+                isDarkMode={isDarkMode}
               >
                 {getRatingText(rating)}
-              </span>
-              <span
+              </StyledSpan>
+              <StyledSpan
                 style={{
-                  color: "white",
                   fontFamily: "Pretendard Variable",
                   fontSize: "13px",
                   fontStyle: "normal",
@@ -491,17 +508,17 @@ export function ContentIntro() {
                   position: "absolute",
                   marginLeft: "-85px",
                 }}
+                isDarkMode={isDarkMode}
               >
                 {getRatingText2(rating)}
-              </span>
+              </StyledSpan>
             </div>
-            <C.CommentRec>
-              유다현님의 관람 경험을 아래 코멘트에 작성해보세요.
+            <C.CommentRec isDarkMode={isDarkMode}>
+              회원님의 관람 경험을 아래 코멘트에 작성해보세요.
             </C.CommentRec>
-            <C.CommentIcon>
-              <img src="/images/CommentIcon.svg" />
-            </C.CommentIcon>
+            <C.CommentIcon isDarkMode={isDarkMode} />
             <C.InfoText
+              isDarkMode={isDarkMode}
               style={{
                 marginLeft: "15px",
                 marginTop: "-22px",
@@ -514,27 +531,40 @@ export function ContentIntro() {
                 <img src={profileImg} alt="Profile Img" />
               </C.ProfileImg>
               <C.CommentInput
+                isDarkMode={isDarkMode}
                 placeholder="전시에 대한 코멘트를 남겨보세요."
                 value={commentText}
                 onChange={handleCommentChange}
               />
-              <C.CommentBtn onClick={handleCommentSubmit}>
+              <C.CommentBtn
+                onClick={handleCommentSubmit}
+                isDarkMode={isDarkMode}
+              >
                 <img src="/images/CommentBtn.svg" />
               </C.CommentBtn>
             </C.CommentInputContainer>
             {comments.map((e) => (
               <C.CommentContainer key={e.id}>
-                <C.CommentContent>{e.comment}</C.CommentContent>
-                <C.CommentDate>{e.createdAt}</C.CommentDate>
-                <C.DeleteBtn onClick={() => handleCommentDelete(e.id)} />
-                <C.CommentNickname>{e.nickname} • </C.CommentNickname>
+                <C.CommentContent isDarkMode={isDarkMode}>
+                  {e.comment}
+                </C.CommentContent>
+                <C.CommentDate isDarkMode={isDarkMode}>
+                  {e.createdAt}
+                </C.CommentDate>
+                <C.DeleteBtn
+                  isDarkMode={isDarkMode}
+                  onClick={() => handleCommentDelete(e.id)}
+                />
+                <C.CommentNickname isDarkMode={isDarkMode}>
+                  {e.nickname} •{" "}
+                </C.CommentNickname>
                 <C.CommentProfile>
                   <img
                     src={`http://127.0.0.1:8000${e.profile}`}
                     alt="Comment Profile"
                   />
                 </C.CommentProfile>
-                <C.CommentLine />
+                <C.CommentLine isDarkMode={isDarkMode} />
               </C.CommentContainer>
             ))}{" "}
             <C.PinkBlur></C.PinkBlur>

@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 import SimpleSlider from "./SimpleSlider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { Component } from "react";
-
 export function Home() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 3; // 페이지당 항목 수
@@ -145,59 +145,12 @@ export function Home() {
     fetchData(); // useEffect에서 fetchData 함수 호출
   }, []);
 
-  // //캐러셀
-  // class SimpleSlider extends Component {
-  //   render() {
-  //     const settings = {
-  //       dots: true,
-  //       infinite: true,
-  //       speed: 500,
-  //       slidesToShow: 1,
-  //       slideToScroll: 1,
-  //     };
-  //     return (
-  //       <div>
-  //         <H.InfoTextPurple>New</H.InfoTextPurple>
-  //         <Slider {...settings}>
-  //           {newcontent ? (
-  //             <H.NewExhibitContainer>
-  //               <br />
-  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
-  //                 <img src={newcontent.image} />
-  //               </H.NewExhibit>
-  //             </H.NewExhibitContainer>
-  //           ) : (
-  //             <p>최신 전시가 없습니다.</p>
-  //           )}{" "}
-  //           {newcontent ? (
-  //             <H.NewExhibitContainer>
-  //               <br />
-  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
-  //                 <img src={newcontent.image} />
-  //               </H.NewExhibit>
-  //             </H.NewExhibitContainer>
-  //           ) : (
-  //             <p>최신 전시가 없습니다.</p>
-  //           )}{" "}
-  //           {newcontent ? (
-  //             <H.NewExhibitContainer>
-  //               <br />
-  //               <H.NewExhibit onClick={() => goContentIntro(newcontent.id)}>
-  //                 <img src={newcontent.image} />
-  //               </H.NewExhibit>
-  //             </H.NewExhibitContainer>
-  //           ) : (
-  //             <p>최신 전시가 없습니다.</p>
-  //           )}
-  //         </Slider>
-  //       </div>
-  //     );
-  //   }
-  // }
-
   return (
     <>
-      <H.Container>
+      <button onClick={toggleDarkMode}>
+        {isDarkMode ? "라이트 모드" : "다크 모드"}
+      </button>
+      <H.Container isDarkMode={isDarkMode}>
         <motion.div
           initial="initial"
           animate="animate"
@@ -214,26 +167,34 @@ export function Home() {
             </H.NewExhibit>
             {/* <SimpleSlider></SimpleSlider> */}
             <H.PinkBlur />
-            <H.AD onClick={goAI}>
-              <img src="/images/AD.svg" />
-            </H.AD>
+            <H.AD onClick={goAI} isDarkMode={isDarkMode}></H.AD>
             <br />
-            <H.InfoText>HOT 후기글</H.InfoText>
-            <H.ReviewBtn onClick={goReview}>
-              더보기 <img src="images/ExpandBtn.svg" />
+            <H.InfoText isDarkMode={isDarkMode}>HOT 후기글</H.InfoText>
+            <H.ReviewBtn onClick={goReview} isDarkMode={isDarkMode}>
+              더보기 >
             </H.ReviewBtn>{" "}
             {review.map((e) => (
-              <H.ReviewBox key={e.id} onClick={() => goReviewDetail(e.id)}>
+              <H.ReviewBox
+                key={e.id}
+                onClick={() => goReviewDetail(e.id)}
+                isDarkMode={isDarkMode}
+              >
                 <H.ProfileImg>
                   <img
                     src={`http://127.0.0.1:8000${e.profile}`}
                     alt="profile"
                   />
                 </H.ProfileImg>
-                <H.ReviewName>{e.nickname}</H.ReviewName>
-                <H.ReviewDate>{e.createdAt2}</H.ReviewDate>
-                <H.ReviewTitle>{e.title}</H.ReviewTitle>
-                <H.ReviewContent>{e.content}</H.ReviewContent>
+                <H.ReviewName isDarkMode={isDarkMode}>
+                  {e.nickname}
+                </H.ReviewName>
+                <H.ReviewDate isDarkMode={isDarkMode}>
+                  {e.createdAt2}
+                </H.ReviewDate>
+                <H.ReviewTitle isDarkMode={isDarkMode}>{e.title}</H.ReviewTitle>
+                <H.ReviewContent isDarkMode={isDarkMode}>
+                  {e.content}
+                </H.ReviewContent>
                 <H.ReviewImg>
                   <img src={e.img} alt="Review Image" />
                 </H.ReviewImg>
@@ -241,9 +202,9 @@ export function Home() {
                 <H.LikeCnt>{e.likeCount}</H.LikeCnt>
               </H.ReviewBox>
             ))}
-            <H.InfoText>HOT 전시</H.InfoText>
-            <H.ReviewBtn onClick={goSearch}>
-              더보기 <img src="images/ExpandBtn.svg" />
+            <H.InfoText isDarkMode={isDarkMode}>HOT 전시</H.InfoText>
+            <H.ReviewBtn onClick={goSearch} isDarkMode={isDarkMode}>
+              더보기 >
             </H.ReviewBtn>
             {content.map((e) => (
               <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>

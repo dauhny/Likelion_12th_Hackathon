@@ -1,17 +1,5 @@
 import { styled } from "styled-components";
 
-export const Container = styled.div`
-  width: 390px;
-  height: 844px;
-  margin: 0 auto;
-  background: #121212;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
 export const Group = styled.div`
   width: 157px;
   height: 118px;

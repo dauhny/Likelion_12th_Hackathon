@@ -4,7 +4,10 @@ export const Container = styled.div`
   width: 390px;
   height: 1490px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -69,7 +72,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#ccc" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -99,10 +102,10 @@ export const SearchInput = styled.input`
   flex-shrink: 0;
   border-radius: 16px;
   border: 1px solid #a259ff;
-  background: #111;
+  background: transparent;
   box-shadow: 0px 81px 106px 0px rgba(0, 0, 0, 0.07),
     0px 10.142px 13.273px 0px rgba(0, 0, 0, 0.03);
-  color: #ccc;
+  color: ${(props) => (props.isDarkMode ? "#ccc" : "#3D3A3A")};
   font-feature-settings: "clig" off, "liga" off;
   font-family: "Pretendard Variable";
   font-size: 13px;
@@ -148,20 +151,19 @@ export const ExhibitInfoBox = styled.button`
   height: 97px;
   border: none;
   border-radius: 0px 10px 10px 0px;
-  background: linear-gradient(
-    180deg,
-    #281d36 37.67%,
-    #392a4d 68.17%,
-    #4e3968 100%
-  );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(180deg, #281d36 37.67%, #392a4d 68.17%, #4e3968 100%)"
+      : "#fff"};
   position: absolute;
   cursor: pointer;
   margin-top: 16px;
   margin-left: -6px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 export const ExhibitTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: left;
   font-family: "Pretendard Variable";
   font-size: 12px;
@@ -172,7 +174,7 @@ export const ExhibitTitle = styled.div`
 `;
 
 export const ExhibitDetail = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
@@ -206,7 +208,7 @@ export const PaginationContainer = styled.div`
 
   ul.pagination li a {
     text-decoration: none;
-    color: white;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   }
 
   ul.pagination li.active a {

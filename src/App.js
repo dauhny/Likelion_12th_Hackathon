@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Main } from "./pages/Main";
 import { Login } from "./pages/Login";
@@ -31,46 +32,50 @@ import { IntroduceApp } from "./pages/IntroduceApp";
 import { IntroduceContent } from "./pages/IntroduceContent";
 import { IntroduceCommunity } from "./pages/IntroduceCommunity";
 import { FirstLogin } from "./pages/FirstLogin";
+import { ThemeProvider } from "./contexts/ThemeContext"; // ThemeProvider 임포트
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contentintro" element={<ContentIntro />} />
-        <Route path="/musiccommunity" element={<MusicCommunity />} />
-        <Route path="/bookcommunity" element={<BookCommunity />} />
-        <Route path="/communityprofile" element={<CommunityProfile />} />
-        <Route path="/musicwrite" element={<MusicWrite />} />
-        <Route path="/bookwrite" element={<BookWrite />} />
-        <Route path="/reviewcommunity" element={<ReviewCommunity />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/idea" element={<Idea />} />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/musicdetail" element={<MusicDetail />} />
-        <Route path="/bookdetail" element={<BookDetail />} />
-        <Route path="/ai" element={<AI />} />
-        <Route path="/airecordlist" element={<AIRecordList />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/mypagerevise" element={<MypageRevise />} />
-        <Route path="/review" element={<ReviewCommunity />} />
-        <Route path="/airesult" element={<AIResult />} />
-        <Route path="/reviewdetail" element={<ReviewDetail />} />
-        <Route path="/record" element={<Record />} />
-        <Route path="/recordwrite" element={<RecordWrite />} />
-        <Route path="/myrecorddetail" element={<MyRecordDetail />} />
-        <Route path="/aipast" element={<AIPast />} />
-        <Route path="/aipastdetail" element={<AIPastDetail />} />
-        <Route path="/introduceai" element={<IntroduceAI />} />
-        <Route path="/introducecommunity" element={<IntroduceCommunity />} />
-        <Route path="/introducecontent" element={<IntroduceContent />} />
-        <Route path="/introduceapp" element={<IntroduceApp />} />
-        <Route path="/firstlogin" element={<FirstLogin />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/contentintro" element={<ContentIntro />} />
+          <Route path="/musiccommunity" element={<MusicCommunity />} />
+          <Route path="/bookcommunity" element={<BookCommunity />} />
+          <Route path="/communityprofile" element={<CommunityProfile />} />
+          <Route path="/musicwrite" element={<MusicWrite />} />
+          <Route path="/bookwrite" element={<BookWrite />} />
+          <Route path="/reviewcommunity" element={<ReviewCommunity />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/idea" element={<Idea />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/musicdetail" element={<MusicDetail />} />
+          <Route path="/bookdetail" element={<BookDetail />} />
+          <Route path="/ai" element={<AI />} />
+          <Route path="/airecordlist" element={<AIRecordList />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/mypagerevise" element={<MypageRevise />} />
+          <Route path="/review" element={<ReviewCommunity />} />
+          <Route path="/airesult" element={<AIResult />} />
+          <Route path="/reviewdetail" element={<ReviewDetail />} />
+          <Route path="/record" element={<Record />} />
+          <Route path="/recordwrite" element={<RecordWrite />} />
+          <Route path="/myrecorddetail" element={<MyRecordDetail />} />
+          <Route path="/aipast" element={<AIPast />} />
+          <Route path="/aipastdetail" element={<AIPastDetail />} />
+          <Route path="/introduceai" element={<IntroduceAI />} />
+          <Route path="/introducecommunity" element={<IntroduceCommunity />} />
+          <Route path="/introducecontent" element={<IntroduceContent />} />
+          <Route path="/introduceapp" element={<IntroduceApp />} />
+          <Route path="/firstlogin" element={<FirstLogin />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
+
 export default App;

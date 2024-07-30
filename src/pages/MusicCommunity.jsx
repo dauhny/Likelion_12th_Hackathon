@@ -125,30 +125,34 @@ export function MusicCommunity() {
           </M.TapOff>
         </M.TapContainer>
         <M.Item>
-          {content.map((e) => (
-            <M.RecContainer key={e.id}>
-              <M.ProfileImg>
-                <img src={`http://127.0.0.1:8000${e.profile}`} />
-              </M.ProfileImg>
-              <M.PostNickname>{e.nickname}</M.PostNickname>
-              <M.PostDate>{e.createdAt}</M.PostDate>
-              <M.MusicCommunityBox onClick={() => goMusicDetail(e.id)}>
-                <M.MusicPhoto onClick={() => goMusicDetail(e.id)}>
-                  <img src={e.image} />
-                </M.MusicPhoto>
-                <M.MusicIcon onClick={() => goMusicDetail(e.id)} />
-                <M.MusicTitle onClick={() => goMusicDetail(e.id)}>
-                  {e.title}
-                </M.MusicTitle>
-                <M.MusicArtist onClick={() => goMusicDetail(e.id)}>
-                  {e.author}
-                </M.MusicArtist>
-                <M.MusicContent onClick={() => goMusicDetail(e.id)}>
-                  {e.content}
-                </M.MusicContent>
-              </M.MusicCommunityBox>
-            </M.RecContainer>
-          ))}
+          {content.length === 0 ? (
+            <M.InfoText>등록된 글이 없습니다.</M.InfoText>
+          ) : (
+            content.map((e) => (
+              <M.RecContainer key={e.id}>
+                <M.ProfileImg>
+                  <img src={`http://127.0.0.1:8000${e.profile}`} />
+                </M.ProfileImg>
+                <M.PostNickname>{e.nickname}</M.PostNickname>
+                <M.PostDate>{e.createdAt}</M.PostDate>
+                <M.MusicCommunityBox onClick={() => goMusicDetail(e.id)}>
+                  <M.MusicPhoto onClick={() => goMusicDetail(e.id)}>
+                    <img src={e.image} />
+                  </M.MusicPhoto>
+                  <M.MusicIcon onClick={() => goMusicDetail(e.id)} />
+                  <M.MusicTitle onClick={() => goMusicDetail(e.id)}>
+                    {e.title}
+                  </M.MusicTitle>
+                  <M.MusicArtist onClick={() => goMusicDetail(e.id)}>
+                    {e.author}
+                  </M.MusicArtist>
+                  <M.MusicContent onClick={() => goMusicDetail(e.id)}>
+                    {e.content}
+                  </M.MusicContent>
+                </M.MusicCommunityBox>
+              </M.RecContainer>
+            ))
+          )}
           <M.PurpleBlur></M.PurpleBlur>
           <M.InfoText>
             관람에 도움이 되었나요?

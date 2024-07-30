@@ -2,9 +2,12 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
-  height: 2690px;
+  height: 2090px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -83,7 +86,7 @@ export const PurpleBlur = styled.div`
   margin: -30px;
   background-color: #a259ff;
   filter: blur(160px);
-  margin-top: -680px;
+  margin-top: -100px;
 `;
 
 export const InfoTextPurple = styled.div`
@@ -145,7 +148,6 @@ export const ExhibitInfo = styled.div`
 `;
 
 export const InfoText = styled.div`
-  color: #fff;
   font-family: "Pretendard Variable";
   font-size: 20px;
   font-style: normal;
@@ -153,10 +155,11 @@ export const InfoText = styled.div`
   line-height: 24px;
   margin-bottom: -20px;
   margin-top: 15%;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
 `;
 
 export const ReviewBtn = styled.button`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 15px;
   font-style: normal;
@@ -177,9 +180,13 @@ export const ReviewBox = styled.div`
   width: 300px;
   height: 130px;
   border-radius: 10px;
-  background: linear-gradient(90deg, #281d36 0%, #6e5095 91%, #74549c 100%);
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(90deg, #281d36 0%, #6e5095 91%, #74549c 100%)"
+      : "white"};
   margin-bottom: 15px;
   cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 export const ProfileImg = styled.div`
@@ -194,7 +201,7 @@ export const ProfileImg = styled.div`
 `;
 
 export const ReviewName = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -207,7 +214,7 @@ export const ReviewName = styled.div`
 `;
 
 export const ReviewDate = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 10px;
   font-style: normal;
@@ -219,7 +226,7 @@ export const ReviewDate = styled.div`
 `;
 
 export const ReviewTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 15px;
   font-style: normal;
@@ -231,7 +238,7 @@ export const ReviewTitle = styled.div`
 `;
 
 export const ReviewContent = styled.div`
-  color: #cccccc;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -262,7 +269,7 @@ export const LikeIcon = styled.div`
   width: 20px;
   height: 20px;
   position: absolute;
-  margin-left: 71%;
+  margin-left: 82%;
   margin-top: 96px;
 `;
 
@@ -274,7 +281,7 @@ export const LikeCnt = styled.div`
   font-weight: 300;
   line-height: 24px;
   position: absolute;
-  margin-left: 78%;
+  margin-left: 90%;
   margin-top: 96px;
 `;
 
@@ -283,7 +290,14 @@ export const NewExhibitContainer = styled.div``;
 export const ReviewContainer = styled.div``;
 
 export const AD = styled.div`
-  margin-left: -12%;
+  margin-left: -13.7%;
   margin-top: 10px;
   cursor: pointer;
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/AD.svg" : "/images/ADwhite.svg"});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 390px;
+  height: 243px;
 `;

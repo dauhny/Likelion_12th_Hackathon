@@ -5,8 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 844px;
   margin: 0 auto;
-  background: #121212;
-  justify-content: center;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   align-items: center;
   flex-direction: column;
   position: relative;
@@ -83,7 +85,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -99,7 +101,7 @@ export const profile = styled.div`
     width: 60px;
     height: 60px;
     flex-shrink: 0;
-    margin-left: 116px;
+    margin-left: 120px;
     margin-top: 8px;
     border-radius: 30px;
   }
@@ -107,17 +109,15 @@ export const profile = styled.div`
 
 // 사용자 이름
 export const name = styled.div`
-  width: 88px;
-  height: 20px;
   flex-shrink: 0;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
-  font-size: 14px;
+  font-size: 15px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 160.5%; /* 22.47px */
-  margin-left: 103px;
   text-align: center;
+  margin-left: -12%;
 `;
 
 // 프로필 편집 버튼
@@ -130,14 +130,15 @@ export const edit = styled.button`
   cursor: pointer;
   border: 2px solid #9747ff;
   margin-top: 9px;
-  margin-left: 62px;
+  margin-left: 67px;
+
   #text1 {
     width: 66.661px;
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px; /* 240% */
     margin-top: -3px;
     margin-left: -2px;
@@ -159,9 +160,9 @@ export const logout = styled.button`
     width: 66.661px;
     color: #fff;
     font-family: "Pretendard Variable";
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px; /* 240% */
     margin-top: -3px;
     margin-left: -2px;
@@ -170,23 +171,25 @@ export const logout = styled.button`
 
 // 스크랩 이미지, 텍스트
 export const scrap = styled.div`
-  img {
-    width: 14px;
-    height: 12px;
-    flex-shrink: 0;
-    margin-top: 40px;
-    margin-left: -20px;
-  }
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/ScrapIcon.svg" : "/images/lightScrapIcon.svg"});
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 25px;
+  margin-left: -20px;
 
   #ScrapText {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: 160.5%; /* 19.26px */
-    margin-left: -5px;
-    margin-top: -19px;
+    margin-left: 15px;
+    margin-top: -3.5px;
+    position: absolute;
   }
 `;
 

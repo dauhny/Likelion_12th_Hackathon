@@ -124,30 +124,34 @@ export function BookCommunity() {
           </B.TapOn>
         </B.TapContainer>
         <B.Item>
-          {content.map((e) => (
-            <B.BookContainer key={e.id}>
-              <B.ProfileImg>
-                <img src={`http://127.0.0.1:8000${e.profile}`} />
-              </B.ProfileImg>
-              <B.PostNickname>{e.nickname}</B.PostNickname>
-              <B.PostDate>{e.createdAt}</B.PostDate>
-              <B.BookCommunityBox onClick={() => goBookDetail(e.id)}>
-                <B.BookPhoto onClick={() => goBookDetail(e.id)}>
-                  <img src={e.image} />
-                </B.BookPhoto>
-                <B.BookIcon onClick={() => goBookDetail(e.id)}></B.BookIcon>
-                <B.BookTitle onClick={() => goBookDetail(e.id)}>
-                  {e.title}
-                </B.BookTitle>
-                <B.BookArtist onClick={() => goBookDetail(e.id)}>
-                  {e.author}
-                </B.BookArtist>
-                <B.BookContent onClick={() => goBookDetail(e.id)}>
-                  {e.content}
-                </B.BookContent>
-              </B.BookCommunityBox>
-            </B.BookContainer>
-          ))}
+          {content.length === 0 ? (
+            <B.InfoText>등록된 글이 없습니다.</B.InfoText>
+          ) : (
+            content.map((e) => (
+              <B.BookContainer key={e.id}>
+                <B.ProfileImg>
+                  <img src={`http://127.0.0.1:8000${e.profile}`} />
+                </B.ProfileImg>
+                <B.PostNickname>{e.nickname}</B.PostNickname>
+                <B.PostDate>{e.createdAt}</B.PostDate>
+                <B.BookCommunityBox onClick={() => goBookDetail(e.id)}>
+                  <B.BookPhoto onClick={() => goBookDetail(e.id)}>
+                    <img src={e.image} />
+                  </B.BookPhoto>
+                  <B.BookIcon onClick={() => goBookDetail(e.id)}></B.BookIcon>
+                  <B.BookTitle onClick={() => goBookDetail(e.id)}>
+                    {e.title}
+                  </B.BookTitle>
+                  <B.BookArtist onClick={() => goBookDetail(e.id)}>
+                    {e.author}
+                  </B.BookArtist>
+                  <B.BookContent onClick={() => goBookDetail(e.id)}>
+                    {e.content}
+                  </B.BookContent>
+                </B.BookCommunityBox>
+              </B.BookContainer>
+            ))
+          )}
           <B.PurpleBlur></B.PurpleBlur>
           <B.InfoText>
             관람에 도움이 되었나요?
