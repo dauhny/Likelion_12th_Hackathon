@@ -28,6 +28,11 @@ import { IntroduceApp } from "./pages/IntroduceApp";
 import { IntroduceContent } from "./pages/IntroduceContent";
 import { IntroduceAI } from "./pages/IntroduceAI";
 import { IntroduceCommunity } from "./pages/IntroduceCommunity";
+import { AI_Dark } from "./pages/AI_Dark";
+import { AIRecordList_Dark } from "./pages/AIRecordList_Dark";
+import { AIPast_Dark } from "./pages/AIPast_Dark";
+import { AIResult_Dark } from "./pages/AIResult_Dark";
+import { AIPastDetail_Dark } from "./pages/AIPastDetail_Dark";
 
 function App() {
   return (
@@ -62,6 +67,11 @@ function App() {
         <Route path="/introducecontent" element={<IntroduceContent />} />
         <Route path="/introduceai" element={<IntroduceAI />} />
         <Route path="/introducecommunity" element={<IntroduceCommunity />} />
+        <Route path="/ai_dark" element={<AI_Dark />} />
+        <Route path="/airecordlist_dark" element={<AIRecordList_Dark />} />
+        <Route path="/aipast_dark" element={<AIPast_Dark />} />
+        <Route path="/airesult_dark" element={<AIResult_Dark />} />
+        <Route path="/aipastdetail_dark" element={<AIPastDetail_Dark />} />
       </Routes>
     </BrowserRouter>
   );
