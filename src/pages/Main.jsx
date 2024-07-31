@@ -94,9 +94,6 @@ export function Main() {
   return (
     <>
       <GlobalStyle isDarkMode={isDarkMode} />
-      <button onClick={toggleDarkMode}>
-        {isDarkMode ? "라이트 모드" : "다크 모드"}
-      </button>
       {isDarkMode ? (
         <Container>
           <motion.div

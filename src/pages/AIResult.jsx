@@ -192,7 +192,7 @@ export function AIResult() {
                 lengthAngle={360}
                 rounded
                 animate
-                label={({ dataEntry }) => dataEntry.name}
+                label={({ dataEntry }) => `감정상태 분석`}
                 labelStyle={{
                   fontFamily: "Pretendard Variable",
                   fontWeight: "400",

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1425px;
+  height: 798px;
   margin: 0 auto;
   background: #fff;
   justify-content: center;
@@ -168,7 +168,7 @@ export const PostArtist = styled(PostTitle)`
 
 export const PostContent = styled.textarea`
   width: 323px;
-  height: 330px;
+  height: 200px;
   border-radius: 10px;
   border: 1px solid #535353;
   background: #281d36;
@@ -181,4 +181,18 @@ export const PostContent = styled.textarea`
   line-height: 24px;
   resize: none;
   padding: 10px;
+`;
+
+export const ContentLength = styled.div`
+  width: 100px;
+  height: 15px;
+  #text {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160.5%; /* 22.47px */
+    margin-left: 270px;
+  }
 `;

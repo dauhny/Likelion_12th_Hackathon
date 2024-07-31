@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1096px;
+  height: 1500px;
   margin: 0 auto;
   background: linear-gradient(
       0deg,
@@ -162,6 +162,7 @@ export const Consumer = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
   margin-top: 30px;
   margin-left: -24px;
+  position: relative;
 
   #profile {
     width: 27.2px;
@@ -183,8 +184,11 @@ export const Consumer = styled.div`
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-left: 70px;
+    margin-left: 68px;
     margin-top: 15px;
+    word-break: break-word;
+    overflow-wrap: break-word; // 긴 단어가 박스 내에서 줄바꿈 되도록 설정
+    white-space: pre-wrap;
   }
 `;
 

@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 881px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -48,7 +51,7 @@ export const NavBar = styled.div`
   bottom: 0;
   z-index: 999;
   display: flex;
-  margin-left: -48px;
+  margin-left: -1px;
 `;
 
 export const NavBtnContainer = styled.div`
@@ -82,16 +85,17 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 기록하기 텍스트
-export const IntroText = styled.div`
-  color: #fff;
+//페이지 제목
+export const PageTitle = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 116px;
-  margin-top: -26px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
+  }
 `;
 
 // 공유하기 버튼
@@ -196,12 +200,12 @@ export const date = styled.input`
   flex-shrink: 0;
   border-radius: 10px;
   background-color: transparent;
-  border: 1px solid #dec5fb;
+  border: 1px solid #a259ff;
   margin-left: 45px;
   margin-top: 17px;
   padding-left: 5px;
   padding-right: 5px;
-  color: #fff;
+  color: #a259ff;
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -226,8 +230,12 @@ export const title = styled.input`
   height: 40px;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #dbbefc;
-  background: linear-gradient(270deg, #dbbefc 0%, #f6effe 75%, #fff 100%);
+  border: 1px solid;
+  border-color: ${(props) => (props.isDarkMode ? "transparent" : "#dbbefc")};
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#281D36"
+      : "linear-gradient(270deg, #dbbefc 0%, #f6effe 75%, #fff 100%)"};
   margin-top: -83px;
   position: absolute;
   margin-left: -25px;
@@ -246,8 +254,12 @@ export const content = styled.textarea`
   height: 225px;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #dbbefc;
-  background: linear-gradient(270deg, #dbbefc 0%, #f6effe 75%, #fff 100%);
+  border: 1px solid;
+  border-color: ${(props) => (props.isDarkMode ? "transparent" : "#dbbefc")};
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#281D36"
+      : "linear-gradient(270deg, #dbbefc 0%, #f6effe 75%, #fff 100%)"};
   margin-left: -25px;
   color: #9c9c9c;
   font-family: "Pretendard Variable";
@@ -266,7 +278,7 @@ export const ContentLength = styled.div`
   width: 100px;
   height: 15px;
   #text {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;

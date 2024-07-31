@@ -2,14 +2,7 @@ import React from "react";
 import * as R from "../styles/styledRegister";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export function Register() {
@@ -23,6 +16,8 @@ export function Register() {
   const [name, setName] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [idCheckMessage, setIdCheckMessage] = useState(""); // 아이디 중복 체크 메시지 상태 추가
+  const [nickCheckMessage, setNickCheckMessage] = useState(""); // 닉네임 중복 체크 메시지 상태 추가
 
   const goWelcome = () => {
     navigate(`/welcome`);
@@ -53,7 +48,6 @@ export function Register() {
     }
   };
 
-  // 유효성 검사
   const validateInputs = () => {
     if (username.trim() === "") {
       setErrorMessage("아이디를 입력하세요.");
@@ -96,9 +90,51 @@ export function Register() {
     return true;
   };
 
+  const handleIdCheck = async () => {
+    if (username.trim() === "") {
+      setIdCheckMessage("아이디를 입력하세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/user/", {
+        username,
+      });
+      if (response.data.username && response.data.username.length > 0) {
+        setIdCheckMessage("사용 가능한 아이디입니다.");
+      } else {
+        setIdCheckMessage("사용 가능한 아이디입니다.");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.username) {
+        setIdCheckMessage("이미 사용중인 아이디입니다.");
+      } else {
+        setIdCheckMessage("사용 가능한 아이디입니다.");
+      }
+    }
+  };
+
+  const handleNickCheck = async () => {
+    if (nickname.trim() === "") {
+      setNickCheckMessage("닉네임을 입력하세요.");
+      return;
+    }
+    try {
+      await axios.post("http://127.0.0.1:8000/user/", {
+        nickname,
+      });
+      setNickCheckMessage("사용 가능한 닉네임입니다.");
+    } catch (error) {
+      if (error.response && error.response.data.nickname) {
+        setNickCheckMessage("이미 사용중인 닉네임입니다.");
+      } else {
+        setNickCheckMessage("사용 가능한 닉네임입니다.");
+      }
+    }
+  };
+
   return (
     <R.Container>
-      {" "}
       <motion.div
         initial="initial"
         animate="animate"
@@ -124,7 +160,9 @@ export function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <R.CheckId>중복체크</R.CheckId>
+          <R.CheckId onClick={handleIdCheck}>중복체크</R.CheckId>
+          <R.IdCheckMessage>{idCheckMessage}</R.IdCheckMessage>{" "}
+          {/* 아이디 중복 체크 메시지 표시 */}
           <br />
           <R.InputLabel>비밀번호</R.InputLabel>
           <R.UserInput
@@ -159,7 +197,9 @@ export function Register() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          <R.CheckNickName>중복체크</R.CheckNickName>
+          <R.CheckNickName onClick={handleNickCheck}>중복체크</R.CheckNickName>
+          <R.NickCheckMessage>{nickCheckMessage}</R.NickCheckMessage>{" "}
+          {/* 닉네임 중복 체크 메시지 표시 */}
           <R.InputLabel>생년월일</R.InputLabel>
           <R.SelectBirth
             type="date"
@@ -182,7 +222,7 @@ export function Register() {
           />
           {errorMessage && <R.ErrorMessage>{errorMessage}</R.ErrorMessage>}
           <R.Complete onClick={handleRegister}>가입하기</R.Complete>
-        </R.InputContainer>{" "}
+        </R.InputContainer>
       </motion.div>
     </R.Container>
   );

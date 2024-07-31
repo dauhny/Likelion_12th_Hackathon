@@ -16,6 +16,7 @@ export function MusicWrite() {
   const [content, setContent] = useState("");
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
+  const [contentLength, setContentLength] = useState(0); // 글자 수 상태
 
   // 기존 데이터 불러오기
   useEffect(() => {
@@ -48,6 +49,15 @@ export function MusicWrite() {
 
     fetchData();
   }, [id, musicId]);
+
+  // 글자 수 업데이트
+  useEffect(() => {
+    setContentLength(content.length);
+    if (content.length > 300) {
+      alert("300자 이내로 작성해주세요.");
+      setContent(content.slice(0, 300));
+    }
+  }, [content]);
 
   const goBack = () => {
     navigate(-1);
@@ -197,6 +207,9 @@ export function MusicWrite() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             ></W.PostContent>
+            <W.ContentLength>
+              <div id="text">({contentLength}/300)</div>
+            </W.ContentLength>
           </W.Item>{" "}
         </motion.div>
         {/*하단바*/}

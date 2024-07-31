@@ -177,7 +177,7 @@ export const LocationText = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-top: -62px;
+  margin-top: -64px;
   margin-left: 49%;
   margin-bottom: 30px;
   width: 140px;

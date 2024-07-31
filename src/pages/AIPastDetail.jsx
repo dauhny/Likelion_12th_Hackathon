@@ -15,6 +15,7 @@ export function AIPastDetail() {
     img: "",
     createdAt: "",
     viewAt: "",
+    content: "",
   });
   const [analysis, setAnalysis] = useState({
     analysis: "",
@@ -41,7 +42,6 @@ export function AIPastDetail() {
           }
         );
 
-        // 응답 데이터가 배열 형태이므로 첫 번째 요소를 가져옴
         const item = response.data.find((item) => item.id.toString() === id);
 
         if (item) {
@@ -62,7 +62,7 @@ export function AIPastDetail() {
           });
         }
       } catch (error) {
-        console.error("후기글 조회 실패 :", error.message); // 에러 메시지 출력
+        console.error("후기글 조회 실패 :", error.message);
       }
     };
 
@@ -108,6 +108,11 @@ export function AIPastDetail() {
     window.scrollTo(0, 0);
   };
 
+  const consumerHeight =
+    (post.content || "").length <= 150
+      ? `${Math.max((post.content || "").length * 1, 120)}px` // 최소 50px로 설정
+      : `${(post.content || "").length}px`;
+
   return (
     <>
       <A.Container>
@@ -120,7 +125,13 @@ export function AIPastDetail() {
             <div id="Date">{post.createdAt}</div>
           </A.Content>
 
-          <A.Consumer>
+          <A.Consumer
+            style={{
+              flexGrow: "1",
+              height: consumerHeight, // 길이에 맞춰 너비를 설정
+              maxWidth: "100%",
+            }}
+          >
             <div id="profile">
               <img src="/images/ProfileImg.svg" alt="Profile" />
             </div>
@@ -142,12 +153,11 @@ export function AIPastDetail() {
             lengthAngle={360}
             rounded
             animate
-            label={({ dataEntry }) => `${dataEntry.name}: ${dataEntry.value}%`}
+            label={({ dataEntry }) => `감정상태 분석`}
             labelStyle={{ fontSize: "6px", fill: "#33333" }}
             labelPosition={0}
           />
 
-          {/* 감정별 데이터 표시 */}
           <A.Purple>
             <div id="purple1">
               <img src="/images/Purple1.svg" alt="Purple1" />
@@ -227,7 +237,6 @@ export function AIPastDetail() {
           <A.AItext>{analysis.analysis}</A.AItext>
 
           <A.NavBar>
-            {/* 검색 */}
             <A.NavBtnContainer>
               <A.NavIcon style={{ marginLeft: "25px" }}>
                 <img
@@ -238,7 +247,6 @@ export function AIPastDetail() {
               </A.NavIcon>
               <A.NavText style={{ marginLeft: "28px" }}>검색</A.NavText>
             </A.NavBtnContainer>
-            {/* AI 심리 분석 */}
             <A.NavBtnContainer>
               <A.NavIcon>
                 <img
@@ -258,7 +266,6 @@ export function AIPastDetail() {
                 AI 심리 분석
               </A.NavText>
             </A.NavBtnContainer>
-            {/* 홈 */}
             <A.NavBtnContainer>
               <A.NavIcon
                 style={{
@@ -270,7 +277,6 @@ export function AIPastDetail() {
                 <img src="/images/HomeIcon.svg" alt="Home" onClick={goHome} />
               </A.NavIcon>
             </A.NavBtnContainer>
-            {/* 내 기록 */}
             <A.NavBtnContainer>
               <A.NavIcon style={{ marginLeft: "63px" }}>
                 <img
@@ -281,7 +287,6 @@ export function AIPastDetail() {
               </A.NavIcon>
               <A.NavText style={{ marginLeft: "60px" }}>내 기록</A.NavText>
             </A.NavBtnContainer>
-            {/* 마이페이지 */}
             <A.NavBtnContainer>
               <A.NavIcon style={{ marginLeft: "45px" }}>
                 <img

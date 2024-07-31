@@ -145,3 +145,25 @@ export const ErrorMessage = styled.div`
   line-height: 160.5%;
   margin-top: 8px;
 `;
+
+export const IdCheckMessage = styled.div`
+  color: ${(props) =>
+    props.children === "사용 가능한 아이디입니다." ? "green" : "red"};
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin-top: 8px;
+`;
+
+export const NickCheckMessage = styled.div`
+  color: ${(props) =>
+    props.children === "사용 가능한 닉네임입니다." ? "green" : "red"};
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin-top: 8px;
+`;
