@@ -9,6 +9,16 @@ export function BookWrite() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState(""); // 추가된 부분
   const [content, setContent] = useState("");
+  const [contentLength, setContentLength] = useState(0);
+
+  // 글자 수 업데이트
+  useEffect(() => {
+    setContentLength(content.length);
+    if (content.length > 300) {
+      alert("300자 이내로 작성해주세요.");
+      setContent(content.slice(0, 300));
+    }
+  }, [content]);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -164,6 +174,9 @@ export function BookWrite() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></W.PostContent>
+          <W.ContentLength>
+            <div id="text">({contentLength}/300)</div>
+          </W.ContentLength>
         </W.Item>
       </W.Container>
     </>

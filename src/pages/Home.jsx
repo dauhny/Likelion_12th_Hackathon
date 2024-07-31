@@ -147,9 +147,6 @@ export function Home() {
 
   return (
     <>
-      <button onClick={toggleDarkMode}>
-        {isDarkMode ? "라이트 모드" : "다크 모드"}
-      </button>
       <H.Container isDarkMode={isDarkMode}>
         <motion.div
           initial="initial"
@@ -160,6 +157,10 @@ export function Home() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <H.Item>
+            <H.ThemeBtn
+              onClick={toggleDarkMode}
+              isDarkMode={isDarkMode}
+            ></H.ThemeBtn>
             <H.NewExhibit>
               {" "}
               <H.InfoTextPurple>New</H.InfoTextPurple>

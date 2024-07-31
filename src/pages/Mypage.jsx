@@ -152,20 +152,28 @@ export function Mypage() {
             <MP.scrap isDarkMode={isDarkMode}>
               <div id="ScrapText">스크랩한 전시</div>
             </MP.scrap>
-            {content.map((e) => (
-              <MP.ScrapContainer key={e.id}>
-                <MP.ImgBox onClick={() => goContentIntro(e.data)}>
-                  <img src={e.image} alt="ExhibitPoster"></img>
-                </MP.ImgBox>
-                <MP.ExhibitionIntroduce
-                  onClick={() => goContentIntro(e.data)}
-                  isDarkMode={isDarkMode}
-                >
-                  <div id="Title">{e.title}</div>
-                  <div id="Date">{e.period}</div>
-                </MP.ExhibitionIntroduce>
-              </MP.ScrapContainer>
-            ))}{" "}
+            {content.length === 0 ? (
+              <MP.InfoText>
+                스크랩한 전시가 없습니다.
+                <br />
+                마음에 드는 전시를 저장해보세요!
+              </MP.InfoText>
+            ) : (
+              content.map((e) => (
+                <MP.ScrapContainer key={e.id}>
+                  <MP.ImgBox onClick={() => goContentIntro(e.data)}>
+                    <img src={e.image} alt="ExhibitPoster"></img>
+                  </MP.ImgBox>
+                  <MP.ExhibitionIntroduce
+                    onClick={() => goContentIntro(e.data)}
+                    isDarkMode={isDarkMode}
+                  >
+                    <div id="Title">{e.title}</div>
+                    <div id="Date">{e.period}</div>
+                  </MP.ExhibitionIntroduce>
+                </MP.ScrapContainer>
+              ))
+            )}
           </MP.Item>
         </motion.div>
 
@@ -268,3 +276,5 @@ const pageTransition = {
   animate: { x: "0%" }, // 가운데로 이동
   exit: { x: "-100%" }, // 왼쪽으로 이동
 };
+
+export default Mypage;

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 898px;
+  height: 758px;
   margin: 0 auto;
   background: ${(props) =>
     props.isDarkMode
@@ -106,7 +106,7 @@ export const record = styled.button`
   background: #9747ff;
   cursor: pointer;
   border: 2px solid #9747ff;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 248px;
 
   #text {
@@ -207,4 +207,72 @@ export const PinkBlur = styled.div`
 
 export const ReviewContainer = styled.div`
   cursor: pointer;
+`;
+
+export const InfoText = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#9c9c9c")};
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 185px;
+  margin-bottom: 185px;
+  margin-left: -50px;
+  p {
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+  }
+`;
+
+export const PaginationContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    cursor: pointer;
+    margin-left: -70px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.pagination li {
+    width: 30px;
+    height: 30px;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  ul.pagination li a {
+    text-decoration: none;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  }
+
+  ul.pagination li.active a {
+    color: #a259ff;
+    font-weight: 500;
+  }
+
+  ul.pagination li.active a:hover {
+    color: white;
+  }
+
+  ul.pagination li a:hover {
+    background-color: #a259ff;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+  }
 `;

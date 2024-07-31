@@ -349,11 +349,12 @@ export const Replay = styled.button`
   height: 31px;
   flex-shrink: 0;
   border-radius: 8px;
-  background-color: #6f4f98;
-  border: 2px solid #6f4f98;
+  background: linear-gradient(90deg, #a259ff 0%, #613599 100%);
+  border: none;
   cursor: pointer;
   margin-left: 56px;
   margin-top: 30px;
+
   #past {
     width: 16.929px;
     height: 14.091px;

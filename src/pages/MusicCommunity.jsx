@@ -117,9 +117,9 @@ export function MusicCommunity() {
 
   return (
     <>
-      <M.Container>
+      <M.Container isDarkMode={isDarkMode}>
         <M.BackBtn onClick={goBack}></M.BackBtn>
-        <M.PageTitle>추천 콘텐츠</M.PageTitle>
+        <M.PageTitle isDarkMode={isDarkMode}>추천 콘텐츠</M.PageTitle>
         <M.TapContainer>
           <M.TapOn onClick={goMusicCommunity}>
             <h1>음악</h1>
@@ -130,9 +130,9 @@ export function MusicCommunity() {
         </M.TapContainer>
         <M.Item>
           {" "}
-          <M.RecBtn onClick={goMusicWrite}></M.RecBtn>
+          <M.RecBtn onClick={goMusicWrite} isDarkMode={isDarkMode}></M.RecBtn>
           {content.length === 0 ? (
-            <M.InfoText style={{ marginTop: "100px" }}>
+            <M.InfoText isDarkMode={isDarkMode} style={{ marginTop: "100px" }}>
               등록된 글이 없습니다.
             </M.InfoText>
           ) : (
@@ -141,20 +141,34 @@ export function MusicCommunity() {
                 <M.ProfileImg>
                   <img src={`http://127.0.0.1:8000${e.profile}`} />
                 </M.ProfileImg>
-                <M.PostNickname>{e.nickname}</M.PostNickname>
-                <M.PostDate>{e.createdAt}</M.PostDate>
-                <M.MusicCommunityBox onClick={() => goMusicDetail(e.id)}>
+                <M.PostNickname isDarkMode={isDarkMode}>
+                  {e.nickname}
+                </M.PostNickname>
+                <M.PostDate isDarkMode={isDarkMode}>{e.createdAt}</M.PostDate>
+                <M.MusicCommunityBox
+                  isDarkMode={isDarkMode}
+                  onClick={() => goMusicDetail(e.id)}
+                >
                   <M.MusicPhoto onClick={() => goMusicDetail(e.id)}>
                     <img src={e.image} />
                   </M.MusicPhoto>
                   <M.MusicIcon onClick={() => goMusicDetail(e.id)} />
-                  <M.MusicTitle onClick={() => goMusicDetail(e.id)}>
+                  <M.MusicTitle
+                    isDarkMode={isDarkMode}
+                    onClick={() => goMusicDetail(e.id)}
+                  >
                     {e.title}
                   </M.MusicTitle>
-                  <M.MusicArtist onClick={() => goMusicDetail(e.id)}>
+                  <M.MusicArtist
+                    isDarkMode={isDarkMode}
+                    onClick={() => goMusicDetail(e.id)}
+                  >
                     {e.author}
                   </M.MusicArtist>
-                  <M.MusicContent onClick={() => goMusicDetail(e.id)}>
+                  <M.MusicContent
+                    isDarkMode={isDarkMode}
+                    onClick={() => goMusicDetail(e.id)}
+                  >
                     {e.content}
                   </M.MusicContent>
                 </M.MusicCommunityBox>
@@ -174,7 +188,7 @@ export function MusicCommunity() {
               onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             />
           </M.PaginationContainer>
-          <M.InfoText>
+          <M.InfoText isDarkMode={isDarkMode}>
             관람에 도움이 되었나요?
             <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
           </M.InfoText>

@@ -2,8 +2,11 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
-  height: 1209px;
-  background: #121212;
+  height: 1809px;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -80,7 +83,7 @@ export const PurpleBlur = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -145,7 +148,7 @@ export const ProfileImg = styled.div`
 `;
 
 export const PostNickname = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
@@ -156,7 +159,7 @@ export const PostNickname = styled.div`
 `;
 
 export const PostDate = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -169,16 +172,15 @@ export const BookCommunityBox = styled.div`
   margin-top: 10px;
   width: 360px;
   height: 180px;
-  background: linear-gradient(
-    rgba(52, 52, 52, 0.5) -3.56%,
-    rgba(78, 78, 78, 0.5) 21.44%,
-    rgba(103, 103, 103, 0.5) 46.44%,
-    rgba(154, 154, 154, 0.5) 96.44%
-  );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(180deg, rgba(52, 52, 52, 0.50) -3.56%, rgba(78, 78, 78, 0.50) 21.44%, rgba(103, 103, 103, 0.50) 46.44%, rgba(154, 154, 154, 0.50) 96.44%)"
+      : "#fff"};
   border-radius: 15px;
   margin-left: -5px;
   cursor: pointer;
   margin-bottom: 30px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 export const BookIcon = styled.div`
@@ -192,7 +194,7 @@ export const BookIcon = styled.div`
 `;
 
 export const BookTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 17px;
   font-style: normal;
@@ -204,7 +206,7 @@ export const BookTitle = styled.div`
 `;
 
 export const BookArtist = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -218,7 +220,7 @@ export const BookArtist = styled.div`
 
 export const BookContent = styled.div`
   width: 210px;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -240,7 +242,7 @@ export const BookPhoto = styled.div`
 `;
 
 export const InfoText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: center;
   font-family: "Pretendard Variable";
   font-size: 14px;
@@ -250,7 +252,7 @@ export const InfoText = styled.div`
   margin-top: 15px;
   margin-left: -10px;
   p {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 10px;
@@ -264,7 +266,8 @@ export const InfoText = styled.div`
 export const RecBtn = styled.button`
   width: 172px;
   height: 25px;
-  background-image: url("/images/RecBtn.svg");
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/RecBtn.svg" : "/images/lightRecBtn.svg"});
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;

@@ -3,27 +3,18 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 844px;
+  height: 758px;
   margin: 0 auto;
-  background: linear-gradient(
-      0deg,
-      rgba(217, 217, 217, 0.21) 0%,
-      rgba(217, 217, 217, 0.21) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #e8d6ff 0%,
-      #dcd3e8 17%,
-      #d9d2e2 21.25%,
-      #e8e8e8 67%,
-      #fff 100%
-    );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
+
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
 `;
 
 //고정
@@ -96,7 +87,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -106,14 +97,16 @@ export const PageTitle = styled.div`
   margin-top: -23px;
 `;
 
-// 챗지피티 이미지
+// 로고
 export const AIImg = styled.div`
-  width: 47.185px;
-  height: 47.185px;
+  width: 206px;
+  height: 160px;
   flex-shrink: 0;
-  margin-left: 53px;
+  margin-left: 55px;
   margin-top: 170px;
-  margin-bottom: 120px;
+  background-repeat: no-repeat;
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/AILogo.svg" : "/images/lightAILogo.svg"});
 `;
 
 // 분석 버튼
@@ -122,8 +115,8 @@ export const Analysis = styled.button`
   height: 31px;
   flex-shrink: 0;
   border-radius: 8px;
-  background-color: #6f4f98;
-  border: 2px solid #6f4f98;
+  border: none;
+  background: linear-gradient(90deg, #a259ff 0%, #613599 100%);
   cursor: pointer;
   margin-left: 63px;
   margin-top: 160px;
@@ -159,8 +152,8 @@ export const Replay = styled.button`
   height: 31px;
   flex-shrink: 0;
   border-radius: 8px;
-  background-color: #6f4f98;
-  border: 2px solid #6f4f98;
+  border: none;
+  background: linear-gradient(90deg, #a259ff 0%, #613599 100%);
   cursor: pointer;
   margin-left: 63px;
   margin-top: 8px;
@@ -186,4 +179,15 @@ export const Replay = styled.button`
     margin-left: 30px;
     margin-top: -15px;
   }
+`;
+
+export const PinkBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #fe3796;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: -0px;
+  margin-left: 50px;
 `;

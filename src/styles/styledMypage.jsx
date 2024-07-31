@@ -273,3 +273,25 @@ export const Trash = styled.div`
 `;
 
 export const ScrapContainer = styled.div``;
+
+export const InfoText = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#9c9c9c")};
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 85px;
+  margin-left: -50px;
+  p {
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+  }
+`;

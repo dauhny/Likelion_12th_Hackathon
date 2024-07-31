@@ -182,3 +182,17 @@ export const PostContent = styled.textarea`
   resize: none;
   padding: 10px;
 `;
+
+export const ContentLength = styled.div`
+  width: 100px;
+  height: 15px;
+  #text {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160.5%; /* 22.47px */
+    margin-left: 270px;
+  }
+`;

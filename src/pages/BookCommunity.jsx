@@ -116,9 +116,9 @@ export function BookCommunity() {
 
   return (
     <>
-      <B.Container>
+      <B.Container isDarkMode={isDarkMode}>
         <B.BackBtn onClick={goBack}></B.BackBtn>
-        <B.PageTitle>추천 콘텐츠</B.PageTitle>
+        <B.PageTitle isDarkMode={isDarkMode}>추천 콘텐츠</B.PageTitle>
         <B.TapContainer>
           <B.TapOff onClick={goMusicCommunity}>
             <h1>음악</h1>
@@ -128,9 +128,9 @@ export function BookCommunity() {
           </B.TapOn>
         </B.TapContainer>
         <B.Item>
-          <B.RecBtn onClick={goBookWrite}></B.RecBtn>
+          <B.RecBtn isDarkMode={isDarkMode} onClick={goBookWrite}></B.RecBtn>
           {content.length === 0 ? (
-            <B.InfoText style={{ marginTop: "100px" }}>
+            <B.InfoText isDarkMode={isDarkMode} style={{ marginTop: "100px" }}>
               등록된 글이 없습니다.
             </B.InfoText>
           ) : (
@@ -139,9 +139,14 @@ export function BookCommunity() {
                 <B.ProfileImg>
                   <img src={`http://127.0.0.1:8000${e.profile}`} />
                 </B.ProfileImg>
-                <B.PostNickname>{e.nickname}</B.PostNickname>
-                <B.PostDate>{e.createdAt}</B.PostDate>
-                <B.BookCommunityBox onClick={() => goBookDetail(e.id)}>
+                <B.PostNickname isDarkMode={isDarkMode}>
+                  {e.nickname}
+                </B.PostNickname>
+                <B.PostDate isDarkMode={isDarkMode}>{e.createdAt}</B.PostDate>
+                <B.BookCommunityBox
+                  isDarkMode={isDarkMode}
+                  onClick={() => goBookDetail(e.id)}
+                >
                   <B.BookPhoto onClick={() => goBookDetail(e.id)}>
                     <img src={e.image} />
                   </B.BookPhoto>
@@ -172,7 +177,7 @@ export function BookCommunity() {
               onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             />
           </B.PaginationContainer>
-          <B.InfoText>
+          <B.InfoText isDarkMode={isDarkMode}>
             관람에 도움이 되었나요?
             <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
           </B.InfoText>

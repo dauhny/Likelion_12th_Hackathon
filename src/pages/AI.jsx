@@ -3,8 +3,10 @@ import * as A from "../styles/styledAI";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function AI() {
+  const { isDarkMode } = useTheme();
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -50,9 +52,9 @@ export function AI() {
 
   return (
     <>
-      <A.Container>
+      <A.Container isDarkMode={isDarkMode}>
         <A.BackBtn onClick={goBack}></A.BackBtn>
-        <A.PageTitle>AI 심리 분석</A.PageTitle>{" "}
+        <A.PageTitle isDarkMode={isDarkMode}>AI 심리 분석</A.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -62,9 +64,7 @@ export function AI() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <A.Item>
-            <A.AIImg>
-              <img src="/images/ChatGPT 2.svg" />
-            </A.AIImg>
+            <A.AIImg isDarkMode={isDarkMode} />
             <A.Analysis onClick={goAIRecordList}>
               <div id="folder">
                 <img src="/images/Folder.svg" />
@@ -76,7 +76,8 @@ export function AI() {
                 <img src="/images/Past.svg" />
               </div>
               <div id="text2">지난 분석 다시 보기</div>
-            </A.Replay>
+            </A.Replay>{" "}
+            <A.PinkBlur />
           </A.Item>
         </motion.div>
         {/*하단바*/}

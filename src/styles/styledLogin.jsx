@@ -1,4 +1,4 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 390px;
@@ -86,18 +86,17 @@ export const ErrorMessage = styled.div`
 `;
 
 export const InfoText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: left;
   font-family: "Pretendard Variable";
   font-size: 11px;
   font-style: normal;
   font-weight: 300;
   line-height: 160.5%; /* 19.26px */
-  margin-top: 10px;
 `;
 
 export const RegisterBtn = styled.button`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   text-align: center;
   font-family: "Pretendard Variable";
   font-size: 12px;

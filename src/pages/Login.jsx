@@ -154,8 +154,10 @@ export function Login() {
         <LightLogin isDarkMode={isDarkMode} onClick={handleLogin}>
           완료
         </LightLogin>
-        <L.InfoText>아직 계정이 없나요?</L.InfoText>
-        <L.RegisterBtn onClick={goRegister}>회원가입 ></L.RegisterBtn>
+        <L.InfoText isDarkMode={isDarkMode}>아직 계정이 없나요?</L.InfoText>
+        <L.RegisterBtn onClick={goRegister} isDarkMode={isDarkMode}>
+          회원가입 >
+        </L.RegisterBtn>
       </motion.div>
     </Container>
   );

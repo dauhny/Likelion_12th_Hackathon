@@ -3,8 +3,12 @@ import * as A from "../styles/styledAIRecordList";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
+import Pagination from "react-js-pagination";
 
 export function AIRecordList() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const itemsCountPerPage = 4;
@@ -96,11 +100,16 @@ export function AIRecordList() {
     );
   };
 
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
-      <A.Container>
+      <A.Container isDarkMode={isDarkMode}>
         <A.BackBtn onClick={goBack}></A.BackBtn>
-        <A.PageTitle>나의 기록</A.PageTitle>{" "}
+        <A.PageTitle isDarkMode={isDarkMode}>나의 기록</A.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -110,40 +119,59 @@ export function AIRecordList() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <A.Item>
-            <A.Choice>분석하고 싶은 기록을 선택하세요.</A.Choice>
-            <A.Comment>
+            <A.Choice isDarkMode={isDarkMode}>
+              분석하고 싶은 기록을 선택하세요.
+            </A.Choice>
+            <A.Comment isDarkMode={isDarkMode}>
               AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.
             </A.Comment>{" "}
-            {review.map((e, index) => (
-              <A.RecordContainer key={index}>
-                <A.ImgBox>
-                  <img src={e.img} alt="Review Image"></img>
-                </A.ImgBox>
-                <A.ExhibitionIntroduce>
-                  <div id="Title">{e.title}</div>
-                  <div id="Date">{e.createdAt}</div>
-                  <A.CheckBox
-                    id="NotCheck"
-                    onClick={() => handleImageClick(index)}
-                  >
-                    <img
-                      src={
-                        checkedItemId === e.id
-                          ? "/images/Check.svg"
-                          : "/images/NotCheck.svg"
-                      }
-                      alt="CheckStatus"
-                    ></img>
-                  </A.CheckBox>
-                </A.ExhibitionIntroduce>
-              </A.RecordContainer>
-            ))}
+            {review.length === 0 ? (
+              <A.InfoText>기록이 없습니다.</A.InfoText>
+            ) : (
+              review.map((e, index) => (
+                <A.RecordContainer key={index}>
+                  <A.ImgBox isDarkMode={isDarkMode}>
+                    <img src={e.img} alt="Review Image"></img>
+                  </A.ImgBox>
+                  <A.ExhibitionIntroduce isDarkMode={isDarkMode}>
+                    <div id="Title">{e.title}</div>
+                    <div id="Date">{e.createdAt}</div>
+                    <A.CheckBox
+                      id="NotCheck"
+                      onClick={() => handleImageClick(index)}
+                    >
+                      <img
+                        src={
+                          checkedItemId === e.id
+                            ? "/images/Check.svg"
+                            : "/images/NotCheck.svg"
+                        }
+                        alt="CheckStatus"
+                      ></img>
+                    </A.CheckBox>
+                  </A.ExhibitionIntroduce>
+                </A.RecordContainer>
+              ))
+            )}
+            <A.PaginationContainer isDarkMode={isDarkMode}>
+              <Pagination
+                clssName="pagination"
+                activePage={page} // 현재 페이지
+                itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+                totalItemsCount={totalItems} // 총 아이템 수
+                pageRangeDisplayed={5} // paginator의 페이지 범위
+                prevPageText={"‹"} // "이전"을 나타낼 텍스트
+                nextPageText={"›"} // "다음"을 나타낼 텍스트
+                onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+              />
+            </A.PaginationContainer>
             <A.Analysis onClick={goAIResult}>
               <div id="choice">
                 <img src="/images/WhiteCheck.svg" />
               </div>
               <div id="text">선택한 기록 분석</div>
-            </A.Analysis>
+            </A.Analysis>{" "}
+            <A.PinkBlur />
           </A.Item>{" "}
         </motion.div>
         <A.NavBar>

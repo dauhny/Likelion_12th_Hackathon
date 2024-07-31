@@ -144,24 +144,43 @@ export function Record() {
             <R.record onClick={goRecordWrite}>
               <div id="text">기록하기</div>
             </R.record>
-            {review.map((e) => (
-              <R.ReviewContainer key={e.id}>
-                <R.ImgBox
-                  onClick={() => goMyRecordDetail(e.id)}
-                  isDarkMode={isDarkMode}
-                >
-                  <img src={e.img} alt="ExhibitPoster"></img>
-                </R.ImgBox>
-                <R.ExhibitionIntroduce
-                  isDarkMode={isDarkMode}
-                  onClick={() => goMyRecordDetail(e.id)}
-                >
-                  <div id="Title">{e.title}</div>
-                  <div id="Date">{e.createdAt2}</div>
-                  <R.Trash id="remove" onClick={() => deletePost(e.id)} />
-                </R.ExhibitionIntroduce>
-              </R.ReviewContainer>
-            ))}
+            {review.length === 0 ? (
+              <R.InfoText>
+                아직 기록이 없습니다. <br />
+                지금 바로 나의 전시 경험을 기록해보세요.
+              </R.InfoText>
+            ) : (
+              review.map((e) => (
+                <R.ReviewContainer key={e.id}>
+                  <R.ImgBox
+                    onClick={() => goMyRecordDetail(e.id)}
+                    isDarkMode={isDarkMode}
+                  >
+                    <img src={e.img} alt="ExhibitPoster"></img>
+                  </R.ImgBox>
+                  <R.ExhibitionIntroduce
+                    isDarkMode={isDarkMode}
+                    onClick={() => goMyRecordDetail(e.id)}
+                  >
+                    <div id="Title">{e.title}</div>
+                    <div id="Date">{e.createdAt2}</div>
+                    <R.Trash id="remove" onClick={() => deletePost(e.id)} />
+                  </R.ExhibitionIntroduce>
+                </R.ReviewContainer>
+              ))
+            )}{" "}
+            <R.PaginationContainer isDarkMode={isDarkMode}>
+              <Pagination
+                clssName="pagination"
+                activePage={page} // 현재 페이지
+                itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+                totalItemsCount={totalItems} // 총 아이템 수
+                pageRangeDisplayed={5} // paginator의 페이지 범위
+                prevPageText={"‹"} // "이전"을 나타낼 텍스트
+                nextPageText={"›"} // "다음"을 나타낼 텍스트
+                onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+              />
+            </R.PaginationContainer>
             <R.PinkBlur></R.PinkBlur>{" "}
           </R.Item>{" "}
         </motion.div>

@@ -115,13 +115,13 @@ export const ExhibitTitle = styled.div`
 export const ExhibitDetail = styled.div`
   color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 300;
-  line-height: 24px;
+  line-height: 20px;
   margin-bottom: 20px;
   margin-left: 45%;
-  width: 166px;
+  width: 160px;
 `;
 
 //고정
@@ -180,6 +180,7 @@ export const LocationText = styled.div`
   margin-top: -62px;
   margin-left: 49%;
   margin-bottom: 30px;
+  width: 140px;
 `;
 
 export const BtnContainer = styled.div`

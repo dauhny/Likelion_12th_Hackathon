@@ -97,7 +97,7 @@ export const InfoTextPurple = styled.div`
   font-weight: 600;
   line-height: 24px;
   margin-bottom: -5px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 5px;
 `;
 
@@ -308,4 +308,17 @@ export const AD = styled.div`
   background-repeat: no-repeat;
   width: 390px;
   height: 243px;
+`;
+
+export const ThemeBtn = styled.button`
+  background-image: url(${(props) =>
+    props.isDarkMode ? "/images/ThemeBtn.svg" : "/images/lightThemeBtn.svg"});
+  width: 128px;
+  height: 33px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 255px;
+  margin-top: 15px;
+  background-repeat: no-repeat;
 `;
