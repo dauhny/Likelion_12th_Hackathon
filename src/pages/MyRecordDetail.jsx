@@ -16,6 +16,7 @@ export function MyRecordDetail() {
   const [createdAt, setCreatedAt] = useState("");
   const [viewAt, setViewAt] = useState("");
   const [content, setContent] = useState("");
+  const [contentLength, setContentLength] = useState(0); // 글자 수 상태
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,11 @@ export function MyRecordDetail() {
     };
     fetchData(); // useEffect에서 fetchData 함수 호출
   }, [id]);
+
+  // 글자 수 업데이트
+  useEffect(() => {
+    setContentLength(content.length);
+  }, [content]);
 
   //삭제 버튼
   const deletePost = async () => {

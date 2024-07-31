@@ -32,6 +32,8 @@ export const BackBtn = styled.button`
   outline: none;
   margin-left: 10px;
   margin-top: 10px;
+  z-index: 999;
+  position: relative;
 `;
 
 //하단바 시작
@@ -47,7 +49,7 @@ export const NavBar = styled.div`
   bottom: 0;
   z-index: 999;
   display: flex;
-  margin-left: -48px;
+  margin-left: -1px;
 `;
 
 export const NavBtnContainer = styled.div`

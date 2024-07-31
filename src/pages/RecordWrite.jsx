@@ -14,6 +14,7 @@ export function RecordWrite() {
   const [viewAt, setViewAt] = useState("");
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
+  const [contentLength, setContentLength] = useState(0); // 글자 수 상태
 
   useEffect(() => {
     if (id) {
@@ -45,6 +46,15 @@ export function RecordWrite() {
       fetchData();
     }
   }, [id]);
+
+  // 글자 수 업데이트
+  useEffect(() => {
+    setContentLength(content.length);
+    if (content.length > 700) {
+      alert("300자 이내로 작성해주세요.");
+      setContent(content.slice(0, 700));
+    }
+  }, [content]);
 
   const handlePost = async (event) => {
     event.preventDefault();
@@ -176,6 +186,11 @@ export function RecordWrite() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
+
+          <RW.ContentLength>
+            <div id="text">({contentLength}/300)</div>
+          </RW.ContentLength>
+
           <RW.PinkBlur2></RW.PinkBlur2>
           <RW.NavBar>
             <RW.NavBtnContainer>

@@ -139,6 +139,7 @@ export const ImgBox = styled.div`
     flex-shrink: 0;
     margin-left: 11px;
     margin-top: 10px;
+    border-radius: 5px;
   }
 `;
 

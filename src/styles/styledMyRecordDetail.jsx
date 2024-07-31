@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1156px;
+  height: 800px;
   margin: 0 auto;
   background: #121212;
   justify-content: center;
@@ -115,6 +115,7 @@ export const date = styled.button`
   border-radius: 10px;
   background-color: #121212;
   border: 1px solid #dec5fb;
+  margin-top: -25px;
 
   #text {
     flex-direction: row;
@@ -139,6 +140,7 @@ export const modify = styled.div`
   background: #ddc4fb;
   margin-left: 125px;
   cursor: pointer;
+  margin-top: -25px;
 
   #text {
     color: #3d3a3a;
@@ -160,6 +162,7 @@ export const remove = styled.div`
   background: #ddc4fb;
   margin-left: 7px;
   cursor: pointer;
+  margin-top: -25px;
 
   #text {
     color: #3d3a3a;
@@ -184,7 +187,7 @@ export const title = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 160.5%; /* 32.1px */
-  margin-top: 15px;
+  margin-top: -15px;
   text-align: center;
   margin-left: -5%;
 `;
@@ -196,7 +199,7 @@ export const img = styled.div`
     height: 214px;
     flex-shrink: 0;
     border-radius: 10px;
-    margin-top: 23px;
+    margin-top: 13px;
     margin-left: 30px;
   }
 `;
@@ -225,8 +228,9 @@ export const content = styled.div`
     #faf8fc 76.5%,
     #fff 100%
   );
-  margin-top: 73px;
+  margin-top: 63px;
   margin-left: -24px;
+  position: absolute;
 
   #text {
     color: #3d3a3a;
@@ -234,10 +238,30 @@ export const content = styled.div`
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 160.5%; /* 22.47px */
+    line-height: 160.5%;
     position: absolute;
-    margin-left: 15px;
-    margin-top: 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    width: 300px;
+    padding-left: 15px;
+  }
+`;
+
+export const ContentLength = styled.div`
+  width: 200px;
+  height: 15px;
+  #text {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160.5%; /* 22.47px */
+    margin-top: 300px;
+    margin-left: 295px;
   }
 `;
 

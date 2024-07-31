@@ -116,6 +116,11 @@ export function AIResult() {
 
   //하단바 끝
 
+  const textLengthInPx = analysis.analysis.length * 3.3;
+  const consumerHeight =
+    (post.content || "").length <= 150
+      ? `${Math.max((post.content || "").length * 1, 120)}px` // 최소 50px로 설정
+      : `${(post.content || "").length * 1.35}px`;
   return (
     <A.Container>
       <A.BackBtn onClick={goBack}></A.BackBtn>
@@ -155,10 +160,22 @@ export function AIResult() {
               <div id="Title">{post.title}</div>
               <div id="Date">{post.createdAt}</div>
             </A.Content>
-            <A.Consumer>
+            <A.Consumer
+              style={{
+                flexGrow: "1",
+                height: consumerHeight, // 길이에 맞춰 너비를 설정
+                maxWidth: "100%",
+              }}
+            >
               <div id="review">{post.content}</div>
             </A.Consumer>
-            <A.AIAnalysis>
+            <A.AIAnalysis
+              style={{
+                flexGrow: "1",
+                height: `${textLengthInPx}px`, // 길이에 맞춰 너비를 설정
+                maxWidth: "100%",
+              }}
+            >
               <div id="text">감정 분석 결과</div>
               <PieChart
                 style={{
@@ -256,7 +273,15 @@ export function AIResult() {
                   marginTop: "-14px",
                 }}
               />
-              <div id="AItext">{analysis.analysis}</div>
+              <div
+                id="AItext"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  wordWrap: "break-word",
+                }}
+              >
+                {analysis.analysis}
+              </div>
             </A.AIAnalysis>
             <A.Replay onClick={goAIPast}>
               <div id="past">

@@ -10,8 +10,9 @@ export const Ellipse549 = styled.div`
   width: 206px;
   height: 205px;
   background-color: #a259ff;
-  filter: blur(159.68670654296875px);
-  margin-top: -120px;
+  filter: blur(160px);
+  margin-top: -150px;
+  margin-left: 60px;
 `;
 
 export const Login = styled.button`

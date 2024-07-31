@@ -139,6 +139,12 @@ export function ReviewCommunity() {
     setPage(1);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <>
       <RC.Container>
@@ -151,6 +157,7 @@ export function ReviewCommunity() {
               placeholder="후기가 궁금한 전시를 입력해보세요."
               value={searchValue}
               onChange={handleKeyword}
+              onKeyDown={handleKeyPress}
             ></RC.search>
             <RC.searchImg onClick={handleSearch}>
               <img src="/images/SearchIconPurple.svg" alt="search"></img>

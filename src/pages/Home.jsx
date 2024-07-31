@@ -171,7 +171,8 @@ export function Home() {
             <br />
             <H.InfoText isDarkMode={isDarkMode}>HOT 후기글</H.InfoText>
             <H.ReviewBtn onClick={goReview} isDarkMode={isDarkMode}>
-              더보기 >
+              더보기
+              <H.WhiteArrow isDarkMode={isDarkMode} />
             </H.ReviewBtn>{" "}
             {review.map((e) => (
               <H.ReviewBox
@@ -204,7 +205,7 @@ export function Home() {
             ))}
             <H.InfoText isDarkMode={isDarkMode}>HOT 전시</H.InfoText>
             <H.ReviewBtn onClick={goSearch} isDarkMode={isDarkMode}>
-              더보기 >
+              더보기 <H.WhiteArrow isDarkMode={isDarkMode} />
             </H.ReviewBtn>
             {content.map((e) => (
               <H.ExhibitPoster key={e.id} onClick={() => goContentIntro(e.id)}>

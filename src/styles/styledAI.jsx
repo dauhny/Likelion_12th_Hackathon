@@ -111,8 +111,9 @@ export const AIImg = styled.div`
   width: 47.185px;
   height: 47.185px;
   flex-shrink: 0;
-  margin-left: 125px;
-  margin-top: 270px;
+  margin-left: 53px;
+  margin-top: 170px;
+  margin-bottom: 120px;
 `;
 
 // 분석 버튼

@@ -28,6 +28,12 @@ export const Search = () => {
     setPage(1);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const goBack = () => {
     navigate(-1);
     window.scrollTo(0, 0);
@@ -110,6 +116,7 @@ export const Search = () => {
               placeholder="관심 있는 전시를 검색해보세요."
               value={searchValue}
               onChange={handleKeyword}
+              onKeyDown={handleKeyPress}
               isDarkMode={isDarkMode}
             />
             <S.SearchIcon onClick={handleSearch} />

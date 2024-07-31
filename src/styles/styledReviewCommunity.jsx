@@ -79,6 +79,7 @@ export const NavText = styled.div`
   margin-left: 33px;
   margin-top: -5px;
 `;
+
 // 하단바 끝
 
 export const PageTitle = styled.div`
@@ -198,8 +199,9 @@ export const contentContainer = styled.div`
   position: relative;
   margin-bottom: 30px;
   margin-top: -103px;
-  margin-left: 110px;
+  margin-left: 100px;
   cursor: pointer;
+
   #title {
     color: #fff;
     font-family: "Pretendard Variable";
@@ -226,8 +228,8 @@ export const contentContainer = styled.div`
     height: 16px;
     flex-shrink: 0;
     position: absolute;
-    margin-left: 154px;
-    margin-top: -73px;
+    margin-left: 161px;
+    margin-top: -68px;
   }
 
   #count {
@@ -238,8 +240,8 @@ export const contentContainer = styled.div`
     font-weight: 500;
     line-height: 24px; /* 200% */
     position: absolute;
-    margin-left: 175px;
-    margin-top: -75px;
+    margin-left: 182px;
+    margin-top: -70px;
   }
 `;
 
@@ -305,7 +307,7 @@ export const ReviewImg = styled.div`
     height: 40px;
     border-radius: 5px;
     position: absolute;
-    margin-left: 150px;
-    margin-top: -45px;
+    margin-left: 157px;
+    margin-top: -40px;
   }
 `;

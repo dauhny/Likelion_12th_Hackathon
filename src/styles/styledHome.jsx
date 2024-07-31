@@ -96,7 +96,7 @@ export const InfoTextPurple = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-bottom: 5px;
+  margin-bottom: -5px;
   margin-top: 30px;
   margin-left: 5px;
 `;
@@ -170,10 +170,18 @@ export const ReviewBtn = styled.button`
   border: none;
   margin-left: 70%;
   margin-bottom: 5px;
+`;
 
-  img {
-    margin-bottom: -7px;
-  }
+export const WhiteArrow = styled.div`
+  background-image: url(${(props) =>
+    props.isDarkMode
+      ? "/images/WhiteArrow.svg"
+      : "/images/lightWhiteArrow.svg"});
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  margin-top: -23px;
+  margin-left: 38px;
 `;
 
 export const ReviewBox = styled.div`
@@ -191,8 +199,8 @@ export const ReviewBox = styled.div`
 
 export const ProfileImg = styled.div`
   img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-left: 18px;
     margin-top: 13px;
     position: absolute;
@@ -207,8 +215,8 @@ export const ReviewName = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  width: 100px;
-  margin-left: 55px;
+  width: 150px;
+  margin-left: 50px;
   margin-top: 13px;
   position: absolute;
 `;
@@ -221,7 +229,7 @@ export const ReviewDate = styled.div`
   font-weight: 400;
   line-height: 24px;
   position: absolute;
-  margin-left: 75%;
+  margin-left: 86.5%;
   margin-top: 5px;
 `;
 
@@ -230,11 +238,11 @@ export const ReviewTitle = styled.div`
   font-family: "Pretendard Variable";
   font-size: 15px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 24px;
   position: absolute;
   margin-left: 19px;
-  margin-top: 48px;
+  margin-top: 43px;
 `;
 
 export const ReviewContent = styled.div`
@@ -243,12 +251,12 @@ export const ReviewContent = styled.div`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 20px;
   position: absolute;
   margin-left: 19px;
-  margin-top: 71px;
+  margin-top: 69px;
   width: 205px;
-  height: 50px;
+  height: 40px;
   overflow: hidden;
 `;
 

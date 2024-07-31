@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1096px;
+  height: 2500px;
   margin: 0 auto;
   background: linear-gradient(
       0deg,
@@ -154,7 +154,7 @@ export const Content = styled.div`
 // 소비자 감상평
 export const Consumer = styled.div`
   width: 216px;
-  height: 180px;
+  height: 410px;
   flex-shrink: 0;
   border-radius: 20px;
   opacity: 0.8;
@@ -172,14 +172,14 @@ export const Consumer = styled.div`
     line-height: 24px; /* 200% */
     position: absolute;
     margin-left: 26px;
-    margin-top: 17px;
+    margin-top: 7px;
   }
 `;
 
 // AI 감정 분석 결과
 export const AIAnalysis = styled.div`
   width: 315px;
-  height: 578px;
+  height: 880px;
   flex-shrink: 0;
   border-radius: 20px;
   opacity: 0.8;

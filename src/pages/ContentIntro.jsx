@@ -299,7 +299,6 @@ export function ContentIntro() {
       );
 
       console.log("별점 등록 성공:", response.data);
-      alert("별점이 등록되었습니다.");
     } catch (error) {
       console.error("별점 등록 실패:", error);
       if (error.response) {

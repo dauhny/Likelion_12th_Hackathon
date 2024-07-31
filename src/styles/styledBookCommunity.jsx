@@ -247,7 +247,7 @@ export const InfoText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin-top: 50px;
+  margin-top: 15px;
   margin-left: -10px;
   p {
     color: #fff;
@@ -262,12 +262,14 @@ export const InfoText = styled.div`
 `;
 
 export const RecBtn = styled.button`
-  width: 290px;
-  height: 41px;
+  width: 172px;
+  height: 25px;
   background-image: url("/images/RecBtn.svg");
   background-color: transparent;
+  background-repeat: no-repeat;
   border: none;
-  margin-left: 40px;
+  margin-left: 55%;
+  margin-top: -30px;
   cursor: pointer;
   &:hover {
     background-image: url("/images/RecBtnH.svg");
@@ -275,3 +277,48 @@ export const RecBtn = styled.button`
 `;
 
 export const BookContainer = styled.div``;
+
+export const PaginationContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    cursor: pointer;
+    margin-left: -30px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.pagination li {
+    width: 30px;
+    height: 30px;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  ul.pagination li a {
+    text-decoration: none;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  }
+
+  ul.pagination li.active a {
+    color: #a259ff;
+    font-weight: 500;
+  }
+
+  ul.pagination li.active a:hover {
+    color: white;
+  }
+
+  ul.pagination li a:hover {
+    background-color: #a259ff;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+  }
+`;

@@ -120,7 +120,6 @@ export const profile = styled.div`
 
 // 사용자 이름
 export const name = styled.div`
-  width: 88px;
   height: 20px;
   flex-shrink: 0;
   color: #fff;
@@ -129,8 +128,8 @@ export const name = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 160.5%; /* 22.47px */
-  margin-left: 103px;
   text-align: center;
+  margin-left: -12%;
 `;
 
 // 정보

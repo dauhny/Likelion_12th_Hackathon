@@ -172,7 +172,7 @@ export const logout = styled.button`
 // 스크랩 이미지, 텍스트
 export const scrap = styled.div`
   background-image: url(${(props) =>
-    props.isDarkMode ? "/images/ScrapIcon.svg" : "/images/lightScrapIcon.svg"});
+    props.isDarkMode ? "/images/Scrap.svg" : "/images/lightScrapIcon.svg"});
   background-repeat: no-repeat;
   width: 100px;
   height: 12px;
@@ -199,7 +199,10 @@ export const ImgBox = styled.div`
   height: 81px;
   flex-shrink: 0;
   border-radius: 10px 0px 0px 10px;
-  background: #2b1e3c;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#2b1e3c"
+      : "linear-gradient(90deg, #6F4F98 0%, #251A32 100%)"};
   margin-top: 12px;
   margin-left: -24px;
   cursor: pointer;
@@ -210,6 +213,7 @@ export const ImgBox = styled.div`
     margin-left: 11px;
     margin-top: 10px;
   }
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 // 전시 설명
@@ -218,14 +222,19 @@ export const ExhibitionIntroduce = styled.div`
   height: 79px;
   flex-shrink: 0;
   border-radius: 0px 10px 10px 0px;
-  border: 1px solid #717171;
-  background: linear-gradient(90deg, #895ebf 0%, #402c59 100%);
+  border: 1px solid;
+  border-color: ${(props) => (props.isDarkMode ? "#717171" : "white")};
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(90deg, #895ebf 0%, #402c59 100%)"
+      : "linear-gradient(90deg, #FFF 0%, #F5F1F9 72%, #EAE3F2 98%)"};
   margin-left: 56px;
   margin-top: -81px;
   cursor: pointer;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   #Title {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 13px;
     font-style: normal;
@@ -236,7 +245,7 @@ export const ExhibitionIntroduce = styled.div`
     position: absolute;
   }
   #Date {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;

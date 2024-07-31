@@ -157,7 +157,10 @@ export function Mypage() {
                 <MP.ImgBox onClick={() => goContentIntro(e.data)}>
                   <img src={e.image} alt="ExhibitPoster"></img>
                 </MP.ImgBox>
-                <MP.ExhibitionIntroduce onClick={() => goContentIntro(e.data)}>
+                <MP.ExhibitionIntroduce
+                  onClick={() => goContentIntro(e.data)}
+                  isDarkMode={isDarkMode}
+                >
                   <div id="Title">{e.title}</div>
                   <div id="Date">{e.period}</div>
                 </MP.ExhibitionIntroduce>

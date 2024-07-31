@@ -3,8 +3,12 @@ import * as M from "../styles/styledMusicCommunity";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTheme } from "../contexts/ThemeContext";
+import Pagination from "react-js-pagination";
 
 export function MusicCommunity() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
 
   const [content, setContent] = useState([]);
@@ -125,8 +129,12 @@ export function MusicCommunity() {
           </M.TapOff>
         </M.TapContainer>
         <M.Item>
+          {" "}
+          <M.RecBtn onClick={goMusicWrite}></M.RecBtn>
           {content.length === 0 ? (
-            <M.InfoText>등록된 글이 없습니다.</M.InfoText>
+            <M.InfoText style={{ marginTop: "100px" }}>
+              등록된 글이 없습니다.
+            </M.InfoText>
           ) : (
             content.map((e) => (
               <M.RecContainer key={e.id}>
@@ -154,11 +162,22 @@ export function MusicCommunity() {
             ))
           )}
           <M.PurpleBlur></M.PurpleBlur>
+          <M.PaginationContainer isDarkMode={isDarkMode}>
+            <Pagination
+              clssName="pagination"
+              activePage={page} // 현재 페이지
+              itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+              totalItemsCount={totalItems} // 총 아이템 수
+              pageRangeDisplayed={5} // paginator의 페이지 범위
+              prevPageText={"‹"} // "이전"을 나타낼 텍스트
+              nextPageText={"›"} // "다음"을 나타낼 텍스트
+              onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+            />
+          </M.PaginationContainer>
           <M.InfoText>
             관람에 도움이 되었나요?
             <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
           </M.InfoText>
-          <M.RecBtn onClick={goMusicWrite}></M.RecBtn>
         </M.Item>
         {/*하단바*/}
         <M.NavBar>

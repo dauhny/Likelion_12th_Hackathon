@@ -11,6 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  padding: 0;
 `;
 
 //고정
@@ -241,7 +242,7 @@ export const title = styled.input`
 
 // 내용
 export const content = styled.textarea`
-  width: 328px;
+  width: 318px;
   height: 225px;
   flex-shrink: 0;
   border-radius: 10px;
@@ -257,6 +258,22 @@ export const content = styled.textarea`
   margin-top: -25px;
   padding-left: 15px;
   padding-top: 10px;
+  resize: none;
+  padding-right: 10px;
+`;
+
+export const ContentLength = styled.div`
+  width: 100px;
+  height: 15px;
+  #text {
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160.5%; /* 22.47px */
+    margin-left: 275px;
+  }
 `;
 
 export const PinkBlur2 = styled.div`

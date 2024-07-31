@@ -3,8 +3,12 @@ import * as B from "../styles/styledBookCommunity";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTheme } from "../contexts/ThemeContext";
+import Pagination from "react-js-pagination";
 
 export function BookCommunity() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
 
   const [content, setContent] = useState([]);
@@ -124,8 +128,11 @@ export function BookCommunity() {
           </B.TapOn>
         </B.TapContainer>
         <B.Item>
+          <B.RecBtn onClick={goBookWrite}></B.RecBtn>
           {content.length === 0 ? (
-            <B.InfoText>등록된 글이 없습니다.</B.InfoText>
+            <B.InfoText style={{ marginTop: "100px" }}>
+              등록된 글이 없습니다.
+            </B.InfoText>
           ) : (
             content.map((e) => (
               <B.BookContainer key={e.id}>
@@ -152,12 +159,23 @@ export function BookCommunity() {
               </B.BookContainer>
             ))
           )}
-          <B.PurpleBlur></B.PurpleBlur>
+          <B.PurpleBlur></B.PurpleBlur>{" "}
+          <B.PaginationContainer isDarkMode={isDarkMode}>
+            <Pagination
+              clssName="pagination"
+              activePage={page} // 현재 페이지
+              itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+              totalItemsCount={totalItems} // 총 아이템 수
+              pageRangeDisplayed={5} // paginator의 페이지 범위
+              prevPageText={"‹"} // "이전"을 나타낼 텍스트
+              nextPageText={"›"} // "다음"을 나타낼 텍스트
+              onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+            />
+          </B.PaginationContainer>
           <B.InfoText>
             관람에 도움이 되었나요?
             <p>더욱 다양한 경험을 위한 추천글을 직접 작성해보세요!</p>
           </B.InfoText>
-          <B.RecBtn onClick={goBookWrite}></B.RecBtn>
         </B.Item>
         {/*하단바*/}
         <B.NavBar>
