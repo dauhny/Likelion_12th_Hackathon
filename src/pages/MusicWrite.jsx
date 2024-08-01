@@ -3,8 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import * as W from "../styles/styledMusicWrite";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function MusicWrite() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -165,7 +168,7 @@ export function MusicWrite() {
 
   return (
     <>
-      <W.Container>
+      <W.Container isDarkMode={isDarkMode}>
         {" "}
         <motion.div
           initial="initial"
@@ -176,11 +179,17 @@ export function MusicWrite() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <W.BackBtn onClick={goBack} />
-          <W.PageTitle>추천글 작성</W.PageTitle>
+          <W.PageTitle isDarkMode={isDarkMode}>추천글 작성</W.PageTitle>
           <W.Item>
             <W.ShareBtn onClick={handlePost}>공유하기</W.ShareBtn>
             <W.PostImgLabel htmlFor="profileImg">
-              <img src="/images/PostImgBtn.svg" />
+              <img
+                src={
+                  isDarkMode
+                    ? "/images/PostImgBtn.svg"
+                    : "/images/lightPostImgBtn.svg"
+                }
+              />{" "}
             </W.PostImgLabel>
             <W.PostImgInput
               type="file"
@@ -193,21 +202,24 @@ export function MusicWrite() {
               <img src={imgFile ? imgFile : "/images/BasicImg.svg"} />
             </W.PostedImg>
             <W.PostTitle
+              isDarkMode={isDarkMode}
               placeholder="음악 제목을 입력하세요."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             ></W.PostTitle>
             <W.PostArtist
+              isDarkMode={isDarkMode}
               placeholder="아티스트명을 입력하세요."
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
             ></W.PostArtist>
             <W.PostContent
+              isDarkMode={isDarkMode}
               placeholder="내용을 입력하세요."
               value={content}
               onChange={(e) => setContent(e.target.value)}
             ></W.PostContent>
-            <W.ContentLength>
+            <W.ContentLength isDarkMode={isDarkMode}>
               <div id="text">({contentLength}/300)</div>
             </W.ContentLength>
           </W.Item>{" "}

@@ -11,7 +11,7 @@ export function AIRecordList() {
 
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const itemsCountPerPage = 4;
+  const itemsCountPerPage = 5;
   const [totalItems, setTotalItems] = useState(0);
 
   const location = useLocation();
@@ -126,7 +126,10 @@ export function AIRecordList() {
               AI 상담사가 기록을 통해 당신의 감정과 심리를 분석합니다.
             </A.Comment>{" "}
             {review.length === 0 ? (
-              <A.InfoText>기록이 없습니다.</A.InfoText>
+              <A.InfoText>
+                기록이 없습니다.
+                <br />내 기록 메뉴에서 글을 작성해보세요.
+              </A.InfoText>
             ) : (
               review.map((e, index) => (
                 <A.RecordContainer key={index}>

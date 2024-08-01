@@ -1,10 +1,14 @@
 import React from "react";
-import * as M from "../styles/styledMusicDetail";
+import * as M from "../styles/styledBookDetail";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTheme } from "../contexts/ThemeContext";
+import { motion } from "framer-motion";
 
 export function BookDetail() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -122,29 +126,41 @@ export function BookDetail() {
 
   return (
     <>
-      <M.Container>
-        <M.BackBtn onClick={goBack}></M.BackBtn>
-        <M.ProfileImgBlack>
-          <img src={`http://127.0.0.1:8000${profile}`} />
-        </M.ProfileImgBlack>
-        <M.InfoText>{nickname}</M.InfoText>
-        <M.PostDate>{createdAt}</M.PostDate>{" "}
-        <M.modify onClick={modifyPost}>
-          <div id="text">수정</div>
-        </M.modify>
-        <M.remove onClick={deletePost}>
-          <div id="text">삭제</div>
-        </M.remove>
-        <M.AlbumCover>
-          <img src={image} alt="Music Image" />
-        </M.AlbumCover>
-        <M.MusicInfo>
-          <p id={"songTitle"}>{title}</p>
-          <br></br>
-          <p id={"artist"}>{author}</p>
-        </M.MusicInfo>
-        <br />
-        <M.UserText>{content}</M.UserText>
+      <M.Container isDarkMode={isDarkMode}>
+        {" "}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <M.Item>
+            <M.BackBtn onClick={goBack}></M.BackBtn>
+            <M.ProfileImgBlack>
+              <img src={`http://127.0.0.1:8000${profile}`} />
+            </M.ProfileImgBlack>
+            <M.InfoText isDarkMode={isDarkMode}>{nickname}</M.InfoText>
+            <M.PostDate isDarkMode={isDarkMode}>{createdAt}</M.PostDate>{" "}
+            <M.modify isDarkMode={isDarkMode} onClick={modifyPost}>
+              <div id="text">수정</div>
+            </M.modify>
+            <M.remove isDarkMode={isDarkMode} onClick={deletePost}>
+              <div id="text">삭제</div>
+            </M.remove>
+            <M.AlbumCover>
+              <img src={image} alt="Music Image" />
+            </M.AlbumCover>
+            <M.MusicInfo isDarkMode={isDarkMode}>
+              <p id={"songTitle"}>{title}</p>
+              <br></br>
+              <p id={"artist"}>{author}</p>
+            </M.MusicInfo>
+            <br />
+            <M.UserText isDarkMode={isDarkMode}>{content}</M.UserText>{" "}
+          </M.Item>
+        </motion.div>
         {/*하단바*/}
         <M.NavBar>
           {/*검색*/}
@@ -221,7 +237,13 @@ export function BookDetail() {
           </M.NavBtnContainer>
         </M.NavBar>
         {/*하단바*/}
-      </M.Container>
+      </M.Container>{" "}
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

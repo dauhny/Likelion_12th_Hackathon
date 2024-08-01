@@ -340,7 +340,10 @@ export function ContentIntro() {
   };
 
   const getRatingText2 = (value) => {
-    return ratingTexts2[Math.round(value * 2) / 2] || "별점을 남겨보세요.";
+    return (
+      ratingTexts2[Math.round(value * 2) / 2] ||
+      "더블클릭하여 별점을 남겨보세요."
+    );
   };
 
   //별점
@@ -394,6 +397,9 @@ export function ContentIntro() {
                 <C.ExhibitPoster onClick={() => handlePageUrl(e.pageUrl)}>
                   <img src={e.image} alt="ExhibitPoster" />
                 </C.ExhibitPoster>
+                <C.ClickPoster isDarkMode={isDarkMode}>
+                  포스터를 클릭하면 전시 홈페이지로 이동합니다.
+                </C.ClickPoster>
                 <C.LocationIcon isDarkMode={isDarkMode} />
                 <br /> <br />
                 <C.LocationText isDarkMode={isDarkMode}>
@@ -491,7 +497,7 @@ export function ContentIntro() {
                   fontWeight: "400",
                   marginTop: "15%",
                   position: "absolute",
-                  marginLeft: "-55px",
+                  marginLeft: "-56px",
                 }}
                 isDarkMode={isDarkMode}
               >
@@ -505,7 +511,7 @@ export function ContentIntro() {
                   fontWeight: "500",
                   marginTop: "30%",
                   position: "absolute",
-                  marginLeft: "-85px",
+                  marginLeft: "-105px",
                 }}
                 isDarkMode={isDarkMode}
               >
@@ -554,15 +560,17 @@ export function ContentIntro() {
                   isDarkMode={isDarkMode}
                   onClick={() => handleCommentDelete(e.id)}
                 />
-                <C.CommentNickname isDarkMode={isDarkMode}>
-                  {e.nickname} •{" "}
-                </C.CommentNickname>
-                <C.CommentProfile>
-                  <img
-                    src={`http://127.0.0.1:8000${e.profile}`}
-                    alt="Comment Profile"
-                  />
-                </C.CommentProfile>
+                <C.CMT>
+                  <C.CommentNickname isDarkMode={isDarkMode}>
+                    {e.nickname} •
+                  </C.CommentNickname>
+                  <C.CommentProfile>
+                    <img
+                      src={`http://127.0.0.1:8000${e.profile}`}
+                      alt="Comment Profile"
+                    />
+                  </C.CommentProfile>
+                </C.CMT>
                 <C.CommentLine isDarkMode={isDarkMode} />
               </C.CommentContainer>
             ))}{" "}

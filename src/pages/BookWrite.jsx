@@ -3,8 +3,12 @@ import * as W from "../styles/styledBookWrite";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function BookWrite() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState(""); // 추가된 부분
@@ -119,11 +123,11 @@ export function BookWrite() {
             },
           }
         );
-        console.log("음악 추천글 생성 성공:", response.data);
+        console.log("도서 추천글 생성 성공:", response.data);
         goBookCommunity();
       }
     } catch (error) {
-      console.error("음악 추천글 생성 실패:", error);
+      console.error("도서 추천글 생성 실패:", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
@@ -139,46 +143,174 @@ export function BookWrite() {
     };
   };
 
+  //하단바
+  const goSearch = () => {
+    navigate(`/search`);
+    window.scrollTo(0, 0);
+  };
+
+  const goAI = () => {
+    navigate(`/ai`);
+    window.scrollTo(0, 0);
+  };
+
+  const goHome = () => {
+    navigate(`/home`);
+    window.scrollTo(0, 0);
+  };
+
+  const goRecord = () => {
+    navigate(`/record`);
+    window.scrollTo(0, 0);
+  };
+
+  const goMyPage = () => {
+    navigate(`/mypage`);
+    window.scrollTo(0, 0);
+  };
+
+  //하단바 끝
+
   return (
     <>
-      <W.Container>
+      <W.Container isDarkMode={isDarkMode}>
         <W.BackBtn onClick={goBack} />
-        <W.PageTitle>추천글 작성</W.PageTitle>
-        <W.Item>
-          <W.ShareBtn onClick={handlePost}>공유하기</W.ShareBtn>
-          <W.PostImgLabel htmlFor="profileImg">
-            <img src="/images/PostImgBtn.svg" />
-          </W.PostImgLabel>
-          <W.PostImgInput
-            type="file"
-            accept="image/*"
-            onChange={saveImgFile}
-            ref={imgRef}
-            id="profileImg"
-          />
-          <W.PostedImg>
-            <img src={imgFile ? imgFile : "/images/BasicImg.svg"} />
-          </W.PostedImg>
-          <W.PostTitle
-            placeholder="책 제목을 입력하세요."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></W.PostTitle>
-          <W.PostArtist
-            placeholder="작가명을 입력하세요."
-            value={author} // 추가된 부분
-            onChange={(e) => setAuthor(e.target.value)} // 추가된 부분
-          ></W.PostArtist>
-          <W.PostContent
-            placeholder="내용을 입력하세요."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></W.PostContent>
-          <W.ContentLength>
-            <div id="text">({contentLength}/300)</div>
-          </W.ContentLength>
-        </W.Item>
+        <W.PageTitle isDarkMode={isDarkMode}>추천글 작성</W.PageTitle>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageTransition}
+          transition={{ duration: 0.3 }}
+          style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
+        >
+          <W.Item>
+            <W.ShareBtn onClick={handlePost}>공유하기</W.ShareBtn>
+            <W.PostImgLabel htmlFor="profileImg">
+              <img
+                src={
+                  isDarkMode
+                    ? "/images/PostImgBtn.svg"
+                    : "/images/lightPostImgBtn.svg"
+                }
+              />
+            </W.PostImgLabel>
+            <W.PostImgInput
+              type="file"
+              accept="image/*"
+              onChange={saveImgFile}
+              ref={imgRef}
+              id="profileImg"
+            />
+            <W.PostedImg>
+              <img src={imgFile ? imgFile : "/images/BasicImg.svg"} />
+            </W.PostedImg>
+            <W.PostTitle
+              isDarkMode={isDarkMode}
+              placeholder="책 제목을 입력하세요."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></W.PostTitle>
+            <W.PostArtist
+              isDarkMode={isDarkMode}
+              placeholder="작가명을 입력하세요."
+              value={author} // 추가된 부분
+              onChange={(e) => setAuthor(e.target.value)} // 추가된 부분
+            ></W.PostArtist>
+            <W.PostContent
+              isDarkMode={isDarkMode}
+              placeholder="내용을 입력하세요."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></W.PostContent>
+            <W.ContentLength isDarkMode={isDarkMode}>
+              <div id="text">({contentLength}/300)</div>
+            </W.ContentLength>
+          </W.Item>{" "}
+        </motion.div>
+        {/*하단바*/}
+        <W.NavBar>
+          {/*검색*/}
+          <W.NavBtnContainer>
+            <W.NavIcon
+              style={{
+                marginLeft: "25px",
+              }}
+            >
+              <img src="/images/SearchIcon.svg" onClick={goSearch} />
+            </W.NavIcon>
+            <W.NavText
+              style={{
+                marginLeft: "28px",
+              }}
+            >
+              검색
+            </W.NavText>
+          </W.NavBtnContainer>
+          {/*AI 심리 분석*/}
+          <W.NavBtnContainer>
+            <W.NavIcon>
+              <img src="/images/AIIcon.svg" onClick={goAI} />
+            </W.NavIcon>
+            <W.NavText
+              style={{
+                fontSize: "11px",
+                marginLeft: "20px",
+                marginTop: "-3px",
+              }}
+            >
+              AI 심리 분석
+            </W.NavText>{" "}
+          </W.NavBtnContainer>
+          {/*홈*/}
+          <W.NavBtnContainer>
+            <W.NavIcon
+              style={{
+                fontSize: "11px",
+                marginLeft: "10px",
+                marginTop: "-25px",
+              }}
+            >
+              <img src="/images/HomeIcon.svg" onClick={goHome} />
+            </W.NavIcon>
+          </W.NavBtnContainer>
+          {/*내 기록*/}
+          <W.NavBtnContainer>
+            <W.NavIcon
+              style={{
+                marginLeft: "63px",
+              }}
+            >
+              <img src="/images/RecordIcon.svg" onClick={goRecord} />
+            </W.NavIcon>
+            <W.NavText
+              style={{
+                marginLeft: "60px",
+              }}
+            >
+              내 기록
+            </W.NavText>
+          </W.NavBtnContainer>
+          {/*마이페이지*/}
+          <W.NavBtnContainer>
+            <W.NavIcon
+              style={{
+                marginLeft: "45px",
+              }}
+            >
+              <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
+            </W.NavIcon>
+            <W.NavText>마이페이지</W.NavText>
+          </W.NavBtnContainer>
+        </W.NavBar>
+        {/*하단바*/}
       </W.Container>
     </>
   );
 }
+
+const pageTransition = {
+  initial: { x: "100%" }, // 오른쪽에서 시작
+  animate: { x: "0%" }, // 가운데로 이동
+  exit: { x: "-100%" }, // 왼쪽으로 이동
+};

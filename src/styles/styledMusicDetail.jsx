@@ -3,7 +3,10 @@ import { styled } from "styled-components";
 export const Container = styled.div`
   width: 390px;
   height: 969px;
-  background: linear-gradient(180deg, #101212 0%, #3b3e40 100%);
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -88,7 +91,7 @@ export const ProfileImgBlack = styled.div`
 export const InfoText = styled.div`
   width: 500px;
   height: 50px;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
@@ -100,7 +103,7 @@ export const InfoText = styled.div`
 `;
 
 export const PostDate = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -126,7 +129,7 @@ export const AlbumCover = styled.div`
 
 export const MusicInfo = styled.div`
   #songTitle {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 20px;
     font-style: normal;
@@ -136,7 +139,7 @@ export const MusicInfo = styled.div`
   }
 
   #artist {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -148,7 +151,7 @@ export const MusicInfo = styled.div`
 `;
 
 export const UserText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;

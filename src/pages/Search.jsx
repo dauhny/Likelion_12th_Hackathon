@@ -169,6 +169,7 @@ export const Search = () => {
             <S.NavText
               style={{
                 marginLeft: "28px",
+                color: "#A259FF",
               }}
             >
               검색

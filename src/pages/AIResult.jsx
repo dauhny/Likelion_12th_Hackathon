@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as A from "../styles/styledAIResult";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import axios from "axios";
 import { PuffLoader } from "react-spinners";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function AIResult() {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
@@ -17,6 +19,7 @@ export function AIResult() {
   const [createdAt, setCreatedAt] = useState("");
   const [viewAt, setViewAt] = useState("");
   const [post, setPost] = useState({});
+  const [nickname, setNickName] = useState("");
   const [analysis, setAnalysis] = useState({
     analysis: "",
     happiness: 0,
@@ -25,7 +28,11 @@ export function AIResult() {
     anxiety: 0,
   });
 
-  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+  const [loading, setLoading] = useState(true);
+
+  const goAIRecordList = () => {
+    navigate(`/airecordlist`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +59,7 @@ export function AIResult() {
           createdAt: post.createdAt,
           img: post.img,
           viewAt: post.viewAt,
+          nickname: post.nickname,
         });
 
         setAnalysis({
@@ -62,10 +70,10 @@ export function AIResult() {
           anxiety: analysisResult.anxiety,
         });
 
-        setLoading(false); // 데이터 로딩 완료
+        setLoading(false);
       } catch (error) {
         console.error("후기글 조회 실패 :", error);
-        setLoading(false); // 로딩 상태를 해제하는 것도 고려
+        setLoading(false);
       }
     };
 
@@ -88,7 +96,6 @@ export function AIResult() {
     { value: analysis.happiness, color: "#DBBEFC", name: "행복" },
   ];
 
-  //하단바
   const goSearch = () => {
     navigate(`/search`);
     window.scrollTo(0, 0);
@@ -114,17 +121,16 @@ export function AIResult() {
     window.scrollTo(0, 0);
   };
 
-  //하단바 끝
-
   const textLengthInPx = analysis.analysis.length * 3.3;
   const consumerHeight =
     (post.content || "").length <= 150
-      ? `${Math.max((post.content || "").length * 1, 120)}px` // 최소 50px로 설정
+      ? `${Math.max((post.content || "").length * 1, 120)}px`
       : `${(post.content || "").length * 1.35}px`;
+
   return (
-    <A.Container>
+    <A.Container isDarkMode={isDarkMode}>
       <A.BackBtn onClick={goBack}></A.BackBtn>
-      <A.PageTitle>분석 결과</A.PageTitle>
+      <A.PageTitle isDarkMode={isDarkMode}>분석 결과</A.PageTitle>
       <A.Item>
         {loading ? (
           <div
@@ -132,7 +138,7 @@ export function AIResult() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100vh", // 전체 화면 높이에 맞춰 조정
+              height: "100vh",
               marginTop: "-100px",
               marginLeft: "-7%",
             }}
@@ -155,24 +161,27 @@ export function AIResult() {
           </div>
         ) : (
           <>
-            <A.Introduce></A.Introduce>
-            <A.Content>
+            <A.Introduce isDarkMode={isDarkMode} />
+            <A.Content isDarkMode={isDarkMode}>
               <div id="Title">{post.title}</div>
               <div id="Date">{post.createdAt}</div>
             </A.Content>
+            <A.PurpleBlur />
             <A.Consumer
+              isDarkMode={isDarkMode}
               style={{
                 flexGrow: "1",
-                height: consumerHeight, // 길이에 맞춰 너비를 설정
+                height: consumerHeight,
                 maxWidth: "100%",
               }}
             >
               <div id="review">{post.content}</div>
             </A.Consumer>
             <A.AIAnalysis
+              isDarkMode={isDarkMode}
               style={{
                 flexGrow: "1",
-                height: `${textLengthInPx}px`, // 길이에 맞춰 너비를 설정
+                height: `${textLengthInPx}px`,
                 maxWidth: "100%",
               }}
             >
@@ -192,12 +201,12 @@ export function AIResult() {
                 lengthAngle={360}
                 rounded
                 animate
-                label={({ dataEntry }) => `감정상태 분석`}
+                label={({ dataEntry }) => `${post.nickname}님의 감정`}
                 labelStyle={{
                   fontFamily: "Pretendard Variable",
                   fontWeight: "400",
                   fontSize: "6px",
-                  fill: "#33333",
+                  fill: isDarkMode ? "#fff" : "3d3a3a",
                 }}
                 labelPosition={0}
               />
@@ -208,7 +217,7 @@ export function AIResult() {
               <div
                 id="PercentPurple1"
                 style={{
-                  width: "85px",
+                  width: `${analysis.anger}%`,
                   height: "14px",
                   borderRadius: "9.919px",
                   background:
@@ -226,7 +235,7 @@ export function AIResult() {
               <div
                 id="PercentPurple2"
                 style={{
-                  width: "54px",
+                  width: `${analysis.anxiety}%`,
                   height: "14px",
                   borderRadius: "9.919px",
                   background:
@@ -244,7 +253,7 @@ export function AIResult() {
               <div
                 id="PercentPurple3"
                 style={{
-                  width: "26px",
+                  width: `${analysis.sadness}%`,
                   height: "14px",
                   borderRadius: "9.919px",
                   background:
@@ -262,7 +271,7 @@ export function AIResult() {
               <div
                 id="PercentPurple4"
                 style={{
-                  width: "18px",
+                  width: `${analysis.happiness}%`,
                   height: "14px",
                   borderRadius: "9.919px",
                   background:
@@ -283,36 +292,32 @@ export function AIResult() {
                 {analysis.analysis}
               </div>
             </A.AIAnalysis>
+            <A.Analysis onClick={goAIRecordList}>
+              <div id="folder">
+                <img src="/images/Folder.svg" />
+              </div>
+              <div id="text">다른 기록 분석하기</div>
+            </A.Analysis>
             <A.Replay onClick={goAIPast}>
               <div id="past">
                 <img src="/images/Past.svg" alt="지난 분석"></img>
               </div>
               <div id="text2">지난 분석 다시 보기</div>
             </A.Replay>
-            {/*하단바*/}
+            {/* 하단바 */}
             <A.NavBar>
-              {/*검색*/}
+              {/* 검색 */}
               <A.NavBtnContainer>
-                <A.NavIcon
-                  style={{
-                    marginLeft: "25px",
-                  }}
-                >
+                <A.NavIcon style={{ marginLeft: "25px" }}>
                   <img
                     src="/images/SearchIcon.svg"
                     onClick={goSearch}
                     alt="검색"
                   />
                 </A.NavIcon>
-                <A.NavText
-                  style={{
-                    marginLeft: "28px",
-                  }}
-                >
-                  검색
-                </A.NavText>
+                <A.NavText style={{ marginLeft: "28px" }}>검색</A.NavText>
               </A.NavBtnContainer>
-              {/*AI 심리 분석*/}
+              {/* AI 심리 분석 */}
               <A.NavBtnContainer>
                 <A.NavIcon>
                   <img
@@ -332,7 +337,7 @@ export function AIResult() {
                   AI 심리 분석
                 </A.NavText>
               </A.NavBtnContainer>
-              {/*홈*/}
+              {/* 홈 */}
               <A.NavBtnContainer>
                 <A.NavIcon
                   style={{
@@ -344,34 +349,20 @@ export function AIResult() {
                   <img src="/images/HomeIcon.svg" onClick={goHome} alt="홈" />
                 </A.NavIcon>
               </A.NavBtnContainer>
-              {/*내 기록*/}
+              {/* 내 기록 */}
               <A.NavBtnContainer>
-                <A.NavIcon
-                  style={{
-                    marginLeft: "63px",
-                  }}
-                >
+                <A.NavIcon style={{ marginLeft: "63px" }}>
                   <img
                     src="/images/RecordIcon.svg"
                     onClick={goRecord}
                     alt="내 기록"
                   />
                 </A.NavIcon>
-                <A.NavText
-                  style={{
-                    marginLeft: "60px",
-                  }}
-                >
-                  내 기록
-                </A.NavText>
+                <A.NavText style={{ marginLeft: "60px" }}>내 기록</A.NavText>
               </A.NavBtnContainer>
-              {/*마이페이지*/}
+              {/* 마이페이지 */}
               <A.NavBtnContainer>
-                <A.NavIcon
-                  style={{
-                    marginLeft: "45px",
-                  }}
-                >
+                <A.NavIcon style={{ marginLeft: "45px" }}>
                   <img
                     src="/images/MyPageIcon.svg"
                     onClick={goMyPage}
@@ -381,7 +372,6 @@ export function AIResult() {
                 <A.NavText>마이페이지</A.NavText>
               </A.NavBtnContainer>
             </A.NavBar>
-            {/*하단바*/}
           </>
         )}
       </A.Item>

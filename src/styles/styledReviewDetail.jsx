@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 1156px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -83,21 +86,21 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 커뮤니티 텍스트
-export const IntroText = styled.div`
-  color: #fff;
+export const PageTitle = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 118px;
-  margin-top: -26px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-top: -23px;
 `;
 
 // 프로필
 export const profile = styled.div`
   position: relative;
+
   img {
     width: 60px;
     height: 60px;
@@ -108,7 +111,7 @@ export const profile = styled.div`
   }
 
   #name {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;
@@ -119,7 +122,7 @@ export const profile = styled.div`
   }
 
   #time {
-    color: #d9d9d9;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
@@ -149,12 +152,12 @@ export const date = styled.div`
   height: 23px;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #ddc4fb;
+  border: 1px solid #a259ff;
   #text {
     flex-direction: row;
     height: 15px;
     flex-shrink: 0;
-    color: #fff;
+    color: #a259ff;
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -206,7 +209,7 @@ export const PinkBlur = styled.div`
 
 // 제목
 export const title = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 20px;
   font-style: normal;
@@ -235,11 +238,14 @@ export const contentContainer = styled.div`
   height: 295px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: linear-gradient(90deg, #6f4f98 0%, #251a32 100%);
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(90deg, #6f4f98 0%, #251a32 100%);"
+      : "#fff"};
   margin-left: -25px;
   margin-top: 24px;
   #content {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;

@@ -180,22 +180,39 @@ export const UserInput = styled.input`
   padding-left: 10px;
 `;
 
+export const UserInfo = styled.div`
+  border-radius: 8px;
+  background: #2e2e2e;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 240.5%;
+  padding-left: 10px;
+`;
+
 export const UserInputShort = styled(UserInput)`
   width: 270px;
   height: 30px;
 `;
 
-export const Name = styled(UserInput)`
+export const UserInfoShort = styled(UserInfo)`
   width: 270px;
   height: 30px;
 `;
 
-export const SelectBirth = styled(UserInputShort)`
+export const Name = styled(UserInfo)`
+  width: 270px;
+  height: 30px;
+`;
+
+export const SelectBirth = styled(UserInfoShort)`
   width: 116px;
   height: 30px;
 `;
 
-export const Email = styled(UserInput)`
+export const Email = styled(UserInfo)`
   width: 156px;
   height: 30px;
 `;
@@ -273,4 +290,13 @@ export const PostImgInput = styled.input`
 
 export const PostImgLabel = styled.label`
   cursor: pointer;
+`;
+export const ErrorMessage = styled.div`
+  color: #ff4d4d;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin-top: 8px;
 `;

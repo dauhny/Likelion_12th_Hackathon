@@ -3,18 +3,28 @@ import * as A from "../styles/styledAIPast";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import Pagination from "react-js-pagination";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function AIPast() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
+  const [totalItems, setTotalItems] = useState(0);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
 
-  const [data, setData] = useState([]); // 데이터 배열
+  const [review, setReview] = useState([]);
 
   const [page, setPage] = useState(1);
-  const itemsCountPerPage = 4;
+  const itemsCountPerPage = 5;
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +43,14 @@ export function AIPast() {
           }
         );
 
-        setData(response.data || []);
+        const allData = response.data;
+        const totalItems = allData.length;
+        const startIndex = (page - 1) * itemsCountPerPage;
+        const endIndex = startIndex + itemsCountPerPage;
+        const paginatedData = allData.slice(startIndex, endIndex);
+
+        setReview(paginatedData);
+        setTotalItems(totalItems);
       } catch (error) {
         console.error("후기글 조회 실패 :", error);
       }
@@ -79,9 +96,9 @@ export function AIPast() {
 
   return (
     <>
-      <A.Container>
+      <A.Container isDarkMode={isDarkMode}>
         <A.BackBtn onClick={goBack}></A.BackBtn>
-        <A.PageTitle>지난 분석</A.PageTitle>{" "}
+        <A.PageTitle isDarkMode={isDarkMode}>지난 분석</A.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -91,58 +108,82 @@ export function AIPast() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <A.Item>
-            {data.map((item, index) => (
-              <A.RecordContainer key={index}>
-                <A.PurpleBox>
-                  <div
-                    id="purplebox"
-                    style={{
-                      width: "81px",
-                      height: "96px",
-                      borderRadius: "10px 0px 0px 10px",
-                      background:
-                        "linear-gradient(180deg, #C0B0D5 0%, #9286A2 50%)",
-                      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                      marginTop: "35px",
-                      marginLeft: "-25px",
-                    }}
-                  />
-                  <A.GrayBox>
+            {review.length === 0 ? (
+              <A.InfoText>분석 내역이 없습니다.</A.InfoText>
+            ) : (
+              review.map((item, index) => (
+                <A.RecordContainer key={index}>
+                  <A.PurpleBox>
                     <div
-                      id="graybox"
+                      id="purplebox"
                       style={{
-                        width: "61px",
-                        height: "78px",
-                        borderRadius: "20px 5px 5px 5px",
+                        width: "81px",
+                        height: "96px",
+                        borderRadius: "10px 0px 0px 10px",
                         background:
-                          "linear-gradient(180deg, rgba(98, 98, 98, 0.55) 0%, rgba(200, 200, 200, 0.55) 100%)",
-                        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.17)",
-                        marginTop: "-88px",
-                        marginLeft: "-11px",
+                          "linear-gradient(180deg, #C0B0D5 0%, #9286A2 50%)",
+                        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                        marginTop: "35px",
+                        marginLeft: "-25px",
                       }}
                     />
-                    <div id="greencheck">
-                      <img src="/images/GreenCheck.svg" alt="Green Check"></img>
+                    <A.GrayBox>
+                      <div
+                        id="graybox"
+                        style={{
+                          width: "61px",
+                          height: "78px",
+                          borderRadius: "20px 5px 5px 5px",
+                          background: isDarkMode
+                            ? "linear-gradient(0deg, #A259FF 0%, #613599 100%)"
+                            : "linear-gradient(180deg, rgba(98, 98, 98, 0.55) 0%, rgba(200, 200, 200, 0.55) 100%)",
+                          boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.17)",
+                          marginTop: "-88px",
+                          marginLeft: "-11px",
+                        }}
+                      />
+                      <div id="greencheck">
+                        <img
+                          src="/images/GreenCheck.svg"
+                          alt="Green Check"
+                        ></img>
+                      </div>
+                      <div id="text">분석 완료</div>
+                      <A.ImgBox>
+                        <img
+                          src={item.post.img || "/images/default-image.png"}
+                          alt="Review Image"
+                        ></img>
+                      </A.ImgBox>
+                    </A.GrayBox>
+                  </A.PurpleBox>
+                  <A.ExhibitionIntroduce
+                    isDarkMode={isDarkMode}
+                    onClick={() => goAIPastDetail(item.id)}
+                  >
+                    <div id="Title">{item.post.title}</div>
+                    <div id="Date">
+                      {item.post.createdAt2}에 작성한 {item.post.title} 전시
+                      기록에 대한 AI 분석입니다. <br />
+                      {item.post.nickname}님의 심리 상태를 알려드릴게요.
                     </div>
-                    <div id="text">분석 완료</div>
-                    <A.ImgBox>
-                      <img
-                        src={item.post.img || "/images/default-image.png"}
-                        alt="Review Image"
-                      ></img>
-                    </A.ImgBox>
-                  </A.GrayBox>
-                </A.PurpleBox>
-                <A.ExhibitionIntroduce onClick={() => goAIPastDetail(item.id)}>
-                  <div id="Title">{item.post.title}</div>
-                  <div id="Date">
-                    {item.post.createdAt2}에 다녀온 {item.post.title} 전시
-                    기록에 대한 <br />
-                    AI 분석을 마쳤어요. 회원님의 심리 상태를 알려드릴게요.
-                  </div>
-                </A.ExhibitionIntroduce>
-              </A.RecordContainer>
-            ))}
+                  </A.ExhibitionIntroduce>
+                </A.RecordContainer>
+              ))
+            )}
+            <A.PinkBlur />
+            <A.PaginationContainer isDarkMode={isDarkMode}>
+              <Pagination
+                clssName="pagination"
+                activePage={page} // 현재 페이지
+                itemsCountPerPage={itemsCountPerPage} // 한 페이지당 아이템 수
+                totalItemsCount={totalItems} // 총 아이템 수
+                pageRangeDisplayed={5} // paginator의 페이지 범위
+                prevPageText={"‹"} // "이전"을 나타낼 텍스트
+                nextPageText={"›"} // "다음"을 나타낼 텍스트
+                onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+              />
+            </A.PaginationContainer>
           </A.Item>{" "}
         </motion.div>
         {/* 하단바 */}
@@ -231,3 +272,5 @@ const pageTransition = {
   animate: { x: "0%" }, // 가운데로 이동
   exit: { x: "-100%" }, // 왼쪽으로 이동
 };
+
+export default AIPast;

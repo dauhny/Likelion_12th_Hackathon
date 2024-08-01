@@ -242,6 +242,7 @@ export function Record() {
             <R.NavText
               style={{
                 marginLeft: "60px",
+                color: "#A259FF",
               }}
             >
               내 기록
@@ -252,24 +253,11 @@ export function Record() {
             <R.NavIcon
               style={{
                 marginLeft: "45px",
-                color: "#A259FF",
               }}
             >
-              <img
-                src="/images/MyPageIcon.svg"
-                onClick={goMyPage}
-                style={{
-                  color: "#A259FF",
-                }}
-              />
+              <img src="/images/MyPageIcon.svg" onClick={goMyPage} />
             </R.NavIcon>
-            <R.NavText
-              style={{
-                color: "#A259FF",
-              }}
-            >
-              마이페이지
-            </R.NavText>
+            <R.NavText>마이페이지</R.NavText>
           </R.NavBtnContainer>
         </R.NavBar>
         {/*하단바*/}

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 758px;
+  height: 858px;
   margin: 0 auto;
   background: ${(props) =>
     props.isDarkMode

@@ -5,25 +5,15 @@ export const Container = styled.div`
   width: 390px;
   height: 844px;
   margin: 0 auto;
-  background: linear-gradient(
-      0deg,
-      rgba(217, 217, 217, 0.21) 0%,
-      rgba(217, 217, 217, 0.21) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #e8d6ff 0%,
-      #dcd3e8 17%,
-      #d9d2e2 21.25%,
-      #e8e8e8 67%,
-      #fff 100%
-    );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
 `;
 
 //고정
@@ -96,7 +86,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -166,12 +156,16 @@ export const ExhibitionIntroduce = styled.div`
   height: 96px;
   flex-shrink: 0;
   border-radius: 0px 10px 10px 0px;
-  background: #fff;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(180deg, rgba(40, 29, 54, 0.67) 0%, rgba(57, 42, 77, 0.68) 50%, rgba(78, 57, 104, 1) 100%)"
+      : "#fff"};
   margin-left: 56px;
   margin-top: -96px;
   cursor: pointer;
+
   #Title {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 13px;
     font-style: normal;
@@ -183,7 +177,7 @@ export const ExhibitionIntroduce = styled.div`
   }
 
   #Date {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
@@ -192,7 +186,89 @@ export const ExhibitionIntroduce = styled.div`
     position: absolute;
     margin-left: 10px;
     margin-top: 43px;
+    width: 240px;
   }
 `;
 
-export const RecordContainer = styled.div``;
+export const RecordContainer = styled.div`
+  margin-bottom: -15px;
+`;
+
+export const PaginationContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: -70px;
+    margin-top: -100px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.pagination li {
+    width: 30px;
+    height: 30px;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  ul.pagination li a {
+    text-decoration: none;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  }
+
+  ul.pagination li.active a {
+    color: #a259ff;
+    font-weight: 500;
+  }
+
+  ul.pagination li.active a:hover {
+    color: white;
+  }
+
+  ul.pagination li a:hover {
+    background-color: #a259ff;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+  }
+`;
+
+export const InfoText = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#9c9c9c")};
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 145px;
+  margin-bottom: 145px;
+  margin-left: -50px;
+  p {
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: -2px;
+  }
+`;
+
+export const PinkBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #fe3796;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: -50px;
+  margin-left: 50px;
+`;

@@ -106,7 +106,7 @@ export function MypageRevise() {
       if (error.response) {
         // 서버에서 반환한 오류 메시지
         console.error("서버 응답 오류:", error.response.data);
-        alert(`서버 오류: ${JSON.stringify(error.response.data)}`);
+        alert(`${JSON.stringify(error.response.data)}`);
       } else {
         console.error("회원정보 수정 실패 :", error);
         alert("회원정보 수정 실패. 서버 로그를 확인하세요.");
@@ -223,19 +223,15 @@ export function MypageRevise() {
             </MPR.informationText>
             <MPR.InputContainer>
               <MPR.InputLabel>아이디</MPR.InputLabel>
-              <MPR.UserInputShort
-                type="text"
-                placeholder={username}
-              ></MPR.UserInputShort>
+              <MPR.UserInfoShort>{username}</MPR.UserInfoShort>
               <MPR.InputLabel>이름</MPR.InputLabel>
-              <MPR.Name type="text" placeholder={name}></MPR.Name>
+              <MPR.Name>{name}</MPR.Name>
               <MPR.InputLabel>생년월일</MPR.InputLabel>
-              <MPR.SelectBirth
-                type="text"
-                placeholder={birthdate}
-              ></MPR.SelectBirth>
+              <MPR.SelectBirth>{birthdate}</MPR.SelectBirth>
               <MPR.InputLabel>이메일</MPR.InputLabel>
-              <MPR.Email type="email" placeholder={email}></MPR.Email>
+              <MPR.Email>{email}</MPR.Email>
+              <MPR.InputLabel>전화번호</MPR.InputLabel>
+              <MPR.Email>{phone}</MPR.Email>
             </MPR.InputContainer>
             <MPR.changeText>
               변경

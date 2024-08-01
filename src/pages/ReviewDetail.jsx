@@ -4,9 +4,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function ReviewDetail() {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
@@ -139,8 +142,9 @@ export function ReviewDetail() {
 
   return (
     <>
-      <RD.Container>
-        <RD.BackBtn onClick={goBack}></RD.BackBtn>
+      <RD.Container isDarkMode={isDarkMode}>
+        <RD.BackBtn onClick={goBack}></RD.BackBtn>\
+        <RD.PageTitle isDarkMode={isDarkMode}>커뮤니티</RD.PageTitle>
         <motion.div
           initial="initial"
           animate="animate"
@@ -150,14 +154,13 @@ export function ReviewDetail() {
           style={{ width: "100%", height: "100%" }} // 컨테이너 전체를 사용하는 애니메이션
         >
           <RD.Item>
-            <RD.IntroText>커뮤니티</RD.IntroText>
             <RD.ReviewContainer>
-              <RD.profile>
+              <RD.profile isDarkMode={isDarkMode}>
                 <img src={`http://127.0.0.1:8000${profile}`} alt="profile" />
                 <div id="name">{username}</div>
                 <div id="time">{createdAt}</div>
               </RD.profile>
-              <RD.firstBox>
+              <RD.firstBox isDarkMode={isDarkMode}>
                 <RD.date>
                   <div id="text">{viewAt}</div>
                 </RD.date>
@@ -167,11 +170,11 @@ export function ReviewDetail() {
                 </RD.like>
                 <RD.PinkBlur></RD.PinkBlur>
               </RD.firstBox>
-              <RD.title>{title}</RD.title>
+              <RD.title isDarkMode={isDarkMode}>{title}</RD.title>
               <RD.img>
                 <img src={img} alt="exhibition" />
               </RD.img>
-              <RD.contentContainer>
+              <RD.contentContainer isDarkMode={isDarkMode}>
                 <div id="content">{content}</div>
               </RD.contentContainer>
             </RD.ReviewContainer>

@@ -3,8 +3,11 @@ import * as A from "../styles/styledAIPastDetail";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
 import axios from "axios";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function AIPastDetail() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -16,6 +19,7 @@ export function AIPastDetail() {
     createdAt: "",
     viewAt: "",
     content: "",
+    nickname: "",
   });
   const [analysis, setAnalysis] = useState({
     analysis: "",
@@ -51,6 +55,7 @@ export function AIPastDetail() {
             createdAt: item.post.createdAt || "",
             viewAt: item.post.viewAt || "",
             content: item.post.content || "",
+            nickname: item.post.nickname || "",
           });
 
           setAnalysis({
@@ -115,17 +120,18 @@ export function AIPastDetail() {
 
   return (
     <>
-      <A.Container>
+      <A.Container isDarkMode={isDarkMode}>
         <A.BackBtn onClick={goBack} />
-        <A.PageTitle>분석 상세</A.PageTitle>
+        <A.PageTitle isDarkMode={isDarkMode}>분석 상세</A.PageTitle>
         <A.Item>
-          <A.Introduce></A.Introduce>
-          <A.Content>
+          <A.Introduce isDarkMode={isDarkMode} />
+          <A.Content isDarkMode={isDarkMode}>
             <div id="Title">{post.title}</div>
             <div id="Date">{post.createdAt}</div>
-          </A.Content>
-
+          </A.Content>{" "}
+          <A.PurpleBlur />
           <A.Consumer
+            isDarkMode={isDarkMode}
             style={{
               flexGrow: "1",
               height: consumerHeight, // 길이에 맞춰 너비를 설정
@@ -137,8 +143,7 @@ export function AIPastDetail() {
             </div>
             <div id="text">{post.content}</div>
           </A.Consumer>
-
-          <A.Result>감정 분석 결과</A.Result>
+          <A.Result isDarkMode={isDarkMode}>감정 분석 결과</A.Result>
           <PieChart
             style={{
               width: "160px",
@@ -153,11 +158,13 @@ export function AIPastDetail() {
             lengthAngle={360}
             rounded
             animate
-            label={({ dataEntry }) => `감정상태 분석`}
-            labelStyle={{ fontSize: "6px", fill: "#33333" }}
+            label={({ dataEntry }) => `${post.nickname}님의 감정`}
+            labelStyle={{
+              fontSize: "6px",
+              fill: isDarkMode ? "#fff" : "3d3a3a",
+            }}
             labelPosition={0}
           />
-
           <A.Purple>
             <div id="purple1">
               <img src="/images/Purple1.svg" alt="Purple1" />
@@ -176,7 +183,6 @@ export function AIPastDetail() {
               }}
             />
           </A.Purple>
-
           <A.Purple2>
             <div id="purple2">
               <img src="/images/Purple2.svg" alt="Purple2" />
@@ -195,7 +201,6 @@ export function AIPastDetail() {
               }}
             />
           </A.Purple2>
-
           <A.Purple3>
             <div id="purple3">
               <img src="/images/Purple3.svg" alt="Purple3" />
@@ -214,7 +219,6 @@ export function AIPastDetail() {
               }}
             />
           </A.Purple3>
-
           <A.Purple4>
             <div id="purple4">
               <img src="/images/Purple4.svg" alt="Purple4" />
@@ -233,9 +237,7 @@ export function AIPastDetail() {
               }}
             />
           </A.Purple4>
-
-          <A.AItext>{analysis.analysis}</A.AItext>
-
+          <A.AItext isDarkMode={isDarkMode}>{analysis.analysis}</A.AItext>
           <A.NavBar>
             <A.NavBtnContainer>
               <A.NavIcon style={{ marginLeft: "25px" }}>

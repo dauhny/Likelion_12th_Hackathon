@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function ReviewCommunity() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const [page, setPage] = useState(1); // 현재 페이지
   const itemsCountPerPage = 5; // 페이지당 항목 수
@@ -147,12 +150,13 @@ export function ReviewCommunity() {
 
   return (
     <>
-      <RC.Container>
+      <RC.Container isDarkMode={isDarkMode}>
         <RC.BackBtn onClick={goBack}></RC.BackBtn>{" "}
-        <RC.PageTitle>커뮤니티</RC.PageTitle>
+        <RC.PageTitle isDarkMode={isDarkMode}>커뮤니티</RC.PageTitle>
         <RC.Item>
           <RC.searchBox>
             <RC.search
+              isDarkMode={isDarkMode}
               type="text"
               placeholder="후기가 궁금한 전시를 입력해보세요."
               value={searchValue}
@@ -164,18 +168,25 @@ export function ReviewCommunity() {
             </RC.searchImg>
           </RC.searchBox>
           {review.map((e) => (
-            <RC.ticket key={e.id}>
-              <img src="/images/Ticket.svg" alt="ticket"></img>
-              <RC.profileContainer>
+            <RC.ticket key={e.id} isDarkMode={isDarkMode}>
+              <img
+                src={
+                  isDarkMode ? "/images/Ticket.svg" : "/images/lightTicket.svg"
+                }
+                alt="ticket"
+              ></img>
+              <RC.profileContainer isDarkMode={isDarkMode}>
                 <img
                   src={`http://127.0.0.1:8000${e.profile}`}
                   alt="profile"
                 ></img>
                 <div id="name">{e.nickname}</div>
                 <div id="time">{e.createdAt}</div>
-                <div id="line"></div>
               </RC.profileContainer>
-              <RC.contentContainer onClick={() => goReviewDetail(e.id)}>
+              <RC.contentContainer
+                isDarkMode={isDarkMode}
+                onClick={() => goReviewDetail(e.id)}
+              >
                 <div id="title">{e.title}</div>
                 <div id="content">{e.content}</div>
                 <RC.ReviewImg>
@@ -186,7 +197,7 @@ export function ReviewCommunity() {
               </RC.contentContainer>
             </RC.ticket>
           ))}
-          <RC.PaginationContainer>
+          <RC.PaginationContainer isDarkMode={isDarkMode}>
             <Pagination
               clssName="pagination"
               activePage={page} // 현재 페이지

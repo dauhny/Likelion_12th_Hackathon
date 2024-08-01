@@ -3,9 +3,12 @@ import { styled } from "styled-components";
 //고정
 export const Container = styled.div`
   width: 390px;
-  height: 1425px;
+  height: 825px;
   margin: 0 auto;
-  background: #fff;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -37,7 +40,7 @@ export const BackBtn = styled.button`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -60,7 +63,7 @@ export const NavBar = styled.div`
   bottom: 0;
   z-index: 999;
   display: flex;
-  margin-left: -48px;
+  margin-left: -1px;
 `;
 
 export const NavBtnContainer = styled.div`
@@ -150,8 +153,8 @@ export const PostTitle = styled.input`
   height: 35px;
   border-radius: 10px;
   border: 1px solid #535353;
-  background: #281d36;
-  color: #fff;
+  background: ${(props) => (props.isDarkMode ? "#281d36" : "#fff")};
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -171,9 +174,9 @@ export const PostContent = styled.textarea`
   height: 330px;
   border-radius: 10px;
   border: 1px solid #535353;
-  background: #281d36;
+  background: ${(props) => (props.isDarkMode ? "#281d36" : "#fff")};
   margin-left: -25px;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -187,7 +190,7 @@ export const ContentLength = styled.div`
   width: 100px;
   height: 15px;
   #text {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;

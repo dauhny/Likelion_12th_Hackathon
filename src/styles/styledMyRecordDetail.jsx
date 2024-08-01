@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 800px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -38,7 +41,7 @@ export const BackBtn = styled.button`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -109,26 +112,27 @@ export const firstBox = styled.div`
 export const date = styled.button`
   display: flex;
   flex-direction: row;
-  width: 96px;
+  width: 126px;
   height: 22px;
   flex-shrink: 0;
   border-radius: 10px;
-  background-color: #121212;
-  border: 1px solid #dec5fb;
+  background-color: transparent;
+  border: 1px solid #a259ff;
   margin-top: -25px;
 
   #text {
     flex-direction: row;
-    width: 65.73px;
+    width: 100px;
     height: 15px;
     flex-shrink: 0;
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 11px;
     font-style: normal;
     font-weight: 500;
     line-height: 160.5%; /* 19.26px */
     margin-left: 7px;
+    margin-top: 1px;
   }
 `;
 
@@ -137,17 +141,18 @@ export const modify = styled.div`
   height: 22px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #ddc4fb;
-  margin-left: 125px;
+  background: ${(props) => (props.isDarkMode ? "#a259ff" : "#dec5fb")};
+  margin-left: 95px;
   cursor: pointer;
   margin-top: -25px;
+  border: 1px solid #a259ff;
 
   #text {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 160.5%; /* 16.05px */
     margin-left: 11px;
     margin-top: 2px;
@@ -159,13 +164,14 @@ export const remove = styled.div`
   height: 22px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #ddc4fb;
+  background: ${(props) => (props.isDarkMode ? "#a259ff" : "#dec5fb")};
   margin-left: 7px;
   cursor: pointer;
   margin-top: -25px;
+  border: 1px solid #a259ff;
 
   #text {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -181,7 +187,7 @@ export const title = styled.div`
   width: 325px;
   height: 32px;
   flex-shrink: 0;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 20px;
   font-style: normal;
@@ -221,19 +227,13 @@ export const content = styled.div`
   height: 295px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: linear-gradient(
-    270deg,
-    #dbbefc 0%,
-    #eadbfc 21%,
-    #faf8fc 76.5%,
-    #fff 100%
-  );
+  background: ${(props) => (props.isDarkMode ? "#281D36" : "#fff")};
   margin-top: 63px;
   margin-left: -24px;
   position: absolute;
 
   #text {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;

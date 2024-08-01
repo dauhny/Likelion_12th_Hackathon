@@ -3,7 +3,10 @@ import { styled } from "styled-components";
 export const Container = styled.div`
   width: 390px;
   height: 969px;
-  background: linear-gradient(180deg, #3b3e40 0%, #101212 100%);
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -75,58 +78,80 @@ export const BackBtn = styled.button`
 `;
 
 export const ProfileImgBlack = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-left: 12%;
-  margin-top: 10%;
+  img {
+    width: 50px;
+    height: 50px;
+    margin-left: 44%;
+    margin-top: 5%;
+    border-radius: 30px;
+    margin-bottom: 5px;
+  }
 `;
 
 export const InfoText = styled.div`
-  color: #fff;
+  width: 500px;
+  height: 50px;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  margin-top: -12%;
-  text-align: left;
-  padding-left: 110px;
+  text-align: center;
+  overflow: hidden;
+  margin-left: -14%;
+`;
+
+export const PostDate = styled.div`
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 200% */
+  text-align: center;
+  margin-top: -25px;
+  margin-left: 1%;
+  margin-bottom: 10px;
 `;
 
 export const AlbumCover = styled.div`
-  width: 200px;
-  height: 200px;
-  margin-left: 26%;
-  margin-top: 15%;
-  background-image: url("/images/AlbumCover.svg");
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  margin-left: 24%;
+  margin-top: 5%;
   border-radius: 10px;
 `;
 
 export const MusicInfo = styled.div`
   #songTitle {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
-    margin-left: 49.5%;
+    text-align: center;
   }
 
   #artist {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
-    margin-left: 45.5%;
     margin-top: -10.5%;
+    text-align: center;
   }
 `;
 
 export const UserText = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -139,36 +164,39 @@ export const UserText = styled.div`
 
 export const modify = styled.div`
   width: 43px;
-  height: 20px;
+  height: 22px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #ddc4fb;
+  background: ${(props) => (props.isDarkMode ? "#a259ff" : "#dec5fb")};
   margin-left: 38%;
   cursor: pointer;
+  border: 1px solid #a259ff;
 
   #text {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 160.5%; /* 16.05px */
     margin-left: 11px;
+    margin-top: 2px;
   }
 `;
 
 export const remove = styled.div`
   width: 43px;
-  height: 20px;
+  height: 22px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: #ddc4fb;
+  background: ${(props) => (props.isDarkMode ? "#a259ff" : "#dec5fb")};
   margin-left: 51%;
   cursor: pointer;
   margin-top: -5.7%;
+  border: 1px solid #a259ff;
 
   #text {
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -178,3 +206,5 @@ export const remove = styled.div`
     margin-top: 2px;
   }
 `;
+
+export const Item = styled.div``;

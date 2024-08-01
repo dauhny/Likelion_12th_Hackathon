@@ -19,6 +19,10 @@ export function Register() {
   const [idCheckMessage, setIdCheckMessage] = useState(""); // 아이디 중복 체크 메시지 상태 추가
   const [nickCheckMessage, setNickCheckMessage] = useState(""); // 닉네임 중복 체크 메시지 상태 추가
 
+  // 체크박스 상태 관리
+  const [isPersonalInfoChecked, setIsPersonalInfoChecked] = useState(false);
+  const [isThirdPartyInfoChecked, setIsThirdPartyInfoChecked] = useState(false);
+
   const goWelcome = () => {
     navigate(`/welcome`);
     window.scrollTo(0, 0);
@@ -27,6 +31,14 @@ export function Register() {
   const handleRegister = async (event) => {
     event.preventDefault();
     if (!validateInputs()) return;
+
+    if (!isPersonalInfoChecked || !isThirdPartyInfoChecked) {
+      alert(
+        "개인정보 수집 및 이용과 제3자 정보 제공에 모두 동의하셔야 가입할 수 있습니다."
+      );
+      return;
+    }
+
     try {
       const response = await axios.post("http://127.0.0.1:8000/user/", {
         username,
@@ -221,6 +233,22 @@ export function Register() {
             onChange={(e) => setPhone(e.target.value)}
           />
           {errorMessage && <R.ErrorMessage>{errorMessage}</R.ErrorMessage>}
+          <R.Agreement>
+            <input
+              type="checkbox"
+              checked={isPersonalInfoChecked}
+              onChange={(e) => setIsPersonalInfoChecked(e.target.checked)}
+            />
+            <div id="text">개인정보 수집 및 이용에 대해 동의합니다.</div>
+          </R.Agreement>
+          <R.Agreement>
+            <input
+              type="checkbox"
+              checked={isThirdPartyInfoChecked}
+              onChange={(e) => setIsThirdPartyInfoChecked(e.target.checked)}
+            />
+            <div id="text">제3자 정보 제공에 동의합니다.</div>
+          </R.Agreement>
           <R.Complete onClick={handleRegister}>가입하기</R.Complete>
         </R.InputContainer>
       </motion.div>

@@ -3,9 +3,11 @@ import * as MRD from "../styles/styledMyRecordDetail";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function MyRecordDetail() {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -118,42 +120,30 @@ export function MyRecordDetail() {
 
   return (
     <>
-      <MRD.Container>
+      <MRD.Container isDarkMode={isDarkMode}>
         <MRD.BackBtn onClick={goBack}></MRD.BackBtn>
         <MRD.PageTitle>나의 기록</MRD.PageTitle>
         <MRD.Item>
           <MRD.firstBox>
-            <MRD.date>
-              <div id="text">{viewAt}</div>
+            <MRD.date isDarkMode={isDarkMode}>
+              <div id="text"> {viewAt} 관람</div>
             </MRD.date>
-            <MRD.modify onClick={modifyPost}>
+            <MRD.modify isDarkMode={isDarkMode} onClick={modifyPost}>
               <div id="text">수정</div>
             </MRD.modify>
-            <MRD.remove onClick={deletePost}>
+            <MRD.remove isDarkMode={isDarkMode} onClick={deletePost}>
               <div id="text">삭제</div>
             </MRD.remove>
           </MRD.firstBox>
-          <MRD.title>{title}</MRD.title>
+          <MRD.title isDarkMode={isDarkMode}>{title}</MRD.title>
           <MRD.img>
             <img src={img ? img : "/images/LikeBtn.svg"} alt="exhibition"></img>
           </MRD.img>
           <MRD.PinkBlur></MRD.PinkBlur>
-          <MRD.content>
+          <MRD.content isDarkMode={isDarkMode}>
             <div id="text">{content}</div>
           </MRD.content>
-          <MRD.help>
-            <div id="text1">어려우신가요?</div>
-            <div id="text2">다른 사람의 기록을 둘러보세요!</div>
-          </MRD.help>
-          <MRD.idea>
-            <img src="/images/Idea.svg" alt="idea"></img>
-          </MRD.idea>
-          <MRD.ideation onClick={goReviewCommunity}>
-            <div id="text">아이데이션</div>
-            <div id="arrow">
-              <img src="/images/IdeationArrow.svg" />
-            </div>
-          </MRD.ideation>
+
           <MRD.PinkBlur2></MRD.PinkBlur2>
           {/*하단바*/}
           <MRD.NavBar>

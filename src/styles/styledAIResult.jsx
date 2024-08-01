@@ -5,25 +5,15 @@ export const Container = styled.div`
   width: 390px;
   height: 2500px;
   margin: 0 auto;
-  background: linear-gradient(
-      0deg,
-      rgba(217, 217, 217, 0.21) 0%,
-      rgba(217, 217, 217, 0.21) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #e8d6ff 0%,
-      #dcd3e8 17%,
-      #d9d2e2 21.25%,
-      #e8e8e8 67%,
-      #fff 100%
-    );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
 `;
 
 //고정
@@ -96,7 +86,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -104,6 +94,8 @@ export const PageTitle = styled.div`
   line-height: 24px;
   text-align: center;
   margin-top: -23px;
+  position: relative;
+  z-index: 999;
 `;
 
 // 전시 작품 제목 및 관람 날짜
@@ -118,12 +110,13 @@ export const Introduce = styled.div`
   position: absolute;
   margin-top: -4px;
   margin-left: -7px;
+  display: ${(props) => (props.isDarkMode ? "none" : "")};
 `;
 
 export const Content = styled.div`
   #Title {
     width: 280.232px;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 13px;
@@ -138,7 +131,7 @@ export const Content = styled.div`
 
   #Date {
     width: 86.968px;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 10px;
@@ -158,13 +151,17 @@ export const Consumer = styled.div`
   flex-shrink: 0;
   border-radius: 20px;
   opacity: 0.8;
-  background: linear-gradient(270deg, #eae3f2 40%, #f5f1f9 85%, #fff 100%);
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(180deg, rgba(52, 52, 52, 0.50) 3.56%, rgba(78, 78, 78, 0.50) 21.44%, rgba(103, 103, 103, 0.50) 46.44%, rgba(154, 154, 154, 0.50) 96.44%)"
+      : "linear-gradient(270deg, #eae3f2 40%, #f5f1f9 85%, #fff 100%)"};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-  margin-top: 32px;
+  margin-top: -12px;
   margin-left: 110px;
+
   #review {
     width: 165px;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -176,6 +173,28 @@ export const Consumer = styled.div`
   }
 `;
 
+export const PinkBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #fe3796;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: -50px;
+  margin-left: 50px;
+`;
+
+export const PurpleBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #a259ff;
+  filter: blur(140px);
+  margin-left: 16%;
+  margin-top: -150px;
+  position: relative;
+  z-index: -1;
+`;
+
 // AI 감정 분석 결과
 export const AIAnalysis = styled.div`
   width: 315px;
@@ -183,20 +202,19 @@ export const AIAnalysis = styled.div`
   flex-shrink: 0;
   border-radius: 20px;
   opacity: 0.8;
-  background: linear-gradient(
-    180deg,
-    #f5f1f9 15.26%,
-    #efe7f9 27.64%,
-    #e5d5fa 87%
-  );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "linear-gradient(180deg, rgba(52, 52, 52, 0.50) 3.56%, rgba(78, 78, 78, 0.50) 21.44%, rgba(103, 103, 103, 0.50) 46.44%, rgba(154, 154, 154, 0.50) 96.44%)"
+      : "linear-gradient(270deg, #eae3f2 40%, #f5f1f9 85%, #fff 100%)"};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.14);
   margin-top: 28px;
   margin-left: -25px;
+
   #text {
     width: 112px;
     height: 20px;
     flex-shrink: 0;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 16px;
     font-style: normal;
@@ -331,7 +349,7 @@ export const AIAnalysis = styled.div`
     width: 246px;
     height: 190px;
     flex-shrink: 0;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -353,7 +371,7 @@ export const Replay = styled.button`
   border: none;
   cursor: pointer;
   margin-left: 56px;
-  margin-top: 30px;
+  margin-top: 10px;
 
   #past {
     width: 16.929px;
@@ -387,4 +405,41 @@ export const Loading = styled.div`
   z-index: 999;
   margin-left: -46.7px;
   margin-top: -33px;
+`;
+
+export const Analysis = styled.button`
+  width: 176px;
+  height: 31px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #a259ff 0%, #613599 100%);
+  cursor: pointer;
+  margin-left: 56px;
+  margin-top: 140px;
+
+  #folder {
+    flex-direction: row;
+    width: 16.929px;
+    height: 14.091px;
+    flex-shrink: 0;
+    stroke-width: 2px;
+    stroke: #fff;
+    margin-top: -4px;
+    margin-left: 10px;
+  }
+  #text {
+    flex-direction: row;
+    width: 110px;
+    height: 15px;
+    flex-shrink: 0;
+    color: #fff;
+    font-family: "Pretendard Variable";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160.5%; /* 22.47px */
+    margin-left: 35px;
+    margin-top: -15px;
+  }
 `;

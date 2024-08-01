@@ -5,25 +5,15 @@ export const Container = styled.div`
   width: 390px;
   height: 1500px;
   margin: 0 auto;
-  background: linear-gradient(
-      0deg,
-      rgba(217, 217, 217, 0.21) 0%,
-      rgba(217, 217, 217, 0.21) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #e8d6ff 0%,
-      #dcd3e8 17%,
-      #d9d2e2 21.25%,
-      #e8e8e8 67%,
-      #fff 100%
-    );
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
 `;
 
 //고정
@@ -96,7 +86,7 @@ export const NavText = styled.div`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -104,6 +94,8 @@ export const PageTitle = styled.div`
   line-height: 24px;
   text-align: center;
   margin-top: -23px;
+  position: relative;
+  z-index: 999;
 `;
 
 // 전시 작품 제목 및 관람 날짜
@@ -118,12 +110,13 @@ export const Introduce = styled.div`
   position: absolute;
   margin-top: -4px;
   margin-left: -7px;
+  display: ${(props) => (props.isDarkMode ? "none" : "")};
 `;
 
 export const Content = styled.div`
   #Title {
     width: 280.232px;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 13px;
@@ -138,7 +131,7 @@ export const Content = styled.div`
 
   #Date {
     width: 86.968px;
-    color: #3d3a3a;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 10px;
@@ -160,7 +153,7 @@ export const Consumer = styled.div`
   opacity: 0.7;
   background: linear-gradient(270deg, #eae3f2 40%, #f5f1f9 85%, #fff 100%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.08);
-  margin-top: 30px;
+  margin-top: -10px;
   margin-left: -24px;
   position: relative;
 
@@ -194,7 +187,7 @@ export const Consumer = styled.div`
 
 // 감정 분석 결과 텍스트
 export const Result = styled.div`
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -331,7 +324,7 @@ export const Purple4 = styled.div`
 //AI 심리분석 해설
 export const AItext = styled.div`
   width: 303px;
-  color: #3d3a3a;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -341,3 +334,25 @@ export const AItext = styled.div`
 `;
 
 export const RecordContainer = styled.div``;
+
+export const PinkBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #fe3796;
+  filter: blur(160px);
+  position: relative;
+  z-index: -1;
+  margin-top: -50px;
+  margin-left: 50px;
+`;
+
+export const PurpleBlur = styled.div`
+  width: 185px;
+  height: 184px;
+  background-color: #a259ff;
+  filter: blur(140px);
+  margin-left: 16%;
+  margin-top: -150px;
+  position: relative;
+  z-index: 0;
+`;

@@ -1,5 +1,5 @@
 import React from "react";
-import * as L from "../styles/styledLogin";
+import * as L from "../styles/styledFirstLogin";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";

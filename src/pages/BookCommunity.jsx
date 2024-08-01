@@ -151,10 +151,16 @@ export function BookCommunity() {
                     <img src={e.image} />
                   </B.BookPhoto>
                   <B.BookIcon onClick={() => goBookDetail(e.id)}></B.BookIcon>
-                  <B.BookTitle onClick={() => goBookDetail(e.id)}>
+                  <B.BookTitle
+                    onClick={() => goBookDetail(e.id)}
+                    isDarkMode={isDarkMode}
+                  >
                     {e.title}
                   </B.BookTitle>
-                  <B.BookArtist onClick={() => goBookDetail(e.id)}>
+                  <B.BookArtist
+                    onClick={() => goBookDetail(e.id)}
+                    isDarkMode={isDarkMode}
+                  >
                     {e.author}
                   </B.BookArtist>
                   <B.BookContent onClick={() => goBookDetail(e.id)}>

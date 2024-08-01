@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 1598px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -83,7 +86,7 @@ export const NavText = styled.div`
 // 하단바 끝
 
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -108,10 +111,10 @@ export const search = styled.input`
   flex-shrink: 0;
   border-radius: 16px;
   border: 1px solid #9747ff;
-  background: #121212;
+  background: #transparent;
   margin-top: 20px;
   margin-left: -7px;
-  color: #ccc;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-feature-settings: "clig" off, "liga" off;
   font-family: "Pretendard Variable";
   font-size: 13px;
@@ -157,12 +160,12 @@ export const profileContainer = styled.div`
     height: 32px;
     flex-shrink: 0;
     margin-top: 20px;
-    margin-left: 10px;
+    margin-left: 18px;
     border-radius: 30px;
   }
 
   #name {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -170,18 +173,18 @@ export const profileContainer = styled.div`
     line-height: 24px; /* 200% */
     text-align: center;
     margin-top: -5px;
-    margin-left: -45%;
+    margin-left: -35%;
   }
 
   #time {
-    color: #d9d9d9;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 10px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 240% */
-    margin-left: -5px;
     margin-top: -7px;
+    margin-left: 5px;
   }
 
   #line {
@@ -203,7 +206,7 @@ export const contentContainer = styled.div`
   cursor: pointer;
 
   #title {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;
@@ -212,7 +215,7 @@ export const contentContainer = styled.div`
   }
 
   #content {
-    color: #fff;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -233,7 +236,7 @@ export const contentContainer = styled.div`
   }
 
   #count {
-    color: #fff;
+    color: #9c9c9c;
     font-family: "Pretendard Variable";
     font-size: 12px;
     font-style: normal;
@@ -260,7 +263,7 @@ export const PaginationContainer = styled.div`
   .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 55px;
+    margin-top: 65px;
     cursor: pointer;
     margin-left: -70px;
   }
@@ -280,7 +283,7 @@ export const PaginationContainer = styled.div`
 
   ul.pagination li a {
     text-decoration: none;
-    color: white;
+    color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   }
 
   ul.pagination li.active a {

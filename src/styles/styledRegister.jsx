@@ -4,7 +4,22 @@ export const Container = styled.div`
   width: 390px;
   height: 1408px;
   margin: 0 auto;
-  background: #121212;
+  background: var(
+    --,
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.45) 100%
+    ),
+    linear-gradient(
+      180deg,
+      #e2d5f3 8.5%,
+      #dcd3e8 17%,
+      #d9d2e2 21.25%,
+      #e8e8e8 67%,
+      #fff 100%
+    )
+  );
   justify-content: center;
   align-items: center;
   display: flex;
@@ -35,7 +50,7 @@ export const InputContainer = styled.div`
 `;
 
 export const InputLabel = styled.div`
-  color: #fff;
+  color: #3d3a3a;
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -48,8 +63,8 @@ export const UserInput = styled.input`
   width: 313px;
   height: 34px;
   border-radius: 10px;
-  background: #121212;
-  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: #3d3a3a;
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -166,4 +181,20 @@ export const NickCheckMessage = styled.div`
   font-weight: 400;
   line-height: 160.5%;
   margin-top: 8px;
+`;
+
+export const Agreement = styled.div`
+  color: #3d3a3a;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160.5%;
+  margin-top: 8px;
+  accent-color: #a259ff;
+
+  #text {
+    margin-left: 25px;
+    margin-top: -22px;
+  }
 `;

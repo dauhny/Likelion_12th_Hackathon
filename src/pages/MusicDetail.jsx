@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import * as M from "../styles/styledMusicDetail";
+import * as M from "../styles/styledBookDetail";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function MusicDetail() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -125,7 +128,7 @@ export function MusicDetail() {
 
   return (
     <>
-      <M.Container>
+      <M.Container isDarkMode={isDarkMode}>
         {" "}
         <motion.div
           initial="initial"
@@ -139,24 +142,24 @@ export function MusicDetail() {
           <M.ProfileImgBlack>
             <img src={`http://127.0.0.1:8000${profile}`} />
           </M.ProfileImgBlack>
-          <M.InfoText>{nickname}</M.InfoText>
-          <M.PostDate>{createdAt}</M.PostDate>
-          <M.modify onClick={modifyPost}>
+          <M.InfoText isDarkMode={isDarkMode}>{nickname}</M.InfoText>
+          <M.PostDate isDarkMode={isDarkMode}>{createdAt}</M.PostDate>
+          <M.modify isDarkMode={isDarkMode} onClick={modifyPost}>
             <div id="text">수정</div>
           </M.modify>
-          <M.remove onClick={deletePost}>
+          <M.remove isDarkMode={isDarkMode} onClick={deletePost}>
             <div id="text">삭제</div>
           </M.remove>
           <M.AlbumCover>
             <img src={image} alt="Music Image" />
           </M.AlbumCover>
-          <M.MusicInfo>
+          <M.MusicInfo isDarkMode={isDarkMode}>
             <p id={"songTitle"}>{title}</p>
             <br></br>
             <p id={"artist"}>{author}</p>
           </M.MusicInfo>
           <br />
-          <M.UserText>{content}</M.UserText>{" "}
+          <M.UserText isDarkMode={isDarkMode}>{content}</M.UserText>{" "}
         </motion.div>
         {/*하단바*/}
         <M.NavBar>

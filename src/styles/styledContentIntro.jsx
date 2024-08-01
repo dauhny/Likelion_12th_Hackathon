@@ -136,6 +136,17 @@ export const PurpleBlur = styled.div`
   z-index: -1;
 `;
 
+export const ClickPoster = styled.div`
+  font-family: "Pretendard Variable";
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
+  margin-left: -7px;
+  margin-top: -5px;
+`;
+
 export const CalendarIcon = styled.div`
   width: 18px;
   height: 18px;
@@ -162,7 +173,7 @@ export const LocationIcon = styled.div`
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  margin-top: -190px;
+  margin-top: -205px;
   margin-left: 44%;
   background-image: url(${(props) =>
     props.isDarkMode
@@ -323,9 +334,6 @@ export const CommentProfile = styled.div`
   img {
     width: 11px;
     height: 11px;
-    margin-left: 44px;
-    position: absolute;
-    margin-top: -16.5px;
     border-radius: 10px;
   }
 `;
@@ -404,4 +412,8 @@ export const CommentRec = styled.div`
   position: absolute;
   margin-top: 120px;
   margin-left: 40px;
+`;
+
+export const CMT = styled.div`
+  display: flex;
 `;
