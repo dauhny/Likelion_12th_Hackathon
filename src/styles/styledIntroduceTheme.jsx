@@ -5,25 +5,15 @@ export const Container = styled.div`
   width: 390px;
   height: 844px;
   margin: 0 auto;
-  background: linear-gradient(
-      0deg,
-      rgba(217, 217, 217, 0.21) 0%,
-      rgba(217, 217, 217, 0.21) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #e8d6ff 0%,
-      #dcd3e8 17%,
-      #d9d2e2 21.25%,
-      #e8e8e8 67%,
-      #fff 100%
-    );
+  background-image: url("/images/DarkLanding.svg");
+  background-size: cover; /* 추가: 이미지를 컨테이너 크기에 맞추기 위해 */
+  background-repeat: no-repeat; /* 추가: 이미지 반복 방지 */
   justify-content: center;
   align-items: center;
+  display: flex; /* 추가: flexbox 속성 적용 */
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
 `;
 
 //고정
@@ -33,7 +23,19 @@ export const Item = styled.div`
   z-index: 0;
 `;
 
-// AI 감정 분석
+// 전시와 관련된
+export const text1 = styled.div`
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 25px;
+  margin-top: 95px;
+`;
+
+// 콘텐츠를 공유
 export const purple1 = styled.div`
   font-family: "Pretendard Variable";
   font-size: 30px;
@@ -56,22 +58,9 @@ export const purple1 = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-left: 25px;
-  margin-top: 95px;
 `;
 
-// 을 통해
-export const text1 = styled.div`
-  color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  margin-left: 175px;
-  margin-top: -30px;
-`;
-
-// 솔직한 감정을 파악하고
+// 하고
 export const text2 = styled.div`
   color: #000;
   font-family: "Pretendard Variable";
@@ -79,10 +68,11 @@ export const text2 = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-left: 25px;
+  margin-left: 190px;
+  margin-top: -29px;
 `;
 
-// 솔루션
+// 영감
 export const purple2 = styled.div`
   font-family: "Pretendard Variable";
   font-size: 30px;
@@ -107,7 +97,7 @@ export const purple2 = styled.div`
   margin-left: 25px;
 `;
 
-// 을 제공받아 보세요!
+// 을 찾아보아요
 export const text3 = styled.div`
   color: #000;
   font-family: "Pretendard Variable";
@@ -115,7 +105,7 @@ export const text3 = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-left: 105px;
+  margin-left: 80px;
   margin-top: -30px;
 `;
 
@@ -138,21 +128,20 @@ export const button = styled.button`
   border: 2px solid #eae3f2;
   background: #eae3f2;
   cursor: pointer;
-  margin-top: 42px;
-  margin-left: 245px;
+  margin-top: 754px;
+  margin-left: 215px;
 
   &:hover {
     #text {
       font-weight: 800;
     }
   }
-
   #text {
     color: #6f4f98;
     font-family: "Pretendard Variable";
     font-size: 19px;
     font-style: normal;
-    font-weight: 00;
+    font-weight: 500;
     line-height: normal;
     margin-left: -10px;
     margin-top: -3px;

@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 export function IntroduceCommunity() {
   const navigate = useNavigate();
 
-  const goHome = () => {
-    navigate(`/home`);
+  const goIntroduceTheme = () => {
+    navigate(`/introducetheme`);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -23,8 +24,8 @@ export function IntroduceCommunity() {
           <IC.img>
             <img src="/images/IntroduceCommunityImg.svg" alt="img1"></img>
           </IC.img>
-          <IC.button onClick={goHome}>
-            <div id="text">Start</div>
+          <IC.button onClick={goIntroduceTheme}>
+            <div id="text">Next</div>
             <div id="img">
               <img src="/images/PurpleArrow.svg" />
             </div>

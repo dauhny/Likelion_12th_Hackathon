@@ -8,6 +8,7 @@ export function IntroduceApp() {
 
   const goIntroduceContent = () => {
     navigate(`/introducecontent`);
+    window.scrollTo(0, 0);
   };
 
   return (

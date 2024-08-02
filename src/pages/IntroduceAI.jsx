@@ -8,6 +8,7 @@ export function IntroduceAI() {
 
   const goIntroduceCommunity = () => {
     navigate(`/introducecommunity`);
+    window.scrollTo(0, 0);
   };
 
   return (

@@ -5,7 +5,10 @@ export const Container = styled.div`
   width: 390px;
   height: 1089px;
   margin: 0 auto;
-  background: #121212;
+  background: ${(props) =>
+    props.isDarkMode
+      ? "#121212"
+      : "linear-gradient(0deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.45) 100%), linear-gradient(180deg, #e2d5f3 8.5%, #dcd3e8 17%, #d9d2e2 21.25%, #e8e8e8 67%, #fff 100%)"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -36,7 +39,7 @@ export const BackBtn = styled.button`
 
 //페이지 제목
 export const PageTitle = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 16px;
   font-style: normal;
@@ -93,18 +96,6 @@ export const NavText = styled.div`
 `;
 // 하단바 끝
 
-// 프로필 편집 텍스트
-export const IntroText = styled.div`
-  color: #fff;
-  font-family: "Pretendard Variable";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; /* 150% */
-  margin-left: 111px;
-  margin-top: -26px;
-`;
-
 // 프로필 이미지
 export const profile = styled.div`
   img {
@@ -122,7 +113,7 @@ export const profile = styled.div`
 export const name = styled.div`
   height: 20px;
   flex-shrink: 0;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -137,7 +128,7 @@ export const informationText = styled.div`
   width: 73px;
   height: 20px;
   flex-shrink: 0;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 17px;
   font-style: normal;
@@ -158,7 +149,7 @@ export const InputContainer = styled.div`
 `;
 
 export const InputLabel = styled.div`
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -171,7 +162,7 @@ export const UserInput = styled.input`
   border-radius: 8px;
   border: 1px solid #9747ff;
   background: #2e2e2e;
-  color: rgba(255, 255, 255, 0.5);
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -182,8 +173,8 @@ export const UserInput = styled.input`
 
 export const UserInfo = styled.div`
   border-radius: 8px;
-  background: #2e2e2e;
-  color: rgba(255, 255, 255, 0.5);
+  background: ${(props) => (props.isDarkMode ? "#2e2e2e" : "#fff")};
+  color: #9c9c9c;
   font-family: "Pretendard Variable";
   font-size: 12px;
   font-style: normal;
@@ -222,7 +213,7 @@ export const changeText = styled.div`
   width: 73px;
   height: 20px;
   flex-shrink: 0;
-  color: #fff;
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#3D3A3A")};
   font-family: "Pretendard Variable";
   font-size: 17px;
   font-style: normal;
@@ -240,7 +231,7 @@ export const changeText = styled.div`
     height: 205px;
     flex-shrink: 0;
     background: #a259ff;
-    filter: blur(159.68670654296875px);
+    filter: blur(160px);
     margin-left: 60px;
     margin-top: 15px;
   }
@@ -249,14 +240,14 @@ export const changeText = styled.div`
 export const NickName = styled(UserInputShort)`
   width: 300px;
   height: 30px;
-  background: #121212;
+  background: ${(props) => (props.isDarkMode ? "#121212" : "#fff")};
 `;
 
 export const PhoneNumber = styled(UserInput)`
   width: 300px;
   height: 30px;
   margin-bottom: 10px;
-  background: #121212;
+  background: ${(props) => (props.isDarkMode ? "#121212" : "#fff")};
 `;
 
 // 저장하기 버튼

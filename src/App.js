@@ -32,7 +32,8 @@ import { IntroduceApp } from "./pages/IntroduceApp";
 import { IntroduceContent } from "./pages/IntroduceContent";
 import { IntroduceCommunity } from "./pages/IntroduceCommunity";
 import { FirstLogin } from "./pages/FirstLogin";
-import { ThemeProvider } from "./contexts/ThemeContext"; // ThemeProvider 임포트
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { IntroduceTheme } from "./pages/IntroduceTheme";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
           <Route path="/introduceai" element={<IntroduceAI />} />
           <Route path="/introducecommunity" element={<IntroduceCommunity />} />
           <Route path="/introducecontent" element={<IntroduceContent />} />
+          <Route path="/introducetheme" element={<IntroduceTheme />} />
           <Route path="/introduceapp" element={<IntroduceApp />} />
           <Route path="/firstlogin" element={<FirstLogin />} />
         </Routes>

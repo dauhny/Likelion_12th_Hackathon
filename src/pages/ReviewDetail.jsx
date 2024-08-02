@@ -143,7 +143,7 @@ export function ReviewDetail() {
   return (
     <>
       <RD.Container isDarkMode={isDarkMode}>
-        <RD.BackBtn onClick={goBack}></RD.BackBtn>\
+        <RD.BackBtn onClick={goBack}></RD.BackBtn>
         <RD.PageTitle isDarkMode={isDarkMode}>커뮤니티</RD.PageTitle>
         <motion.div
           initial="initial"

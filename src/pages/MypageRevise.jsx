@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function MypageRevise() {
+  const { isDarkMode } = useTheme();
+
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState("");
   const [nickname, setNickname] = useState("");
@@ -144,9 +147,9 @@ export function MypageRevise() {
 
   return (
     <>
-      <MPR.Container>
+      <MPR.Container isDarkMode={isDarkMode}>
         <MPR.BackBtn onClick={goBack}></MPR.BackBtn>
-        <MPR.PageTitle>프로필 편집</MPR.PageTitle>{" "}
+        <MPR.PageTitle isDarkMode={isDarkMode}>프로필 편집</MPR.PageTitle>{" "}
         <motion.div
           initial="initial"
           animate="animate"
@@ -171,7 +174,7 @@ export function MypageRevise() {
                 style={{
                   width: "26px",
                   height: "26px",
-                  background: "#121212",
+                  background: isDarkMode ? "#121212" : "#EFE7F8",
                   borderRadius: "10px 0px 10px 10px",
                   marginLeft: "160px",
                   marginTop: "-21px",
@@ -184,7 +187,7 @@ export function MypageRevise() {
                 style={{
                   width: "21px",
                   height: "21px",
-                  background: "#121212",
+                  background: isDarkMode ? "#121212" : "#fff",
                   borderRadius: "10px 0px 10px 10px",
                   marginLeft: "163px",
                   marginTop: "-23px",
@@ -216,37 +219,50 @@ export function MypageRevise() {
                 id="profileImg"
               />
             </MPR.profile>
-            <MPR.name>{nickname}</MPR.name>
-            <MPR.informationText>
+            <MPR.name isDarkMode={isDarkMode}>{nickname}</MPR.name>
+            <MPR.informationText isDarkMode={isDarkMode}>
               정보
-              <img src="/images/WhiteArrow.svg" alt="profile"></img>
+              <img
+                src={
+                  isDarkMode
+                    ? "/images/WhiteArrow.svg"
+                    : "images/lightWhiteArrow.svg"
+                }
+              />
             </MPR.informationText>
-            <MPR.InputContainer>
-              <MPR.InputLabel>아이디</MPR.InputLabel>
+            <MPR.InputContainer isDarkMode={isDarkMode}>
+              <MPR.InputLabel isDarkMode={isDarkMode}>아이디</MPR.InputLabel>
               <MPR.UserInfoShort>{username}</MPR.UserInfoShort>
-              <MPR.InputLabel>이름</MPR.InputLabel>
+              <MPR.InputLabel isDarkMode={isDarkMode}>이름</MPR.InputLabel>
               <MPR.Name>{name}</MPR.Name>
-              <MPR.InputLabel>생년월일</MPR.InputLabel>
+              <MPR.InputLabel isDarkMode={isDarkMode}>생년월일</MPR.InputLabel>
               <MPR.SelectBirth>{birthdate}</MPR.SelectBirth>
-              <MPR.InputLabel>이메일</MPR.InputLabel>
+              <MPR.InputLabel isDarkMode={isDarkMode}>이메일</MPR.InputLabel>
               <MPR.Email>{email}</MPR.Email>
-              <MPR.InputLabel>전화번호</MPR.InputLabel>
+              <MPR.InputLabel isDarkMode={isDarkMode}>전화번호</MPR.InputLabel>
               <MPR.Email>{phone}</MPR.Email>
             </MPR.InputContainer>
-            <MPR.changeText>
+            <MPR.changeText isDarkMode={isDarkMode}>
               변경
-              <img src="/images/WhiteArrow.svg" alt="profile"></img>
+              <img
+                src={
+                  isDarkMode
+                    ? "/images/WhiteArrow.svg"
+                    : "images/lightWhiteArrow.svg"
+                }
+                alt="profile"
+              />
               <div id="background" />
             </MPR.changeText>
-            <MPR.InputContainer>
-              <MPR.InputLabel>닉네임</MPR.InputLabel>
+            <MPR.InputContainer isDarkMode={isDarkMode}>
+              <MPR.InputLabel isDarkMode={isDarkMode}>닉네임</MPR.InputLabel>
               <MPR.NickName
                 type="text"
                 placeholder="닉네임을 입력하세요."
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
               ></MPR.NickName>
-              <MPR.InputLabel>휴대번호</MPR.InputLabel>
+              <MPR.InputLabel isDarkMode={isDarkMode}>휴대번호</MPR.InputLabel>
               <MPR.PhoneNumber
                 type="tel"
                 placeholder="전화번호를 입력하세요."

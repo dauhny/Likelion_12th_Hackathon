@@ -179,6 +179,12 @@ export const button = styled.button`
   margin-top: 42px;
   margin-left: 245px;
 
+  &:hover {
+    #text {
+      font-weight: 800;
+    }
+  }
+
   #text {
     color: #6f4f98;
     font-family: "Pretendard Variable";
@@ -187,14 +193,14 @@ export const button = styled.button`
     font-weight: 00;
     line-height: normal;
     margin-left: -10px;
-    margin-top: -4px;
+    margin-top: -3px;
   }
 
   #img {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    margin-left: 44px;
-    margin-top: -18.5px;
+    margin-left: 42px;
+    margin-top: -16px;
   }
 `;
