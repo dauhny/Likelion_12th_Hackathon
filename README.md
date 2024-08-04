@@ -8,7 +8,7 @@
 <br>
 
 ## 🍀🏛️ 프로젝트 소개 : ${\textsf{\color{ArtHeal(아트힐)}Green}}$ArtHeal(아트힐) 🏛️🍀
-
+## <span style="color: #ff0000;">🍀🏛️ 프로젝트 소개</span>
 ### 1. 서비스 링크 
 
 <br><br>
