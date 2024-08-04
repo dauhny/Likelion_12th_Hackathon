@@ -90,7 +90,7 @@
  ├─ client/
  │  ├─ static
  │  ├─ asset-manifest.json
- │  └─  index.html
+ │  └─ index.html
  └─ manage.py
 ```
 <br>
