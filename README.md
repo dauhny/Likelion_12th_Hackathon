@@ -9,19 +9,21 @@
 
 ## 🍀🏛️ 프로젝트 소개 : ArtHeal(아트힐) 🏛️🍀
 
-### 1. 서비스 소개
+### 1. 서비스 링크
+
+### 2. 서비스 소개
 
 <br><br>
 
 
-### 2. 기술 스택
+### 3. 기술 스택
 
   |기획/디자인|프론트엔드|백엔드|
   |:-------------:|:-------------:|:-------------:|
   |<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">|<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">|<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">|
   
 <br><br>
-  ### 3. 팀원 소개
+  ### 4. 팀원 소개
   
   |조정인|남지연|유다현|김가현|장하연|
   |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
@@ -32,7 +34,7 @@
 
 <br>
 
-### 4. 폴더 구조
+### 5. 폴더 구조
 
 ```
 📂 HECKATHON-TEAM-Pathos
@@ -88,7 +90,7 @@
 ```
 <br>
 
-### 5. 개발환경에서의 실행 방법
+### 6. 개발환경에서의 실행 방법
 
 ```
 $ source myvenv/Scripts/activate
