@@ -25,7 +25,7 @@
   
   |조정인|남지연|유다현|김가현|장하연|
   |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-  |<img width="80%" src="https://github.com/user-attachments/assets/11c532a4-ea9a-4f1a-9049-db21bc8a0b3f"/>|<img width="80%" src="https://github.com/hyjang14/2024-Herethon-backend/assets/126192446/f43656f4-1f4a-4c25-80ff-8eee7405f2be"/>|<img width="80%" src="https://github.com/hyjang14/2024-Herethon-backend/assets/126192446/3cee2c61-982f-45cf-9259-5f965c2d127e"/>|<img width="80%" src="https://github.com/hyjang14/2024-Herethon-backend/assets/126192446/1a93cd52-26aa-4f6a-9acb-109920458dbd"/>|<img width="80%" src="https://github.com/hyjang14/2024-Herethon-backend/assets/126192446/d56f17ef-3f14-4bb9-adad-be25d4f17f6b"/>|
+  |<img width="80%" src="https://github.com/user-attachments/assets/11c532a4-ea9a-4f1a-9049-db21bc8a0b3f"/>|<img width="80%" src="https://github.com/user-attachments/assets/023c2d0f-0489-4593-8aa1-04c98e0c1ffd"/>|<img width="80%" src="https://github.com/user-attachments/assets/6dd68578-d786-4650-adf3-c3b9cd88364f"/>|<img width="80%" src="https://github.com/user-attachments/assets/b1b57b8a-8b0b-4b5c-aaba-9b6e81508cb7"/>|<img width="80%" src="https://github.com/user-attachments/assets/80d2cc92-c0fa-4324-86a9-3068bbc013d4b"/>|
   |<b>기획·디자인|<b>프론트엔드|<b>프론트엔드|<b>백엔드|<b>백엔드|
   |서비스 기획·디자인|AI 심리분석 퍼블리싱|디자인/계정/메인/검색 퍼블리싱|AI 심리분석 구현|API 전시데이터 구현|
   |PPT 기획·디자인|후기글 커뮤니티 퍼블리싱|백/프론트 연동|후기글 커뮤니티 구현|정보&전시 커뮤니티 구현|
