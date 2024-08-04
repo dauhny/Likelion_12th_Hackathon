@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model # 커스텀유저 모델 가져오기
 
+
 # openApi 사용해서 데이터 불러오기
 class DataModel(models.Model):
     title = models.CharField(max_length=200) # TITLE 제목
-    description = models.CharField(max_length=1000, null=True) # DESCRIPTION 소개(설명)
-    image = models.URLField(max_length=200, null=True) # IAMGE_OBJECT 이미지주소
-    pageUrl = models.URLField(max_length=200, null=True) # URL 홈페이지 주소
+    description = models.CharField(max_length=10000, null=True) # DESCRIPTION 소개(설명)
+    image = models.URLField(max_length=1000, null=True) # IAMGE_OBJECT 이미지주소
+    pageUrl = models.URLField(max_length=1000, null=True) # URL 홈페이지 주소
     author = models.CharField(max_length=200, null=True) # AUTHOR 작가
     period = models.CharField(max_length=200, null=True) # PERIOD 기간
     time = models.CharField(max_length=200, null=True) # EVENT_PERIOD 관람시간
@@ -40,6 +41,10 @@ class Scrap(models.Model):
     data = models.ForeignKey(DataModel, on_delete=models.CASCADE)  # 데이터 모델과 연결
     created_at = models.DateTimeField(auto_now_add=True)
     is_scrapped = models.BooleanField(default=False)
+    title = models.CharField(max_length=150, blank=True, editable=False) # TITLE 제목
+    image = models.URLField(max_length=150, blank=True, editable=False) # IAMGE_OBJECT 이미지주소
+    period = models.CharField(max_length=150, blank=True, editable=False) # PERIOD 기간
+    place = models.CharField(max_length=150, blank=True, editable=False) # CNTC_INSTT_NM 장소
 
     class Meta:
         # 동일한 사용자가 동일한 데이터 중복으로 스크랩하지 못하게 함
@@ -49,6 +54,21 @@ class Scrap(models.Model):
     def toggle_scrap(self):
         self.is_scrapped = not self.is_scrapped
         self.save()
+
+    def save(self, *args, **kwargs):
+        # 데이터 모델에서 정보를 가져와 설정
+        if not self.title:
+            self.title = self.data.title
+        if not self.image:
+            self.image = self.data.image
+        if not self.period:
+            self.period = self.data.period
+        if not self.place:
+            self.place = self.data.place
+
+        super().save(*args, **kwargs)
+
+    
 
 # 댓글 
 class Comment(models.Model):
@@ -74,3 +94,14 @@ class Comment(models.Model):
         if not self.profile and hasattr(self.user, 'profile'):
             self.profile = self.user.profile.url 
         super().save(*args, **kwargs)
+
+
+# 별점
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(DataModel, related_name='ratings', on_delete=models.CASCADE)
+    score = models.FloatField(default=0.0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'item')

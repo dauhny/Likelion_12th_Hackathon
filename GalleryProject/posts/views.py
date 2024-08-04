@@ -2,7 +2,12 @@ from .models import Post, Analysis, Like
 from .serializers import PostSerializer, AnalysisSerializer, LikeSerializer
 from rest_framework.viewsets import ModelViewSet 
 from rest_framework.generics import ListAPIView
+from datas.models import DataModel
+from datas.serializers import DataSerializer
 import re
+
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwnerOrReadOnly  # 커스텀 권한 클래스 임포트
 
 # 좋아요
 from rest_framework import generics
@@ -22,9 +27,11 @@ from rest_framework.filters import SearchFilter
 
 # 기록글 전체보기
 class PostViewSet(ModelViewSet): 
-    queryset = Post.objects.all().order_by('-created_at') 
-    # queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-created_at')
     serializer_class = PostSerializer
+
+    # 자신이 쓴 글만 수정/삭제할 수 있도록
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     # 후기글 검색 
     filter_backends = (DjangoFilterBackend, SearchFilter)
@@ -107,8 +114,12 @@ class LikeDeleteView(generics.DestroyAPIView):
     
 
 class AnalysisListView(ListAPIView):
-    queryset = Analysis.objects.all()
     serializer_class = AnalysisSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Analysis.objects.filter(post__writer=user).order_by('-created_at')
 
 
 # AI 감정분석
@@ -123,18 +134,31 @@ class AnalyzePostView(APIView):
         model = "gpt-3.5-turbo" 
         
         # 프롬프트 
-        query = "이 글을 심리 분석하고 행복, 슬픔, 분노, 불안의 퍼센트를 도출해주세요. 각 퍼센트는 합해서 100%가 되어야 합니다. 감정 퍼센트를 마지막에 정리해서 알려주세요." 
-        
+        query = (
+            "이 글을 정말 자세하게 심리 분석하고 설명해주세요. 감정이 아닌 심리분석이기 때문에 오직 심리분석만 하세요."
+            "그 다음 무조건 심리 분석 결과에 따라 꼭 [행복: , 슬픔: , 분노: , 불안: ]이 형식으로 4가지의 퍼센트를 도출해주세요. 다른 감정은 필요없고 4가지 감정은 꼭 포함되어야합니다. 심리분석에 나타나지 않은 감정은 0%라고 분석해도 괜찮습니다. 이때 각 퍼센트는 합해서 무조건 100%가 되어야 합니다."
+            "감정에 따라서 아래의 전시회 데이터 중 적절한 전시회를 추천해주세요. 추천 이유와 함께 추천해주세요."
+            "필수로 이 세가지 형식을 맞춰서 해주세요."
+        )
+
+        # 전시회 데이터를 가져오기
+        exhibitions = DataModel.objects.all()
+        exhibition_summaries = self.summarize_exhibitions(exhibitions)
+        # exhibition_data = "\n".join([f"{exhibition.title}: {exhibition.description}" for exhibition in exhibitions])
+
         # 메시지 설정하기
-        messages = [ {"role": "system", "content": "You are a helpful assistant"}, {"role": "user", "content": post.content}, {"role": "user", "content": query} ] 
+        messages = [ {"role": "system", "content": "You are a helpful assistant"},
+                     {"role": "user", "content": post.content},
+                     {"role": "user", "content": query},
+                     {"role": "user", "content": exhibition_summaries} ] 
         
         try: 
 
             # API 호출 
             response = openai.ChatCompletion.create( 
                  model=model, 
-                 messages=messages, 
-                 temperature=0.8 ) 
+                 messages=messages ) 
+                #  temperature=0.8 ) 
             
 
             # 응답 출력 
@@ -172,3 +196,16 @@ class AnalyzePostView(APIView):
             if match[3]: emotions['불안'] = float(match[3]) 
                 
         return emotions
+    
+    def summarize_exhibitions(self, exhibitions):  # 추가된 부분
+        summaries = []
+        for exhibition in exhibitions:
+            summary = f"{exhibition.title}: {exhibition.description[:50]}..."  # 전시회 설명의 처음 50자만 사용
+            summaries.append(summary)
+        return "\n".join(summaries)
+    
+    def parse_recommendations(self, text, exhibitions):
+        # 전시회 추천 결과를 파싱하기 위한 로직
+        recommended_titles = re.findall(r'Recommended Exhibition: (.+)', text)
+        recommended_exhibitions = exhibitions.filter(title__in=recommended_titles)
+        return recommended_exhibitions
