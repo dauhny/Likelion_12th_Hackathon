@@ -87,6 +87,10 @@
  │  ├─ views.py
  │  ├─ serializers.py
  │  └─ permissions.py
+ ├─ client/
+ │  ├─ static
+ │  ├─ asset-manifest.json
+ │  └─  index.html
  └─ manage.py
 ```
 <br>
