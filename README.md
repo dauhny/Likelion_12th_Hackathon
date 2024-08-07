@@ -11,11 +11,8 @@
 
 ## 🍀🏛️ 프로젝트 소개 : ArtHeal(아트힐) 🏛️🍀
 
-### 1. 서비스 배포링크 
-http://52.79.34.113/
-
 <br><br>
-### 2. 서비스 소개
+### 1. 서비스 소개
 <img width="100%" src="https://github.com/user-attachments/assets/2f2e2c78-e7db-4171-b73c-9d7332bdfa1e"/><br>
 <img width="100%" src="https://github.com/user-attachments/assets/76690296-be41-4530-a6da-77cdf14a104a"/><br>
 <아트힐>은 정답이 없는 예술을 자유롭게 상상하고 해석함을 통해 마음의 평화를 찾고자 하는 생각에서 출발하였습니다. 작품을 감상하고, 바로 그 감정을 기록하며, 분석을 통해 자신의 감정 상태를 파악하고 데이터 내 맞춤 전시를 제안합니다.
@@ -27,14 +24,14 @@ http://52.79.34.113/
 <br><br>
 
 
-### 3. 기술 스택
+### 2. 기술 스택
 
   |기획·디자인|프론트엔드|백엔드|
   |:-------------:|:-------------:|:-------------:|
   |<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">|<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">|<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white"> <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white">|
   
 <br><br>
-  ### 4. 팀원 소개
+  ### 3. 팀원 소개
   
   |조정인|남지연|유다현|김가현|장하연|
   |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
@@ -45,7 +42,7 @@ http://52.79.34.113/
 
 <br>
 
-### 5. 폴더 구조
+### 4. 폴더 구조
 
 ```
 📂 HECKATHON-TEAM-Pathos
@@ -105,7 +102,7 @@ http://52.79.34.113/
 ```
 <br>
 
-### 6. 개발환경에서의 실행 방법
+### 5. 개발환경에서의 실행 방법
 
 ```
 $ source myvenv/Scripts/activate
@@ -115,7 +112,7 @@ $ python manage.py runserver
 
 <br>
 
-### 7. API 명세서
+### 6. 백엔드 API 명세서
 https://dwu-likelion12th-3.notion.site/0868321dc85740eda4fc232322484b26?v=7514a7d85dcd45bea8df7018fdfe6750&pvs=4
 
 
