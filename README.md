@@ -11,7 +11,6 @@
 
 ## 🍀🏛️ 프로젝트 소개 : ArtHeal(아트힐) 🏛️🍀
 
-<br><br>
 ### 1. 서비스 소개
 <img width="100%" src="https://github.com/user-attachments/assets/2f2e2c78-e7db-4171-b73c-9d7332bdfa1e"/><br>
 <img width="100%" src="https://github.com/user-attachments/assets/76690296-be41-4530-a6da-77cdf14a104a"/><br>
