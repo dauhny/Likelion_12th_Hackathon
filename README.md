@@ -12,6 +12,7 @@
 ## 🍀🏛️ 프로젝트 소개 : ArtHeal(아트힐) 🏛️🍀
 
 ### 1. 서비스 소개
+시연영상 : https://drive.google.com/file/d/1j2T8ArssFZ_PVn75xfCfV7pH1IIZcxmv/view?usp=sharing
 <img width="100%" src="https://github.com/user-attachments/assets/2f2e2c78-e7db-4171-b73c-9d7332bdfa1e"/><br>
 <img width="100%" src="https://github.com/user-attachments/assets/76690296-be41-4530-a6da-77cdf14a104a"/><br>
 <아트힐>은 정답이 없는 예술을 자유롭게 상상하고 해석함을 통해 마음의 평화를 찾고자 하는 생각에서 출발하였습니다. 작품을 감상하고, 바로 그 감정을 기록하며, 분석을 통해 자신의 감정 상태를 파악하고 데이터 내 맞춤 전시를 제안합니다.
